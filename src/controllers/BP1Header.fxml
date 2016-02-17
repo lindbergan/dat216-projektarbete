@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BP1HeaderController">
+   <children>
+      <HBox spacing="20.0" style="-fx-background-color: green; -fx-min-height: 100%; -fx-min-width: 100%;">
+         <children>
+            <ToggleButton mnemonicParsing="false" text="Butiksvy" />
+            <ToggleButton mnemonicParsing="false" text="Kategorivy" />
+            <TextField promptText="Sök efter artikel" />
+            <MenuButton mnemonicParsing="false" text="Dina Favoriter">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="Dina Inköpslistor">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="Kundvagn / Kassa">
+               <items>
+                  <MenuItem disable="true" mnemonicParsing="false" text="Antal varor: " />
+                  <MenuItem mnemonicParsing="false" text="Till Kundvagnen / Kassan" />
+               </items>
+            </MenuButton>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
