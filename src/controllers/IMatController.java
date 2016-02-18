@@ -22,6 +22,13 @@ public class IMatController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        /**
+         * Byter vyerna mellan butiksvy och kategorivy.
+         * En fullösning som vi får fixa till senare. Har inte riktigt fattat hur stackpane fungerar ön.
+         * // Adrian torsdag 18 feb 1700
+         * */
+
         pane2.setVisible(false);
         BP1Toggle1.setOnAction(event -> {
             BP1Toggle2.setSelected(false);
@@ -34,6 +41,12 @@ public class IMatController implements Initializable {
             pane1.setVisible(false);
 
         });
+
+        /***
+         * Lägger till items i tableview:n.
+         * Fungerar inte riktigt än, namnen kommer inte upp i viewn även om categorierna finns där.
+         * // Adrian torsdag 18 feb 1700
+         */
 
         ObservableList<ProductCategory> categories = FXCollections.observableArrayList(ProductCategory.values());
         tableView1.setItems(categories);
