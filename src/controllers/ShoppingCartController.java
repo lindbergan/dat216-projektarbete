@@ -16,19 +16,16 @@ public class ShoppingCartController {
     @FXML private Pane cartView;
     @FXML private TextField cartAmount;
 
-
-
-    public ShoppingCartController(){
-
-
-    }
     public void cartAmountClicked(){
         cartAmount.clear();
 
 
     }
-    public void switchView(){
-        cartView.setVisible(false);
-
+    public void incItem(){
+        int old = Integer.parseInt(cartAmount.getText());
+        int tmp = old + 1;
+        String updated = ""+tmp;
+        cartAmount.setText(updated);
     }
+
 }
