@@ -14,41 +14,40 @@ import java.util.*;
 
 public class IMatController implements Initializable {
 
-    @FXML private ToggleButton BP1Toggle1;
-    @FXML private ToggleButton BP1Toggle2;
-    @FXML private TableView tableView1;
-    @FXML private AnchorPane pane1;
-    @FXML private AnchorPane pane2;
+    @FXML private static AnchorPane bp1iMatCategoryAP;
+    @FXML private TableView<String> bp1Tableview;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        /**ObservableList<String> categories = FXCollections.observableArrayList();
+        for (ProductCategory category : ProductCategory.values()) {
+            categories.add(translateCategories(category));
+        }
+        bp1Tableview.setItems(categories);**/
+    }
 
-        /**
-         * Byter vyerna mellan butiksvy och kategorivy.
-         * En fullösning som vi får fixa till senare. Har inte riktigt fattat hur stackpane fungerar ön.
-         * // Adrian torsdag 18 feb 1700
-         * */
-
-        pane2.setVisible(false);
-        BP1Toggle1.setOnAction(event -> {
-            BP1Toggle2.setSelected(false);
-            pane2.setVisible(false);
-            pane1.setVisible(true);
-        });
-        BP1Toggle2.setOnAction(event -> {
-            BP1Toggle1.setSelected(false);
-            pane2.setVisible(true);
-            pane1.setVisible(false);
-
-        });
-
-        /***
-         * Lägger till items i tableview:n.
-         * Fungerar inte riktigt än, namnen kommer inte upp i viewn även om categorierna finns där.
-         * // Adrian torsdag 18 feb 1700
-         */
-
-        ObservableList<ProductCategory> categories = FXCollections.observableArrayList(ProductCategory.values());
-        tableView1.setItems(categories);
+    public String translateCategories(ProductCategory p) {
+        if (p.toString().equalsIgnoreCase("POD")) return "Baljväxter";
+        if (p.toString().equalsIgnoreCase("BREAD")) return "Bröd";
+        if (p.toString().equalsIgnoreCase("BERRY")) return "Bär";
+        if (p.toString().equalsIgnoreCase("CITRUS_FRUIT")) return "Citrusfrukter";
+        if (p.toString().equalsIgnoreCase("HOT_DRINKS")) return "Varma drycker";
+        if (p.toString().equalsIgnoreCase("COLD_DRINKS")) return "Kalla drycker";
+        if (p.toString().equalsIgnoreCase("EXOTIC_FRUIT")) return "Exotiska frukter";
+        if (p.toString().equalsIgnoreCase("FISH")) return "Fisk";
+        if (p.toString().equalsIgnoreCase("VEGETABLE_FRUIT")) return "Frukt och grönsaker";
+        if (p.toString().equalsIgnoreCase("CABBAGE")) return "Sallad";
+        if (p.toString().equalsIgnoreCase("MEAT")) return "Kött";
+        if (p.toString().equalsIgnoreCase("DAIRIES")) return "Mejeriprodukter";
+        if (p.toString().equalsIgnoreCase("MELONS")) return "Meloner";
+        if (p.toString().equalsIgnoreCase("FLOUR_SUGAR_SALT")) return "Skafferi";
+        if (p.toString().equalsIgnoreCase("NUTS_AND_SEEDS")) return "Nötter och frön";
+        if (p.toString().equalsIgnoreCase("PASTA")) return "Pasta";
+        if (p.toString().equalsIgnoreCase("POTATO_RICE")) return "Ris och potatis";
+        if (p.toString().equalsIgnoreCase("ROOT_VEGETABLE")) return "Rotgrönsaker";
+        if (p.toString().equalsIgnoreCase("FRUIT")) return "Frukt";
+        if (p.toString().equalsIgnoreCase("SWEET")) return "Sötsaker";
+        if (p.toString().equalsIgnoreCase("HERB")) return "Örter och kryddor";
+        return null;
     }
 }
