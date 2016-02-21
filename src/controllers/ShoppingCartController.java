@@ -35,6 +35,12 @@ public class ShoppingCartController {
             cartAmount.setText(updated);
         }
     }
+    public void preventZero(){
+        int old = Integer.parseInt(cartAmount.getText());
+        if(old == 0){
+            cartAmount.setText("1");
+        }
+    }
 
 
 }
