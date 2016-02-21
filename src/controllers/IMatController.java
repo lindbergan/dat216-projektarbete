@@ -59,7 +59,7 @@ public class IMatController implements Initializable {
         if (p.toString().equalsIgnoreCase("HERB")) return "Örter och kryddor";
         return null;
     }
-    public void goToCart(ActionEvent event)throws IOException {
+    public void goToCart()throws IOException {
         Parent cartParent = FXMLLoader.load(getClass().getResource("/fxml/shoppingcart.fxml"));
         Scene cartScene = new Scene(cartParent);
         Stage cartStage = (Stage) cartMenuButton.getScene().getWindow();
