@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="cartView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ShoppingCartController">
+<Pane fx:id="cartView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#preventNull" prefHeight="752.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ShoppingCartController">
    <children>
       <Text layoutX="366.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min Kundvagn" textAlignment="CENTER" wrappingWidth="253.35009765625">
          <font>
@@ -40,9 +40,9 @@
                 <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="cartAmount" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="67.0" text="1" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0" text="-" GridPane.halignment="LEFT" />
-                  <Button layoutX="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0" text="+" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                  <TextField fx:id="cartAmount" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#preventZero" onMouseClicked="#cartAmountClicked" prefHeight="31.0" prefWidth="67.0" text="1" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                  <Button fx:id="decItem" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#decItem" onKeyPressed="#preventNull" prefHeight="31.0" prefWidth="31.0" text="-" GridPane.halignment="LEFT" />
+                  <Button fx:id="incItem" layoutX="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#incItem" prefHeight="31.0" prefWidth="31.0" text="+" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                </children>
             </GridPane>
          </children>
@@ -63,7 +63,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" text="Ta bort" />
+            <Button fx:id="removeItem" mnemonicParsing="false" onAction="#preventNull" prefHeight="31.0" prefWidth="125.0" text="Ta bort" />
          </children>
       </GridPane>
       <Line endX="100.0" layoutX="776.0" layoutY="546.0" startX="-100.0" />
