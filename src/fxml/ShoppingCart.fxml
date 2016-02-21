@@ -28,8 +28,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="10 :-" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-            <Label text="Mjölk, 1l" GridPane.halignment="CENTER" />
+            <Label fx:id="price" text="10 :-" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+            <Label fx:id="itemName" text="Mjölk, 1l" GridPane.halignment="CENTER" />
             <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="230.0" GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="28.0" />
@@ -63,7 +63,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="removeItem" mnemonicParsing="false" onAction="#preventNull" prefHeight="31.0" prefWidth="125.0" text="Ta bort" />
+            <Button fx:id="removeItem" mnemonicParsing="false" onAction="#deleteItem" prefHeight="31.0" prefWidth="125.0" text="Ta bort" />
          </children>
       </GridPane>
       <Line endX="100.0" layoutX="776.0" layoutY="546.0" startX="-100.0" />
