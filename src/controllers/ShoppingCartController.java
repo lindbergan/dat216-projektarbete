@@ -16,6 +16,12 @@ public class ShoppingCartController {
     @FXML private Pane cartView;
     @FXML private TextField cartAmount;
 
+    public void preventNull(){
+        if (!cartAmount.isFocused() && cartAmount.getText() == null){
+            cartAmount.setText("1");
+        }
+    }
+
     public void cartAmountClicked(){
         cartAmount.setText(null);
 
