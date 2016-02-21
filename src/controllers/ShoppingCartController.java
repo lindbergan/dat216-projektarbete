@@ -27,5 +27,14 @@ public class ShoppingCartController {
         String updated = ""+tmp;
         cartAmount.setText(updated);
     }
+    public void decItem(){
+        int old = Integer.parseInt(cartAmount.getText());
+        if(old != 0 && old != 1){
+            int tmp = old - 1;
+            String updated = ""+tmp;
+            cartAmount.setText(updated);
+        }
+    }
+
 
 }
