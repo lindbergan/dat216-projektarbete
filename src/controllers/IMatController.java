@@ -59,6 +59,7 @@ public class IMatController implements Initializable {
         if (p.toString().equalsIgnoreCase("HERB")) return "Örter och kryddor";
         return null;
     }
+    //gets the view where the dropdown menu for the cart is, hides it and then opens the shopping cart view
     public void goToCart()throws IOException {
         Parent cartParent = FXMLLoader.load(getClass().getResource("/fxml/shoppingcart.fxml"));
         Scene cartScene = new Scene(cartParent);
