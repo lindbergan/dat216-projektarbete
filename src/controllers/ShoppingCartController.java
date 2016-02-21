@@ -2,6 +2,8 @@ package controllers;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -15,6 +17,11 @@ public class ShoppingCartController {
     @FXML private GridPane cartPane;
     @FXML private Pane cartView;
     @FXML private TextField cartAmount;
+    @FXML private Label itemName;
+    @FXML private Button decItem;
+    @FXML private Button incItem;
+    @FXML private Label price;
+
 
     public void preventNull(){
         if (!cartAmount.isFocused() && cartAmount.getText() == null){
@@ -52,6 +59,14 @@ public class ShoppingCartController {
         if(old == 0){
             cartAmount.setText("1");
         }
+    }
+    public void deleteItem(){
+        preventNull();
+        itemName.setVisible(false);
+        cartAmount.setVisible(false);
+        incItem.setVisible(false);
+        decItem.setVisible(false);
+        price.setVisible(false);
     }
 
 
