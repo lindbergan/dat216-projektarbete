@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +24,7 @@ public class IMatController implements Initializable {
 
     @FXML private static AnchorPane bp1iMatCategoryAP;
     @FXML private TableView<String> bp1Tableview;
+    @FXML private MenuButton cartMenuButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,7 +62,7 @@ public class IMatController implements Initializable {
     public void goToCart(ActionEvent event)throws IOException {
         Parent cartParent = FXMLLoader.load(getClass().getResource("/fxml/shoppingcart.fxml"));
         Scene cartScene = new Scene(cartParent);
-        Stage cartStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage cartStage = (Stage) cartMenuButton.getScene().getWindow();
         cartStage.hide();
         cartStage.setScene(cartScene);
         cartStage.show();
