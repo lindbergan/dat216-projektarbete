@@ -75,7 +75,7 @@
                            <items>
                               <MenuItem disable="true" mnemonicParsing="false" text="Totalt : 403kr" />
                               <SeparatorMenuItem mnemonicParsing="false" />
-                              <MenuItem mnemonicParsing="false" text="Gå till kundvagnen / kassan" />
+                              <MenuItem mnemonicParsing="false" onAction="#goToCart" text="Gå till kundvagnen / kassan" />
                            </items>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -160,6 +160,7 @@
                               <AnchorPane fx:id="bp1iMatCategoryAP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="661.0" prefWidth="1004.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <fx:include source="categoryMenu.fxml" />
+                                    <Button layoutX="338.0" layoutY="268.0" mnemonicParsing="false" onAction="#goToCart" text="Test för att gå till kundvagn //razz" />
                                  </children>
                               </AnchorPane>
                            </children>
