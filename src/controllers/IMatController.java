@@ -10,10 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
 
 import java.io.IOException;
@@ -22,17 +25,12 @@ import java.util.*;
 
 public class IMatController implements Initializable {
 
-    @FXML private static AnchorPane bp1iMatCategoryAP;
-    @FXML private TableView<String> bp1Tableview;
     @FXML private MenuButton cartMenuButton;
+    @FXML private AnchorPane content;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /**ObservableList<String> categories = FXCollections.observableArrayList();
-        for (ProductCategory category : ProductCategory.values()) {
-            categories.add(translateCategories(category));
-        }
-        bp1Tableview.setItems(categories);**/
+
     }
 
     public String translateCategories(ProductCategory p) {
@@ -59,14 +57,16 @@ public class IMatController implements Initializable {
         if (p.toString().equalsIgnoreCase("HERB")) return "Örter och kryddor";
         return null;
     }
+
     //gets the view where the dropdown menu for the cart is, hides it and then opens the shopping cart view
     public void goToCart()throws IOException {
-        Parent cartParent = FXMLLoader.load(getClass().getResource("/fxml/shoppingcart.fxml"));
-        Scene cartScene = new Scene(cartParent);
-        Stage cartStage = (Stage) cartMenuButton.getScene().getWindow();
-        cartStage.hide();
-        cartStage.setScene(cartScene);
-        cartStage.show();
+        try {
+            AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
+            e.setPrefSize(content.getWidth(), content.getHeight());
+            content.getChildren().setAll(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
