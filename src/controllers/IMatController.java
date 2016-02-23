@@ -26,7 +26,7 @@ import java.util.*;
 public class IMatController implements Initializable {
 
     @FXML private MenuButton cartMenuButton;
-    @FXML private AnchorPane content;
+    @FXML private AnchorPane bp1iMatCategoryAP;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,13 +58,11 @@ public class IMatController implements Initializable {
         return null;
     }
 
-    //gets the view where the dropdown menu for the cart is, hides it and then opens the shopping cart view
+    //fetches the shopping cart view and replaces current anchor pane with it
     public void goToCart()throws IOException {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
-            content.getChildren().setAll(e);
-            e.setLayoutX(-34);
-            e.setLayoutY(-34);
+            bp1iMatCategoryAP.getChildren().setAll(e);
         } catch (IOException e) {
             e.printStackTrace();
         }
