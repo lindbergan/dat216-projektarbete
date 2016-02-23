@@ -1,19 +1,12 @@
 package controllers;
 
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+
 
 import java.io.IOException;
 
@@ -23,10 +16,6 @@ import java.io.IOException;
  */
 public class ShoppingCartController extends IMatController {
     @FXML
-    private GridPane cartPane;
-    @FXML
-    private Pane cartView;
-    @FXML
     private TextField cartAmount;
     @FXML
     private Label itemName;
@@ -35,11 +24,9 @@ public class ShoppingCartController extends IMatController {
     @FXML
     private Button incItem;
     @FXML
-    private Button homeButton;
-    @FXML
     private Label price;
     @FXML
-    private AnchorPane nobPane;
+    private AnchorPane cartPane;
 
 
 
@@ -93,7 +80,7 @@ public class ShoppingCartController extends IMatController {
 
     public void setPane()throws IOException{
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/categoryMenu.fxml/"));
-        nobPane.getChildren().setAll(e);
+        cartPane.getChildren().setAll(e);
 
     }
 
