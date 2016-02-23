@@ -6,11 +6,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="cartPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ShoppingCartController">
+<AnchorPane fx:id="cartPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ShoppingCartController">
    <children>
       <Pane fx:id="cartView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#preventNull" prefHeight="598.0" prefWidth="1004.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text layoutX="366.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min Kundvagn" textAlignment="CENTER" wrappingWidth="253.35009765625">
+            <Text layoutX="359.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min Kundvagn" textAlignment="CENTER" wrappingWidth="253.35009765625">
                <font>
                   <Font size="39.0" />
                </font>
@@ -79,8 +79,8 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-            <Button fx:id="homeButton" layoutX="444.0" layoutY="546.0" mnemonicParsing="false" onAction="#setPane" text="Tillbaka till butiken" />
-            <Button layoutX="294.0" layoutY="544.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="144.0" text="Till kassan" />
+            <Button fx:id="homeButton" layoutX="643.0" layoutY="631.0" mnemonicParsing="false" onAction="#setPane" text="Tillbaka till butiken" />
+            <Button layoutX="816.0" layoutY="631.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="144.0" text="Till kassan" />
          </children>
       </Pane>
    </children>
