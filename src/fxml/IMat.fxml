@@ -99,7 +99,7 @@
                         <Button alignment="CENTER" mnemonicParsing="false" text="Sök" StackPane.alignment="CENTER_RIGHT" />
                      </children>
                   </StackPane>
-                  <Button layoutX="1208.0" layoutY="17.0" mnemonicParsing="false" opacity="0.74" prefHeight="25.0" prefWidth="25.0" text="?">
+                  <Button fx:id="helpButton" layoutX="1208.0" layoutY="17.0" mnemonicParsing="false" onAction="#helpMenu" opacity="0.74" prefHeight="25.0" prefWidth="25.0" text="?">
                      <font>
                         <Font size="25.0" />
                      </font>
