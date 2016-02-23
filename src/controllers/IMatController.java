@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
@@ -27,6 +24,7 @@ public class IMatController implements Initializable {
 
     @FXML private MenuButton cartMenuButton;
     @FXML private AnchorPane bp1iMatCategoryAP;
+    @FXML private Button helpButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -66,6 +64,14 @@ public class IMatController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    //toggles the help menu
+    public void helpMenu() throws IOException{
+        Parent helpParent = FXMLLoader.load(getClass().getResource("/fxml/helpMenu.fxml"));
+        Scene helpScene = new Scene(helpParent);
+        Stage helpStage = new Stage();
+        helpStage.setScene(helpScene);
+        helpStage.show();
     }
 
 
