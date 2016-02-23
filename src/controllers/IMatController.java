@@ -62,8 +62,9 @@ public class IMatController implements Initializable {
     public void goToCart()throws IOException {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
-            e.setPrefSize(content.getWidth(), content.getHeight());
             content.getChildren().setAll(e);
+            e.setLayoutX(-34);
+            e.setLayoutY(-34);
         } catch (IOException e) {
             e.printStackTrace();
         }
