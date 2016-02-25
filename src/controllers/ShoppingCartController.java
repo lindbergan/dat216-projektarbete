@@ -8,7 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 
-import java.io.IOException;
+import java.io.*;
+import java.util.Properties;
 
 
 /**
@@ -27,8 +28,6 @@ public class ShoppingCartController extends IMatController {
     private Label price;
     @FXML
     private AnchorPane cartPane;
-
-
 
     public void preventNull() {
         if (!cartAmount.isFocused() && cartAmount.getText() == null) {
@@ -82,6 +81,27 @@ public class ShoppingCartController extends IMatController {
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/categoryMenu.fxml/"));
         cartPane.getChildren().setAll(e);
 
+    }
+    //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
+    public void testFile(){
+        try {
+            Properties prop = new Properties();
+            InputStreamReader in = new FileReader("C:\\Users\\Razmus\\.dat215\\imat\\customer.txt");
+            prop.load(in);
+
+            FileOutputStream out = new FileOutputStream("C:\\Users\\Razmus\\.dat215\\imat\\customer.txt");
+            String hej = itemName.getText();
+            prop.setProperty("name", hej);
+            prop.setProperty("adress", hej);
+            prop.setProperty("city", hej);
+            prop.store(out, null);
+            price.setText(prop.getProperty("name"));
+
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
