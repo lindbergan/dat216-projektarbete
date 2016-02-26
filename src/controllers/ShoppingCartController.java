@@ -73,15 +73,6 @@ public class ShoppingCartController implements Initializable {
         } else cartAmount.setText("1");
     }
 
-    public void preventZero() {
-        if(cartAmount.getText() == null){
-            cartAmount.setText("1.0");
-        }
-        double old = Double.parseDouble(cartAmount.getText());
-        if (old == 0) {
-            cartAmount.setText("1.0");
-        }
-    }
 
     public void deleteItem() {
         preventNull();
