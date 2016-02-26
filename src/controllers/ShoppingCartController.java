@@ -92,7 +92,7 @@ public class ShoppingCartController extends IMatController {
     public void testAddItem(){
         Product p = handler.getProduct(1);
         cart.addItem(new ShoppingItem(p,2));
-        System.out.println(handler.getShoppingCart().getItems().get(0));
+        itemName.setText(handler.getShoppingCart().getItems().get(0).getProduct().getName());
         //System.out.println(cart);
     }
     //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
