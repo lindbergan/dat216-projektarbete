@@ -42,7 +42,7 @@ public class ShoppingCartController implements Initializable {
     @FXML private Label itemUnit;
 
     public void preventNull() {
-        if (!cartAmount.isFocused() && (cartAmount.getText().isEmpty() || cartAmount.getText() == "0")) {
+        if (!cartAmount.isFocused() && (cartAmount.getText().isEmpty() || cartAmount.getText().equals("0"))) {
             cartAmount.setText("1.0");
         }
     }
