@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 
 import java.io.*;
@@ -20,7 +21,7 @@ import java.util.Properties;
  */
 public class ShoppingCartController extends IMatController {
     IMatDataHandler handler = IMatDataHandler.getInstance();
-    ShoppingCart cart;
+    ShoppingCart cart = handler.getShoppingCart();
 
     @FXML
     private TextField cartAmount;
@@ -89,7 +90,10 @@ public class ShoppingCartController extends IMatController {
 
     }
     public void testAddItem(){
-        System.out.println(handler.getProduct(1));
+        Product p = handler.getProduct(1);
+        cart.addItem(new ShoppingItem(p,2));
+        System.out.println(handler.getShoppingCart().getItems().get(0));
+        //System.out.println(cart);
     }
     //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
     public void testFile(){
