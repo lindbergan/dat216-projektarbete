@@ -43,30 +43,30 @@ public class ShoppingCartController implements Initializable {
 
     public void preventNull() {
         if (!cartAmount.isFocused() && cartAmount.getText() == null) {
-            cartAmount.setText("1");
+            cartAmount.setText("1.0");
         }
     }
 
     public void cartAmountClicked() {
-        cartAmount.setText(null);
+        cartAmount.selectAll();
 
 
     }
 
     public void incItem() {
         if (cartAmount.getText() != null) {
-            int old = Integer.parseInt(cartAmount.getText());
-            int tmp = old + 1;
+            double old = Double.parseDouble(cartAmount.getText());
+            double tmp = old + 1;
             String updated = "" + tmp;
             cartAmount.setText(updated);
-        } else cartAmount.setText("1");
+        } else cartAmount.setText("1.0");
     }
 
     public void decItem() {
         if (cartAmount.getText() != null) {
-            int old = Integer.parseInt(cartAmount.getText());
+            double old = Double.parseDouble(cartAmount.getText());
             if (old != 0 && old != 1) {
-                int tmp = old - 1;
+                double tmp = old - 1;
                 String updated = "" + tmp;
                 cartAmount.setText(updated);
             }
@@ -74,9 +74,12 @@ public class ShoppingCartController implements Initializable {
     }
 
     public void preventZero() {
-        int old = Integer.parseInt(cartAmount.getText());
+        if(cartAmount.getText() == null){
+            cartAmount.setText("1.0");
+        }
+        double old = Double.parseDouble(cartAmount.getText());
         if (old == 0) {
-            cartAmount.setText("1");
+            cartAmount.setText("1.0");
         }
     }
 
