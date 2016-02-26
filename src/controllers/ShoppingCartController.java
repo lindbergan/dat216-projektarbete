@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,14 +14,16 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 
 
 import java.io.*;
+import java.net.URL;
 import java.util.List;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 
 /**
  * Created by Razmus on 2016-02-21.
  */
-public class ShoppingCartController extends IMatController {
+public class ShoppingCartController implements Initializable {
     IMatDataHandler handler = IMatDataHandler.getInstance();
     ShoppingCart cart = handler.getShoppingCart();
 
@@ -97,10 +100,6 @@ public class ShoppingCartController extends IMatController {
     public void testAddItem(){
         Product p = handler.getProduct(1);
         cart.addItem(new ShoppingItem(p,2));
-        itemName.setText(showItem(0).getProduct().getName());
-        cartAmount.setText(""+showItem(0).getAmount());
-        price.setText(""+showItem(0).getProduct().getPrice() * showItem(0).getAmount());
-        itemUnit.setText(showItem(0).getProduct().getUnitSuffix());
 
     }
     //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
@@ -126,7 +125,15 @@ public class ShoppingCartController extends IMatController {
     }
 
 
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if(handler.getShoppingCart().getTotal() != 0) {
+            itemName.setText(showItem(0).getProduct().getName());
+            cartAmount.setText("" + showItem(0).getAmount());
+            price.setText("" + showItem(0).getProduct().getPrice() * showItem(0).getAmount());
+            itemUnit.setText(showItem(0).getProduct().getUnitSuffix());
+        }
+    }
 }
 
 
