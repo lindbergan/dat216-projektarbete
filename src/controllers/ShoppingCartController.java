@@ -42,7 +42,7 @@ public class ShoppingCartController implements Initializable {
     @FXML private Label itemUnit;
 
     public void preventNull() {
-        if (!cartAmount.isFocused() && cartAmount.getText() == null) {
+        if (!cartAmount.isFocused() && (cartAmount.getText().isEmpty() || cartAmount.getText() == "0")) {
             cartAmount.setText("1.0");
         }
     }
@@ -54,7 +54,7 @@ public class ShoppingCartController implements Initializable {
     }
 
     public void incItem() {
-        if (cartAmount.getText() != null) {
+        if (!cartAmount.getText().isEmpty()) {
             double old = Double.parseDouble(cartAmount.getText());
             double tmp = old + 1;
             String updated = "" + tmp;
@@ -63,7 +63,7 @@ public class ShoppingCartController implements Initializable {
     }
 
     public void decItem() {
-        if (cartAmount.getText() != null) {
+        if (!cartAmount.getText().isEmpty()) {
             double old = Double.parseDouble(cartAmount.getText());
             if (old != 0 && old != 1) {
                 double tmp = old - 1;
