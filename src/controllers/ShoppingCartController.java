@@ -6,6 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ShoppingCart;
 
 
 import java.io.*;
@@ -16,6 +19,9 @@ import java.util.Properties;
  * Created by Razmus on 2016-02-21.
  */
 public class ShoppingCartController extends IMatController {
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    ShoppingCart cart;
+
     @FXML
     private TextField cartAmount;
     @FXML
@@ -81,6 +87,9 @@ public class ShoppingCartController extends IMatController {
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/categoryMenu.fxml/"));
         cartPane.getChildren().setAll(e);
 
+    }
+    public void testAddItem(){
+        System.out.println(handler.getProduct(1));
     }
     //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
     public void testFile(){
