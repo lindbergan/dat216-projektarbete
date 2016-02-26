@@ -36,6 +36,7 @@ public class ShoppingCartController extends IMatController {
     private Label price;
     @FXML
     private AnchorPane cartPane;
+    @FXML private Label itemUnit;
 
     public void preventNull() {
         if (!cartAmount.isFocused() && cartAmount.getText() == null) {
@@ -90,15 +91,16 @@ public class ShoppingCartController extends IMatController {
         cartPane.getChildren().setAll(e);
 
     }
-    public List<ShoppingItem> showItem(){
-        return handler.getShoppingCart().getItems();
+    public ShoppingItem showItem(int i){
+        return handler.getShoppingCart().getItems().get(i);
     }
     public void testAddItem(){
         Product p = handler.getProduct(1);
         cart.addItem(new ShoppingItem(p,2));
-        itemName.setText(showItem().get(0).getProduct().getName());
-        cartAmount.setText(""+showItem().get(0).getAmount());
-        price.setText(""+showItem().get(0).getProduct().getPrice() * showItem().get(0).getAmount());
+        itemName.setText(showItem(0).getProduct().getName());
+        cartAmount.setText(""+showItem(0).getAmount());
+        price.setText(""+showItem(0).getProduct().getPrice() * showItem(0).getAmount());
+        itemUnit.setText(showItem(0).getProduct().getUnitSuffix());
 
     }
     //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
