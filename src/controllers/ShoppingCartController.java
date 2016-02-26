@@ -13,6 +13,7 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 
 
 import java.io.*;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -89,11 +90,16 @@ public class ShoppingCartController extends IMatController {
         cartPane.getChildren().setAll(e);
 
     }
+    public List<ShoppingItem> showItem(){
+        return handler.getShoppingCart().getItems();
+    }
     public void testAddItem(){
         Product p = handler.getProduct(1);
         cart.addItem(new ShoppingItem(p,2));
-        itemName.setText(handler.getShoppingCart().getItems().get(0).getProduct().getName());
-        //System.out.println(cart);
+        itemName.setText(showItem().get(0).getProduct().getName());
+        cartAmount.setText(""+showItem().get(0).getAmount());
+        price.setText(""+showItem().get(0).getProduct().getPrice() * showItem().get(0).getAmount());
+
     }
     //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
     public void testFile(){
