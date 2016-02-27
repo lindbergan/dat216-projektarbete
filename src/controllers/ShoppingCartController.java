@@ -5,9 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
@@ -16,7 +18,6 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import java.io.*;
 import java.net.URL;
-import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -42,11 +43,12 @@ public class ShoppingCartController implements Initializable {
     private AnchorPane cartPane;
     @FXML private Label itemUnit;
     @FXML private GridPane grid;
+    @FXML private ScrollPane scroll;
 
     public void preventNull() {
-        if (!cartAmount.isFocused() && (cartAmount.getText().isEmpty() || cartAmount.getText().equals("0"))) {
+       /* if (!cartAmount.isFocused() && (cartAmount.getText().isEmpty() || cartAmount.getText().equals("0"))) {
             cartAmount.setText("1.0");
-        }
+        }*/
     }
 
     public void cartAmountClicked() {
@@ -96,6 +98,8 @@ public class ShoppingCartController implements Initializable {
     public void testAddItem(){
         Product p = handler.getProduct(1);
         cart.addItem(new ShoppingItem(p,2));
+        cart.addItem(new ShoppingItem(handler.getProduct(3),5));
+
 
     }
     //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
@@ -123,11 +127,22 @@ public class ShoppingCartController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(handler.getShoppingCart().getTotal() != 0) {
-            itemName.setText(showItem(0).getProduct().getName());
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        if(handler.getShoppingCart().getTotal() > 1) {
+            scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            grid.add(new Text(showItem(0).getProduct().getName()),0,0);
+            TextField temp = new TextField();
+            temp.setText("" + showItem(0).getAmount());
+            temp.setMaxSize(59,31);
+            grid.add(temp,1,0);
+            Text suffix = new Text(showItem(0).getProduct().getUnitSuffix());
+            grid.add(suffix,2,0);
+            grid.add(new Text(showItem(1).getProduct().getName()), 0, 1);
+
+            /*itemName.setText(showItem(0).getProduct().getName());
             cartAmount.setText("" + showItem(0).getAmount());
             price.setText("" + showItem(0).getProduct().getPrice() * showItem(0).getAmount());
-            itemUnit.setText(showItem(0).getProduct().getUnitSuffix());
+            itemUnit.setText(showItem(0).getProduct().getUnitSuffix());*/
         }
     }
 }
