@@ -43,10 +43,14 @@ public class InvoiceController implements Initializable {
 
 
     //back to delivery view when clicked <--
-    public void backToDeliveryClicked()throws IOException {
+    public void backToDeliveryClicked(ActionEvent event)throws IOException {
 
-        AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml/"));
-        paymentViewInvoice.getChildren().setAll(deliveryView);
+        Parent checkoutParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml/"));
+        Scene checkoutScene = new Scene(checkoutParent);
+        Stage checkoutStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        checkoutStage.hide();
+        checkoutStage.setScene(checkoutScene);
+        checkoutStage.show();
     }
 
     //gives us the confirmation view
