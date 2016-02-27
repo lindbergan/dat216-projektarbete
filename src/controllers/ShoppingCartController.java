@@ -137,6 +137,7 @@ public class ShoppingCartController implements Initializable {
             grid.add(temp,1,0);
             Text suffix = new Text(showItem(0).getProduct().getUnitSuffix());
             grid.add(suffix,2,0);
+            grid.add(new Text("" + showItem(0).getProduct().getPrice() * showItem(0).getAmount()),3,0);
             grid.add(new Text(showItem(1).getProduct().getName()), 0, 1);
 
             /*itemName.setText(showItem(0).getProduct().getName());
