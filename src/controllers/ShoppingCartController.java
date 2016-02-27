@@ -1,11 +1,16 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
@@ -27,6 +32,7 @@ public class ShoppingCartController extends IMatController {
     private Label price;
     @FXML
     private AnchorPane cartPane;
+    private Stage checkoutStage;
 
 
 
@@ -85,10 +91,30 @@ public class ShoppingCartController extends IMatController {
     }
 
 
+    //added in order to go to checkoutview
+    public void goToCheckout(ActionEvent event) throws IOException{
+        Parent checkoutParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml/"));
+        Scene checkoutScene = new Scene(checkoutParent);
+        Stage checkoutStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        checkoutStage.hide();
+        checkoutStage.setScene(checkoutScene);
+        checkoutStage.show();
+    }
+
 
 }
 
 
 
+/* ursprungliga:
 
+    public void goToCheckout(ActionEvent event) throws IOException{
+        Parent helpParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml"));
+        Scene helpScene = new Scene(helpParent);
+        helpStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        helpStage.hide();
+        helpStage.setScene(helpScene);
+        helpStage.show();
+    }
+ */
 
