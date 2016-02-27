@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?scenebuilder-stylesheet CheckoutView.css?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DeliveryViewController">
+  <children>
+    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="800.0" prefWidth="1200.0">
+      <center>
+        <StackPane opacity="1.0" prefHeight="593.0" prefWidth="1200.0">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <children>
+                  <AnchorPane id="AnchorPane" fx:id="deliveryView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1200.0">
+                     <children>
+                        <Pane prefHeight="686.0" prefWidth="1200.0">
+                           <children>
+                              <TextField layoutX="105.0" layoutY="130.0" prefHeight="32.9609375" prefWidth="235.0" />
+                              <TextField layoutX="105.0" layoutY="222.0" prefHeight="32.9609375" prefWidth="235.0" />
+                              <TextField layoutX="105.0" layoutY="325.0" prefHeight="32.9609375" prefWidth="80.0" />
+                              <TextField layoutX="105.0" layoutY="433.0" prefHeight="32.9609375" prefWidth="165.0" />
+                              <TextField layoutX="382.0" layoutY="130.0" prefHeight="32.9609375" prefWidth="235.0" />
+                              <TextField layoutX="382.0" layoutY="222.0" prefHeight="32.9609375" prefWidth="80.0" />
+                              <TextField layoutX="382.0" layoutY="322.0" prefHeight="32.9609375" prefWidth="235.0" />
+                              <TextField layoutX="382.0" layoutY="433.0" prefHeight="32.9609375" prefWidth="235.0" />
+                              <Label layoutX="105.0" layoutY="47.0" prefHeight="33.0" prefWidth="107.0" text="Levereras till:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" fx:id="x1" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="105.0" layoutY="100.0" text="Förnamn *" />
+                              <Label layoutX="105.0" layoutY="193.0" text="Adress *" />
+                              <Label layoutX="382.0" layoutY="193.0" text="Postkod" />
+                              <Label layoutX="382.0" layoutY="100.0" text="Efternamn *" />
+                              <Label layoutX="105.0" layoutY="290.0" text="Postnummer *" />
+                              <Label layoutX="384.0" layoutY="290.0" text="Postort" />
+                              <Label layoutX="105.0" layoutY="402.0" text="Telefon/Mobil *" />
+                              <Label layoutX="384.0" layoutY="402.0" text="E-post *" />
+                              <Label layoutX="105.0" layoutY="494.0" text="* uppgifter markerade med (*) är obligatoriska " />
+                              <Label font="$x1" layoutX="106.0" layoutY="534.0" text="Betalsätt:" />
+                              <RadioButton fx:id="cardPayment" layoutX="106.0" layoutY="571.0" mnemonicParsing="false" text="Kortbetalning" />
+                              <RadioButton fx:id="invoicePayment" layoutX="106.0" layoutY="609.0" mnemonicParsing="false" text="Fakturabetalning" />
+                              <Button layoutX="877.0" layoutY="619.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="33.0" prefWidth="125.0" text="Tillbaka till butik" />
+                              <Button layoutX="1023.0" layoutY="619.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="32.9609375" prefWidth="125.0" text="Fortsätt" />
+                              <Label font="$x1" layoutX="918.0" layoutY="54.0" text="Leveranstid:" />
+                              <TextArea editable="false" layoutX="834.0" layoutY="100.0" opacity="0.5" prefHeight="83.0" prefWidth="262.0" text="Välj gärna ett så stort intervall som möjligt. Då blir det enklare för oss att planera våra rutter samtidigt som vi minskar vår miljöpåverkan. Tack!" wrapText="true" />
+                              <Label layoutX="834.0" layoutY="222.0" text="Månad" />
+                              <Label layoutX="1023.0" layoutY="222.0" text="Dag" />
+                              <Label layoutX="922.0" layoutY="347.0" text="Mellan klockan" />
+                              <ChoiceBox layoutX="834.0" layoutY="252.0" prefHeight="27.0" prefWidth="95.0">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="Item 1" />
+                                       <String fx:value="Item 2" />
+                                       <String fx:value="Item 3" />
+                                    </FXCollections>
+                                 </items>
+                              </ChoiceBox>
+                              <ChoiceBox layoutX="1023.0" layoutY="252.0" prefHeight="27.0" prefWidth="88.0">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="Item 1" />
+                                       <String fx:value="Item 2" />
+                                       <String fx:value="Item 3" />
+                                    </FXCollections>
+                                 </items>
+                              </ChoiceBox>
+                              <ChoiceBox layoutX="868.0" layoutY="381.0" prefHeight="27.0" prefWidth="80.0">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="Item 1" />
+                                       <String fx:value="Item 2" />
+                                       <String fx:value="Item 3" />
+                                    </FXCollections>
+                                 </items>
+                              </ChoiceBox>
+                              <ChoiceBox layoutX="994.0" layoutY="381.0" prefHeight="27.0" prefWidth="80.0">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="Item 1" />
+                                       <String fx:value="Item 2" />
+                                       <String fx:value="Item 3" />
+                                    </FXCollections>
+                                 </items>
+                              </ChoiceBox>
+                              <Label layoutX="958.0" layoutY="384.0" text="och" />
+                              <Label layoutX="587.0" layoutY="21.0" text="Leverans">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </children></StackPane>
+      </center>
+      <top>
+        <Pane prefHeight="114.0" prefWidth="1200.0">
+          <children>
+            <HBox layoutX="0.0" layoutY="7.0" prefHeight="99.0" prefWidth="277.0">
+              <children>
+                        <Button layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#logoClicked" prefHeight="109.0" prefWidth="195.0">
+                           <graphic>
+                      <ImageView fitHeight="87.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                          <Image url="@../pictures/iMat.png" />
+                        </image>
+                      </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+              </children>
+            </HBox>
+            <HBox layoutX="346.0" layoutY="43.0" prefHeight="64.0" prefWidth="705.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="190.0" text="Leverans" />
+                        <Button mnemonicParsing="false" prefHeight="17.0" prefWidth="190.0" text="Betalning" />
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="190.0" text="Genomför köp" />
+                     </children>
+            </HBox>
+          </children>
+        </Pane>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>
