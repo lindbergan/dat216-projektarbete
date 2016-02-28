@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -89,8 +91,7 @@ public class ShoppingCartController implements Initializable {
         int row = db.getRow();
         handler.getShoppingCart().getItems().remove(row);
         try {
-            setPane();
-            setPane2();
+            refresh();
         }
         catch(Exception ex){
 
@@ -106,6 +107,15 @@ public class ShoppingCartController implements Initializable {
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
         cartPane.getChildren().setAll(e);
 
+    }
+    public void refresh(){
+        try{
+            setPane();
+            setPane2();
+        }
+        catch(Exception e){
+
+        }
     }
     public ShoppingItem showItem(int i){
         return handler.getShoppingCart().getItems().get(i);
@@ -153,17 +163,28 @@ public class ShoppingCartController implements Initializable {
         }
         for(int i = 0; i<handler.getShoppingCart().getItems().size(); i++){
             grid.add(new Text(showItem(i).getProduct().getName()),0,i);
-            TextField temp = new TextField();
+            CartTextField temp = new CartTextField(i);
             temp.setText("" + showItem(i).getAmount());
             temp.setMaxSize(59,31);
             temp.setOnMouseClicked(this::amountClicked);
+            temp.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
+                    try{
+                        refresh();
+                    }
+                    catch(Exception e){
+
+                    }
+                }
+            });
             grid.add(temp,1,i);
             Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
             grid.add(suffix,2,i);
             grid.add(new Text("" + showItem(i).getProduct().getPrice() * showItem(i).getAmount()),3,i);
             totalPrice.setText(handler.getShoppingCart().getTotal() + " :-");
-            delButton = new DelButton("Ta bort");
-            delButton.setRow(i);
+            delButton = new DelButton("Ta bort",i);
             delButton.setOnAction(this::deleteItem);
             grid.add(delButton,4,i);
         }
