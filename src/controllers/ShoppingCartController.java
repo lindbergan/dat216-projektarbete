@@ -123,6 +123,7 @@ public class ShoppingCartController implements Initializable {
         cart.addItem(new ShoppingItem(handler.getProduct(29),5));
         cart.addItem(new ShoppingItem(handler.getProduct(99),5));
         cart.addItem(new ShoppingItem(handler.getProduct(12),5));
+        refresh();
 
 
     }
