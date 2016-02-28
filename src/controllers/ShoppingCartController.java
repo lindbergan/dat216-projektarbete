@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,6 +46,7 @@ public class ShoppingCartController implements Initializable {
     @FXML private GridPane grid;
     @FXML private ScrollPane scroll;
     @FXML private Label totalPrice;
+    @FXML private Button delButton;
 
     public void preventNull() {
        /* if (!cartAmount.isFocused() && (cartAmount.getText().isEmpty() || cartAmount.getText().equals("0"))) {
@@ -79,13 +81,8 @@ public class ShoppingCartController implements Initializable {
     }
 
 
-    public void deleteItem() {
-        preventNull();
-        itemName.setVisible(false);
-        cartAmount.setVisible(false);
-        incItem.setVisible(false);
-        decItem.setVisible(false);
-        price.setVisible(false);
+    public void deleteItem(ActionEvent e) {
+        handler.getShoppingCart().getItems().remove(0);
     }
 
     public void setPane()throws IOException{
@@ -134,6 +131,7 @@ public class ShoppingCartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        delButton.setVisible(false);
         if(handler.getShoppingCart().getItems().size() > 5){
             scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         }
@@ -147,6 +145,9 @@ public class ShoppingCartController implements Initializable {
             grid.add(suffix,2,i);
             grid.add(new Text("" + showItem(i).getProduct().getPrice() * showItem(i).getAmount()),3,i);
             totalPrice.setText(handler.getShoppingCart().getTotal() + " :-");
+            delButton = new Button("Ta bort");
+            delButton.setOnAction(this::deleteItem);
+            grid.add(delButton,4,i);
         }
     }
 }
