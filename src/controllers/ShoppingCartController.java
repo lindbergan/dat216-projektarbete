@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -55,8 +56,9 @@ public class ShoppingCartController implements Initializable {
         }*/
     }
 
-    public void cartAmountClicked() {
-        cartAmount.selectAll();
+    public void amountClicked(MouseEvent e) {
+        TextField temp = (TextField)e.getSource();
+        temp.selectAll();
 
 
     }
@@ -154,6 +156,7 @@ public class ShoppingCartController implements Initializable {
             TextField temp = new TextField();
             temp.setText("" + showItem(i).getAmount());
             temp.setMaxSize(59,31);
+            temp.setOnMouseClicked(this::amountClicked);
             grid.add(temp,1,i);
             Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
             grid.add(suffix,2,i);
