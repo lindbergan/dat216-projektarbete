@@ -12,9 +12,7 @@ public class DelButton extends Button {
         setText(s);
         this.row = r;
     }
-    public void setRow(int r){
-        this.row = r;
-    }
+
     public int getRow(){
         return this.row;
     }
