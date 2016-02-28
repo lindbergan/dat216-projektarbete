@@ -171,11 +171,17 @@ public class ShoppingCartController implements Initializable {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
-                    try{
-                        refresh();
-                    }
-                    catch(Exception e){
+                }
+            });
+            temp.focusedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if (!newValue) {
+                        try {
+                            refresh();
+                        } catch (Exception e) {
 
+                        }
                     }
                 }
             });
