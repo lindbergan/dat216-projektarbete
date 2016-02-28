@@ -40,11 +40,15 @@ public class InvoiceController implements Initializable {
     @FXML private TextField invoicePostAddress;
     @FXML private TextField invoiceEmail;
     @FXML private TextField invoicePhone;
+    private static boolean visited = false;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        //makes sure that it has been visited in order to be able to jump pass it from the buttons in the header
+        visited = true;
 
         //sets the radiobuttons, visa = default choise, user specified option is set to diabled due to time restraints
         sameAsDelivery.setSelected(true);
@@ -65,20 +69,20 @@ public class InvoiceController implements Initializable {
     //back to delivery view when clicked <--
     public void backToDeliveryClicked(ActionEvent event)throws IOException {
 
-        Parent checkoutParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml/"));
-        Scene checkoutScene = new Scene(checkoutParent);
-        Stage checkoutStage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        checkoutStage.hide();
-        checkoutStage.setScene(checkoutScene);
-        checkoutStage.show();
+        AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
+        paymentViewInvoice.getChildren().setAll(deliveryView);
+
     }
 
     //gives us the confirmation view
     public void continueClicked()throws IOException{
 
-        AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml/"));
+        AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
         paymentViewInvoice.getChildren().setAll(confirmationView);
 
+    }
+    public static boolean hasBeenVisited(){
+        return visited;
     }
 
 }
