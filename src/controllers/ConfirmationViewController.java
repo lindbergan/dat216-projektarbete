@@ -4,6 +4,8 @@ package controllers;
  * Created by Jolo on 2/26/16.
  */
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,32 +17,39 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Customer;
+import se.chalmers.ait.dat215.project.ShoppingCart;
+import se.chalmers.ait.dat215.project.ShoppingItem;
+
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ConfirmationViewController implements Initializable {
 
     @FXML private AnchorPane confirmationView;
-    @FXML private AnchorPane exitView;
+    @FXML private ListView shoppingCartSummary;
     @FXML private Label customerName;
     @FXML private Label customerAddress;
     @FXML private Label customerPostCode;
     @FXML private Label customerEmail;
     @FXML private Label customerPhone;
     @FXML private Label customerDate;
+    @FXML private Label customerPaymentChoise;
 
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
+    private ShoppingCart shoppingCart =handler.getShoppingCart();
+    private ObservableList<ShoppingItem> cartItems = FXCollections.observableArrayList(shoppingCart.getItems());
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        customerName.setText(customer.getFirstName() +customer.getLastName());
+        customerName.setText(customer.getFirstName() + " " + customer.getLastName());
         customerAddress.setText(customer.getAddress());
         customerPostCode.setText(customer.getPostCode());
         customerEmail.setText(customer.getEmail());
@@ -49,21 +58,33 @@ public class ConfirmationViewController implements Initializable {
                 DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
                 DeliveryViewController.getUserSpecifiedMinTime() + " - " +
                 DeliveryViewController.getUserSpecifiedMaxTime()  );
+
+        customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
+
+        //places the shopping items in the ObservableList if the shoppingcart contains any items
+        if(shoppingCart.getItems().size() != 0) {
+            shoppingCartSummary.setItems(cartItems);
+        }
     }
 
     //back to payment view when clicked <--
     public void backtoPaymentView()throws IOException {
 
-        //villkor - beroende på om kund valt kort eller faktura, löses med observables och firepropertychange??
+        //villkor - beroende på om kund valt att betala med kort eller faktura:
+        if(DeliveryViewController.getPaymentChoise()=="Kortbetalning") {
 
-        // kort blir:
-        AnchorPane paymentViewCard = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml/"));
-        confirmationView.getChildren().setAll(paymentViewCard);
+            AnchorPane paymentViewCard = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
+            confirmationView.getChildren().setAll(paymentViewCard);
+        }
+        else{
+            AnchorPane paymentViewInvoice = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
+            confirmationView.getChildren().setAll(paymentViewInvoice);
+        }
     }
 
     //gives us the Exit/Thank you view
     public void confirmPurches(ActionEvent event) throws IOException{
-        Parent exitParent = FXMLLoader.load(getClass().getResource("/fxml/ExitView.fxml/"));
+        Parent exitParent = FXMLLoader.load(getClass().getResource("/fxml/ExitView.fxml"));
         Scene exitScene = new Scene(exitParent);
         Stage exitStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         exitStage.hide();
