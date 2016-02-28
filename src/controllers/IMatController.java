@@ -27,7 +27,6 @@ public class IMatController implements Initializable {
     @FXML private MenuButton cartMenuButton;
     @FXML private AnchorPane bp1iMatCategoryAP;
     @FXML private Button helpButton;
-    private Stage helpStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -82,14 +81,11 @@ public class IMatController implements Initializable {
     public void helpMenu() throws IOException{
         Parent helpParent = FXMLLoader.load(getClass().getResource("/fxml/helpMenu.fxml"));
         Scene helpScene = new Scene(helpParent);
-        helpStage = new Stage();
+        Stage helpStage = new Stage();
         helpStage.setScene(helpScene);
         helpStage.show();
     }
-    //closes help menu when pressing the button
-    public void closeWindow(ActionEvent event){
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-    }
+
 
 
 }
