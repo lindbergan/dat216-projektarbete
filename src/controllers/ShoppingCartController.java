@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
  * Created by Razmus on 2016-02-21.
  */
 public class ShoppingCartController implements Initializable {
+    IMatController controller = new IMatController();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     ShoppingCart cart = handler.getShoppingCart();
 
@@ -85,10 +86,22 @@ public class ShoppingCartController implements Initializable {
         DelButton db = (DelButton)e.getSource();
         int row = db.getRow();
         handler.getShoppingCart().getItems().remove(row);
+        try {
+            setPane();
+            setPane2();
+        }
+        catch(Exception ex){
+
+        }
     }
 
     public void setPane()throws IOException{
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/categoryMenu.fxml/"));
+        cartPane.getChildren().setAll(e);
+
+    }
+    public void setPane2()throws IOException{
+        AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
         cartPane.getChildren().setAll(e);
 
     }
