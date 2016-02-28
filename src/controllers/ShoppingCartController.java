@@ -35,16 +35,6 @@ public class ShoppingCartController implements Initializable {
     ShoppingCart cart = handler.getShoppingCart();
 
     @FXML
-    private TextField cartAmount;
-    @FXML
-    private Label itemName;
-    @FXML
-    private Button decItem;
-    @FXML
-    private Button incItem;
-    @FXML
-    private Label price;
-    @FXML
     private AnchorPane cartPane;
     @FXML private Label itemUnit;
     @FXML private GridPane grid;
@@ -59,16 +49,16 @@ public class ShoppingCartController implements Initializable {
         temp.selectAll();
     }
 
-    public void incItem() {
+  /*  public void incItem() {
         if (!cartAmount.getText().isEmpty()) {
             double old = Double.parseDouble(cartAmount.getText());
             double tmp = old + 1;
             String updated = "" + tmp;
             cartAmount.setText(updated);
         } else cartAmount.setText("1.0");
-    }
+    }*/
 
-    public void decItem() {
+   /* public void decItem() {
         if (!cartAmount.getText().isEmpty()) {
             double old = Double.parseDouble(cartAmount.getText());
             if (old != 0 && old != 1) {
@@ -77,7 +67,7 @@ public class ShoppingCartController implements Initializable {
                 cartAmount.setText(updated);
             }
         } else cartAmount.setText("1");
-    }
+    }*/
 
 
     public void deleteItem(ActionEvent e) {
@@ -128,7 +118,7 @@ public class ShoppingCartController implements Initializable {
 
     }
     //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
-    public void testFile(){
+    /*public void testFile(){
         try {
             Properties prop = new Properties();
             InputStreamReader in = new FileReader("C:\\Users\\Razmus\\.dat215\\imat\\customer.txt");
@@ -147,7 +137,7 @@ public class ShoppingCartController implements Initializable {
         catch(Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
 
 
     @Override
