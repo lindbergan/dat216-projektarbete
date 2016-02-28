@@ -44,6 +44,7 @@ public class ShoppingCartController implements Initializable {
     @FXML private Label itemUnit;
     @FXML private GridPane grid;
     @FXML private ScrollPane scroll;
+    @FXML private Label totalPrice;
 
     public void preventNull() {
        /* if (!cartAmount.isFocused() && (cartAmount.getText().isEmpty() || cartAmount.getText().equals("0"))) {
@@ -99,6 +100,11 @@ public class ShoppingCartController implements Initializable {
         Product p = handler.getProduct(1);
         cart.addItem(new ShoppingItem(p,2));
         cart.addItem(new ShoppingItem(handler.getProduct(3),5));
+        cart.addItem(new ShoppingItem(handler.getProduct(4),5));
+        cart.addItem(new ShoppingItem(handler.getProduct(6),5));
+        cart.addItem(new ShoppingItem(handler.getProduct(29),5));
+        cart.addItem(new ShoppingItem(handler.getProduct(99),5));
+        cart.addItem(new ShoppingItem(handler.getProduct(12),5));
 
 
     }
@@ -128,22 +134,19 @@ public class ShoppingCartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        if(handler.getShoppingCart().getTotal() > 1) {
-            scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-            grid.add(new Text(showItem(0).getProduct().getName()),0,0);
+        if(handler.getShoppingCart().getItems().size() > 5){
+            scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        }
+        for(int i = 0; i<handler.getShoppingCart().getItems().size(); i++){
+            grid.add(new Text(showItem(i).getProduct().getName()),0,i);
             TextField temp = new TextField();
-            temp.setText("" + showItem(0).getAmount());
+            temp.setText("" + showItem(i).getAmount());
             temp.setMaxSize(59,31);
-            grid.add(temp,1,0);
-            Text suffix = new Text(showItem(0).getProduct().getUnitSuffix());
-            grid.add(suffix,2,0);
-            grid.add(new Text("" + showItem(0).getProduct().getPrice() * showItem(0).getAmount()),3,0);
-            grid.add(new Text(showItem(1).getProduct().getName()), 0, 1);
-
-            /*itemName.setText(showItem(0).getProduct().getName());
-            cartAmount.setText("" + showItem(0).getAmount());
-            price.setText("" + showItem(0).getProduct().getPrice() * showItem(0).getAmount());
-            itemUnit.setText(showItem(0).getProduct().getUnitSuffix());*/
+            grid.add(temp,1,i);
+            Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
+            grid.add(suffix,2,i);
+            grid.add(new Text("" + showItem(i).getProduct().getPrice() * showItem(i).getAmount()),3,i);
+            totalPrice.setText(handler.getShoppingCart().getTotal() + " :-");
         }
     }
 }
