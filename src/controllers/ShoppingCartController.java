@@ -52,17 +52,11 @@ public class ShoppingCartController implements Initializable {
     @FXML private Label totalPrice;
     @FXML private DelButton delButton;
 
-    public void preventNull() {
-       /* if (!cartAmount.isFocused() && (cartAmount.getText().isEmpty() || cartAmount.getText().equals("0"))) {
-            cartAmount.setText("1.0");
-        }*/
-    }
+
 
     public void amountClicked(MouseEvent e) {
         TextField temp = (TextField)e.getSource();
         temp.selectAll();
-
-
     }
 
     public void incItem() {
@@ -94,7 +88,7 @@ public class ShoppingCartController implements Initializable {
             refresh();
         }
         catch(Exception ex){
-
+            ex.getStackTrace();
         }
     }
 
@@ -114,7 +108,7 @@ public class ShoppingCartController implements Initializable {
             setPane2();
         }
         catch(Exception e){
-
+            e.getStackTrace();
         }
     }
     public ShoppingItem showItem(int i){
@@ -170,7 +164,9 @@ public class ShoppingCartController implements Initializable {
             temp.textProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
+                    if(!temp.getText().isEmpty()) {
+                        cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
+                    }
                 }
             });
             temp.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -182,6 +178,9 @@ public class ShoppingCartController implements Initializable {
                         } catch (Exception e) {
 
                         }
+                    }
+                    if(temp.getText().isEmpty() || temp.getText().equals("0")){
+                        temp.setText("1.0");
                     }
                 }
             });
