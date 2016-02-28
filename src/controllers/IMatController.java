@@ -31,12 +31,16 @@ public class IMatController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for(int i = 0; i<5; i++){
-            ShoppingItem item = handler.getShoppingCart().getItems().get(i);
-            MenuItem temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   "+item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
-            cartMenuButton.getItems().add(i, temp);
+        if(handler.getShoppingCart().getItems().size() != 0) {
+            for (int i = 0; i < 5; i++) {
+                ShoppingItem item = handler.getShoppingCart().getItems().get(i);
+                MenuItem temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                cartMenuButton.getItems().add(i, temp);
+            }
         }
-        cartMenuButton.getItems().add(5,new MenuItem("..."));
+        if(handler.getShoppingCart().getItems().size() > 5) {
+            cartMenuButton.getItems().add(5, new MenuItem("..."));
+        }
 
     }
 
