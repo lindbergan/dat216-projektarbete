@@ -15,12 +15,14 @@ import javafx.stage.Stage;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
 public class IMatController implements Initializable {
+    IMatDataHandler handler = IMatDataHandler.getInstance();
 
     @FXML private MenuButton cartMenuButton;
     @FXML private AnchorPane bp1iMatCategoryAP;
@@ -29,6 +31,11 @@ public class IMatController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        for(int i = 0; i<6; i++){
+            ShoppingItem item = handler.getShoppingCart().getItems().get(i);
+            MenuItem temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   "+item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+            cartMenuButton.getItems().add(0, temp);
+        }
 
     }
 
