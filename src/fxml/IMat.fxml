@@ -18,14 +18,14 @@
                <children>
                   <HBox alignment="BASELINE_LEFT" layoutX="253.0" layoutY="10.0" prefHeight="49.0" prefWidth="217.0" spacing="10.0" AnchorPane.leftAnchor="253.0">
                      <children>
-                        <ToggleButton fx:id="toggle1" focusTraversable="false" mnemonicParsing="false" selected="true" text="Butiksvy">
+                        <ToggleButton fx:id="toggle1" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#currentView" selected="true" text="Butiksvy">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <font>
                               <Font size="15.0" />
                            </font></ToggleButton>
-                        <ToggleButton fx:id="toggle2" focusTraversable="false" mnemonicParsing="false" text="Kategorivy">
+                        <ToggleButton fx:id="toggle2" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#currentView" text="Kategorivy">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

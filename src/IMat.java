@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.util.Properties;
+
 public class IMat extends Application {
 
     @Override
@@ -23,6 +28,18 @@ public class IMat extends Application {
             @Override
             public void handle(WindowEvent event) {
                 handler.shutDown();
+                try {
+                    Properties prop = new Properties();
+
+                    FileOutputStream out = new FileOutputStream("currentView.txt");
+                    prop.setProperty("URL", "/fxml/shopView.fxml/");
+                    prop.store(out, null);
+
+
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         });
         primaryStage.show();
