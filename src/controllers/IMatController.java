@@ -1,17 +1,14 @@
 package controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingItem;
@@ -31,6 +28,7 @@ public class IMatController implements Initializable {
     @FXML private MenuButton receiptMenu;
     @FXML private MenuButton favoritesMenu;
     private Stage helpStage;
+    @FXML private AnchorPane bp1iMatCategoryAP;
     @FXML private MenuItem totalMenu;
     IMatDataHandler handler = IMatDataHandler.getInstance();
 
@@ -124,6 +122,7 @@ public class IMatController implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void cartMenuOnAction(){
         cartMenuButton.getItems().remove(0,cartMenuButton.getItems().size()-3);
         int limit = 5;
@@ -146,10 +145,7 @@ public class IMatController implements Initializable {
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
     }
-    //closes help menu when pressing the button
-    public void closeWindow(ActionEvent event){
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-    }
+
 
 
 }

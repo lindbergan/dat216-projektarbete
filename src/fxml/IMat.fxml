@@ -71,9 +71,9 @@
                               <Font size="15.0" />
                            </font>
                         </MenuButton>
-                        <MenuButton fx:id="cartMenuButton" cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Kundvagn / Kassa">
+                        <MenuButton fx:id="cartMenuButton" cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#cartMenuOnAction" pickOnBounds="false" scaleShape="false" text="Kundvagn / Kassa">
                            <items>
-                              <MenuItem disable="true" mnemonicParsing="false" text="Totalt : 403kr" />
+                              <MenuItem fx:id="totalMenu" mnemonicParsing="false" styleClass="-fx-text-fill: blue;" />
                               <SeparatorMenuItem mnemonicParsing="false" />
                               <MenuItem mnemonicParsing="false" onAction="#goToCart" text="Gå till kundvagnen / kassan" />
                            </items>
