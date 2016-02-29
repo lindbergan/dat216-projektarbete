@@ -7,101 +7,77 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class categoryMenuController implements Initializable {
 
     @FXML public GridPane gridPane;
     @FXML public AnchorPane apGridWindow;
-    IMatDataHandler handler = IMatDataHandler.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        showProducts();
+        showProductCategories();
     }
 
-    /*public void getSelectedCategory() {
-        showProductsPC();
-        showProducts();
-    }*/
+    /***
+     *
+     *
+     *  1.  "Baljväxter"
+     *  2.  "Bröd"
+     *  3.  "Frukt och grönt (inkl. bär)"
+     *  4.  "Skafferi" (inkl. Drycker varma, mjöl socker salt)
+     *  5.  "Sötsaker och drycker" (inkl. kalla drycker, sötsaker)
+     *  6.  "Fisk"
+     *  7.  "Kött"
+     *  8.  "Mejeri"
+     *  9.  "Nötter och frön"
+     *  10. "Pasta potatis och ris"
+     *  11. "Rotfrukter"
+     *
+     *
+     */
 
-    public void showProducts() {
-        List<Product> productList = handler.getProducts();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setAlignment(Pos.TOP_CENTER);
-        gridPane.setPadding(new Insets(10));
-        if (!(productList.isEmpty())) {
-            int productListSize = productList.size();
-            int rowNr = 0;
-            for (int i = 0; i < productListSize - 1; i=i+4) {
-                gridPane.addRow(rowNr);
-                rowNr++;
-            }
-            int rowNrAgain = 0;
-            double magicalHeight = 483.0;
-            int magicalIdNr = 0;
-            for (int i = 0; i < productListSize - 1; i+=4) {
-                for (int j = 0; j < 4; j++) {
-                    Button newButton = new Button("" + magicalIdNr);
-                    newButton.setPrefWidth(200);
-                    newButton.setPrefHeight(250);
-                    gridPane.add(newButton, j, rowNrAgain);
-                    magicalIdNr++;
-                }
-                if (rowNrAgain < rowNr) {
-                    rowNrAgain++;
-                    apGridWindow.setPrefHeight(magicalHeight + 250);
-                    magicalHeight = magicalHeight + 250;
-                }
-            }
-        }
-        else {
-            System.out.println("Productlist is empty. ");
+    public void showProductCategories() {
+        String[] productCategories = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk"
+        , "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
+
+        int categoryListSize = productCategories.length;
+        int rowNr = 0;
+        double magicalHeight = 483.0;
+
+        for (int i = 0; i < categoryListSize; i=i+4) {
+            gridPane.addRow(rowNr);
+            rowNr++;
         }
 
-    }
+        int magicalNr = 0;
+        int rowNrAgain = 0;
+        for (int i = 0; i < categoryListSize; i+=4) {
+            for (int j = 0; j < 4; j++) {
 
-    public void showProductsPC() {
-        List<Product> productList = handler.getProducts();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setAlignment(Pos.TOP_CENTER);
-        gridPane.setPadding(new Insets(10));
-        if (!(productList.isEmpty())) {
-            int productListSize = productList.size();
-            int rowNr = 0;
-            for (int i = 0; i < productListSize - 1; i=i+4) {
-                gridPane.addRow(rowNr);
-                rowNr++;
+                Button newButton = new Button(productCategories[magicalNr]);
+                newButton.setPrefWidth(200);
+                newButton.setPrefHeight(250);
+                newButton.setPickOnBounds(false);
+                newButton.setFocusTraversable(false);
+
+                gridPane.add(newButton, j, rowNrAgain);
+                if (magicalNr < 10) {magicalNr++;}
             }
-            int rowNrAgain = 0;
-            double magicalHeight = 483.0;
-            int magicalIdNr = 0;
-            for (int i = 0; i < productListSize - 1; i+=4) {
-                for (int j = 0; j < 4; j++) {
-                    Button newButton = new Button("" + magicalIdNr);
-                    newButton.setPrefWidth(200);
-                    newButton.setPrefHeight(250);
-                    gridPane.add(newButton, j, rowNrAgain);
-                    magicalIdNr++;
-                }
-                if (rowNrAgain < rowNr) {
-                    rowNrAgain++;
-                    apGridWindow.setPrefHeight(magicalHeight + 250);
-                    magicalHeight = magicalHeight + 250;
-                }
+
+            if (rowNrAgain < rowNr) {
+                rowNrAgain++;
+                apGridWindow.setPrefHeight(magicalHeight + 250);
+                magicalHeight = magicalHeight + 250;
             }
         }
-        else {
-            System.out.println("Productlist is empty. ");
-        }
+
 
     }
 
