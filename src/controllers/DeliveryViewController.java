@@ -16,11 +16,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import se.chalmers.ait.dat215.project.CreditCard;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
@@ -29,6 +31,7 @@ public class DeliveryViewController implements Initializable{
     @FXML private AnchorPane deliveryView;
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
+    private CreditCard creditCard = handler.getCreditCard();
 
     final ToggleGroup radioButtonGroup = new ToggleGroup();
     @FXML private RadioButton cardPayment;
@@ -81,6 +84,12 @@ public class DeliveryViewController implements Initializable{
         minTimeChoisebox.setItems(minTime);
         maxTimeChoisebox.setItems(maxTime);
 
+        //sets the choiesBoxes
+        monthChoisebox.setValue(userSpecifiedMonth);
+        dateChoisebox.setValue(userSpecifiedDate);
+        minTimeChoisebox.setValue(userSpecifiedMinTime);
+        maxTimeChoisebox.setValue(userSpecifiedMaxTime);
+
         //sets the radiobuttons
         if(paymentChoise == "Kortbetalning") {
             cardPayment.setSelected(true);
@@ -116,7 +125,7 @@ public class DeliveryViewController implements Initializable{
     public void logoClicked(ActionEvent event) throws IOException{
 
         Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
-        Scene mainScene = new Scene(mainParent);
+        Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage mainStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         mainStage.hide();
         mainStage.setScene(mainScene);
@@ -127,7 +136,7 @@ public class DeliveryViewController implements Initializable{
     public void backtoStoreClicked(ActionEvent event) throws IOException {
 
         Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
-        Scene mainScene = new Scene(mainParent);
+        Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         mainStage.hide();
         mainStage.setScene(mainScene);

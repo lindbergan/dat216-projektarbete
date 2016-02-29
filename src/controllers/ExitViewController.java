@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
@@ -49,7 +50,7 @@ public class ExitViewController implements Initializable {
     public void continueShopping(ActionEvent event) throws IOException{
 
         Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
-        Scene imatScene = new Scene(imatParent);
+        Scene imatScene = new Scene(imatParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage imatStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         imatStage.hide();
         imatStage.setScene(imatScene);

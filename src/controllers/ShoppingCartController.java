@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 
@@ -94,7 +95,7 @@ public class ShoppingCartController extends IMatController {
     //added in order to go to checkoutview
     public void goToCheckout(ActionEvent event) throws IOException{
         Parent checkoutParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml"));
-        Scene checkoutScene = new Scene(checkoutParent);
+        Scene checkoutScene = new Scene(checkoutParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage checkoutStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         checkoutStage.hide();
         checkoutStage.setScene(checkoutScene);

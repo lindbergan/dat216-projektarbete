@@ -10,34 +10,38 @@
 
 <AnchorPane id="AnchorPane" fx:id="exitView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExitViewController">
   <children>
-    <Text layoutX="453.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Betalningen är nu godkänd och ett mail  med ditt kvitto&#10;har skickats till ">
-      <font>
-        <Font size="12.0" />
-      </font>
-    </Text>
-    <Text layoutX="545.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tack för ditt köp!">
-      <font>
-        <Font name="System Bold" size="18.0" fx:id="x1" />
-      </font>
-    </Text>
-    <ImageView fitHeight="146.0" fitWidth="254.0" layoutX="504.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../pictures/iMat.png" />
-      </image>
-    </ImageView>
-    <Text font="$x1" layoutX="545.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Välkommen Åter!" />
-    <Button defaultButton="true" layoutX="545.0" layoutY="580.0" mnemonicParsing="false" onAction="#continueShopping" prefHeight="51.0" prefWidth="155.0" text="Fortsätt handla" />
-    <Text layoutX="551.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leveranstid beräknas till" />
-    <Button layoutX="1107.0" layoutY="34.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="51.0" text="X">
-      <font>
-        <Font name="System Bold" size="24.0" />
-      </font>
-    </Button>
-    <Label fx:id="customerDate" alignment="CENTER" layoutX="539.0" layoutY="433.0" prefHeight="17.0" prefWidth="177.0" text="getDate" />
-      <Label fx:id="customerEmail" layoutX="539.0" layoutY="319.0" text="&quot;person@email.com&quot;.">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Label>
+      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="1080.0" prefWidth="1920.0">
+         <children>
+          <Text layoutX="484.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Betalningen är nu godkänd och ett mail  med ditt kvitto&#10;har skickats till ">
+            <font>
+              <Font size="12.0" />
+            </font>
+          </Text>
+          <Text layoutX="562.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tack för ditt köp!">
+            <font>
+              <Font name="System Bold" size="18.0" fx:id="x1" />
+            </font>
+          </Text>
+          <Text font="$x1" layoutX="562.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Välkommen Åter!" />
+          <Text layoutX="565.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leveranstid beräknas till" />
+          <Label fx:id="customerDate" alignment="CENTER" layoutX="545.0" layoutY="453.0" prefHeight="17.0" prefWidth="177.0" text="getDate" />
+          <ImageView fitHeight="146.0" fitWidth="254.0" layoutX="513.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+              <Image url="@../pictures/iMat.png" />
+            </image>
+          </ImageView>
+          <Button defaultButton="true" layoutX="563.0" layoutY="567.0" mnemonicParsing="false" onAction="#continueShopping" prefHeight="51.0" prefWidth="155.0" text="Fortsätt handla" />
+          <Button layoutX="1195.0" layoutY="30.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="51.0" text="X" AnchorPane.rightAnchor="35.4921875" AnchorPane.topAnchor="30.0">
+            <font>
+              <Font name="System Bold" size="24.0" />
+            </font>
+          </Button>
+            <Label fx:id="customerEmail" layoutX="572.0" layoutY="337.0" text="&quot;person@email.com&quot;.">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
   </children>
 </AnchorPane>

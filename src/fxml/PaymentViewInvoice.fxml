@@ -29,8 +29,8 @@
     <Label layoutX="84.0" layoutY="489.0" text="Telefon/Mobil *" />
     <Label layoutX="363.0" layoutY="489.0" text="E-post *" />
     <Label layoutX="84.0" layoutY="581.0" text="* uppgifter markerade med (*) är obligatoriska " />
-    <Button layoutX="846.0" layoutY="611.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="34.0" prefWidth="131.0" text="Tillbaka" />
-    <Button defaultButton="true" layoutX="1008.0" layoutY="611.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0" text="Fortsätt" />
+    <Button layoutX="936.0" layoutY="618.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="34.0" prefWidth="131.0" text="Tillbaka" />
+    <Button defaultButton="true" layoutX="1082.0" layoutY="618.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0" text="Fortsätt" />
     <Label layoutX="546.0" layoutY="20.0" text="Fakturabetalning">
       <font>
         <Font name="System Bold" size="20.0" />

@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Customer;
@@ -85,7 +86,7 @@ public class ConfirmationViewController implements Initializable {
     //gives us the Exit/Thank you view
     public void confirmPurches(ActionEvent event) throws IOException{
         Parent exitParent = FXMLLoader.load(getClass().getResource("/fxml/ExitView.fxml"));
-        Scene exitScene = new Scene(exitParent);
+        Scene exitScene = new Scene(exitParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage exitStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         exitStage.hide();
         exitStage.setScene(exitScene);

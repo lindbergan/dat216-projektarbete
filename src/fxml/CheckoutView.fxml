@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DeliveryViewController">
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="800.0" prefWidth="1200.0">
+    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
         <StackPane opacity="1.0" prefHeight="593.0" prefWidth="1200.0">
                <BorderPane.margin>
@@ -123,7 +123,7 @@
                         </Button>
               </children>
             </HBox>
-            <HBox layoutX="346.0" layoutY="43.0" prefHeight="64.0" prefWidth="705.0">
+            <HBox alignment="CENTER" layoutX="-1.0" prefHeight="114.0" prefWidth="1280.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#DeliveryButtonPushed" prefHeight="27.0" prefWidth="190.0" text="Leverans" />
                         <Button mnemonicParsing="false" onAction="#PaymentButtonPushed" prefHeight="17.0" prefWidth="190.0" text="Betalning" />
