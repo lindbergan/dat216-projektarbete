@@ -95,7 +95,7 @@ public class IMatController implements Initializable {
             cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(),new MenuItem(""));
         }
 
-        totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal());
+        totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
     }
 
 
