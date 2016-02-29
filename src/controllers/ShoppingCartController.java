@@ -83,7 +83,10 @@ public class ShoppingCartController implements Initializable {
     }
 
     public void setPane()throws IOException{
-        AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/categoryMenu.fxml/"));
+        Properties prop = new Properties();
+        InputStreamReader in = new FileReader("currentView.txt");
+        prop.load(in);
+        AnchorPane e = FXMLLoader.load(getClass().getResource(prop.getProperty("URL")));
         cartPane.getChildren().setAll(e);
 
     }
