@@ -1,83 +1,192 @@
 package controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
-import se.chalmers.ait.dat215.project.ProductCategory;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
 public class IMatController implements Initializable {
 
     @FXML private MenuButton cartMenuButton;
-    @FXML private AnchorPane bp1iMatCategoryAP;
     @FXML private Button helpButton;
+    @FXML private AnchorPane content;
+    @FXML public ImageView imageView1;
+    @FXML private ToggleButton toggle1;
+    @FXML private ToggleButton toggle2;
+    @FXML private MenuButton receiptMenu;
+    @FXML private MenuButton favoritesMenu;
+    @FXML private MenuButton listMenu;
+    @FXML private AnchorPane bp1iMatCategoryAP;
+    @FXML private MenuItem totalMenu;
     private Stage helpStage;
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    private boolean isShopView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        setImage();
+        start();
+        initToggleButtons();
+        ifNoReciepts();
+        ifNoFavorites();
+        ifNoLists();
+        initButtons();
     }
 
-    public String translateCategories(ProductCategory p) {
-        if (p.toString().equalsIgnoreCase("POD")) return "Baljväxter";
-        if (p.toString().equalsIgnoreCase("BREAD")) return "Bröd";
-        if (p.toString().equalsIgnoreCase("BERRY")) return "Bär";
-        if (p.toString().equalsIgnoreCase("CITRUS_FRUIT")) return "Citrusfrukter";
-        if (p.toString().equalsIgnoreCase("HOT_DRINKS")) return "Varma drycker";
-        if (p.toString().equalsIgnoreCase("COLD_DRINKS")) return "Kalla drycker";
-        if (p.toString().equalsIgnoreCase("EXOTIC_FRUIT")) return "Exotiska frukter";
-        if (p.toString().equalsIgnoreCase("FISH")) return "Fisk";
-        if (p.toString().equalsIgnoreCase("VEGETABLE_FRUIT")) return "Frukt och grönsaker";
-        if (p.toString().equalsIgnoreCase("CABBAGE")) return "Sallad";
-        if (p.toString().equalsIgnoreCase("MEAT")) return "Kött";
-        if (p.toString().equalsIgnoreCase("DAIRIES")) return "Mejeriprodukter";
-        if (p.toString().equalsIgnoreCase("MELONS")) return "Meloner";
-        if (p.toString().equalsIgnoreCase("FLOUR_SUGAR_SALT")) return "Skafferi";
-        if (p.toString().equalsIgnoreCase("NUTS_AND_SEEDS")) return "Nötter och frön";
-        if (p.toString().equalsIgnoreCase("PASTA")) return "Pasta";
-        if (p.toString().equalsIgnoreCase("POTATO_RICE")) return "Ris och potatis";
-        if (p.toString().equalsIgnoreCase("ROOT_VEGETABLE")) return "Rotgrönsaker";
-        if (p.toString().equalsIgnoreCase("FRUIT")) return "Frukt";
-        if (p.toString().equalsIgnoreCase("SWEET")) return "Sötsaker";
-        if (p.toString().equalsIgnoreCase("HERB")) return "Örter och kryddor";
-        return null;
+    public void ifNoFavorites() {
+        if (favoritesMenu.getItems().isEmpty()) {
+            MenuItem newMenuItem = new MenuItem("Inga favoriter.");
+            newMenuItem.setDisable(true);
+            newMenuItem.styleProperty().set("-fx-pref-width:138px;");
+            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
+            favoritesMenu.getItems().add(newMenuItem);
+        }
+    }
+
+    public void ifNoLists() {
+        if (listMenu.getItems().isEmpty()) {
+            MenuItem newMenuItem = new MenuItem("Skapa ny lista.");
+            newMenuItem.styleProperty().set("-fx-pref-width:159px;");
+            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
+            listMenu.getItems().add(newMenuItem);
+        }
+    }
+
+    public void initButtons() {
+        helpButton.setOnAction(e -> {
+            helpMenu();
+        });
+    }
+
+    public void ifNoReciepts() {
+        if (receiptMenu.getItems().isEmpty()) {
+            MenuItem newMenuItem = new MenuItem("Inga kvitton.");
+            newMenuItem.setDisable(true);
+            newMenuItem.styleProperty().set("-fx-pref-width:175px;");
+            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
+            receiptMenu.getItems().add(newMenuItem);
+        }
+    }
+
+    public void setImage() {
+        Image image = new Image("/pictures/IMat.png/");
+        imageView1.setImage(image);
+    }
+
+    public void initToggleButtons() {
+        toggle1.setOnAction(e -> {
+            toggle1.setSelected(true);
+            toggle2.setSelected(false);
+            start();
+        });
+        toggle2.setOnAction(e -> {
+            toggle2.setSelected(true);
+            toggle1.setSelected(false);
+            goToCategoryMenu();
+        });
+    }
+
+    public void goToCategoryMenu() {
+        try {
+            AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/categoryMenu.fxml/"));
+            content.getChildren().setAll(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void start() {
+        try {
+            AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/shopView.fxml/"));
+            content.getChildren().setAll(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //fetches the shopping cart view and replaces current anchor pane with it
     public void goToCart()throws IOException {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
-            bp1iMatCategoryAP.getChildren().setAll(e);
+            content.getChildren().setAll(e);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     //toggles the help menu
-    public void helpMenu() throws IOException{
-        Parent helpParent = FXMLLoader.load(getClass().getResource("/fxml/helpMenu.fxml"));
-        Scene helpScene = new Scene(helpParent);
-        helpStage = new Stage();
-        helpStage.setScene(helpScene);
-        helpStage.show();
+    public void helpMenu() {
+        try {
+            Parent helpParent = FXMLLoader.load(getClass().getResource("/fxml/helpMenu.fxml"));
+            Scene helpScene = new Scene(helpParent);
+            Stage helpStage = new Stage();
+            helpStage.setScene(helpScene);
+            helpStage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    //closes help menu when pressing the button
-    public void closeWindow(ActionEvent event){
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+    public void cartMenuOnAction(){
+        cartMenuButton.getItems().remove(0,cartMenuButton.getItems().size()-3);
+        int limit = 5;
+        if(handler.getShoppingCart().getItems().size()<limit){
+            limit = handler.getShoppingCart().getItems().size();
+        }
+        if(handler.getShoppingCart().getItems().size() != 0) {
+            for (int i = 0; i < limit; i++) {
+                ShoppingItem item = handler.getShoppingCart().getItems().get(i);
+                MenuItem temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                cartMenuButton.getItems().add(i, temp);
+            }
+        }
+        if(handler.getShoppingCart().getItems().size() > 5) {
+            cartMenuButton.getItems().add(5, new MenuItem("..."));
+        }
+        else{
+            cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(),new MenuItem(""));
+        }
+
+        totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
     }
+    public void currentView(){
+        isShopView = toggle1.isSelected();
+        String url;
+        if(isShopView){
+            url = "/fxml/shopView.fxml/";
+        }
+        else url = "/fxml/categoryMenu.fxml/";
+        try {
+            Properties prop = new Properties();
+            InputStreamReader in = new FileReader("currentView.txt");
+            prop.load(in);
+
+            FileOutputStream out = new FileOutputStream("currentView.txt");
+            prop.setProperty("URL", url);
+            prop.store(out, null);
+
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
