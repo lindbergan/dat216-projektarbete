@@ -7,9 +7,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.IMatController">
    <bottom>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="0.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="closeHelp" layoutY="137.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="63.0" prefWidth="600.0" text="Stäng fönstret och börja handla" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
+            <Button fx:id="closeHelp" layoutY="137.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="191.0" prefWidth="600.0" text="Stäng fönstret och börja handla" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="28.0" />
                </font>
@@ -37,22 +37,22 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="285.0" prefWidth="28.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="20.0" layoutY="4.0" mnemonicParsing="false" prefHeight="225.0" prefWidth="78.0" text="&lt;" AnchorPane.bottomAnchor="-90.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="4.0">
+            <Button alignment="CENTER" layoutX="20.0" layoutY="63.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="200.0" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
-                  <Font size="57.0" />
+                  <Font size="17.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="285.0" prefWidth="28.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="97.0" layoutY="2.0" mnemonicParsing="false" prefHeight="222.0" prefWidth="83.0" text="&gt;" AnchorPane.bottomAnchor="-85.0" AnchorPane.leftAnchor="97.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="2.0">
+            <Button mnemonicParsing="false" prefHeight="285.0" prefWidth="113.0" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
-                  <Font size="54.0" />
+                  <Font size="17.0" />
                </font>
             </Button>
          </children>

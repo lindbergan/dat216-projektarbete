@@ -18,14 +18,14 @@
                <children>
                   <HBox alignment="BASELINE_LEFT" layoutX="253.0" layoutY="10.0" prefHeight="49.0" prefWidth="217.0" spacing="10.0" AnchorPane.leftAnchor="253.0">
                      <children>
-                        <ToggleButton focusTraversable="false" mnemonicParsing="false" selected="true" text="Butiksvy">
+                        <ToggleButton fx:id="toggle1" focusTraversable="false" mnemonicParsing="false" selected="true" text="Butiksvy">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <font>
                               <Font size="15.0" />
                            </font></ToggleButton>
-                        <ToggleButton focusTraversable="false" mnemonicParsing="false" text="Kategorivy">
+                        <ToggleButton fx:id="toggle2" focusTraversable="false" mnemonicParsing="false" text="Kategorivy">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -37,9 +37,9 @@
                         <Insets bottom="10.0" left="10.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <HBox layoutX="266.0" layoutY="78.0">
+                  <HBox layoutX="266.0" layoutY="78.0" spacing="10.0">
                      <children>
-                        <MenuButton cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Mina favoriter">
+                        <MenuButton fx:id="favoritesMenu" cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Mina favoriter">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -63,7 +63,7 @@
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" layoutX="900.0" layoutY="70.0" prefHeight="39.0" prefWidth="373.0" spacing="10.0">
                      <children>
-                        <MenuButton cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Mina tidigare inköp">
+                        <MenuButton fx:id="receiptMenu" cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Mina tidigare inköp">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -99,11 +99,12 @@
                         <Button alignment="CENTER" mnemonicParsing="false" text="Sök" StackPane.alignment="CENTER_RIGHT" />
                      </children>
                   </StackPane>
-                  <Button fx:id="helpButton" layoutX="1208.0" layoutY="17.0" mnemonicParsing="false" onAction="#helpMenu" opacity="0.74" prefHeight="25.0" prefWidth="25.0" text="?">
+                  <Button fx:id="helpButton" layoutX="1208.0" layoutY="17.0" mnemonicParsing="false" opacity="0.74" prefHeight="25.0" prefWidth="25.0" text="?">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Button>
+                  <ImageView fx:id="imageView1" fitHeight="100.0" fitWidth="250.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </top>
@@ -155,15 +156,7 @@
                <children>
                   <StackPane prefHeight="673.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane fx:id="content">
-                           <children>
-                              <AnchorPane fx:id="bp1iMatCategoryAP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="661.0" prefWidth="1004.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <fx:include source="categoryMenu.fxml" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </AnchorPane>
+                        <AnchorPane fx:id="content" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
