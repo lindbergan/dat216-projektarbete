@@ -27,6 +27,7 @@ public class IMatController implements Initializable {
     @FXML private ToggleButton toggle2;
     @FXML private MenuButton receiptMenu;
     @FXML private MenuButton favoritesMenu;
+    @FXML private MenuButton listMenu;
     @FXML private AnchorPane bp1iMatCategoryAP;
     @FXML private MenuItem totalMenu;
     private Stage helpStage;
@@ -39,6 +40,7 @@ public class IMatController implements Initializable {
         initToggleButtons();
         ifNoReciepts();
         ifNoFavorites();
+        ifNoLists();
         initButtons();
     }
 
@@ -46,7 +48,18 @@ public class IMatController implements Initializable {
         if (favoritesMenu.getItems().isEmpty()) {
             MenuItem newMenuItem = new MenuItem("Inga favoriter.");
             newMenuItem.setDisable(true);
+            newMenuItem.styleProperty().set("-fx-pref-width:138px;");
+            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
             favoritesMenu.getItems().add(newMenuItem);
+        }
+    }
+
+    public void ifNoLists() {
+        if (listMenu.getItems().isEmpty()) {
+            MenuItem newMenuItem = new MenuItem("Skapa ny lista.");
+            newMenuItem.styleProperty().set("-fx-pref-width:159px;");
+            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
+            listMenu.getItems().add(newMenuItem);
         }
     }
 
@@ -60,6 +73,8 @@ public class IMatController implements Initializable {
         if (receiptMenu.getItems().isEmpty()) {
             MenuItem newMenuItem = new MenuItem("Inga kvitton.");
             newMenuItem.setDisable(true);
+            newMenuItem.styleProperty().set("-fx-pref-width:175px;");
+            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
             receiptMenu.getItems().add(newMenuItem);
         }
     }
