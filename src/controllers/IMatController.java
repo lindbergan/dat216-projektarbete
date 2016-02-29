@@ -26,7 +26,7 @@ public class IMatController implements Initializable {
 
     @FXML private MenuButton cartMenuButton;
     @FXML private AnchorPane bp1iMatCategoryAP;
-    @FXML private Button helpButton;
+    @FXML private MenuItem totalMenu;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -91,6 +91,11 @@ public class IMatController implements Initializable {
         if(handler.getShoppingCart().getItems().size() > 5) {
             cartMenuButton.getItems().add(5, new MenuItem("..."));
         }
+        else{
+            cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(),new MenuItem(""));
+        }
+
+        totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal());
     }
 
 
