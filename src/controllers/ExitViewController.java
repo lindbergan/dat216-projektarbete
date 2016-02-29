@@ -41,6 +41,8 @@ public class ExitViewController implements Initializable {
                 DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
                 DeliveryViewController.getUserSpecifiedMinTime() + " - " +
                 DeliveryViewController.getUserSpecifiedMaxTime());
+
+
     }
 
     //goes back to the store
@@ -56,6 +58,7 @@ public class ExitViewController implements Initializable {
 
     //closes the application
     public void closeWindow(ActionEvent event){
+        handler.shutDown();
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

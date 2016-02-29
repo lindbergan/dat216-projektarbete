@@ -85,7 +85,7 @@ public class ShoppingCartController extends IMatController {
     }
 
     public void setPane()throws IOException{
-        AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/categoryMenu.fxml/"));
+        AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/categoryMenu.fxml"));
         cartPane.getChildren().setAll(e);
 
     }
@@ -93,7 +93,7 @@ public class ShoppingCartController extends IMatController {
 
     //added in order to go to checkoutview
     public void goToCheckout(ActionEvent event) throws IOException{
-        Parent checkoutParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml/"));
+        Parent checkoutParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml"));
         Scene checkoutScene = new Scene(checkoutParent);
         Stage checkoutStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         checkoutStage.hide();

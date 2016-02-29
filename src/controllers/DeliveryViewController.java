@@ -27,7 +27,6 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 public class DeliveryViewController implements Initializable{
 
     @FXML private AnchorPane deliveryView;
-    @FXML private ImageView iMatLogo;
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
 
@@ -42,6 +41,10 @@ public class DeliveryViewController implements Initializable{
     @FXML private TextField customerPostAddress;
     @FXML private TextField customerEmail;
     @FXML private TextField customerPhone;
+
+    @FXML private Button deliveryButton;
+    @FXML private Button paymentButton;
+    @FXML private Button confirmationButton;
 
     @FXML private ChoiceBox monthChoisebox;
     @FXML private ChoiceBox dateChoisebox;
@@ -77,7 +80,6 @@ public class DeliveryViewController implements Initializable{
         dateChoisebox.setItems(date);
         minTimeChoisebox.setItems(minTime);
         maxTimeChoisebox.setItems(maxTime);
-
 
         //sets the radiobuttons
         if(paymentChoise == "Kortbetalning") {
