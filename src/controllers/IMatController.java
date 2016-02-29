@@ -13,7 +13,10 @@ import javafx.stage.Stage;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
@@ -31,6 +34,7 @@ public class IMatController implements Initializable {
     @FXML private AnchorPane bp1iMatCategoryAP;
     @FXML private MenuItem totalMenu;
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    private boolean isShopView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -144,6 +148,28 @@ public class IMatController implements Initializable {
         }
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
+    }
+    public void currentView(){
+        isShopView = toggle1.isSelected();
+        String url;
+        if(isShopView){
+            url = "/fxml/shopView.fxml/";
+        }
+        else url = "/fxml/categoryMenu.fxml/";
+        try {
+            Properties prop = new Properties();
+            InputStreamReader in = new FileReader("currentView.txt");
+            prop.load(in);
+
+            FileOutputStream out = new FileOutputStream("currentView.txt");
+            prop.setProperty("URL", url);
+            prop.store(out, null);
+
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
