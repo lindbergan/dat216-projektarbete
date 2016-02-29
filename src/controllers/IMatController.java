@@ -27,9 +27,9 @@ public class IMatController implements Initializable {
     @FXML private ToggleButton toggle2;
     @FXML private MenuButton receiptMenu;
     @FXML private MenuButton favoritesMenu;
-    private Stage helpStage;
     @FXML private AnchorPane bp1iMatCategoryAP;
     @FXML private MenuItem totalMenu;
+    private Stage helpStage;
     IMatDataHandler handler = IMatDataHandler.getInstance();
 
     @Override

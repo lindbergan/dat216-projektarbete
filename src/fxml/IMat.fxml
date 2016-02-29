@@ -54,10 +54,6 @@
                            <font>
                               <Font size="15.0" />
                            </font>
-                           <items>
-                              <SeparatorMenuItem mnemonicParsing="false" />
-                              <MenuItem mnemonicParsing="false" text="Skapa en ny lista" />
-                           </items>
                         </MenuButton>
                      </children>
                   </HBox>
