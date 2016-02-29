@@ -65,6 +65,7 @@ public class DeliveryViewController implements Initializable{
     private static String userSpecifiedMinTime;
     private static String userSpecifiedMaxTime;
     private static String paymentChoise = "Kortbetalning"; //default set to card
+    private boolean allFieldsFilled;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -84,7 +85,7 @@ public class DeliveryViewController implements Initializable{
         minTimeChoisebox.setItems(minTime);
         maxTimeChoisebox.setItems(maxTime);
 
-        //sets the choiesBoxes
+        //sets the choiesBoxes in case customer chose "go back" from paymentView
         monthChoisebox.setValue(userSpecifiedMonth);
         dateChoisebox.setValue(userSpecifiedDate);
         minTimeChoisebox.setValue(userSpecifiedMinTime);
@@ -146,13 +147,16 @@ public class DeliveryViewController implements Initializable{
     //gives us the right payment view depending on what radiobutton is selected
     public void continueClicked()throws IOException{
 
-        if(paymentChoise == "Kortbetalning"){
-            AnchorPane cardView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
-            deliveryView.getChildren().setAll(cardView);
-        }
-        else {
-            AnchorPane invoiceView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
-            deliveryView.getChildren().setAll(invoiceView);
+        allFieldsFilledIn();
+        if(allFieldsFilled) {
+
+            if (paymentChoise == "Kortbetalning") {
+                AnchorPane cardView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
+                deliveryView.getChildren().setAll(cardView);
+            } else {
+                AnchorPane invoiceView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
+                deliveryView.getChildren().setAll(invoiceView);
+            }
         }
     }
 
@@ -260,13 +264,16 @@ public class DeliveryViewController implements Initializable{
     }
     public void PaymentButtonPushed()throws IOException{
 
-        if(paymentChoise == "Kortbetalning"){
-            AnchorPane cardView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
-            deliveryView.getChildren().setAll(cardView);
-        }
-        else {
-            AnchorPane invoiceView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
-            deliveryView.getChildren().setAll(invoiceView);
+        allFieldsFilledIn();
+        if(allFieldsFilled) {
+
+            if (paymentChoise == "Kortbetalning") {
+                AnchorPane cardView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
+                deliveryView.getChildren().setAll(cardView);
+            } else {
+                AnchorPane invoiceView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
+                deliveryView.getChildren().setAll(invoiceView);
+            }
         }
     }
     public void ConfirmationButtonPushed()throws IOException{
@@ -277,6 +284,7 @@ public class DeliveryViewController implements Initializable{
             deliveryView.getChildren().setAll(confirmationView);
         }
     }
+
 
     //The getters for our custom choisboxes and radiobuttons:
     public static String getUserSpecifiedMonth(){
@@ -295,4 +303,15 @@ public class DeliveryViewController implements Initializable{
         return paymentChoise;
     }
 
+    public void allFieldsFilledIn(){
+        if(customerFirstName != null && customerLastName!= null && customerAddress != null
+                && customerPostCode != null && customerPhone!= null && customerEmail!= null
+                && userSpecifiedMonth!= null && userSpecifiedDate!= null && userSpecifiedMinTime!= null
+                && userSpecifiedMaxTime!= null){
+            allFieldsFilled = true;
+        }
+        else{
+            allFieldsFilled =false;
+        }
+    }
 }

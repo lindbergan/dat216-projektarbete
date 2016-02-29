@@ -41,6 +41,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
+            <Button fx:id="receipts" layoutX="563.0" layoutY="638.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="155.0" text="Kvitton" />
          </children>
       </Pane>
   </children>

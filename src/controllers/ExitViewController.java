@@ -32,6 +32,7 @@ public class ExitViewController implements Initializable {
     private Customer customer = handler.getCustomer();
     @FXML private Label customerEmail;
     @FXML private Label customerDate;
+    @FXML private Button receipts;
 
 
     @Override
@@ -55,6 +56,10 @@ public class ExitViewController implements Initializable {
         imatStage.hide();
         imatStage.setScene(imatScene);
         imatStage.show();
+    }
+
+    public void receiptsButtonPushed(ActionEvent event){
+        //byt stage till kvitto-stage:n
     }
 
     //closes the application
