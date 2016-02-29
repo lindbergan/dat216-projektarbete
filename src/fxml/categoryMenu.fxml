@@ -7,10 +7,26 @@
 
 <AnchorPane fx:id="bp1CategoryAP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.categoryMenuController">
    <children>
-      <Text layoutX="438.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorivy">
+      <Text layoutX="393.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorivy">
          <font>
             <Font size="41.0" />
          </font>
       </Text>
+      <ScrollPane layoutX="11.0" layoutY="97.0" prefHeight="486.0" prefWidth="983.0">
+        <content>
+          <AnchorPane fx:id="apGridWindow" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="483.0" prefWidth="965.0">
+               <children>
+                  <GridPane fx:id="gridPane" layoutX="190.0" layoutY="167.0" maxHeight="1.7976931348623157E308" prefHeight="503.0" prefWidth="965.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
