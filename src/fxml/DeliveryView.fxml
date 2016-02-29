@@ -38,7 +38,7 @@
             <RadioButton fx:id="cardPayment" layoutX="106.0" layoutY="571.0" mnemonicParsing="false" text="Kortbetalning" />
             <RadioButton fx:id="invoicePayment" layoutX="106.0" layoutY="609.0" mnemonicParsing="false" text="Fakturabetalning" />
             <Button layoutX="936.0" layoutY="618.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="33.0" prefWidth="125.0" text="Tillbaka till butik" />
-            <Button layoutX="1082.0" layoutY="618.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="32.9609375" prefWidth="125.0" text="Fortsätt" />
+            <Button defaultButton="true" layoutX="1082.0" layoutY="618.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="32.9609375" prefWidth="125.0" text="Fortsätt" />
             <Label font="$x1" layoutX="966.0" layoutY="56.0" text="Leveranstid:" />
             <TextArea editable="false" layoutX="882.0" layoutY="102.0" opacity="0.5" prefHeight="83.0" prefWidth="262.0" text="Välj gärna ett så stort intervall som möjligt. Då blir det enklare för oss att planera våra rutter samtidigt som vi minskar vår miljöpåverkan. Tack!" wrapText="true" />
             <Label layoutX="882.0" layoutY="224.0" text="Månad" />

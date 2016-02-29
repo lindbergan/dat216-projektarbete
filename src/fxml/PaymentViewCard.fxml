@@ -18,12 +18,12 @@
     <RadioButton fx:id="visa" layoutX="145.0" layoutY="118.0" mnemonicParsing="false" text="Visa" />
     <RadioButton fx:id="mastercard" layoutX="145.0" layoutY="151.0" mnemonicParsing="false" text="Mastercard" />
     <RadioButton fx:id="other" layoutX="145.0" layoutY="185.0" mnemonicParsing="false" text="Annat" />
-    <TextField layoutX="245.0" layoutY="254.0" prefHeight="27.0" prefWidth="36.0" />
-    <TextField layoutX="245.0" layoutY="296.0" prefWidth="200.0" />
+    <TextField fx:id="creditCardNumbr" layoutX="245.0" layoutY="254.0" prefHeight="27.0" prefWidth="200.0" />
+    <TextField fx:id="cardHolderName" layoutX="245.0" layoutY="296.0" prefWidth="200.0" />
     <Label layoutX="145.0" layoutY="259.0" text="Kortnummer" />
     <Label layoutX="145.0" layoutY="301.0" text="Kortinnehavare" />
     <Label layoutX="145.0" layoutY="373.0" text="Utgångsdatum" />
-    <ChoiceBox layoutX="245.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
+    <ChoiceBox fx:id="cardMonthChoiseBox" layoutX="245.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -33,7 +33,7 @@
       </items>
     </ChoiceBox>
     <Label layoutX="321.0" layoutY="375.0" text="/" />
-    <ChoiceBox layoutX="337.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
+    <ChoiceBox fx:id="cardYearChoiseBox" layoutX="337.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -43,15 +43,12 @@
       </items>
     </ChoiceBox>
     <Label layoutX="145.0" layoutY="419.0" text="CVV" />
-    <TextField layoutX="245.0" layoutY="414.0" prefWidth="51.0" />
-    <Button layoutX="310.0" layoutY="414.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" text="?" />
+    <TextField fx:id="cvv" layoutX="245.0" layoutY="414.0" prefWidth="51.0" />
+    <Button layoutX="310.0" layoutY="414.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" text="?">
+         <tooltip>
+            <Tooltip text="CVV är de tre sista siffrorna på baksidan av kortet" />
+         </tooltip></Button>
     <Button layoutX="836.0" layoutY="609.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="34.0" prefWidth="131.0" text="Tillbaka" />
-    <Button layoutX="998.0" layoutY="609.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0" text="Fortsätt" />
-      <TextField layoutX="308.0" layoutY="254.0" prefHeight="27.0" prefWidth="36.0" />
-      <TextField layoutX="436.0" layoutY="254.0" prefHeight="27.0" prefWidth="36.0" />
-      <TextField layoutX="371.0" layoutY="254.0" prefHeight="27.0" prefWidth="36.0" />
-      <Label layoutX="293.0" layoutY="259.0" text="-" />
-      <Label layoutX="353.0" layoutY="259.0" text="-" />
-      <Label layoutX="419.0" layoutY="259.0" text="-" />
+    <Button defaultButton="true" layoutX="998.0" layoutY="609.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0" text="Fortsätt" />
   </children>
 </AnchorPane>

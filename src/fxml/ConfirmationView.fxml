@@ -17,7 +17,7 @@
         <Font name="System Bold" size="20.0" />
       </font>
     </Label>
-    <Button id="" layoutX="535.0" layoutY="517.0" mnemonicParsing="false" onAction="#confirmPurches" prefHeight="55.0" prefWidth="181.0" text="Genomför köp">
+    <Button id="" defaultButton="true" layoutX="535.0" layoutY="517.0" mnemonicParsing="false" onAction="#confirmPurches" prefHeight="55.0" prefWidth="181.0" text="Genomför köp">
          <font>
             <Font size="14.0" />
          </font>
