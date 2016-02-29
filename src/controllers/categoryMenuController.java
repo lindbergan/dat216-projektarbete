@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import se.chalmers.ait.dat215.project.ProductCategory;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -79,7 +78,6 @@ public class categoryMenuController implements Initializable {
                 magicalHeight = magicalHeight + 250;
             }
         }
-
     }
 
 }
