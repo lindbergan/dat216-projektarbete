@@ -76,8 +76,13 @@ public class IMatController implements Initializable {
         helpStage.show();
     }
     public void cartMenuOnAction(){
+        cartMenuButton.getItems().remove(0,cartMenuButton.getItems().size()-3);
+        int limit = 5;
+        if(handler.getShoppingCart().getItems().size()<limit){
+            limit = handler.getShoppingCart().getItems().size();
+        }
         if(handler.getShoppingCart().getItems().size() != 0) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
                 MenuItem temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
                 cartMenuButton.getItems().add(i, temp);
