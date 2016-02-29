@@ -47,7 +47,7 @@
                               <Font size="15.0" />
                            </font>
                         </MenuButton>
-                        <MenuButton cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Mina inköpslistor">
+                        <MenuButton fx:id="listMenu" cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Mina inköpslistor">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

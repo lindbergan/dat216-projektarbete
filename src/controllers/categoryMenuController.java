@@ -2,14 +2,9 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
 
 import java.net.URL;
@@ -19,6 +14,8 @@ public class categoryMenuController implements Initializable {
 
     @FXML public GridPane gridPane;
     @FXML public AnchorPane apGridWindow;
+    IMatController handler = new IMatController();
+    SelectedCategoryMenuController categoryHandler = new SelectedCategoryMenuController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -66,6 +63,11 @@ public class categoryMenuController implements Initializable {
                 newButton.setPrefHeight(250);
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
+                newButton.setOnAction(e -> {
+                    /*if (!(newButton.getText() == null || newButton.getText().equals(""))) {
+                        goToSelectedCategoryMenu(newButton.getText());
+                    }*/
+                });
 
                 gridPane.add(newButton, j, rowNrAgain);
                 if (magicalNr < 10) {magicalNr++;}
@@ -77,7 +79,6 @@ public class categoryMenuController implements Initializable {
                 magicalHeight = magicalHeight + 250;
             }
         }
-
 
     }
 

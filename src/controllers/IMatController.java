@@ -27,8 +27,8 @@ public class IMatController implements Initializable {
     @FXML private ToggleButton toggle2;
     @FXML private MenuButton receiptMenu;
     @FXML private MenuButton favoritesMenu;
-    @FXML private AnchorPane bp1iMatCategoryAP;
     @FXML private MenuItem totalMenu;
+    @FXML private MenuButton listMenu;
     private Stage helpStage;
     IMatDataHandler handler = IMatDataHandler.getInstance();
 
@@ -40,6 +40,7 @@ public class IMatController implements Initializable {
         ifNoReciepts();
         ifNoFavorites();
         initButtons();
+        ifNoLists();
     }
 
     public void ifNoFavorites() {
@@ -49,6 +50,15 @@ public class IMatController implements Initializable {
             favoritesMenu.getItems().add(newMenuItem);
         }
     }
+
+    public void ifNoLists() {
+           if (listMenu.getItems().isEmpty()) {
+                     MenuItem newMenuItem = new MenuItem("Skapa ny lista.");
+                     newMenuItem.styleProperty().set("-fx-pref-width:159px;");
+                     newMenuItem.styleProperty().set("-fx-pref-height:29px;");
+                      listMenu.getItems().add(newMenuItem);
+                  }
+         }
 
     public void initButtons() {
         helpButton.setOnAction(e -> {
@@ -91,6 +101,15 @@ public class IMatController implements Initializable {
         }
     }
 
+    public void goToSelectedCategory() {
+        try {
+            AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/SelectedCategoryMenu.fxml/"));
+            content.getChildren().setAll(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void start() {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/shopView.fxml/"));
@@ -116,7 +135,7 @@ public class IMatController implements Initializable {
             Scene helpScene = new Scene(helpParent);
             Stage helpStage = new Stage();
             helpStage.setScene(helpScene);
-            helpStage.show();
+            helpStage.showAndWait();
         }
         catch (IOException e) {
             e.printStackTrace();
