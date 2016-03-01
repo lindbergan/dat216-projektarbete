@@ -49,7 +49,20 @@ public class SelectedCategoryMenuController implements Initializable {
     public void buyItem(ActionEvent e){
         BuyButton bb = (BuyButton)e.getSource();
         int id = bb.getProductId();
-        cart.addItem(new ShoppingItem(handler.getProduct(id),1));
+        if(cart.getItems().size() == 0){
+            cart.addItem((new ShoppingItem(handler.getProduct(id))));
+        }
+        else
+        for(int i = 0; i<cart.getItems().size(); i++){
+            if(cart.getItems().get(i).getProduct().getProductId() == id){
+                cart.getItems().get(i).setAmount(cart.getItems().get(i).getAmount() + 1);
+            }
+            else {
+                cart.addItem((new ShoppingItem(handler.getProduct(id))));
+            }
+
+        }
+
 
     }
     public void showProducts(String category) {
