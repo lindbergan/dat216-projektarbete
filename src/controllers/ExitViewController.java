@@ -34,15 +34,22 @@ public class ExitViewController implements Initializable {
     @FXML private Label customerDate;
     @FXML private Button receipts;
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         initTextFields();
-
     }
 
-    //goes back to the store when "continue shopping"- button is pushed
+    public void initTextFields(){
+
+        customerEmail.setText(customer.getEmail());
+        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
+                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
+                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
+                DeliveryViewController.getUserSpecifiedMaxTime());
+    }
+
+    //goes back to the store when "continue shopping" button is pushed
     public void continueShopping(ActionEvent event) throws IOException{
 
         Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
@@ -58,18 +65,9 @@ public class ExitViewController implements Initializable {
         //byt stage till kvitto-stage:n
     }
 
-    //closes the application
+    //closes the application and saves user settings
     public void closeWindow(ActionEvent event){
         handler.shutDown();
         ((Node)(event.getSource())).getScene().getWindow().hide();
-    }
-
-    public void initTextFields(){
-
-        customerEmail.setText(customer.getEmail());
-        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
-                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
-                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
-                DeliveryViewController.getUserSpecifiedMaxTime());
     }
 }

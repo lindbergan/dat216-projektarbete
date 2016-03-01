@@ -26,6 +26,7 @@ import se.chalmers.ait.dat215.project.CreditCard;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
+//OBS: Detta är main-controllern OCH controllern för DeliveryView:n. Inte optimalt att ha dem sammanslagna, men lyckades inte ta mig runt detta.
 public class DeliveryViewController implements Initializable{
 
     @FXML private AnchorPane deliveryView;
@@ -70,6 +71,19 @@ public class DeliveryViewController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        //initialize the fields
+        initTextFields();
+        initChoiseBoxes();
+        initRadioButtons();
+
+        //listen to all the fields user can change
+        listenToTextField();
+        listenToChoiseboxes();
+        listenToRadioButtons();
+    }
+
+    public void initTextFields(){
+
         //sets the textfields to the correct default values
         customerFirstName.setText(customer.getFirstName());
         customerLastName.setText(customer.getLastName());
@@ -78,20 +92,33 @@ public class DeliveryViewController implements Initializable{
         customerPostAddress.setText(customer.getPostAddress());
         customerEmail.setText(customer.getEmail());
         customerPhone.setText(customer.getPhoneNumber());
+    }
 
-        //initialize the choiseboxes
+    public void initChoiseBoxes(){
+
         monthChoisebox.setItems(month);
         dateChoisebox.setItems(date);
         minTimeChoisebox.setItems(minTime);
         maxTimeChoisebox.setItems(maxTime);
 
         //sets the choiesBoxes in case customer chose "go back" from paymentView
+        userSpecifiedChoiseBox();
+
+    }
+
+    public void userSpecifiedChoiseBox(){
+
         monthChoisebox.setValue(userSpecifiedMonth);
         dateChoisebox.setValue(userSpecifiedDate);
         minTimeChoisebox.setValue(userSpecifiedMinTime);
         maxTimeChoisebox.setValue(userSpecifiedMaxTime);
+    }
 
-        //sets the radiobuttons
+    public void initRadioButtons(){
+
+        cardPayment.setToggleGroup(radioButtonGroup);
+        invoicePayment.setToggleGroup(radioButtonGroup);
+
         if(paymentChoise == "Kortbetalning") {
             cardPayment.setSelected(true);
             invoicePayment.setSelected(false);
@@ -100,101 +127,6 @@ public class DeliveryViewController implements Initializable{
             cardPayment.setSelected(false);
             invoicePayment.setSelected(true);
         }
-        cardPayment.setToggleGroup(radioButtonGroup);
-        invoicePayment.setToggleGroup(radioButtonGroup);
-
-        //to detemine which radiobutton was chosen
-        radioButtonGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-
-                if(newValue == cardPayment){
-                    paymentChoise = "Kortbetalning";
-                }
-                else{
-                    paymentChoise = "Fakturabetalning";
-                }
-            }
-        });
-
-        //listen to all the fields user can change
-        this.listenToTextField();
-        this.listenToChoiseboxes();
-    }
-
-    //back to IMat store when user clicked the Logotype
-    public void logoClicked(ActionEvent event) throws IOException{
-
-        Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
-        Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
-        Stage mainStage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        mainStage.hide();
-        mainStage.setScene(mainScene);
-        mainStage.show();
-    }
-
-    //back to IMat store when user clicked "back" <--
-    public void backtoStoreClicked(ActionEvent event) throws IOException {
-
-        Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
-        Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
-        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        mainStage.hide();
-        mainStage.setScene(mainScene);
-        mainStage.show();
-    }
-
-    //gives us the right payment view depending on what radiobutton is selected
-    public void continueClicked()throws IOException{
-
-        allFieldsFilledIn();
-        if(allFieldsFilled) {
-
-            if (paymentChoise == "Kortbetalning") {
-                AnchorPane cardView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
-                deliveryView.getChildren().setAll(cardView);
-            } else {
-                AnchorPane invoiceView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
-                deliveryView.getChildren().setAll(invoiceView);
-            }
-        }
-    }
-
-    //ChangeListener for the choiseboxes
-    public void listenToChoiseboxes(){
-
-        //selected month
-        monthChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiseBoxIndex = newValue.intValue();
-                userSpecifiedMonth = month.get(choiseBoxIndex);
-            }
-        });
-        //selected date
-        dateChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiseBoxIndex = newValue.intValue();
-                userSpecifiedDate = date.get(choiseBoxIndex);
-            }
-        });
-        //selected minTime
-        minTimeChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiseBoxIndex = newValue.intValue();
-                userSpecifiedMinTime = minTime.get(choiseBoxIndex);
-            }
-        });
-        //selected maxTime
-        maxTimeChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiseBoxIndex = newValue.intValue();
-                userSpecifiedMaxTime = maxTime.get(choiseBoxIndex);
-            }
-        });
     }
 
     //ChangeListener for the textfields:
@@ -257,6 +189,99 @@ public class DeliveryViewController implements Initializable{
         });
     }
 
+    //ChangeListener for the choiseboxes
+    public void listenToChoiseboxes(){
+
+        //selected month
+        monthChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                int choiseBoxIndex = newValue.intValue();
+                userSpecifiedMonth = month.get(choiseBoxIndex);
+            }
+        });
+        //selected date
+        dateChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                int choiseBoxIndex = newValue.intValue();
+                userSpecifiedDate = date.get(choiseBoxIndex);
+            }
+        });
+        //selected minTime
+        minTimeChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                int choiseBoxIndex = newValue.intValue();
+                userSpecifiedMinTime = minTime.get(choiseBoxIndex);
+            }
+        });
+        //selected maxTime
+        maxTimeChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                int choiseBoxIndex = newValue.intValue();
+                userSpecifiedMaxTime = maxTime.get(choiseBoxIndex);
+            }
+        });
+    }
+
+    public void listenToRadioButtons(){
+
+        //to detemine which radiobutton was chosen
+        radioButtonGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+
+                if(newValue == cardPayment){
+                    paymentChoise = "Kortbetalning";
+                }
+                else{
+                    paymentChoise = "Fakturabetalning";
+                }
+            }
+        });
+    }
+
+    //back to IMat store when user clicked the Logotype
+    public void logoClicked(ActionEvent event) throws IOException{
+
+        Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
+        Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+        Stage mainStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        mainStage.hide();
+        mainStage.setScene(mainScene);
+        mainStage.show();
+    }
+
+
+    //back to IMat store when user clicked "back to store" <--
+    public void backtoStoreClicked(ActionEvent event) throws IOException {
+
+        Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
+        Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        mainStage.hide();
+        mainStage.setScene(mainScene);
+        mainStage.show();
+    }
+
+    //gives us the right PaymentView depending on what radiobutton is selected
+    public void continueClicked()throws IOException{
+
+        allFieldsFilledIn();
+        if(allFieldsFilled) {
+
+            if (paymentChoise == "Kortbetalning") {
+                AnchorPane cardView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
+                deliveryView.getChildren().setAll(cardView);
+            } else {
+                AnchorPane invoiceView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
+                deliveryView.getChildren().setAll(invoiceView);
+            }
+        }
+    }
+
     //Associate the different buttons in the header to the corresponding View
     public void DeliveryButtonPushed()throws IOException{
             AnchorPane delView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
@@ -316,7 +341,7 @@ public class DeliveryViewController implements Initializable{
             allFieldsFilled =false;
         }
         */
-        //TA BORT NÄR FÄRDIGT. BARA FÖR BEKVÄMLIGHET
+        //TA BORT NÄR FÄRDIGT. BARA FÖR BEKVÄMLIGHET VID TESTNING
         allFieldsFilled=true;
     }
 }

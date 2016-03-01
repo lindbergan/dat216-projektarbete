@@ -55,17 +55,45 @@ public class CreditCardController implements Initializable {
     //sets the radiobuttons, visa = default choise
     public void initialize(URL url, ResourceBundle rb) {
 
-        //initialize the choiseboxes
+        //makes sure that it has been visited in order to be able to jump pass it from the buttons in the header
+        visited = true;
+
+        //initialize the fields
+        initTextFields();
+        initiChoiseBoxes();
+        initRadioButtons();
+
+        //listen to all the fields user can change
+        this.listenToTextField();
+        this.listenToChoiseboxes();
+    }
+
+    public void initTextFields(){
+        cardHolderName.setText(creditCard.getHoldersName());
+        creditCardNumbr.setText(creditCard.getCardNumber());
+        cvv.setText(""+creditCard.getVerificationCode()); //dont know why i cant reach toString()
+    }
+
+    public void initiChoiseBoxes(){
         cardYearChoiseBox.setItems(cardYear);
         cardMonthChoiseBox.setItems(cardMonth);
 
-        //sets the radioButtons to groups
+        //get the value from previous session
+        cardYearChoiseBox.getSelectionModel().select(creditCard.getValidYear());
+        cardMonthChoiseBox.getSelectionModel().select(creditCard.getValidMonth());
+    }
+
+    public void initRadioButtons(){
         visa.setToggleGroup(radioButtonGroup);
         mastercard.setToggleGroup(radioButtonGroup);
         other.setToggleGroup(radioButtonGroup);
 
-
         //sets the radioButtons to default (visa) or previously specified type
+        setDefaultRadioButton();
+    }
+
+    public void setDefaultRadioButton(){
+
         if(creditCard.getCardType() == "mastercard"){
             mastercard.isSelected();
         }
@@ -75,40 +103,6 @@ public class CreditCardController implements Initializable {
         else {
             visa.setSelected(true);
         }
-
-        //sets the values from iMatHandler:
-        cardHolderName.setText(creditCard.getHoldersName());
-        creditCardNumbr.setText(creditCard.getCardNumber());
-        cvv.setText(""+creditCard.getVerificationCode()); //dont know why i cant reach toString()
-        cardYearChoiseBox.getSelectionModel().select(creditCard.getValidYear());
-        cardMonthChoiseBox.getSelectionModel().select(creditCard.getValidMonth());
-
-        //makes sure that it has been visited in order to be able to jump pass it from the buttons in the header
-        visited = true;
-
-        //listen to all the fields user can change
-        this.listenToTextField();
-        this.listenToChoiseboxes();
-    }
-
-
-    //ChangeListener for the choiseboxes
-    public void listenToChoiseboxes(){
-
-        //selected cardYear
-        cardYearChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                creditCard.setValidYear(newValue.intValue());
-            }
-        });
-        //selected cardMonth
-        cardMonthChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                creditCard.setValidYear(newValue.intValue());
-            }
-        });
     }
 
     //ChangeListener for the textfields:
@@ -140,8 +134,26 @@ public class CreditCardController implements Initializable {
         });
     }
 
+    //ChangeListener for the choiseboxes
+    public void listenToChoiseboxes(){
 
-    //back to deliveryView when clicked <--
+        //selected cardYear
+        cardYearChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                creditCard.setValidYear(newValue.intValue());
+            }
+        });
+        //selected cardMonth
+        cardMonthChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                creditCard.setValidYear(newValue.intValue());
+            }
+        });
+    }
+
+    //back to deliveryView when clicked "go back" <--
     public void backToDeliveryClicked(ActionEvent event)throws IOException {
 
         AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
@@ -149,7 +161,7 @@ public class CreditCardController implements Initializable {
 
     }
 
-    //gives us the confirmation view
+    //gives us the confirmation view when clicked "continue" -->
     public void continueClicked()throws IOException{
 
         creditCard.setCardType(radioButtonGroup.getSelectedToggle().toString());

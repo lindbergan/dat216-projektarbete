@@ -53,34 +53,9 @@ public class ConfirmationViewController implements Initializable {
         initTextFields();
 
         //places the shopping items in the ObservableList if the shoppingcart contains any items
-        if(shoppingCart.getItems().size() != 0) {
-            shoppingCartSummary.setItems(cartItems);
-        }
-    }
-
-    //back to payment view when clicked <--
-    public void backtoPaymentView()throws IOException {
-
-        //need to determine what View to present - based on users Paymentchoise
-        if(DeliveryViewController.getPaymentChoise()=="Kortbetalning") {
-
-            AnchorPane paymentViewCard = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
-            confirmationView.getChildren().setAll(paymentViewCard);
-        }
-        else{
-            AnchorPane paymentViewInvoice = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
-            confirmationView.getChildren().setAll(paymentViewInvoice);
-        }
-    }
-
-    //gives us the Exit/Thank you view
-    public void confirmPurches(ActionEvent event) throws IOException{
-        Parent exitParent = FXMLLoader.load(getClass().getResource("/fxml/ExitView.fxml"));
-        Scene exitScene = new Scene(exitParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
-        Stage exitStage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        exitStage.hide();
-        exitStage.setScene(exitScene);
-        exitStage.show();
+        //if(shoppingCart.getItems().size() != 0) {
+        //    shoppingCartSummary.setItems(cartItems);
+        //}
     }
 
     public void initTextFields(){
@@ -98,4 +73,28 @@ public class ConfirmationViewController implements Initializable {
         customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
     }
 
+    //back to the correct PaymentView when "go back" <-- is clicked
+    public void backtoPaymentView()throws IOException {
+
+        //need to determine what View to present - based on users Paymentchoise
+        if(DeliveryViewController.getPaymentChoise()=="Kortbetalning") {
+
+            AnchorPane paymentViewCard = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
+            confirmationView.getChildren().setAll(paymentViewCard);
+        }
+        else{
+            AnchorPane paymentViewInvoice = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
+            confirmationView.getChildren().setAll(paymentViewInvoice);
+        }
+    }
+
+    //go to ExitView
+    public void confirmPurches(ActionEvent event) throws IOException{
+        Parent exitParent = FXMLLoader.load(getClass().getResource("/fxml/ExitView.fxml"));
+        Scene exitScene = new Scene(exitParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+        Stage exitStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        exitStage.hide();
+        exitStage.setScene(exitScene);
+        exitStage.show();
+    }
 }

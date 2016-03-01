@@ -50,11 +50,11 @@ public class InvoiceController implements Initializable {
         //makes sure that it has been visited in order to be able to jump pass it from the buttons in the header
         visited = true;
 
-        //sets the radiobuttons, visa = default choise, user specified option is set to diabled due to time restraints
-        sameAsDelivery.setSelected(true);
-        sameAsDelivery.setToggleGroup(radioButtonGroup);
-        otherAdress.setToggleGroup(radioButtonGroup);
+        initTextFields();
+        initRadioButtons();
+    }
 
+    public void initTextFields(){
         //sets the textfields to the same as delivery by default
         invoiceFirstName.setText(customer.getFirstName());
         invoiceLastName.setText(customer.getLastName());
@@ -65,16 +65,21 @@ public class InvoiceController implements Initializable {
         invoicePhone.setText(customer.getPhoneNumber());
     }
 
+    public void initRadioButtons(){
+        //sameAsDelivery chosen by default. otherAdress = disabeld in Scenebuilder due to time restraints
+        sameAsDelivery.setSelected(true);
+        sameAsDelivery.setToggleGroup(radioButtonGroup);
+        otherAdress.setToggleGroup(radioButtonGroup);
+    }
 
-    //back to delivery view when clicked <--
+    //back to delivery view when clicked "go back" <--
     public void backToDeliveryClicked(ActionEvent event)throws IOException {
 
         AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
         paymentViewInvoice.getChildren().setAll(deliveryView);
-
     }
 
-    //gives us the confirmation view
+    //gives us the confirmation view when user clicked "continue" -->
     public void continueClicked()throws IOException{
 
         AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
