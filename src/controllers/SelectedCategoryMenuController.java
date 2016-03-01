@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -106,14 +108,20 @@ public class SelectedCategoryMenuController implements Initializable {
             int rowNrAgain = 0;
             double magicalHeight = 0.0;
             int magicalIdNr = 0;
+            int adrianplz = 0;
             for (int i = 0; i < productListSize - 1; i+=4) {
                 for (int j = 0; j < 4; j++) {
-
+                    String url = "/controllers/images/"+productList.get(adrianplz).getImageName();
                     Button newButton = new Button();
                     newButton.setPrefWidth(200);
-                    newButton.setPrefHeight(250);
+                    newButton.setPrefHeight(240);
                     newButton.setPickOnBounds(false);
                     newButton.setFocusTraversable(false);
+                    ImageView img = new ImageView(new Image(url));
+                    img.setFitWidth(200);
+                    img.setFitHeight(240);
+                    newButton.setGraphic(img);
+                    adrianplz = adrianplz + 1;
 
                     Button newBottomButton = new Button("Köp");
                     newBottomButton.setPrefWidth(75);
