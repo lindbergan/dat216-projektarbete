@@ -142,7 +142,7 @@ public class IMatController implements Initializable {
             Scene helpScene = new Scene(helpParent);
             Stage helpStage = new Stage();
             helpStage.setScene(helpScene);
-            helpStage.show();
+            helpStage.showAndWait();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -164,9 +164,12 @@ public class IMatController implements Initializable {
         }
         if(handler.getShoppingCart().getItems().size() > 5) {
             cartMenuButton.getItems().add(5, new MenuItem("..."));
+            cartMenuButton.getItems().add(6, new SeparatorMenuItem());
         }
         else{
-            cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(),new MenuItem(""));
+            if (handler.getShoppingCart().getItems().size() != 0) {
+                cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(),new SeparatorMenuItem());
+            }
         }
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");

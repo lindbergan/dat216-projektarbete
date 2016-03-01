@@ -109,7 +109,7 @@ public class SelectedCategoryMenuController implements Initializable {
             for (int i = 0; i < productListSize - 1; i+=4) {
                 for (int j = 0; j < 4; j++) {
 
-                    Button newButton = new Button("" + magicalIdNr);
+                    Button newButton = new Button();
                     newButton.setPrefWidth(200);
                     newButton.setPrefHeight(250);
                     newButton.setPickOnBounds(false);
