@@ -102,7 +102,7 @@ public class ShoppingCartController implements Initializable {
     }
     public void goToCheckout(ActionEvent event)throws IOException{
 
-        Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml"));
+        Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml/"));
         Scene imatScene = new Scene(imatParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage imatStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         imatStage.hide();
