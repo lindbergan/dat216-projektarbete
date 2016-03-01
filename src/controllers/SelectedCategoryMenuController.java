@@ -144,7 +144,9 @@ public class SelectedCategoryMenuController implements Initializable {
                     panelLayout.setAlignment(txt,Pos.TOP_CENTER);
                     gridPane123.add(panelLayout, j, rowNrAgain);
                     magicalIdNr++;
-                    adrianplz = adrianplz + 1;
+                    if(adrianplz < productListSize - 1) {
+                        adrianplz = adrianplz + 1;
+                    }
                 }
                 if (rowNrAgain < rowNr) {
                     rowNrAgain++;
