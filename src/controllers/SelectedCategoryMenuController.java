@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -12,9 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
-import se.chalmers.ait.dat215.project.ProductCategory;
+import se.chalmers.ait.dat215.project.*;
 
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -30,6 +29,7 @@ public class SelectedCategoryMenuController implements Initializable {
     @FXML public AnchorPane apGridWindow;
     @FXML private Label exampleText;
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    ShoppingCart cart = handler.getShoppingCart();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,7 +46,12 @@ public class SelectedCategoryMenuController implements Initializable {
 
     }
 
+    public void buyItem(ActionEvent e){
+        BuyButton bb = (BuyButton)e.getSource();
+        int id = bb.getProductId();
+        cart.addItem(new ShoppingItem(handler.getProduct(id),1));
 
+    }
     public void showProducts(String category) {
         List<Product> productList;
         switch (category) {
@@ -126,13 +131,14 @@ public class SelectedCategoryMenuController implements Initializable {
                     img.setFitHeight(240);
                     newButton.setGraphic(img);
 
-                    Button newBottomButton = new Button("Köp");
+                    BuyButton newBottomButton = new BuyButton("Köp",productList.get(adrianplz).getProductId());
                     newBottomButton.setPrefWidth(75);
                     newBottomButton.setPrefHeight(35);
                     newBottomButton.toFront();
                     newBottomButton.setAlignment(Pos.CENTER);
                     newBottomButton.setPickOnBounds(false);
                     newBottomButton.setFocusTraversable(false);
+                    newBottomButton.setOnAction(this::buyItem);
 
                     Label txt = new Label(productList.get(adrianplz).getName());
                    // txt.setPrefSize(75,75);
