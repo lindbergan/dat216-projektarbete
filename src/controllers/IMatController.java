@@ -24,7 +24,7 @@ public class IMatController implements Initializable {
 
     @FXML private MenuButton cartMenuButton;
     @FXML private Button helpButton;
-    @FXML private AnchorPane content;
+    @FXML public AnchorPane content;
     @FXML public ImageView imageView1;
     @FXML private ToggleButton toggle1;
     @FXML private ToggleButton toggle2;
@@ -36,9 +36,11 @@ public class IMatController implements Initializable {
     private Stage helpStage;
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private boolean isShopView;
+    public static AnchorPane razzan;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        razzan = content;
         setImage();
         start();
         initToggleButtons();
@@ -46,6 +48,10 @@ public class IMatController implements Initializable {
         ifNoFavorites();
         ifNoLists();
         initButtons();
+    }
+
+    public static AnchorPane getRazzan() {
+        return razzan;
     }
 
     public void ifNoFavorites() {
@@ -84,7 +90,7 @@ public class IMatController implements Initializable {
     }
 
     public void setImage() {
-        Image image = new Image("/pictures/IMat.png/");
+        Image image = new Image("/images/redness.png/");
         imageView1.setImage(image);
     }
 
@@ -120,7 +126,7 @@ public class IMatController implements Initializable {
     }
 
     //fetches the shopping cart view and replaces current anchor pane with it
-    public void goToCart()throws IOException {
+    public void goToCart() throws IOException {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
             content.getChildren().setAll(e);
@@ -128,6 +134,7 @@ public class IMatController implements Initializable {
             e.printStackTrace();
         }
     }
+
     //toggles the help menu
     public void helpMenu() {
         try {
@@ -135,7 +142,7 @@ public class IMatController implements Initializable {
             Scene helpScene = new Scene(helpParent);
             Stage helpStage = new Stage();
             helpStage.setScene(helpScene);
-            helpStage.show();
+            helpStage.showAndWait();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -157,9 +164,12 @@ public class IMatController implements Initializable {
         }
         if(handler.getShoppingCart().getItems().size() > 5) {
             cartMenuButton.getItems().add(5, new MenuItem("..."));
+            cartMenuButton.getItems().add(6, new SeparatorMenuItem());
         }
         else{
-            cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(),new MenuItem(""));
+            if (handler.getShoppingCart().getItems().size() != 0) {
+                cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(),new SeparatorMenuItem());
+            }
         }
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
@@ -186,4 +196,7 @@ public class IMatController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
+
 }

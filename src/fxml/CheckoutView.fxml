@@ -116,7 +116,7 @@
                            <graphic>
                       <ImageView fitHeight="102.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                          <Image url="@../pictures/iMat.png" />
+                          <Image url="@../pictures/IMat.png" />
                         </image>
                       </ImageView>
                            </graphic>

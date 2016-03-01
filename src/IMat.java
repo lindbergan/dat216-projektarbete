@@ -17,10 +17,10 @@ public class IMat extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        final IMatDataHandler handler = IMatDataHandler.getInstance();
+        IMatDataHandler handler = IMatDataHandler.getInstance();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
 
-        Scene scene = new Scene(root, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+        Scene scene = new Scene(root);
 
         primaryStage.setTitle("IMat");
         primaryStage.setScene(scene);

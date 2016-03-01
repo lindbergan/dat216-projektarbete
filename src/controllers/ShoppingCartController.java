@@ -46,7 +46,6 @@ public class ShoppingCartController implements Initializable {
     @FXML private ScrollPane scroll;
     @FXML private Label totalPrice;
     @FXML private DelButton delButton;
-    private ViewChanger viewChanger = new ViewChanger();
 
 
 
@@ -96,9 +95,19 @@ public class ShoppingCartController implements Initializable {
         cartPane.getChildren().setAll(e);
 
     }
+
     public void setPane2()throws IOException{
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
         cartPane.getChildren().setAll(e);
+    }
+    public void goToCheckout(ActionEvent event)throws IOException{
+
+        Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml"));
+        Scene imatScene = new Scene(imatParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+        Stage imatStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        imatStage.hide();
+        imatStage.setScene(imatScene);
+        imatStage.show();
 
     }
     public void refresh(){
@@ -148,7 +157,6 @@ public class ShoppingCartController implements Initializable {
         }
     }*/
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -195,18 +203,6 @@ public class ShoppingCartController implements Initializable {
         }
     }
 
-    public void goToCheckout(ActionEvent event) throws IOException {
-
-        viewChanger.changeStageOverride(event,"/fxml/CheckoutView.fxml");
-        /*
-        Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/CheckoutView.fxml"));
-        Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
-        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        mainStage.hide();
-        mainStage.setScene(mainScene);
-        mainStage.show();
-        */
-    }
 }
 
 
