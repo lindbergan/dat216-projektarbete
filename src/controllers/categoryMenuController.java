@@ -62,7 +62,7 @@ public class categoryMenuController implements Initializable {
 
         int categoryListSize = productCategories.length;
         int rowNr = 0;
-        double magicalHeight = 483.0;
+        double magicalHeight = 0.0;
 
         for (int i = 0; i < categoryListSize; i=i+4) {
             gridPane.addRow(rowNr);

@@ -60,7 +60,37 @@ public class SelectedCategoryMenuController implements Initializable {
                 break;
             case "Skafferi": {
                 productList = handler.getProducts(ProductCategory.FLOUR_SUGAR_SALT);
-                productList.addAll(handler.getProducts(ProductCategory.COLD_DRINKS));
+            }
+            break;
+            case "Sötsaker och drycker": {
+                productList = handler.getProducts(ProductCategory.COLD_DRINKS);
+                productList.addAll(handler.getProducts(ProductCategory.SWEET));
+                productList.addAll(handler.getProducts(ProductCategory.HOT_DRINKS));
+            }
+            break;
+            case "Fisk": {
+                productList = handler.getProducts(ProductCategory.FISH);
+            }
+            break;
+            case "Kött": {
+                productList = handler.getProducts(ProductCategory.MEAT);
+            }
+            break;
+            case "Mejeri": {
+                productList = handler.getProducts(ProductCategory.DAIRIES);
+            }
+            break;
+            case "Nötter och frön": {
+                productList = handler.getProducts(ProductCategory.NUTS_AND_SEEDS);
+            }
+            break;
+            case "Pasta, potatis och ris": {
+                productList = handler.getProducts(ProductCategory.PASTA);
+                productList.addAll(handler.getProducts(ProductCategory.POTATO_RICE));
+            }
+            break;
+            case "Rotfrukter": {
+                productList = handler.getProducts(ProductCategory.ROOT_VEGETABLE);
             }
             break;
             default: productList = handler.getProducts();
@@ -74,7 +104,7 @@ public class SelectedCategoryMenuController implements Initializable {
                 rowNr++;
             }
             int rowNrAgain = 0;
-            double magicalHeight = 483.0;
+            double magicalHeight = 0.0;
             int magicalIdNr = 0;
             for (int i = 0; i < productListSize - 1; i+=4) {
                 for (int j = 0; j < 4; j++) {
