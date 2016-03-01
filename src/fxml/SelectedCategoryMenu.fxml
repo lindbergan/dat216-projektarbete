@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -23,10 +24,18 @@
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
                         </GridPane>
                     </children>
                 </AnchorPane>
             </content>
         </ScrollPane>
+      <Label fx:id="exampleText" layoutX="76.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="120.0" text="hej" textFill="#0a0101">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
