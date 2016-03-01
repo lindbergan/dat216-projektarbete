@@ -71,6 +71,7 @@ public class categoryMenuController implements Initializable {
 
         int magicalNr = 0;
         int rowNrAgain = 0;
+        int adrianplz = 0;
         for (int i = 0; i < categoryListSize; i+=4) {
             for (int j = 0; j < 4; j++) {
 
@@ -97,6 +98,10 @@ public class categoryMenuController implements Initializable {
 
                 gridPane.add(newButton, j, rowNrAgain);
                 if (magicalNr < 10) {magicalNr++;}
+                if(adrianplz < categoryListSize - 1){
+                    adrianplz++;
+                }
+                else break;
             }
 
             if (rowNrAgain < rowNr) {
