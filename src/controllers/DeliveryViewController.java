@@ -67,6 +67,7 @@ public class DeliveryViewController implements Initializable{
     private static String userSpecifiedMaxTime;
     private static String paymentChoise = "Kortbetalning"; //default set to card
     private boolean allFieldsFilled;
+    private ViewChanger viewChanger = new ViewChanger();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -246,24 +247,30 @@ public class DeliveryViewController implements Initializable{
     //back to IMat store when user clicked the Logotype
     public void logoClicked(ActionEvent event) throws IOException{
 
+        viewChanger.changeStage(event,deliveryView,"/fxml/IMat.fxml" );
+        /*
         Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
         Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage mainStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         mainStage.hide();
         mainStage.setScene(mainScene);
         mainStage.show();
+        */
     }
 
 
     //back to IMat store when user clicked "back to store" <--
     public void backtoStoreClicked(ActionEvent event) throws IOException {
 
+        viewChanger.changeStage(event,deliveryView,"/fxml/IMat.fxml" );
+        /*
         Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
         Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         mainStage.hide();
         mainStage.setScene(mainScene);
         mainStage.show();
+        */
     }
 
     //gives us the right PaymentView depending on what radiobutton is selected
@@ -273,19 +280,31 @@ public class DeliveryViewController implements Initializable{
         if(allFieldsFilled) {
 
             if (paymentChoise == "Kortbetalning") {
+                viewChanger.changeScene(deliveryView,"/fxml/PaymentViewCard.fxml");
+
+                /*
                 AnchorPane cardView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
                 deliveryView.getChildren().setAll(cardView);
+                */
             } else {
+                viewChanger.changeScene(deliveryView,"/fxml/PaymentViewInvoice.fxml");
+
+                /*
                 AnchorPane invoiceView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
                 deliveryView.getChildren().setAll(invoiceView);
+                */
             }
         }
     }
 
     //Associate the different buttons in the header to the corresponding View
     public void DeliveryButtonPushed()throws IOException{
-            AnchorPane delView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
+        viewChanger.changeScene(deliveryView,"/fxml/DeliveryView.fxml");
+
+        /*
+        AnchorPane delView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
             deliveryView.getChildren().setAll(delView);
+            */
     }
     public void PaymentButtonPushed()throws IOException{
 
@@ -293,11 +312,18 @@ public class DeliveryViewController implements Initializable{
         if(allFieldsFilled) {
 
             if (paymentChoise == "Kortbetalning") {
+                viewChanger.changeScene(deliveryView,"/fxml/PaymentViewCard.fxml");
+                /*
                 AnchorPane cardView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
                 deliveryView.getChildren().setAll(cardView);
+                */
             } else {
+                viewChanger.changeScene(deliveryView,"/fxml/PaymentViewInvoice.fxml");
+
+                /*
                 AnchorPane invoiceView = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
                 deliveryView.getChildren().setAll(invoiceView);
+                */
             }
         }
     }
@@ -305,8 +331,12 @@ public class DeliveryViewController implements Initializable{
 
         //makes sure that the customer has been to InvoiceView or CardView before entering ConfirmationView.
         if(InvoiceController.hasBeenVisited() || CreditCardController.hasBeenVisited()) {
+            viewChanger.changeScene(deliveryView,"/fxml/ConfirmationView.fxml");
+
+            /*
             AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
             deliveryView.getChildren().setAll(confirmationView);
+            */
         }
     }
 

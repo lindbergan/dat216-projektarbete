@@ -186,7 +186,4 @@ public class IMatController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
-
 }

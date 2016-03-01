@@ -49,6 +49,7 @@ public class CreditCardController implements Initializable {
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private CreditCard creditCard = handler.getCreditCard();
     private static boolean visited = false;
+    private ViewChanger viewChanger = new ViewChanger();
 
 
     @Override
@@ -156,9 +157,11 @@ public class CreditCardController implements Initializable {
     //back to deliveryView when clicked "go back" <--
     public void backToDeliveryClicked(ActionEvent event)throws IOException {
 
+        viewChanger.changeScene(paymentViewCard,"/fxml/DeliveryView.fxml");
+        /*
         AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
         paymentViewCard.getChildren().setAll(deliveryView);
-
+*/
     }
 
     //gives us the confirmation view when clicked "continue" -->
@@ -177,10 +180,15 @@ public class CreditCardController implements Initializable {
         else{
             creditCard.setCardType("other");
         }
-        */
 
+
+        */
+        viewChanger.changeScene(paymentViewCard,"/fxml/ConfirmationView.fxml");
+
+        /*
         AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
         paymentViewCard.getChildren().setAll(confirmationView);
+        */
     }
 
     public static boolean hasBeenVisited(){

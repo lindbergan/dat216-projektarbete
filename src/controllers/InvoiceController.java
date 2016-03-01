@@ -41,6 +41,7 @@ public class InvoiceController implements Initializable {
     @FXML private TextField invoiceEmail;
     @FXML private TextField invoicePhone;
     private static boolean visited = false;
+    private ViewChanger viewChanger = new ViewChanger();
 
 
 
@@ -75,15 +76,23 @@ public class InvoiceController implements Initializable {
     //back to delivery view when clicked "go back" <--
     public void backToDeliveryClicked(ActionEvent event)throws IOException {
 
+        viewChanger.changeScene(paymentViewInvoice,"/fxml/DeliveryView.fxml");
+
+        /*
         AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
         paymentViewInvoice.getChildren().setAll(deliveryView);
+        */
     }
 
     //gives us the confirmation view when user clicked "continue" -->
     public void continueClicked()throws IOException{
 
+        viewChanger.changeScene(paymentViewInvoice,"/fxml/ConfirmationView.fxml");
+
+        /*
         AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
         paymentViewInvoice.getChildren().setAll(confirmationView);
+        */
 
     }
     public static boolean hasBeenVisited(){

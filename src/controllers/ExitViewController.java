@@ -30,9 +30,11 @@ public class ExitViewController implements Initializable {
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
+    @FXML private AnchorPane exitView;
     @FXML private Label customerEmail;
     @FXML private Label customerDate;
     @FXML private Button receipts;
+    private ViewChanger viewChanger = new ViewChanger();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,12 +54,15 @@ public class ExitViewController implements Initializable {
     //goes back to the store when "continue shopping" button is pushed
     public void continueShopping(ActionEvent event) throws IOException{
 
+        viewChanger.changeStage(event,exitView, "/fxml/IMat.fxml");
+        /*
         Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
         Scene imatScene = new Scene(imatParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage imatStage = (Stage)((Node) event.getSource()).getScene().getWindow();
         imatStage.hide();
         imatStage.setScene(imatScene);
         imatStage.show();
+        */
 
     }
 
