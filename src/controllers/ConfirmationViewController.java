@@ -39,8 +39,7 @@ public class ConfirmationViewController implements Initializable {
     @FXML private Label customerPhone;
     @FXML private Label customerDate;
     @FXML private Label customerPaymentChoise;
-
-
+    private ViewChanger viewChanger = new ViewChanger();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
     private ShoppingCart shoppingCart =handler.getShoppingCart();
@@ -79,22 +78,17 @@ public class ConfirmationViewController implements Initializable {
         //need to determine what View to present - based on users Paymentchoise
         if(DeliveryViewController.getPaymentChoise()=="Kortbetalning") {
 
-            AnchorPane paymentViewCard = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
-            confirmationView.getChildren().setAll(paymentViewCard);
+            viewChanger.changeScene(confirmationView,"/fxml/PaymentViewCard.fxml");
         }
         else{
-            AnchorPane paymentViewInvoice = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewInvoice.fxml"));
-            confirmationView.getChildren().setAll(paymentViewInvoice);
+
+            viewChanger.changeScene(confirmationView,"/fxml/PaymentViewInvoice.fxml");
         }
     }
 
     //go to ExitView
     public void confirmPurches(ActionEvent event) throws IOException{
-        Parent exitParent = FXMLLoader.load(getClass().getResource("/fxml/ExitView.fxml"));
-        Scene exitScene = new Scene(exitParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
-        Stage exitStage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        exitStage.hide();
-        exitStage.setScene(exitScene);
-        exitStage.show();
+
+        viewChanger.changeStage(event,"/fxml/ExitView.fxml");
     }
 }

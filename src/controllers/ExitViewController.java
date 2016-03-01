@@ -58,6 +58,7 @@ public class ExitViewController implements Initializable {
         imatStage.hide();
         imatStage.setScene(imatScene);
         imatStage.show();
+
     }
 
     //goes back to iMatView and shows receipts
