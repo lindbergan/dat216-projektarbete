@@ -304,6 +304,8 @@ public class DeliveryViewController implements Initializable{
     }
 
     public void allFieldsFilledIn(){
+
+        /*
         if(customerFirstName != null && customerLastName!= null && customerAddress != null
                 && customerPostCode != null && customerPhone!= null && customerEmail!= null
                 && userSpecifiedMonth!= null && userSpecifiedDate!= null && userSpecifiedMinTime!= null
@@ -313,5 +315,8 @@ public class DeliveryViewController implements Initializable{
         else{
             allFieldsFilled =false;
         }
+        */
+        //TA BORT NÄR FÄRDIGT. BARA FÖR BEKVÄMLIGHET
+        allFieldsFilled=true;
     }
 }

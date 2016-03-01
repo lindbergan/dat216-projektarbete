@@ -50,17 +50,7 @@ public class ConfirmationViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        customerName.setText(customer.getFirstName() + " " + customer.getLastName());
-        customerAddress.setText(customer.getAddress());
-        customerPostCode.setText(customer.getPostCode());
-        customerEmail.setText(customer.getEmail());
-        customerPhone.setText(customer.getPhoneNumber());
-        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
-                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
-                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
-                DeliveryViewController.getUserSpecifiedMaxTime()  );
-
-        customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
+        initTextFields();
 
         //places the shopping items in the ObservableList if the shoppingcart contains any items
         if(shoppingCart.getItems().size() != 0) {
@@ -71,7 +61,7 @@ public class ConfirmationViewController implements Initializable {
     //back to payment view when clicked <--
     public void backtoPaymentView()throws IOException {
 
-        //villkor - beroende på om kund valt att betala med kort eller faktura:
+        //need to determine what View to present - based on users Paymentchoise
         if(DeliveryViewController.getPaymentChoise()=="Kortbetalning") {
 
             AnchorPane paymentViewCard = FXMLLoader.load(getClass().getResource("/fxml/PaymentViewCard.fxml"));
@@ -91,6 +81,21 @@ public class ConfirmationViewController implements Initializable {
         exitStage.hide();
         exitStage.setScene(exitScene);
         exitStage.show();
+    }
+
+    public void initTextFields(){
+
+        customerName.setText(customer.getFirstName() + " " + customer.getLastName());
+        customerAddress.setText(customer.getAddress());
+        customerPostCode.setText(customer.getPostCode());
+        customerEmail.setText(customer.getEmail());
+        customerPhone.setText(customer.getPhoneNumber());
+        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
+                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
+                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
+                DeliveryViewController.getUserSpecifiedMaxTime()  );
+
+        customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
     }
 
 }

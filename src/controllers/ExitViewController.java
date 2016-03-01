@@ -38,16 +38,11 @@ public class ExitViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        customerEmail.setText(customer.getEmail());
-        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
-                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
-                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
-                DeliveryViewController.getUserSpecifiedMaxTime());
-
+        initTextFields();
 
     }
 
-    //goes back to the store
+    //goes back to the store when "continue shopping"- button is pushed
     public void continueShopping(ActionEvent event) throws IOException{
 
         Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
@@ -58,6 +53,7 @@ public class ExitViewController implements Initializable {
         imatStage.show();
     }
 
+    //goes back to iMatView and shows receipts
     public void receiptsButtonPushed(ActionEvent event){
         //byt stage till kvitto-stage:n
     }
@@ -66,5 +62,14 @@ public class ExitViewController implements Initializable {
     public void closeWindow(ActionEvent event){
         handler.shutDown();
         ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    public void initTextFields(){
+
+        customerEmail.setText(customer.getEmail());
+        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
+                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
+                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
+                DeliveryViewController.getUserSpecifiedMaxTime());
     }
 }
