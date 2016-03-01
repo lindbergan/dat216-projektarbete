@@ -147,6 +147,7 @@ public class SelectedCategoryMenuController implements Initializable {
                     if(adrianplz < productListSize - 1) {
                         adrianplz = adrianplz + 1;
                     }
+                    else break;
                 }
                 if (rowNrAgain < rowNr) {
                     rowNrAgain++;
