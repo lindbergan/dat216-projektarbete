@@ -5,11 +5,13 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
@@ -26,10 +28,12 @@ public class SelectedCategoryMenuController implements Initializable {
 
     @FXML public GridPane gridPane123;
     @FXML public AnchorPane apGridWindow;
+    @FXML private Label exampleText;
     IMatDataHandler handler = IMatDataHandler.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        exampleText.setVisible(false);
         try {
             Properties prop = new Properties();
             InputStreamReader in = new FileReader("products.txt");
@@ -121,7 +125,6 @@ public class SelectedCategoryMenuController implements Initializable {
                     img.setFitWidth(200);
                     img.setFitHeight(240);
                     newButton.setGraphic(img);
-                    adrianplz = adrianplz + 1;
 
                     Button newBottomButton = new Button("Köp");
                     newBottomButton.setPrefWidth(75);
@@ -131,10 +134,17 @@ public class SelectedCategoryMenuController implements Initializable {
                     newBottomButton.setPickOnBounds(false);
                     newBottomButton.setFocusTraversable(false);
 
-                    StackPane panelLayout = new StackPane(newButton, newBottomButton);
+                    Label txt = new Label(productList.get(adrianplz).getName());
+                   // txt.setPrefSize(75,75);
+                    txt.setTextFill(exampleText.getTextFill());
+                    txt.setFont(exampleText.getFont());
+
+                    StackPane panelLayout = new StackPane(newButton, newBottomButton,txt);
                     panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
+                    panelLayout.setAlignment(txt,Pos.TOP_CENTER);
                     gridPane123.add(panelLayout, j, rowNrAgain);
                     magicalIdNr++;
+                    adrianplz = adrianplz + 1;
                 }
                 if (rowNrAgain < rowNr) {
                     rowNrAgain++;
