@@ -90,11 +90,12 @@ public class ShoppingCartController implements Initializable {
         cartPane.getChildren().setAll(e);
 
     }
+
     public void setPane2()throws IOException{
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
         cartPane.getChildren().setAll(e);
-
     }
+
     public void refresh(){
         try{
             setPane();

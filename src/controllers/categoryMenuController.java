@@ -1,18 +1,26 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class categoryMenuController implements Initializable {
 
     @FXML public GridPane gridPane;
     @FXML public AnchorPane apGridWindow;
-    IMatController handler = new IMatController();
+    @FXML public AnchorPane bp1CategoryAP;
+    @FXML public AnchorPane categoryMenuAP;
     SelectedCategoryMenuController categoryHandler = new SelectedCategoryMenuController();
 
     @Override
@@ -38,6 +46,16 @@ public class categoryMenuController implements Initializable {
      *
      */
 
+    public void setPane() {
+        try {
+            AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/SelectedCategoryMenu.fxml/"));
+            categoryMenuAP.getChildren().setAll(e);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void showProductCategories() {
         String[] productCategories = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk"
         , "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
@@ -62,9 +80,19 @@ public class categoryMenuController implements Initializable {
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
                 newButton.setOnAction(e -> {
-                    /*if (!(newButton.getText() == null || newButton.getText().equals(""))) {
-                        goToSelectedCategoryMenu(newButton.getText());
-                    }*/
+                    if (!(newButton.getText() == null || newButton.getText().equals(""))) {
+                        try {
+                            Properties prop = new Properties();
+
+                            FileOutputStream out = new FileOutputStream("products.txt");
+                            prop.setProperty("category", newButton.getText());
+                            prop.store(out, null);
+                            setPane();
+                        }
+                        catch(Exception ex){
+                               ex.printStackTrace();
+                        }
+                    }
                 });
 
                 gridPane.add(newButton, j, rowNrAgain);
