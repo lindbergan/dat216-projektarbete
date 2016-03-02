@@ -24,6 +24,9 @@ import java.util.ResourceBundle;
 public class ConfirmationViewController implements Initializable {
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    ShoppingCart cart = handler.getShoppingCart();
+
+
     @FXML
     private AnchorPane confirmationView;
     @FXML
@@ -42,6 +45,7 @@ public class ConfirmationViewController implements Initializable {
     private Label customerDate;
     @FXML
     private Label customerPaymentChoise;
+    @FXML private Label price;
     private ViewChanger viewChanger = new ViewChanger();
     private Customer customer = handler.getCustomer();
     private ShoppingCart shoppingCart = handler.getShoppingCart();
@@ -52,11 +56,8 @@ public class ConfirmationViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         initTextFields();
-
-        //places the shopping items in the ObservableList if the shoppingcart contains any items
-        //if(shoppingCart.getItems().size() != 0) {
-        //    shoppingCartSummary.setItems(cartItems);
-        //}
+        setShoppingCartSummary();
+        setTotalPrice();
     }
 
     public void initTextFields() {
@@ -73,6 +74,15 @@ public class ConfirmationViewController implements Initializable {
 
         customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
     }
+
+    //skriver denna senare
+    public void setShoppingCartSummary(){
+    }
+
+    public void setTotalPrice(){
+        price.setText(cart.getTotal() + " :-");
+    }
+
 
     //back to the correct PaymentView when "go back" <-- is clicked
     public void backtoPaymentView() throws IOException {

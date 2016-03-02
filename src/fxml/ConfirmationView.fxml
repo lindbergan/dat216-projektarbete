@@ -1,57 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" fx:id="confirmationView" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1280.0"
-            xmlns="http://javafx.com/javafx/8" fx:controller="controllers.ConfirmationViewController">
-    <children>
-        <ListView fx:id="shoppingCartSummary" layoutX="37.0" layoutY="72.0" prefHeight="372.0" prefWidth="395.0"/>
-        <Label layoutX="549.0" layoutY="23.0" text="Sammanfattning">
-            <font>
-                <Font name="System Bold" size="20.0"/>
-            </font>
-        </Label>
-        <Button id="" defaultButton="true" layoutX="535.0" layoutY="447.0" mnemonicParsing="false"
-                onAction="#confirmPurches" prefHeight="55.0" prefWidth="181.0" text="Genomför köp">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-        <Button layoutX="587.0" layoutY="524.0" mnemonicParsing="false" onAction="#backtoPaymentView"
-                prefHeight="27.000099999997474" prefWidth="78.0" text="Tillbaka"/>
-        <Label layoutX="235.0" layoutY="491.0" text="Totalt :">
-            <font>
-                <Font name="System Bold" size="14.0" fx:id="x1"/>
-            </font>
-        </Label>
-        <Label layoutX="392.0" layoutY="490.0" text=":-">
-            <font>
-                <Font name="System Bold" size="16.0"/>
-            </font>
-        </Label>
-        <Line endX="100.0" layoutX="332.0" layoutY="480.0" startX="-100.0"/>
-        <Label font="$x1" layoutX="869.0" layoutY="72.0" text="Leveransadress"/>
-        <Label layoutX="716.0" layoutY="125.0" text="Namn"/>
-        <Label layoutX="716.0" layoutY="157.0" text="Adress"/>
-        <Label layoutX="716.0" layoutY="191.0" text="Postnummer"/>
-        <Label layoutX="716.0" layoutY="225.0" text="E-post"/>
-        <Label layoutX="716.0" layoutY="258.0" text="Telefon"/>
-        <Label layoutX="716.0" layoutY="323.0" text="Betalningsmetod">
-            <font>
-                <Font name="System Bold" size="12.0" fx:id="x2"/>
-            </font>
-        </Label>
-        <Label font="$x2" layoutX="716.0" layoutY="392.0" text="Leveransdatum"/>
-        <Label fx:id="customerName" layoutX="869.0" layoutY="125.0" text="getFirst + getSecond"/>
-        <Label fx:id="customerAddress" layoutX="869.0" layoutY="157.0" text="getAdress"/>
-        <Label fx:id="customerPostCode" layoutX="869.0" layoutY="191.0" text="getPostalCode"/>
-        <Label fx:id="customerEmail" layoutX="869.0" layoutY="225.0" text="getEmail"/>
-        <Label fx:id="customerPhone" layoutX="869.0" layoutY="258.0" text="getPhone"/>
-        <Label fx:id="customerPaymentChoise" layoutX="869.0" layoutY="323.0" text="getPaymentMethod"/>
-        <Label fx:id="customerDate" layoutX="869.0" layoutY="392.0" text="gDate"/>
-        <Label layoutX="332.0" layoutY="492.0" text="getPrice()"/>
-    </children>
+
+<AnchorPane id="AnchorPane" fx:id="confirmationView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ConfirmationViewController">
+  <children>
+    <ListView fx:id="shoppingCartSummary" layoutX="87.0" layoutY="133.0" prefHeight="275.0" prefWidth="433.0" />
+    <Label layoutX="550.0" layoutY="23.0" text="Sammanfattning">
+      <font>
+        <Font name="System Bold" size="20.0" />
+      </font>
+    </Label>
+    <Button id="" defaultButton="true" layoutX="550.0" layoutY="494.0" mnemonicParsing="false" onAction="#confirmPurches" prefHeight="55.0" prefWidth="181.0" text="Genomför köp">
+      <font>
+        <Font size="14.0" />
+      </font>
+    </Button>
+    <Button layoutX="602.0" layoutY="571.0" mnemonicParsing="false" onAction="#backtoPaymentView" prefHeight="27.000099999997474" prefWidth="78.0" text="Tillbaka" />
+    <Label layoutX="323.0" layoutY="437.0" text="Totalt :">
+      <font>
+        <Font name="System Bold" size="14.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Line endX="100.0" layoutX="420.0" layoutY="426.0" startX="-100.0" />
+    <Label font="$x1" layoutX="919.0" layoutY="78.0" text="Leveransadress" />
+    <Label layoutX="766.0" layoutY="131.0" text="Namn" />
+    <Label layoutX="766.0" layoutY="163.0" text="Adress" />
+    <Label layoutX="766.0" layoutY="197.0" text="Postnummer" />
+    <Label layoutX="765.0" layoutY="231.0" text="E-post" />
+    <Label layoutX="765.0" layoutY="264.0" text="Telefon" />
+    <Label layoutX="765.0" layoutY="329.0" text="Betalningsmetod">
+      <font>
+        <Font name="System Bold" size="12.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Label font="$x2" layoutX="765.0" layoutY="398.0" text="Leveransdatum" />
+    <Label fx:id="customerName" layoutX="919.0" layoutY="131.0" text="getFirst + getSecond" />
+    <Label fx:id="customerAddress" layoutX="919.0" layoutY="163.0" text="getAdress" />
+    <Label fx:id="customerPostCode" layoutX="919.0" layoutY="197.0" text="getPostalCode" />
+    <Label fx:id="customerEmail" layoutX="919.0" layoutY="231.0" text="getEmail" />
+    <Label fx:id="customerPhone" layoutX="918.0" layoutY="264.0" text="getPhone" />
+    <Label fx:id="customerPaymentChoise" layoutX="918.0" layoutY="329.0" text="getPaymentMethod" />
+    <Label fx:id="customerDate" layoutX="918.0" layoutY="398.0" text="gDate" />
+    <Label fx:id="price" layoutX="457.0" layoutY="439.0" text="getPrice()" />
+    <Label font="$x1" layoutX="235.0" layoutY="82.0" text="Min kundvagn" />
+  </children>
 </AnchorPane>

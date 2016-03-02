@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.ShoppingCart;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,7 @@ public class ExitViewController implements Initializable {
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
+    private ShoppingCart cart = handler.getShoppingCart();
     @FXML
     private AnchorPane exitView;
     @FXML
@@ -47,9 +49,10 @@ public class ExitViewController implements Initializable {
                 DeliveryViewController.getUserSpecifiedMaxTime());
     }
 
-    //goes back to the store when "continue shopping" button is pushed
+    //clears the cart and goes back to the store when "continue shopping" button is pushed
     public void continueShopping(ActionEvent event) throws IOException {
 
+        cart.clear();
         viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");
         /*
         Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
@@ -67,9 +70,10 @@ public class ExitViewController implements Initializable {
         //byt stage till kvitto-stage:n
     }
 
-    //closes the application and saves user settings
-    public void closeWindow(ActionEvent event) {
+    //clears the cart and goes back to the store when "continue shopping" button is pushed
+    public void closeWindow(ActionEvent event)throws IOException {
         handler.shutDown();
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        cart.clear();
+        viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");
     }
 }

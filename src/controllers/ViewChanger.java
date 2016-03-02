@@ -37,7 +37,7 @@ public class ViewChanger {
     public void changeStageOverride(ActionEvent event, String url) throws IOException {
 
         Parent parent = FXMLLoader.load(getClass().getResource(url));
-        Scene scene = new Scene(parent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+        Scene scene = new Scene(parent); // Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.hide();
         stage.setScene(scene);
