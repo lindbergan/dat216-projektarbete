@@ -33,14 +33,11 @@ import java.util.ResourceBundle;
  * Created by Razmus on 2016-02-21.
  */
 public class ShoppingCartController implements Initializable {
-    IMatController controller = new IMatController();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     ShoppingCart cart = handler.getShoppingCart();
 
     @FXML
     private AnchorPane cartPane;
-    @FXML
-    private Label itemUnit;
     @FXML
     private GridPane grid;
     @FXML
@@ -144,41 +141,6 @@ public class ShoppingCartController implements Initializable {
     public ShoppingItem showItem(int i) {
         return handler.getShoppingCart().getItems().get(i);
     }
-
-    public void testAddItem() {
-        Product p = handler.getProduct(1);
-        cart.addItem(new ShoppingItem(p, 2));
-        cart.addItem(new ShoppingItem(handler.getProduct(3), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(4), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(6), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(29), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(99), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(12), 5));
-        refresh();
-
-
-    }
-    //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
-    /*public void testFile(){
-        try {
-            Properties prop = new Properties();
-            InputStreamReader in = new FileReader("C:\\Users\\Razmus\\.dat215\\imat\\customer.txt");
-            prop.load(in);
-
-            FileOutputStream out = new FileOutputStream("C:\\Users\\Razmus\\.dat215\\imat\\customer.txt");
-            String hej = itemName.getText();
-            prop.setProperty("name", hej);
-            prop.setProperty("adress", hej);
-            prop.setProperty("city", hej);
-            prop.store(out, null);
-            price.setText(prop.getProperty("name"));
-
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }*/
 
 
     @Override
