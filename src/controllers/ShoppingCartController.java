@@ -134,8 +134,24 @@ public class ShoppingCartController implements Initializable {
             return false;
         }
     }
+    public boolean isInt(String s){
+        if(s.equals(0)){
+            s = "a";
+        }
+        try{
+            Integer.parseInt(s);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
     public void activateEnter(ActionEvent e){
         refresh();
+    }
+    public boolean cantBuyHalf(int i){
+        return cart.getItems().get(i).getProduct().getUnitSuffix().equals("st");
+
     }
 
     public ShoppingItem showItem(int i) {
@@ -155,36 +171,55 @@ public class ShoppingCartController implements Initializable {
             temp.setText("" + showItem(i).getAmount());
             temp.setMaxSize(59, 31);
             temp.setOnMouseClicked(this::amountClicked);
-            temp.textProperty().addListener(new ChangeListener<String>() {
-                @Override
-                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    if(!isDouble(temp.getText())){
-                        if(isDouble(oldValue)) {
-                            temp.setText(oldValue);
-                        }
-                        else temp.setText("1.0");
-                    }
-                    else
-                    if (!temp.getText().isEmpty()) {
-                        cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
-                    }
-                }
-            });
-            temp.focusedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if (!newValue) {
-                        try {
-                            refresh();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+            if(!cantBuyHalf(temp.getRow())) {
+
+
+                temp.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        if (!isDouble(temp.getText())) {
+                            if (isDouble(oldValue)) {
+                                temp.setText(oldValue);
+                            } else temp.setText("1.0");
+                        } else if (!temp.getText().isEmpty()) {
+                            cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
                         }
                     }
-                    if (!newValue && (temp.getText().isEmpty() || temp.getText().equals("0"))) {
-                        temp.setText("1.0");
+                });
+            }
+            if(cantBuyHalf(temp.getRow())){
+                temp.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        if(!isInt(temp.getText())){
+                            if(isDouble(oldValue)){
+                                int old2 = (int)Double.parseDouble(oldValue);
+                                temp.setText(old2+"");
+
+
+                            }
+                            else temp.setText("1.0");
+                        } else if (!temp.getText().isEmpty()){
+                            cart.getItems().get(temp.getRow()).setAmount(Integer.parseInt(newValue));
+                        }
                     }
-                }
-            });
+                });
+            }
+                temp.focusedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                        if (!newValue) {
+                            try {
+                                refresh();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (!newValue && (temp.getText().isEmpty() || temp.getText().equals("0"))) {
+                            temp.setText("1.0");
+                        }
+                    }
+                });
             temp.setOnAction(this :: activateEnter);
             grid.add(temp, 1, i);
             Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
