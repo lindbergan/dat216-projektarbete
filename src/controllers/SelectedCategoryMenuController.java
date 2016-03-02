@@ -61,6 +61,7 @@ public class SelectedCategoryMenuController implements Initializable {
         tf.setAlignment(Pos.CENTER);
 
         p.getChildren().remove(bb);
+        incItem(bb.getProductId());
 
         HBox hbox = new HBox(10, negButton, tf, posButton);
         hbox.setAlignment(Pos.BOTTOM_CENTER);
@@ -68,19 +69,28 @@ public class SelectedCategoryMenuController implements Initializable {
         p.setAlignment(hbox, Pos.BOTTOM_CENTER);
 
         posButton.setOnAction(ee -> {
+            incItem(bb.getProductId());
             double amount = Double.parseDouble(tf.getText());
             amount++;
             tf.setText(String.valueOf(amount));
         });
 
         negButton.setOnAction(ee -> {
+            decItem(bb.getProductId());
             double amount = Double.parseDouble(tf.getText());
-            amount--;
+            if(amount>1) {
+                amount--;
+            }
             tf.setText(String.valueOf(amount));
         });
 
 
-        int id = bb.getProductId();
+
+
+
+    }
+    public void incItem(int idd){
+        int id = idd;
         int razzan = 0;
         if(cart.getItems().size() == 0){
             cart.addItem((new ShoppingItem(handler.getProduct(id))));
@@ -98,8 +108,20 @@ public class SelectedCategoryMenuController implements Initializable {
         if(razzan == cart.getItems().size()){
             cart.addItem((new ShoppingItem(handler.getProduct(id))));
         }
+    }
+    public void decItem(int idd) {
+        int id = idd;
+        if (cart.getItems().size() == 0) {
+            cart.addItem((new ShoppingItem(handler.getProduct(id))));
+        } else
+            for (int i = 0; i < cart.getItems().size(); i++) {
+                if (cart.getItems().get(i).getProduct().getProductId() == id) {
+                    if (cart.getItems().get(i).getAmount() > 1) {
+                        cart.getItems().get(i).setAmount(cart.getItems().get(i).getAmount() - 1);
+                    } else cart.getItems().remove(i);
+                }
 
-
+            }
     }
 
     public void showProducts(String category) {
