@@ -178,6 +178,7 @@ public class ShoppingCartController implements Initializable {
             temp.textProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
                     if (!temp.getText().isEmpty()) {
                         cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
                     }
@@ -193,7 +194,7 @@ public class ShoppingCartController implements Initializable {
 
                         }
                     }
-                    if (temp.getText().isEmpty() || temp.getText().equals("0")) {
+                    if (!newValue && (temp.getText().isEmpty() || temp.getText().equals("0"))) {
                         temp.setText("1.0");
                     }
                 }
