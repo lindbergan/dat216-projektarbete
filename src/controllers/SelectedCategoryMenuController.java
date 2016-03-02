@@ -14,6 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import se.chalmers.ait.dat215.project.*;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ProductCategory;
 
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -69,6 +72,7 @@ public class SelectedCategoryMenuController implements Initializable {
 
 
     }
+
     public void showProducts(String category) {
         List<Product> productList;
         switch (category) {
@@ -149,6 +153,7 @@ public class SelectedCategoryMenuController implements Initializable {
                     newButton.setGraphic(img);
 
                     BuyButton newBottomButton = new BuyButton("Köp",productList.get(adrianplz).getProductId());
+                    Button newBottomButton = new Button("Köp");
                     newBottomButton.setPrefWidth(75);
                     newBottomButton.setPrefHeight(35);
                     newBottomButton.toFront();
