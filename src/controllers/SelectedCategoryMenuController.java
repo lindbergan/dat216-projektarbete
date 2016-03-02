@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.css.CssMetaData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,17 +8,17 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import se.chalmers.ait.dat215.project.*;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
 
+import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -51,6 +52,34 @@ public class SelectedCategoryMenuController implements Initializable {
 
     public void buyItem(ActionEvent e){
         BuyButton bb = (BuyButton)e.getSource();
+        StackPane p = (StackPane) bb.getParent();
+
+        Button posButton = new Button("+");
+        Button negButton = new Button("-");
+        TextField tf = new TextField("1.0");
+        tf.setPrefWidth(50);
+        tf.setAlignment(Pos.CENTER);
+
+        p.getChildren().remove(bb);
+
+        HBox hbox = new HBox(10, negButton, tf, posButton);
+        hbox.setAlignment(Pos.BOTTOM_CENTER);
+        p.getChildren().add(hbox);
+        p.setAlignment(hbox, Pos.BOTTOM_CENTER);
+
+        posButton.setOnAction(ee -> {
+            double amount = Double.parseDouble(tf.getText());
+            amount++;
+            tf.setText(String.valueOf(amount));
+        });
+
+        negButton.setOnAction(ee -> {
+            double amount = Double.parseDouble(tf.getText());
+            amount--;
+            tf.setText(String.valueOf(amount));
+        });
+
+
         int id = bb.getProductId();
         int razzan = 0;
         if(cart.getItems().size() == 0){
