@@ -90,7 +90,7 @@ public class IMatController implements Initializable {
     }
 
     public void setImage() {
-        Image image = new Image("/images/redness.png/");
+        Image image = new Image("/images/IMat-logga.png/");
         imageView1.setImage(image);
     }
 
