@@ -168,7 +168,12 @@ public class ShoppingCartController implements Initializable {
         for (int i = 0; i < handler.getShoppingCart().getItems().size(); i++) {
             grid.add(new Text(showItem(i).getProduct().getName()), 0, i);
             CartTextField temp = new CartTextField(i);
-            temp.setText("" + showItem(i).getAmount());
+            if(cantBuyHalf(temp.getRow())){
+                temp.setText("" +(int) showItem(i).getAmount());
+            }
+            if(!cantBuyHalf(temp.getRow())) {
+                temp.setText("" + showItem(i).getAmount());
+            }
             temp.setMaxSize(59, 31);
             temp.setOnMouseClicked(this::amountClicked);
             if(!cantBuyHalf(temp.getRow())) {
