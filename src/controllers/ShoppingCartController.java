@@ -122,6 +122,18 @@ public class ShoppingCartController implements Initializable {
             e.getStackTrace();
         }
     }
+    public boolean isDouble(String s){
+        if(s.equals("0") || s.equals("0.0")){
+            s = "a";
+        }
+        try{
+            Double.parseDouble(s);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
 
     public ShoppingItem showItem(int i) {
         return handler.getShoppingCart().getItems().get(i);
@@ -178,7 +190,13 @@ public class ShoppingCartController implements Initializable {
             temp.textProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
+                    if(!isDouble(temp.getText())){
+                        if(isDouble(oldValue)) {
+                            temp.setText(oldValue);
+                        }
+                        else temp.setText("1.0");
+                    }
+                    else
                     if (!temp.getText().isEmpty()) {
                         cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
                     }
@@ -191,7 +209,7 @@ public class ShoppingCartController implements Initializable {
                         try {
                             refresh();
                         } catch (Exception e) {
-
+                            e.printStackTrace();
                         }
                     }
                     if (!newValue && (temp.getText().isEmpty() || temp.getText().equals("0"))) {
