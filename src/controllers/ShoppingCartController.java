@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -19,8 +18,9 @@ import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
-
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -36,17 +36,21 @@ public class ShoppingCartController implements Initializable {
 
     @FXML
     private AnchorPane cartPane;
-    @FXML private Label itemUnit;
-    @FXML private GridPane grid;
-    @FXML private ScrollPane scroll;
-    @FXML private Label totalPrice;
-    @FXML private DelButton delButton;
+    @FXML
+    private Label itemUnit;
+    @FXML
+    private GridPane grid;
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private Label totalPrice;
+    @FXML
+    private DelButton delButton;
     private ViewChanger viewChanger = new ViewChanger();
 
 
-
     public void amountClicked(MouseEvent e) {
-        TextField temp = (TextField)e.getSource();
+        TextField temp = (TextField) e.getSource();
         temp.selectAll();
     }
 
@@ -72,18 +76,17 @@ public class ShoppingCartController implements Initializable {
 
 
     public void deleteItem(ActionEvent e) {
-        DelButton db = (DelButton)e.getSource();
+        DelButton db = (DelButton) e.getSource();
         int row = db.getRow();
         handler.getShoppingCart().getItems().remove(row);
         try {
             refresh();
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.getStackTrace();
         }
     }
 
-    public void setPane()throws IOException{
+    public void setPane() throws IOException {
         Properties prop = new Properties();
         InputStreamReader in = new FileReader("currentView.txt");
         prop.load(in);
@@ -92,12 +95,12 @@ public class ShoppingCartController implements Initializable {
 
     }
 
-    public void setPane2()throws IOException{
+    public void setPane2() throws IOException {
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
         cartPane.getChildren().setAll(e);
     }
 
-    public void goToCheckout(ActionEvent event) throws IOException{
+    public void goToCheckout(ActionEvent event) throws IOException {
 
         viewChanger.changeStageOverride(event, "/fxml/CheckoutView.fxml");
         /*
@@ -111,27 +114,28 @@ public class ShoppingCartController implements Initializable {
 
     }
 
-    public void refresh(){
-        try{
+    public void refresh() {
+        try {
             setPane();
             setPane2();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.getStackTrace();
         }
     }
-    public ShoppingItem showItem(int i){
+
+    public ShoppingItem showItem(int i) {
         return handler.getShoppingCart().getItems().get(i);
     }
-    public void testAddItem(){
+
+    public void testAddItem() {
         Product p = handler.getProduct(1);
-        cart.addItem(new ShoppingItem(p,2));
-        cart.addItem(new ShoppingItem(handler.getProduct(3),5));
-        cart.addItem(new ShoppingItem(handler.getProduct(4),5));
-        cart.addItem(new ShoppingItem(handler.getProduct(6),5));
-        cart.addItem(new ShoppingItem(handler.getProduct(29),5));
-        cart.addItem(new ShoppingItem(handler.getProduct(99),5));
-        cart.addItem(new ShoppingItem(handler.getProduct(12),5));
+        cart.addItem(new ShoppingItem(p, 2));
+        cart.addItem(new ShoppingItem(handler.getProduct(3), 5));
+        cart.addItem(new ShoppingItem(handler.getProduct(4), 5));
+        cart.addItem(new ShoppingItem(handler.getProduct(6), 5));
+        cart.addItem(new ShoppingItem(handler.getProduct(29), 5));
+        cart.addItem(new ShoppingItem(handler.getProduct(99), 5));
+        cart.addItem(new ShoppingItem(handler.getProduct(12), 5));
         refresh();
 
 
@@ -162,19 +166,19 @@ public class ShoppingCartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        if(handler.getShoppingCart().getItems().size() > 5){
+        if (handler.getShoppingCart().getItems().size() > 5) {
             scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         }
-        for(int i = 0; i<handler.getShoppingCart().getItems().size(); i++){
-            grid.add(new Text(showItem(i).getProduct().getName()),0,i);
+        for (int i = 0; i < handler.getShoppingCart().getItems().size(); i++) {
+            grid.add(new Text(showItem(i).getProduct().getName()), 0, i);
             CartTextField temp = new CartTextField(i);
             temp.setText("" + showItem(i).getAmount());
-            temp.setMaxSize(59,31);
+            temp.setMaxSize(59, 31);
             temp.setOnMouseClicked(this::amountClicked);
             temp.textProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    if(!temp.getText().isEmpty()) {
+                    if (!temp.getText().isEmpty()) {
                         cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
                     }
                 }
@@ -189,19 +193,19 @@ public class ShoppingCartController implements Initializable {
 
                         }
                     }
-                    if(temp.getText().isEmpty() || temp.getText().equals("0")){
+                    if (temp.getText().isEmpty() || temp.getText().equals("0")) {
                         temp.setText("1.0");
                     }
                 }
             });
-            grid.add(temp,1,i);
+            grid.add(temp, 1, i);
             Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
-            grid.add(suffix,2,i);
-            grid.add(new Text("" + showItem(i).getProduct().getPrice() * showItem(i).getAmount()),3,i);
+            grid.add(suffix, 2, i);
+            grid.add(new Text("" + showItem(i).getProduct().getPrice() * showItem(i).getAmount()), 3, i);
             totalPrice.setText(handler.getShoppingCart().getTotal() + " :-");
-            delButton = new DelButton("Ta bort",i);
+            delButton = new DelButton("Ta bort", i);
             delButton.setOnAction(this::deleteItem);
-            grid.add(delButton,4,i);
+            grid.add(delButton, 4, i);
         }
     }
 }

@@ -10,47 +10,50 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import se.chalmers.ait.dat215.project.CreditCard;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import se.chalmers.ait.dat215.project.CreditCard;
-import se.chalmers.ait.dat215.project.Customer;
-import se.chalmers.ait.dat215.project.IMatDataHandler;
 
 
 public class CreditCardController implements Initializable {
 
+    private static boolean visited = false;
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
+    IMatDataHandler handler = IMatDataHandler.getInstance();
     @FXML
     private MenuBar menuBar;
-    @FXML private AnchorPane paymentViewCard;
-
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-    @FXML private RadioButton visa;
-    @FXML private RadioButton mastercard;
-    @FXML private RadioButton other;
-    @FXML private TextField cardHolderName;
-    @FXML private TextField creditCardNumbr;
-    @FXML private TextField cvv;
-    @FXML private ChoiceBox cardYearChoiseBox;
-    @FXML private ChoiceBox cardMonthChoiseBox;
-
-    private ObservableList<String> cardYear = FXCollections.observableArrayList("16","17","18","19","20","21","22");
-    private ObservableList<String> cardMonth = FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
-
-    IMatDataHandler handler = IMatDataHandler.getInstance();
+    @FXML
+    private AnchorPane paymentViewCard;
+    @FXML
+    private RadioButton visa;
+    @FXML
+    private RadioButton mastercard;
+    @FXML
+    private RadioButton other;
+    @FXML
+    private TextField cardHolderName;
+    @FXML
+    private TextField creditCardNumbr;
+    @FXML
+    private TextField cvv;
+    @FXML
+    private ChoiceBox cardYearChoiseBox;
+    @FXML
+    private ChoiceBox cardMonthChoiseBox;
+    private ObservableList<String> cardYear = FXCollections.observableArrayList("16", "17", "18", "19", "20", "21", "22");
+    private ObservableList<String> cardMonth = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
     private CreditCard creditCard = handler.getCreditCard();
-    private static boolean visited = false;
     private ViewChanger viewChanger = new ViewChanger();
 
+    public static boolean hasBeenVisited() {
+        return visited;
+    }
 
     @Override
     //sets the radiobuttons, visa = default choise
@@ -69,13 +72,13 @@ public class CreditCardController implements Initializable {
         this.listenToChoiseboxes();
     }
 
-    public void initTextFields(){
+    public void initTextFields() {
         cardHolderName.setText(creditCard.getHoldersName());
         creditCardNumbr.setText(creditCard.getCardNumber());
-        cvv.setText(""+creditCard.getVerificationCode()); //dont know why i cant reach toString()
+        cvv.setText("" + creditCard.getVerificationCode()); //dont know why i cant reach toString()
     }
 
-    public void initiChoiseBoxes(){
+    public void initiChoiseBoxes() {
         cardYearChoiseBox.setItems(cardYear);
         cardMonthChoiseBox.setItems(cardMonth);
 
@@ -84,7 +87,7 @@ public class CreditCardController implements Initializable {
         cardMonthChoiseBox.getSelectionModel().select(creditCard.getValidMonth());
     }
 
-    public void initRadioButtons(){
+    public void initRadioButtons() {
         visa.setToggleGroup(radioButtonGroup);
         mastercard.setToggleGroup(radioButtonGroup);
         other.setToggleGroup(radioButtonGroup);
@@ -93,27 +96,25 @@ public class CreditCardController implements Initializable {
         setDefaultRadioButton();
     }
 
-    public void setDefaultRadioButton(){
+    public void setDefaultRadioButton() {
 
-        if(creditCard.getCardType() == "mastercard"){
+        if (creditCard.getCardType() == "mastercard") {
             mastercard.isSelected();
-        }
-        else if(creditCard.getCardType()=="other"){
+        } else if (creditCard.getCardType() == "other") {
             other.isSelected();
-        }
-        else {
+        } else {
             visa.setSelected(true);
         }
     }
 
     //ChangeListener for the textfields:
-    public void listenToTextField(){
+    public void listenToTextField() {
 
         //CreditCardNumber:
         creditCardNumbr.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        creditCard.setCardNumber(newValue);
+                creditCard.setCardNumber(newValue);
             }
         });
 
@@ -136,7 +137,7 @@ public class CreditCardController implements Initializable {
     }
 
     //ChangeListener for the choiseboxes
-    public void listenToChoiseboxes(){
+    public void listenToChoiseboxes() {
 
         //selected cardYear
         cardYearChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
@@ -155,9 +156,9 @@ public class CreditCardController implements Initializable {
     }
 
     //back to deliveryView when clicked "go back" <--
-    public void backToDeliveryClicked(ActionEvent event)throws IOException {
+    public void backToDeliveryClicked(ActionEvent event) throws IOException {
 
-        viewChanger.changeScene(paymentViewCard,"/fxml/DeliveryView.fxml");
+        viewChanger.changeScene(paymentViewCard, "/fxml/DeliveryView.fxml");
         /*
         AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
         paymentViewCard.getChildren().setAll(deliveryView);
@@ -165,7 +166,7 @@ public class CreditCardController implements Initializable {
     }
 
     //gives us the confirmation view when clicked "continue" -->
-    public void continueClicked()throws IOException{
+    public void continueClicked() throws IOException {
 
         creditCard.setCardType(radioButtonGroup.getSelectedToggle().toString());
         //sends the radiobutton info to iMatHandler
@@ -183,15 +184,11 @@ public class CreditCardController implements Initializable {
 
 
         */
-        viewChanger.changeScene(paymentViewCard,"/fxml/ConfirmationView.fxml");
+        viewChanger.changeScene(paymentViewCard, "/fxml/ConfirmationView.fxml");
 
         /*
         AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
         paymentViewCard.getChildren().setAll(confirmationView);
         */
-    }
-
-    public static boolean hasBeenVisited(){
-        return visited;
     }
 }

@@ -18,29 +18,39 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.*;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class IMatController implements Initializable {
 
-    @FXML private MenuButton cartMenuButton;
-    @FXML private Button helpButton;
-    @FXML public AnchorPane content;
-    @FXML public ImageView imageView1;
-    @FXML private ToggleButton toggle1;
-    @FXML private ToggleButton toggle2;
-    @FXML private MenuButton receiptMenu;
-    @FXML private MenuButton favoritesMenu;
-    @FXML private MenuButton listMenu;
-    @FXML private AnchorPane bp1iMatCategoryAP;
-    @FXML private MenuItem totalMenu;
-    private Stage helpStage;
+    @FXML
+    public AnchorPane content;
+    @FXML
+    public ImageView imageView1;
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    @FXML
+    private MenuButton cartMenuButton;
+    @FXML
+    private Button helpButton;
+    @FXML
+    private ToggleButton toggle1;
+    @FXML
+    private ToggleButton toggle2;
+    @FXML
+    private MenuButton receiptMenu;
+    @FXML
+    private MenuButton favoritesMenu;
+    @FXML
+    private MenuButton listMenu;
+    @FXML
+    private AnchorPane bp1iMatCategoryAP;
+    @FXML
+    private MenuItem totalMenu;
+    private Stage helpStage;
     private boolean isShopView;
-    public static AnchorPane razzan;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        razzan = content;
         setImage();
         start();
         initToggleButtons();
@@ -48,10 +58,6 @@ public class IMatController implements Initializable {
         ifNoFavorites();
         ifNoLists();
         initButtons();
-    }
-
-    public static AnchorPane getRazzan() {
-        return razzan;
     }
 
     public void ifNoFavorites() {
@@ -143,44 +149,42 @@ public class IMatController implements Initializable {
             Stage helpStage = new Stage();
             helpStage.setScene(helpScene);
             helpStage.showAndWait();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void cartMenuOnAction(){
-        cartMenuButton.getItems().remove(0,cartMenuButton.getItems().size()-3);
+    public void cartMenuOnAction() {
+        cartMenuButton.getItems().remove(0, cartMenuButton.getItems().size() - 3);
         int limit = 5;
-        if(handler.getShoppingCart().getItems().size()<limit){
+        if (handler.getShoppingCart().getItems().size() < limit) {
             limit = handler.getShoppingCart().getItems().size();
         }
-        if(handler.getShoppingCart().getItems().size() != 0) {
+        if (handler.getShoppingCart().getItems().size() != 0) {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
                 MenuItem temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
                 cartMenuButton.getItems().add(i, temp);
             }
         }
-        if(handler.getShoppingCart().getItems().size() > 5) {
+        if (handler.getShoppingCart().getItems().size() > 5) {
             cartMenuButton.getItems().add(5, new MenuItem("..."));
             cartMenuButton.getItems().add(6, new SeparatorMenuItem());
-        }
-        else{
+        } else {
             if (handler.getShoppingCart().getItems().size() != 0) {
-                cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(),new SeparatorMenuItem());
+                cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(), new SeparatorMenuItem());
             }
         }
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
     }
-    public void currentView(){
+
+    public void currentView() {
         isShopView = toggle1.isSelected();
         String url;
-        if(isShopView){
+        if (isShopView) {
             url = "/fxml/shopView.fxml/";
-        }
-        else url = "/fxml/categoryMenu.fxml/";
+        } else url = "/fxml/categoryMenu.fxml/";
         try {
             Properties prop = new Properties();
             InputStreamReader in = new FileReader("currentView.txt");
@@ -189,14 +193,10 @@ public class IMatController implements Initializable {
             FileOutputStream out = new FileOutputStream("currentView.txt");
             prop.setProperty("URL", url);
             prop.store(out, null);
-
-
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
 
 }

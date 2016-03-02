@@ -1,25 +1,20 @@
 package controllers;
 
-import javafx.css.CssMetaData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.text.Text;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import se.chalmers.ait.dat215.project.*;
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
-import se.chalmers.ait.dat215.project.ProductCategory;
 
-import java.awt.*;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -29,11 +24,14 @@ import java.util.ResourceBundle;
 
 public class SelectedCategoryMenuController implements Initializable {
 
-    @FXML public GridPane gridPane123;
-    @FXML public AnchorPane apGridWindow;
-    @FXML private Label exampleText;
+    @FXML
+    public GridPane gridPane123;
+    @FXML
+    public AnchorPane apGridWindow;
     IMatDataHandler handler = IMatDataHandler.getInstance();
     ShoppingCart cart = handler.getShoppingCart();
+    @FXML
+    private Label exampleText;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,20 +41,19 @@ public class SelectedCategoryMenuController implements Initializable {
             InputStreamReader in = new FileReader("products.txt");
             prop.load(in);
             showProducts(prop.getProperty("category"));
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
     }
 
-    public void buyItem(ActionEvent e){
-        BuyButton bb = (BuyButton)e.getSource();
+    public void buyItem(ActionEvent e) {
+        BuyButton bb = (BuyButton) e.getSource();
         StackPane p = (StackPane) bb.getParent();
 
         Button posButton = new Button("+");
         Button negButton = new Button("-");
-        TextField tf = new TextField("1.0");
+        TextField tf = new TextField("1");
         tf.setPrefWidth(50);
         tf.setAlignment(Pos.CENTER);
 
@@ -70,45 +67,48 @@ public class SelectedCategoryMenuController implements Initializable {
 
         posButton.setOnAction(ee -> {
             incItem(bb.getProductId());
-            double amount = Double.parseDouble(tf.getText());
+            int amount = Integer.parseInt(tf.getText());
             amount++;
             tf.setText(String.valueOf(amount));
         });
 
         negButton.setOnAction(ee -> {
-            decItem(bb.getProductId());
-            double amount = Double.parseDouble(tf.getText());
-            if(amount>1) {
+            int amount = Integer.parseInt(tf.getText());
+            if (amount < 2) {
+                hbox.getChildren().removeAll();
+                p.getChildren().removeAll();
+                hbox.setVisible(false);
+                p.getChildren().add(bb);
+                decItem(bb.getProductId());
+            } else {
                 amount--;
+                tf.setText(String.valueOf(amount));
+                decItem(bb.getProductId());
             }
-            tf.setText(String.valueOf(amount));
         });
 
 
-
-
-
     }
-    public void incItem(int idd){
+
+    public void incItem(int idd) {
         int id = idd;
         int razzan = 0;
-        if(cart.getItems().size() == 0){
+        if (cart.getItems().size() == 0) {
             cart.addItem((new ShoppingItem(handler.getProduct(id))));
-        }
-        else
-            for(int i = 0; i<cart.getItems().size(); i++){
-                if(cart.getItems().get(i).getProduct().getProductId() == id){
+        } else
+            for (int i = 0; i < cart.getItems().size(); i++) {
+                if (cart.getItems().get(i).getProduct().getProductId() == id) {
                     cart.getItems().get(i).setAmount(cart.getItems().get(i).getAmount() + 1);
-                }
-                else {
+                } else {
                     razzan = razzan + 1;
                 }
 
             }
-        if(razzan == cart.getItems().size()){
+        if (razzan == cart.getItems().size()) {
             cart.addItem((new ShoppingItem(handler.getProduct(id))));
         }
     }
+
     public void decItem(int idd) {
         int id = idd;
         if (cart.getItems().size() == 0) {
@@ -127,9 +127,11 @@ public class SelectedCategoryMenuController implements Initializable {
     public void showProducts(String category) {
         List<Product> productList;
         switch (category) {
-            case "Baljväxter": productList = handler.getProducts(ProductCategory.POD);
+            case "Baljväxter":
+                productList = handler.getProducts(ProductCategory.POD);
                 break;
-            case "Bröd": productList = handler.getProducts(ProductCategory.BREAD);
+            case "Bröd":
+                productList = handler.getProducts(ProductCategory.BREAD);
                 break;
             case "Frukt och grönt": {
                 productList = handler.getProducts(ProductCategory.FRUIT);
@@ -140,7 +142,7 @@ public class SelectedCategoryMenuController implements Initializable {
                 productList.addAll(handler.getProducts(ProductCategory.CABBAGE));
                 productList.addAll(handler.getProducts(ProductCategory.MELONS));
             }
-                break;
+            break;
             case "Skafferi": {
                 productList = handler.getProducts(ProductCategory.FLOUR_SUGAR_SALT);
             }
@@ -176,13 +178,14 @@ public class SelectedCategoryMenuController implements Initializable {
                 productList = handler.getProducts(ProductCategory.ROOT_VEGETABLE);
             }
             break;
-            default: productList = handler.getProducts();
+            default:
+                productList = handler.getProducts();
         }
 
         if (!(productList.isEmpty())) {
             int productListSize = productList.size();
             int rowNr = 0;
-            for (int i = 0; i < productListSize - 1; i=i+4) {
+            for (int i = 0; i < productListSize - 1; i = i + 4) {
                 gridPane123.addRow(rowNr);
                 rowNr++;
             }
@@ -190,9 +193,9 @@ public class SelectedCategoryMenuController implements Initializable {
             double magicalHeight = 0.0;
             int magicalIdNr = 0;
             int adrianplz = 0;
-            for (int i = 0; i < productListSize - 1; i+=4) {
+            for (int i = 0; i < productListSize - 1; i += 4) {
                 for (int j = 0; j < 4; j++) {
-                    String url = "/controllers/images/"+productList.get(adrianplz).getImageName();
+                    String url = "/controllers/images/" + productList.get(adrianplz).getImageName();
                     Button newButton = new Button();
                     newButton.setPrefWidth(200);
                     newButton.setPrefHeight(240);
@@ -203,8 +206,8 @@ public class SelectedCategoryMenuController implements Initializable {
                     img.setFitHeight(240);
                     newButton.setGraphic(img);
 
-                    BuyButton newBottomButton = new BuyButton("Köp",productList.get(adrianplz).getProductId());
-                   // Button newBottomButton = new Button("Köp");
+                    BuyButton newBottomButton = new BuyButton("Köp", productList.get(adrianplz).getProductId());
+                    // Button newBottomButton = new Button("Köp");
                     newBottomButton.setPrefWidth(75);
                     newBottomButton.setPrefHeight(35);
                     newBottomButton.toFront();
@@ -214,19 +217,18 @@ public class SelectedCategoryMenuController implements Initializable {
                     newBottomButton.setOnAction(this::buyItem);
 
                     Label txt = new Label(productList.get(adrianplz).getName());
-                   // txt.setPrefSize(75,75);
+                    // txt.setPrefSize(75,75);
                     txt.setTextFill(exampleText.getTextFill());
                     txt.setFont(exampleText.getFont());
 
-                    StackPane panelLayout = new StackPane(newButton, newBottomButton,txt);
+                    StackPane panelLayout = new StackPane(newButton, newBottomButton, txt);
                     panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
-                    panelLayout.setAlignment(txt,Pos.TOP_CENTER);
+                    panelLayout.setAlignment(txt, Pos.TOP_CENTER);
                     gridPane123.add(panelLayout, j, rowNrAgain);
                     magicalIdNr++;
-                    if(adrianplz < productListSize - 1) {
+                    if (adrianplz < productListSize - 1) {
                         adrianplz = adrianplz + 1;
-                    }
-                    else break;
+                    } else break;
                 }
                 if (rowNrAgain < rowNr) {
                     rowNrAgain++;
@@ -234,8 +236,7 @@ public class SelectedCategoryMenuController implements Initializable {
                     magicalHeight = magicalHeight + 250;
                 }
             }
-        }
-        else {
+        } else {
             System.out.println("Productlist is empty. ");
         }
     }

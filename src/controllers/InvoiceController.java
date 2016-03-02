@@ -6,15 +6,11 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
@@ -25,25 +21,35 @@ import java.util.ResourceBundle;
 public class InvoiceController implements Initializable {
 
 
-    @FXML private AnchorPane paymentViewInvoice;
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-    @FXML private RadioButton sameAsDelivery;
-    @FXML private RadioButton otherAdress;
-    IMatDataHandler handler = IMatDataHandler.getInstance();
-    private Customer customer = handler.getCustomer();
-
-
-    @FXML private TextField invoiceFirstName;
-    @FXML private TextField invoiceLastName;
-    @FXML private TextField invoiceAddress;
-    @FXML private TextField invoicePostCode;
-    @FXML private TextField invoicePostAddress;
-    @FXML private TextField invoiceEmail;
-    @FXML private TextField invoicePhone;
     private static boolean visited = false;
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    @FXML
+    private AnchorPane paymentViewInvoice;
+    @FXML
+    private RadioButton sameAsDelivery;
+    @FXML
+    private RadioButton otherAdress;
+    private Customer customer = handler.getCustomer();
+    @FXML
+    private TextField invoiceFirstName;
+    @FXML
+    private TextField invoiceLastName;
+    @FXML
+    private TextField invoiceAddress;
+    @FXML
+    private TextField invoicePostCode;
+    @FXML
+    private TextField invoicePostAddress;
+    @FXML
+    private TextField invoiceEmail;
+    @FXML
+    private TextField invoicePhone;
     private ViewChanger viewChanger = new ViewChanger();
 
-
+    public static boolean hasBeenVisited() {
+        return visited;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,7 +61,7 @@ public class InvoiceController implements Initializable {
         initRadioButtons();
     }
 
-    public void initTextFields(){
+    public void initTextFields() {
         //sets the textfields to the same as delivery by default
         invoiceFirstName.setText(customer.getFirstName());
         invoiceLastName.setText(customer.getLastName());
@@ -66,7 +72,7 @@ public class InvoiceController implements Initializable {
         invoicePhone.setText(customer.getPhoneNumber());
     }
 
-    public void initRadioButtons(){
+    public void initRadioButtons() {
         //sameAsDelivery chosen by default. otherAdress = disabeld in Scenebuilder due to time restraints
         sameAsDelivery.setSelected(true);
         sameAsDelivery.setToggleGroup(radioButtonGroup);
@@ -74,9 +80,9 @@ public class InvoiceController implements Initializable {
     }
 
     //back to delivery view when clicked "go back" <--
-    public void backToDeliveryClicked(ActionEvent event)throws IOException {
+    public void backToDeliveryClicked(ActionEvent event) throws IOException {
 
-        viewChanger.changeScene(paymentViewInvoice,"/fxml/DeliveryView.fxml");
+        viewChanger.changeScene(paymentViewInvoice, "/fxml/DeliveryView.fxml");
 
         /*
         AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
@@ -85,18 +91,15 @@ public class InvoiceController implements Initializable {
     }
 
     //gives us the confirmation view when user clicked "continue" -->
-    public void continueClicked()throws IOException{
+    public void continueClicked() throws IOException {
 
-        viewChanger.changeScene(paymentViewInvoice,"/fxml/ConfirmationView.fxml");
+        viewChanger.changeScene(paymentViewInvoice, "/fxml/ConfirmationView.fxml");
 
         /*
         AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
         paymentViewInvoice.getChildren().setAll(confirmationView);
         */
 
-    }
-    public static boolean hasBeenVisited(){
-        return visited;
     }
 
 }

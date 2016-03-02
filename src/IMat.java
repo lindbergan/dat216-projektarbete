@@ -3,17 +3,18 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.InputStreamReader;
 import java.util.Properties;
 
 public class IMat extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -36,8 +37,7 @@ public class IMat extends Application {
                     prop.store(out, null);
 
 
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -45,6 +45,4 @@ public class IMat extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) { launch(args);}
-    
 }

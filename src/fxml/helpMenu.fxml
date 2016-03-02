@@ -1,53 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HelpMenuController">
-   <bottom>
-      <AnchorPane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="closeHelp" cacheShape="false" centerShape="false" focusTraversable="false" layoutY="137.0" mnemonicParsing="false" onAction="#closeWindow" pickOnBounds="false" prefHeight="191.0" prefWidth="600.0" scaleShape="false" text="Stäng fönstret och börja handla" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-   </bottom>
-   <top>
-      <AnchorPane prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="957.0" layoutY="6.0" text="?">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <Label layoutX="334.0" layoutY="16.0" text="Hej och välkommen till iMat!">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </top>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
-   <left>
-      <AnchorPane prefHeight="285.0" prefWidth="20.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="20.0" layoutY="63.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="285.0" prefWidth="28.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-   </right>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="controllers.HelpMenuController">
+    <bottom>
+        <AnchorPane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="closeHelp" cacheShape="false" centerShape="false" focusTraversable="false"
+                        layoutY="137.0" mnemonicParsing="false" onAction="#closeWindow" pickOnBounds="false"
+                        prefHeight="191.0" prefWidth="600.0" scaleShape="false" text="Stäng fönstret och börja handla"
+                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                        AnchorPane.topAnchor="0.0">
+                    <font>
+                        <Font size="28.0"/>
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </bottom>
+    <top>
+        <AnchorPane prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="957.0" layoutY="6.0" text="?">
+                    <font>
+                        <Font size="36.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="334.0" layoutY="16.0" text="Hej och välkommen till iMat!">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+    </center>
+    <left>
+        <AnchorPane prefHeight="285.0" prefWidth="20.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false"
+                        layoutX="20.0" layoutY="63.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="285.0"
+                        prefWidth="36.0" scaleShape="false" text="&lt;" AnchorPane.bottomAnchor="0.0"
+                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+            </children>
+        </AnchorPane>
+    </left>
+    <right>
+        <AnchorPane prefHeight="285.0" prefWidth="28.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false"
+                        pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&gt;"
+                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                        AnchorPane.topAnchor="0.0"/>
+            </children>
+        </AnchorPane>
+    </right>
 </BorderPane>
