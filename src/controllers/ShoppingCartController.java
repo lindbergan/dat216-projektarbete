@@ -41,6 +41,7 @@ public class ShoppingCartController implements Initializable {
     @FXML private ScrollPane scroll;
     @FXML private Label totalPrice;
     @FXML private DelButton delButton;
+    private ViewChanger viewChanger = new ViewChanger();
 
 
 
@@ -94,6 +95,20 @@ public class ShoppingCartController implements Initializable {
     public void setPane2()throws IOException{
         AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
         cartPane.getChildren().setAll(e);
+    }
+
+    public void goToCheckout(ActionEvent event) throws IOException{
+
+        viewChanger.changeStageOverride(event, "/fxml/CheckoutView.fxml");
+        /*
+        Parent imatParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
+        Scene imatScene = new Scene(imatParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+        Stage imatStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        imatStage.hide();
+        imatStage.setScene(imatScene);
+        imatStage.show();
+        */
+
     }
 
     public void refresh(){
