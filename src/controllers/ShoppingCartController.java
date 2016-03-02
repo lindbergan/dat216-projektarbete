@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -18,6 +19,8 @@ import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
+import javax.swing.*;
+import java.awt.event.KeyEvent;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -134,6 +137,9 @@ public class ShoppingCartController implements Initializable {
             return false;
         }
     }
+    public void activateEnter(ActionEvent e){
+        refresh();
+    }
 
     public ShoppingItem showItem(int i) {
         return handler.getShoppingCart().getItems().get(i);
@@ -217,6 +223,7 @@ public class ShoppingCartController implements Initializable {
                     }
                 }
             });
+            temp.setOnAction(this :: activateEnter);
             grid.add(temp, 1, i);
             Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
             grid.add(suffix, 2, i);
