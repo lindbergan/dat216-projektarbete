@@ -100,6 +100,6 @@ public class ConfirmationViewController implements Initializable {
     //go to ExitView
     public void confirmPurches(ActionEvent event) throws IOException {
 
-        viewChanger.changeStage(event, confirmationView, "/fxml/ExitView.fxml");
+        viewChanger.changeStageOverride(event, "/fxml/ExitView.fxml");
     }
 }

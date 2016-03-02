@@ -50,12 +50,6 @@ public class DeliveryViewController implements Initializable {
     @FXML
     private TextField customerPhone;
     @FXML
-    private Button deliveryButton;
-    @FXML
-    private Button paymentButton;
-    @FXML
-    private Button confirmationButton;
-    @FXML
     private ChoiceBox monthChoisebox;
     @FXML
     private ChoiceBox dateChoisebox;
@@ -70,6 +64,10 @@ public class DeliveryViewController implements Initializable {
     private ObservableList<String> maxTime = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24");
     private boolean allFieldsFilled;
     private ViewChanger viewChanger = new ViewChanger();
+    @FXML private Button deliveryButton;
+    @FXML private Button paymentButton;
+    @FXML private Button confirmationButton;
+
 
     //The getters for our custom choisboxes and radiobuttons:
     public static String getUserSpecifiedMonth() {
@@ -92,8 +90,12 @@ public class DeliveryViewController implements Initializable {
         return paymentChoise;
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        //deliveryButton.setDefaultButton(true);
 
         //initialize the fields
         initTextFields();
@@ -106,6 +108,26 @@ public class DeliveryViewController implements Initializable {
         listenToRadioButtons();
     }
 
+    /*
+    public static void setHeaderButton(String viewName){
+
+        if (viewName == "deliveryView"){
+            deliveryButton.setDefaultButton(true);
+            paymentButton.setDefaultButton(false);
+            confirmationButton.setDefaultButton(false);
+        }
+        if (viewName == "paymentView"){
+            deliveryButton.setDefaultButton(false);
+            paymentButton.setDefaultButton(true);
+            confirmationButton.setDefaultButton(false);
+        }
+        if (viewName == "confirmationView"){
+            deliveryButton.setDefaultButton(false);
+            paymentButton.setDefaultButton(false);
+            confirmationButton.setDefaultButton(true);
+        }
+    }
+    */
     public void initTextFields() {
 
         //sets the textfields to the correct default values
@@ -268,7 +290,7 @@ public class DeliveryViewController implements Initializable {
     //back to IMat store when user clicked the Logotype
     public void logoClicked(ActionEvent event) throws IOException {
 
-        viewChanger.changeStage(event, deliveryView, "/fxml/IMat.fxml");
+        viewChanger.changeStageOverride(event, "/fxml/IMat.fxml");
         /*
         Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
         Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
@@ -282,7 +304,7 @@ public class DeliveryViewController implements Initializable {
     //back to IMat store when user clicked "back to store" <--
     public void backtoStoreClicked(ActionEvent event) throws IOException {
 
-        viewChanger.changeStage(event, deliveryView, "/fxml/IMat.fxml");
+        viewChanger.changeStageOverride(event, "/fxml/IMat.fxml");
         /*
         Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/IMat.fxml"));
         Scene mainScene = new Scene(mainParent, Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
@@ -295,6 +317,7 @@ public class DeliveryViewController implements Initializable {
 
     //gives us the right PaymentView depending on what radiobutton is selected
     public void continueClicked() throws IOException {
+
 
         allFieldsFilledIn();
         if (allFieldsFilled) {
@@ -320,6 +343,7 @@ public class DeliveryViewController implements Initializable {
     //Associate the different buttons in the header to the corresponding View
     public void DeliveryButtonPushed() throws IOException {
         viewChanger.changeScene(deliveryView, "/fxml/DeliveryView.fxml");
+        deliveryButton.setDefaultButton(true);
 
         /*
         AnchorPane delView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
@@ -329,7 +353,7 @@ public class DeliveryViewController implements Initializable {
 
     public void PaymentButtonPushed() throws IOException {
 
-        allFieldsFilledIn();
+        //allFieldsFilledIn();
         if (allFieldsFilled) {
 
             if (paymentChoise == "Kortbetalning") {
