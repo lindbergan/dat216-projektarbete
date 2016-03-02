@@ -152,8 +152,8 @@ public class SelectedCategoryMenuController implements Initializable {
                     img.setFitHeight(240);
                     newButton.setGraphic(img);
 
-                    //BuyButton newBottomButton = new BuyButton("Köp",productList.get(adrianplz).getProductId());
-                    Button newBottomButton = new Button("Köp");
+                    BuyButton newBottomButton = new BuyButton("Köp",productList.get(adrianplz).getProductId());
+                   // Button newBottomButton = new Button("Köp");
                     newBottomButton.setPrefWidth(75);
                     newBottomButton.setPrefHeight(35);
                     newBottomButton.toFront();
