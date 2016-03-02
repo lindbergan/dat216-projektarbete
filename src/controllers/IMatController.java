@@ -48,6 +48,7 @@ public class IMatController implements Initializable {
     private MenuItem totalMenu;
     private Stage helpStage;
     private boolean isShopView;
+    private MenuItem temp;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -163,7 +164,12 @@ public class IMatController implements Initializable {
         if (handler.getShoppingCart().getItems().size() != 0) {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
-                MenuItem temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                if(!cantBuyHalf(item.getProduct().getProductId())) {
+                    temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                }
+                if(cantBuyHalf(item.getProduct().getProductId())){
+                    temp = new MenuItem(item.getProduct().getName() + "     " + (int) item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                }
                 cartMenuButton.getItems().add(i, temp);
             }
         }
@@ -177,6 +183,10 @@ public class IMatController implements Initializable {
         }
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
+    }
+    public boolean cantBuyHalf(int i){
+        return handler.getProduct(i).getUnitSuffix().equals("st");
+
     }
 
     public void currentView() {
