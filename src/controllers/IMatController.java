@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import properties.CategoryListCell;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import java.io.FileOutputStream;
@@ -22,11 +23,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class IMatController implements Initializable {
 
+    @FXML private Button searchButton;
+    @FXML private TextField searchField;
     @FXML
     public AnchorPane content;
     @FXML
@@ -245,6 +249,15 @@ public class IMatController implements Initializable {
             prop.store(out, null);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public void search(){
+        String input = searchField.getText().toLowerCase();
+        List<Product> products = handler.getProducts();
+        for(int i = 0; i<products.size(); i++){
+            if (products.get(i).getName().toLowerCase().contains(input)){
+                System.out.println(products.get(i).getName());
+            }
         }
     }
 
