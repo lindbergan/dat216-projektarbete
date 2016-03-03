@@ -118,7 +118,7 @@
                   <graphic>
                     <ImageView fitHeight="102.0" fitWidth="157.0" pickOnBounds="false" preserveRatio="true">
                       <image>
-                        <Image url="@../pictures/IMat.png" />
+                        <Image url="@../images/IMat-logga.png" />
                       </image>
                     </ImageView>
                   </graphic>
@@ -130,9 +130,9 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="43.0" prefWidth="656.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="81.0">
               <children>
-                <Button fx:id="deliveryButton" mnemonicParsing="false" onAction="#DeliveryButtonPushed" prefHeight="27.0" prefWidth="190.0" text="Leverans" />
-                <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#PaymentButtonPushed" prefHeight="26.6015625" prefWidth="190.0" text="Betalning" />
-                <Button fx:id="confirmationButton" mnemonicParsing="false" onAction="#ConfirmationButtonPushed" prefHeight="27.0" prefWidth="190.0" text="Genomför köp" />
+                <ToggleButton fx:id="deliveryButton" mnemonicParsing="false" prefHeight="26.6015625" prefWidth="190.0" text="Leverans" />
+                <ToggleButton fx:id="paymentButton" mnemonicParsing="false" prefHeight="26.6015625" prefWidth="190.0" text="Betalning" />
+                <ToggleButton fx:id="confirmationButton" mnemonicParsing="false" prefHeight="26.6015625" prefWidth="190.0" text="Genomför köp" />
               </children>
             </HBox>
           </children>

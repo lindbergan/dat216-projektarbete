@@ -1,2 +1,2 @@
-#Wed Mar 02 12:26:02 CET 2016
-URL=/fxml/categoryMenu.fxml/
+#Thu Mar 03 21:20:58 CET 2016
+URL=/fxml/shopView.fxml/

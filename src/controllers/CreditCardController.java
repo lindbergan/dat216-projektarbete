@@ -4,7 +4,10 @@ package controllers;
  * Created by Jolo on 2/26/16.
  */
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +26,6 @@ import java.util.ResourceBundle;
 
 public class CreditCardController implements Initializable {
 
-    private static boolean visited = false;
     final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     @FXML
@@ -46,21 +48,18 @@ public class CreditCardController implements Initializable {
     private ChoiceBox cardYearChoiseBox;
     @FXML
     private ChoiceBox cardMonthChoiseBox;
+    @FXML private Button continueButton;
     private ObservableList<String> cardYear = FXCollections.observableArrayList("16", "17", "18", "19", "20", "21", "22");
     private ObservableList<String> cardMonth = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
     private CreditCard creditCard = handler.getCreditCard();
     private ViewChanger viewChanger = new ViewChanger();
+    private static boolean allFieldsFilled = false;
 
-    public static boolean hasBeenVisited() {
-        return visited;
-    }
+
 
     @Override
-    //sets the radiobuttons, visa = default choise
     public void initialize(URL url, ResourceBundle rb) {
 
-        //makes sure that it has been visited in order to be able to jump pass it from the buttons in the header
-        visited = true;
 
         //initialize the fields
         initTextFields();
@@ -68,14 +67,15 @@ public class CreditCardController implements Initializable {
         initRadioButtons();
 
         //listen to all the fields user can change
-        this.listenToTextField();
-        this.listenToChoiseboxes();
+        listenToTextField();
+        listenToChoiseboxes();
+        listenToRadioButtons();
     }
 
     public void initTextFields() {
         cardHolderName.setText(creditCard.getHoldersName());
         creditCardNumbr.setText(creditCard.getCardNumber());
-        cvv.setText("" + creditCard.getVerificationCode()); //dont know why i cant reach toString()
+        cvv.setText(creditCard.getVerificationCode() + ""); //dont know why i cant reach toString()
     }
 
     public void initiChoiseBoxes() {
@@ -83,8 +83,8 @@ public class CreditCardController implements Initializable {
         cardMonthChoiseBox.setItems(cardMonth);
 
         //get the value from previous session
-        cardYearChoiseBox.getSelectionModel().select(creditCard.getValidYear());
-        cardMonthChoiseBox.getSelectionModel().select(creditCard.getValidMonth());
+        cardYearChoiseBox.setValue(cardYear.get(creditCard.getValidYear()));
+        cardMonthChoiseBox.setValue(cardMonth.get(creditCard.getValidMonth()));
     }
 
     public void initRadioButtons() {
@@ -98,11 +98,13 @@ public class CreditCardController implements Initializable {
 
     public void setDefaultRadioButton() {
 
-        if (creditCard.getCardType() == "mastercard") {
-            mastercard.isSelected();
-        } else if (creditCard.getCardType() == "other") {
-            other.isSelected();
-        } else {
+        if (creditCard.getCardType().contains("mastercard")) {
+            mastercard.setSelected(true);
+        }
+        else if (creditCard.getCardType().contains("other")) {
+            other.setSelected(true);
+        }
+        else {
             visa.setSelected(true);
         }
     }
@@ -130,7 +132,6 @@ public class CreditCardController implements Initializable {
         cvv.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
                 creditCard.setVerificationCode(Integer.parseInt(newValue));
             }
         });
@@ -150,45 +151,57 @@ public class CreditCardController implements Initializable {
         cardMonthChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                creditCard.setValidYear(newValue.intValue());
+                creditCard.setValidMonth(newValue.intValue());
+            }
+        });
+    }
+
+    public void listenToRadioButtons() {
+
+        //to detemine which radiobutton was chosen
+        radioButtonGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+
+                if (newValue == visa) {
+                    creditCard.setCardType("visa");
+                }
+                else if (newValue == mastercard) {
+                    creditCard.setCardType("mastercard");
+                }
+                else{
+                    creditCard.setCardType("other");
+                }
             }
         });
     }
 
     //back to deliveryView when clicked "go back" <--
-    public void backToDeliveryClicked(ActionEvent event) throws IOException {
-
+    public void backToDeliveryClicked() throws IOException {
         viewChanger.changeScene(paymentViewCard, "/fxml/DeliveryView.fxml");
-        /*
-        AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
-        paymentViewCard.getChildren().setAll(deliveryView);
-*/
     }
 
     //gives us the confirmation view when clicked "continue" -->
     public void continueClicked() throws IOException {
 
-        creditCard.setCardType(radioButtonGroup.getSelectedToggle().toString());
-        //sends the radiobutton info to iMatHandler
-
-        /*
-        if(visa.isSelected()){
-            creditCard.setCardType("visa");
+        checkIfAllFieldsFilled();
+        if(allFieldsFilled) {
+            viewChanger.changeScene(paymentViewCard, "/fxml/ConfirmationView.fxml");
         }
-        else if(mastercard.isSelected()){
-            creditCard.setCardType("mastercard");
+    }
+
+    public void checkIfAllFieldsFilled() {
+        if (cardHolderName != null && !cardHolderName.getText().isEmpty() && creditCardNumbr != null &&
+                !creditCardNumbr.getText().isEmpty() && cvv != null && !cvv.getText().isEmpty()
+                && cardYearChoiseBox != null && cardMonthChoiseBox != null) {
+
+            allFieldsFilled = true;
         }
-        else{
-            creditCard.setCardType("other");
+        else {
+            allFieldsFilled = false;
         }
-
-
-        */
-        viewChanger.changeScene(paymentViewCard, "/fxml/ConfirmationView.fxml");
-
-        /*
-        AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
-        paymentViewCard.getChildren().setAll(confirmationView);
-        */
+    }
+    public static boolean getAllFieldsFilled(){
+        return allFieldsFilled;
     }
 }

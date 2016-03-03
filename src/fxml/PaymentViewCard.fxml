@@ -51,6 +51,6 @@
       </tooltip>
     </Button>
     <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="34.0" prefWidth="131.0" text="Tillbaka" />
-    <Button defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0" text="Fortsätt" />
+    <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0" text="Fortsätt" />
   </children>
 </AnchorPane>

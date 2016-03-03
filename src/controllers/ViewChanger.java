@@ -34,10 +34,11 @@ public class ViewChanger {
         stage.show();
     }
 
+    //Change stage avd override to specified Resolution : 1280x720
     public void changeStageOverride(ActionEvent event, String url) throws IOException {
 
         Parent parent = FXMLLoader.load(getClass().getResource(url));
-        Scene scene = new Scene(parent, parent.prefWidth(1280.0), parent.prefHeight(720.0)); // Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+        Scene scene = new Scene(parent, parent.prefWidth(1280.0), parent.prefHeight(720.0));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.hide();
         stage.setScene(scene);
