@@ -159,6 +159,7 @@ public class categoryMenuController implements Initializable {
                 img.setFitWidth(newButton.getPrefWidth());
                 img.setFitHeight(newButton.getPrefHeight()*0.6);
                 img.setEffect(new DropShadow(8, Color.BEIGE));
+                newButton.getStyleClass().add("productButton");
                 newButton.setGraphic(img);
                 Label txt = new Label(productCategories[magicalNr]);
                 txt.setFont(hideThis.getFont());
