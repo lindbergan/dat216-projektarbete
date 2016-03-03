@@ -96,6 +96,14 @@ public class IMatController implements Initializable {
         initButtons();
         initListView();
         listProperty = listView;
+        try {
+            FileOutputStream clear = new FileOutputStream("search.txt");
+            prop.setProperty("input", "");
+            prop.store(clear, null);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
 
         searchField.textProperty().addListener(new ChangeListener<String>() {
             @Override
