@@ -70,7 +70,5 @@ public abstract class ProductView {
                 productList = handler.getProducts();
         }
     }
-    public List<Product> getPL(){
-        return productList;
-    }
+
 }
