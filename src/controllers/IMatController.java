@@ -8,9 +8,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import properties.CategoryListCell;
@@ -252,13 +255,24 @@ public class IMatController implements Initializable {
         }
     }
     public void search(){
-        String input = searchField.getText().toLowerCase();
-        List<Product> products = handler.getProducts();
-        for(int i = 0; i<products.size(); i++){
-            if (products.get(i).getName().toLowerCase().contains(input)){
-                System.out.println(products.get(i).getName());
-            }
+        try {
+            AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/searchView.fxml/"));
+            content.getChildren().setAll(e);
         }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        String input = searchField.getText().toLowerCase();
+        Properties prop = new Properties();
+        try {
+            FileOutputStream out = new FileOutputStream("search.txt");
+            prop.setProperty("input", input);
+            prop.store(out, null);
+        }
+        catch(Exception e){
+            e.getStackTrace();
+        }
+
     }
 
 
