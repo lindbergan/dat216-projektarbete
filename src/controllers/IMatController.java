@@ -46,20 +46,37 @@ public class IMatController implements Initializable {
     @FXML
     private MenuButton listMenu;
     @FXML
-    private AnchorPane bp1iMatCategoryAP;
-    @FXML
     private MenuItem totalMenu;
     @FXML
     private ListView<String> listView;
-    public static ListView<String> listProperty;
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     categoryMenuController categoryHandler = new categoryMenuController();
+
     private boolean isShopView;
     private MenuItem temp;
 
+    /***
+     *
+     * 'Here lies the static variables
+     * They shall remain unknown but be essential for the war to come'
+     * contentProperty = getter för content
+     * listProperty = getter för listView
+     *
+     */
+
+    public static ListView<String> listProperty;
+    public static AnchorPane contentProperty;
+
+    /**
+     *
+     * Används för att vi ska kunna få deras storlek även när vi inte är i fönstret i fråga
+     *
+     */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        contentProperty = content;
         setImage();
         start();
         initToggleButtons();
