@@ -88,7 +88,7 @@
                         </HBox>
                         <StackPane layoutX="597.0" layoutY="23.0" prefHeight="29.0" prefWidth="381.0">
                             <children>
-                                <TextField fx:id="searchField" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="29.0" prefWidth="327.0" promptText="Sök efter artiklar">
+                                <TextField fx:id="searchField" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#search" pickOnBounds="false" prefHeight="29.0" prefWidth="327.0" promptText="Sök efter artiklar">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
