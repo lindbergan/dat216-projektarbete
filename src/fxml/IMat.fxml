@@ -88,12 +88,12 @@
                         </HBox>
                         <StackPane layoutX="597.0" layoutY="23.0" prefHeight="29.0" prefWidth="381.0">
                             <children>
-                                <TextField focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="29.0" prefWidth="327.0" promptText="Sök efter artiklar">
+                                <TextField fx:id="searchField" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="29.0" prefWidth="327.0" promptText="Sök efter artiklar">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
                                 </TextField>
-                                <Button alignment="CENTER" mnemonicParsing="false" text="Sök" StackPane.alignment="CENTER_RIGHT" />
+                                <Button fx:id="searchButton" alignment="CENTER" mnemonicParsing="false" onAction="#search" text="Sök" StackPane.alignment="CENTER_RIGHT" />
                             </children>
                         </StackPane>
                         <Button fx:id="helpButton" layoutX="1208.0" layoutY="17.0" mnemonicParsing="false" opacity="0.74" prefHeight="25.0" prefWidth="25.0" text="?">
