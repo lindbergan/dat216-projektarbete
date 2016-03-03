@@ -1,15 +1,20 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
@@ -27,7 +32,6 @@ public class IMatController implements Initializable {
     public AnchorPane content;
     @FXML
     public ImageView imageView1;
-    IMatDataHandler handler = IMatDataHandler.getInstance();
     @FXML
     private MenuButton cartMenuButton;
     @FXML
@@ -46,6 +50,13 @@ public class IMatController implements Initializable {
     private AnchorPane bp1iMatCategoryAP;
     @FXML
     private MenuItem totalMenu;
+    @FXML
+    private ListView<String> listView;
+    public static ListView<String> listProperty;
+
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    categoryMenuController categoryHandler = new categoryMenuController();
+    SelectedCategoryMenuController category = new SelectedCategoryMenuController();
     private Stage helpStage;
     private boolean isShopView;
     private MenuItem temp;
@@ -59,6 +70,38 @@ public class IMatController implements Initializable {
         ifNoFavorites();
         ifNoLists();
         initButtons();
+        initListView();
+        listProperty = listView;
+    }
+
+    public ListView<String> getListProperty() {
+        return listProperty;
+    }
+
+    public void initListView() {
+        ObservableList<String> categories = FXCollections.observableArrayList(categoryHandler.getProductCategories());
+        listView.setItems(categories);
+        listView.getSelectionModel().selectedItemProperty().addListener(e -> {
+            try {
+                Properties prop = new Properties();
+                FileOutputStream out = new FileOutputStream("products.txt");
+                prop.setProperty("category", listView.getSelectionModel().getSelectedItem());
+                prop.store(out, null);
+                goToCategoryMenu();
+                categoryHandler.setPane();
+            }
+            catch (IOException ee) {
+                ee.printStackTrace();
+            }
+        });
+        listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> list) {
+                return new CategoryListCell();
+            }
+        });
+        double height = categoryHandler.getProductCategories().length * 40;
+        listView.setPrefHeight(height);
     }
 
     public void ifNoFavorites() {

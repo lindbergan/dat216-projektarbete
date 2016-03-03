@@ -44,7 +44,6 @@ public class SelectedCategoryMenuController implements Initializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     public void buyItem(ActionEvent e) {
@@ -191,7 +190,6 @@ public class SelectedCategoryMenuController implements Initializable {
             }
             int rowNrAgain = 0;
             double magicalHeight = 0.0;
-            int magicalIdNr = 0;
             int adrianplz = 0;
             for (int i = 0; i < productListSize - 1; i += 4) {
                 for (int j = 0; j < 4; j++) {
@@ -207,7 +205,6 @@ public class SelectedCategoryMenuController implements Initializable {
                     newButton.setGraphic(img);
 
                     BuyButton newBottomButton = new BuyButton("Köp", productList.get(adrianplz).getProductId());
-                    // Button newBottomButton = new Button("Köp");
                     newBottomButton.setPrefWidth(75);
                     newBottomButton.setPrefHeight(35);
                     newBottomButton.toFront();
@@ -217,7 +214,6 @@ public class SelectedCategoryMenuController implements Initializable {
                     newBottomButton.setOnAction(this::buyItem);
 
                     Label txt = new Label(productList.get(adrianplz).getName());
-                    // txt.setPrefSize(75,75);
                     txt.setTextFill(exampleText.getTextFill());
                     txt.setFont(exampleText.getFont());
 
@@ -225,7 +221,6 @@ public class SelectedCategoryMenuController implements Initializable {
                     panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
                     panelLayout.setAlignment(txt, Pos.TOP_CENTER);
                     gridPane123.add(panelLayout, j, rowNrAgain);
-                    magicalIdNr++;
                     if (adrianplz < productListSize - 1) {
                         adrianplz = adrianplz + 1;
                     } else break;

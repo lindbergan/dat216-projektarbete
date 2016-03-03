@@ -23,10 +23,19 @@ public class categoryMenuController implements Initializable {
     public AnchorPane bp1CategoryAP;
     @FXML
     public AnchorPane categoryMenuAP;
-    SelectedCategoryMenuController categoryHandler = new SelectedCategoryMenuController();
+
+    public String[] productCategories = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk"
+            , "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
+
+    public static AnchorPane categoryMenuAPproperty;
+
+    public String[] getProductCategories() {
+        return productCategories;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        categoryMenuAPproperty = categoryMenuAP;
         showProductCategories();
     }
 
@@ -47,15 +56,13 @@ public class categoryMenuController implements Initializable {
     public void setPane() {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/SelectedCategoryMenu.fxml/"));
-            categoryMenuAP.getChildren().setAll(e);
+            categoryMenuAPproperty.getChildren().setAll(e);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void showProductCategories() {
-        String[] productCategories = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk"
-                , "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
 
         int categoryListSize = productCategories.length;
         int rowNr = 0;
