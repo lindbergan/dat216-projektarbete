@@ -3,16 +3,20 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import properties.BuyButton;
 import se.chalmers.ait.dat215.project.*;
 
 import java.io.FileReader;
@@ -36,6 +40,8 @@ public class SelectedCategoryMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         exampleText.setVisible(false);
+        gridPane123.setVgap(10);
+        gridPane123.setPadding(new Insets(10, 0, 0, 0));
         try {
             Properties prop = new Properties();
             InputStreamReader in = new FileReader("products.txt");
@@ -193,15 +199,16 @@ public class SelectedCategoryMenuController implements Initializable {
             int adrianplz = 0;
             for (int i = 0; i < productListSize - 1; i += 4) {
                 for (int j = 0; j < 4; j++) {
-                    String url = "/controllers/images/" + productList.get(adrianplz).getImageName();
+                    String url = "/products/images/" + productList.get(adrianplz).getImageName();
                     Button newButton = new Button();
                     newButton.setPrefWidth(200);
                     newButton.setPrefHeight(240);
                     newButton.setPickOnBounds(false);
                     newButton.setFocusTraversable(false);
                     ImageView img = new ImageView(new Image(url));
-                    img.setFitWidth(200);
-                    img.setFitHeight(240);
+                    img.setFitWidth(newButton.getPrefWidth());
+                    img.setFitHeight(newButton.getPrefHeight()*0.6);
+                    img.setEffect(new DropShadow(8, Color.BEIGE));
                     newButton.setGraphic(img);
 
                     BuyButton newBottomButton = new BuyButton("Köp", productList.get(adrianplz).getProductId());
@@ -212,6 +219,7 @@ public class SelectedCategoryMenuController implements Initializable {
                     newBottomButton.setPickOnBounds(false);
                     newBottomButton.setFocusTraversable(false);
                     newBottomButton.setOnAction(this::buyItem);
+                    newBottomButton.setStyle("-fx-background-color:green;");
 
                     Label txt = new Label(productList.get(adrianplz).getName());
                     txt.setTextFill(exampleText.getTextFill());

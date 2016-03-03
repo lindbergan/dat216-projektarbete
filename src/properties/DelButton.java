@@ -1,14 +1,15 @@
-package controllers;
+package properties;
 
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 
 /**
  * Created by Razmus on 2016-02-28.
  */
-public class CartTextField extends TextField {
+public class DelButton extends Button {
     private int row;
 
-    public CartTextField(int r) {
+    public DelButton(String s, int r) {
+        setText(s);
         this.row = r;
     }
 
