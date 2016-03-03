@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -209,7 +210,10 @@ public class SelectedCategoryMenuController implements Initializable {
                     img.setFitWidth(newButton.getPrefWidth());
                     img.setFitHeight(newButton.getPrefHeight()*0.6);
                     img.setEffect(new DropShadow(8, Color.BEIGE));
+                    newButton.getStyleClass().add("productButton");
+                    img.getStyleClass().add("productImage");
                     newButton.setGraphic(img);
+
 
                     BuyButton newBottomButton = new BuyButton("Köp", productList.get(adrianplz).getProductId());
                     newBottomButton.setPrefWidth(75);
@@ -219,7 +223,7 @@ public class SelectedCategoryMenuController implements Initializable {
                     newBottomButton.setPickOnBounds(false);
                     newBottomButton.setFocusTraversable(false);
                     newBottomButton.setOnAction(this::buyItem);
-                    newBottomButton.setStyle("-fx-background-color:green;");
+                    newBottomButton.getStyleClass().add("buyButton");
 
                     Label txt = new Label(productList.get(adrianplz).getName());
                     txt.setTextFill(exampleText.getTextFill());
@@ -228,6 +232,7 @@ public class SelectedCategoryMenuController implements Initializable {
                     StackPane panelLayout = new StackPane(newButton, newBottomButton, txt);
                     panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
                     panelLayout.setAlignment(txt, Pos.TOP_CENTER);
+                    panelLayout.setMargin(newBottomButton, new Insets(0, 0, 5, 0));
                     gridPane123.add(panelLayout, j, rowNrAgain);
                     if (adrianplz < productListSize - 1) {
                         adrianplz = adrianplz + 1;

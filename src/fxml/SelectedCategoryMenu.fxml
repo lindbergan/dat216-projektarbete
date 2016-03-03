@@ -8,7 +8,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="bp1CategoryAP" maxHeight="1.7976931348623157E308"
             maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="1000.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="controllers.SelectedCategoryMenuController">
+            fx:controller="controllers.SelectedCategoryMenuController" stylesheets="/css/stylesheet.css">
     <children>
         <Text layoutX="393.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produkt kategori">
             <font>

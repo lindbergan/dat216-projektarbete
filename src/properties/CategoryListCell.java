@@ -21,14 +21,14 @@ public class CategoryListCell extends ListCell<String> {
         Label l = new Label(item);
         Label l2 = new Label();
 
-        l2.setGraphic(new Rectangle(75, 50, Color.AQUAMARINE));
+        l2.setGraphic(new Rectangle(75, 50, Color.WHITESMOKE));
 
         StackPane sp = new StackPane(l, l2);
         sp.setPrefWidth(handler.getListProperty().getWidth() * 0.75);
         sp.setPrefHeight(handler.getListProperty().getHeight()*0.075);
         sp.setAlignment(l, Pos.CENTER_LEFT);
         sp.setAlignment(l2, Pos.CENTER_RIGHT);
-        setPadding(new Insets(5, 0, 0, 0));
+        setPadding(new Insets(0, 0, 0, 10));
         setGraphic(sp);
     }
 

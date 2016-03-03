@@ -55,8 +55,6 @@ public class IMatController implements Initializable {
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     categoryMenuController categoryHandler = new categoryMenuController();
-    SelectedCategoryMenuController category = new SelectedCategoryMenuController();
-    private Stage helpStage;
     private boolean isShopView;
     private MenuItem temp;
 
