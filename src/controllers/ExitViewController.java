@@ -7,7 +7,6 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +23,8 @@ public class ExitViewController implements Initializable {
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
     private ShoppingCart cart = handler.getShoppingCart();
+    private ViewChanger viewChanger = new ViewChanger();
+
     @FXML
     private AnchorPane exitView;
     @FXML
@@ -32,7 +33,7 @@ public class ExitViewController implements Initializable {
     private Label customerDate;
     @FXML
     private Button receipts;
-    private ViewChanger viewChanger = new ViewChanger();
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

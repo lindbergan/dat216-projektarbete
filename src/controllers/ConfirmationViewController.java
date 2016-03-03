@@ -15,9 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import se.chalmers.ait.dat215.project.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ConfirmationViewController implements Initializable {
@@ -48,41 +46,45 @@ public class ConfirmationViewController implements Initializable {
     private Label customerPaymentChoise;
     @FXML private Label price;
 
-    private List<String> shoppingcartToString  = new ArrayList<String>();
-    private ObservableList<String> testList = FXCollections.observableArrayList("a","b","c","d","a","b","c","d","a","b","c","d","a","b","c","d");
-    private ObservableList<String> listViewList = FXCollections.observableArrayList(shoppingcartToString); //"a","b","c","d","a","b","c","d","a","b","c","d","a","b","c","d"
-    private double totalItemCost;
+    private ObservableList<String> listViewList = FXCollections.observableArrayList("");
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         initTextFields();
-        //setShoppingCartSummary();
+        initShoppingCartSummary();
         setTotalPrice();
-
-        constructListViewList();
-        //vill ta in en hel lista, måste skapa denna lista innan
-        //shoppingCartSummary.setItems(listViewList);
-
-
-
     }
 
-    public void constructListViewList(){
+    public void initShoppingCartSummary(){
 
         for(Iterator<ShoppingItem> ite = cartItems.iterator(); ite.hasNext(); ) {
 
             ShoppingItem thisItem = ite.next();
             double totalItemCost = thisItem.getAmount()*thisItem.getProduct().getPrice();
 
-            listViewList.add(thisItem.getProduct().getName() + "                                        " + thisItem.getProduct().getPrice() + ":-" + " * " + thisItem.getAmount() + " " +thisItem.getProduct().getUnit() +"                                 " + totalItemCost + ":-");
-        }
 
-        for(int i = 0; i<listViewList.size(); i++){
-            System.out.println(listViewList.get(i));
+            listViewList.add(getStringSpacingOne(thisItem.getProduct().getName()) +
+                    getStringSpacingTwo(thisItem.getAmount() + " * " + thisItem.getProduct().getPrice() +
+                            " " + thisItem.getProduct().getUnit()) +totalItemCost + ":-");
         }
         shoppingCartSummary.setItems(listViewList);
+    }
+
+    public String getStringSpacingOne(String str){
+
+        while(str.length()<40){
+            str = str + " ";
+        }
+        return str;
+    }
+    public String getStringSpacingTwo(String str){
+
+        while(str.length()<50){
+            str = str + " ";
+        }
+        return str;
     }
 
     public void initTextFields() {

@@ -21,16 +21,20 @@ import java.util.ResourceBundle;
 //OBS: Detta är main-controllern OCH controllern för DeliveryView:n. Inte optimalt att ha dem sammanslagna, men lyckades inte ta mig runt detta.
 public class DeliveryViewController implements Initializable {
 
+
     private static String userSpecifiedMonth;
     private static String userSpecifiedDate;
     private static String userSpecifiedMinTime;
     private static String userSpecifiedMaxTime;
-    private static String paymentChoise = "Kortbetalning"; //default set to card
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-    final ToggleGroup headerButtonGroup = new ToggleGroup();
+    private static String paymentChoise = "Kortbetalning";
+
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
     private CreditCard creditCard = handler.getCreditCard();
+    private ViewChanger viewChanger = new ViewChanger();
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
+    final ToggleGroup headerButtonGroup = new ToggleGroup();
+
     @FXML
     private AnchorPane deliveryView;
     @FXML
@@ -63,6 +67,7 @@ public class DeliveryViewController implements Initializable {
     @FXML private ToggleButton paymentButton;
     @FXML private ToggleButton confirmationButton;
 
+
     //the observable lists for the Choiseboxes
     private ObservableList<String> month = FXCollections.observableArrayList("Januari", "Februari", "Mars",
             "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December");
@@ -75,8 +80,9 @@ public class DeliveryViewController implements Initializable {
     private ObservableList<String> maxTime = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05",
             "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
             "23", "24");
+
     private static boolean allFieldsFilled = false;
-    private ViewChanger viewChanger = new ViewChanger();
+    private boolean firstTimeRun = true;
 
 
     //The getters for our custom choisboxes and radiobuttons:
@@ -101,7 +107,6 @@ public class DeliveryViewController implements Initializable {
     }
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -115,7 +120,7 @@ public class DeliveryViewController implements Initializable {
         listenToTextField();
         listenToChoiseboxes();
         listenToRadioButtons();
-        //listenToToggleButtons();
+        listenToToggleButtons();
     }
 
     public void initTextFields() {
@@ -166,12 +171,17 @@ public class DeliveryViewController implements Initializable {
 
     //sets the ToggleButtons to the same group and activates the default button (i.e "delivery")
     public void initToggleButtons(){
-        deliveryButton.setToggleGroup(headerButtonGroup);
-        paymentButton.setToggleGroup(headerButtonGroup);
-        confirmationButton.setToggleGroup(headerButtonGroup);
 
+        /*
+        if(firstTimeRun) {
+            deliveryButton.setToggleGroup(headerButtonGroup);
+            paymentButton.setToggleGroup(headerButtonGroup);
+            confirmationButton.setToggleGroup(headerButtonGroup);
+            firstTimeRun=false;
+        }
+        */
         //set the default
-        deliveryButton.setSelected(true);
+        //deliveryButton.setSelected(true);
     }
 
     //Changelisteners for the ToggleButtons
@@ -180,7 +190,6 @@ public class DeliveryViewController implements Initializable {
         headerButtonGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-
             }
         });
     }
@@ -334,7 +343,7 @@ public class DeliveryViewController implements Initializable {
     public void PaymentButtonPushed() throws IOException {
 
         continueClicked();
-        /*
+
         allFieldsFilledIn();
         if (allFieldsFilled) {
 
@@ -344,9 +353,9 @@ public class DeliveryViewController implements Initializable {
             else {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
             }
-        } */
-   /* }
-/*
+        }
+    }
+
     public void ConfirmationButtonPushed() throws IOException {
         //makes sure that the customer has been to InvoiceView or CardView before entering ConfirmationView.
             viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
@@ -358,7 +367,6 @@ public class DeliveryViewController implements Initializable {
 
     public void checkIfAllFieldsFilledIn() {
 
-        /*
         if(customerFirstName != null && !customerFirstName.getText().isEmpty() && customerLastName!= null
                 && !customerLastName.getText().isEmpty() && customerAddress != null &&
                 !customerAddress.getText().isEmpty() && customerPostCode != null &&
@@ -369,10 +377,8 @@ public class DeliveryViewController implements Initializable {
 
             allFieldsFilled = true;
         }
-        else{
-            allFieldsFilled =false;
+        else {
+            allFieldsFilled = false;
         }
-        */
-        allFieldsFilled=true;
     }
 }

@@ -20,8 +20,10 @@ import java.util.ResourceBundle;
 
 public class InvoiceController implements Initializable {
 
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    private ViewChanger viewChanger = new ViewChanger();
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
+
     @FXML
     private AnchorPane paymentViewInvoice;
     @FXML
@@ -43,7 +45,6 @@ public class InvoiceController implements Initializable {
     private TextField invoiceEmail;
     @FXML
     private TextField invoicePhone;
-    private ViewChanger viewChanger = new ViewChanger();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

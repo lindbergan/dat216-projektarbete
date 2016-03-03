@@ -4,14 +4,10 @@ package controllers;
  * Created by Jolo on 2/26/16.
  */
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -26,8 +22,11 @@ import java.util.ResourceBundle;
 
 public class CreditCardController implements Initializable {
 
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    private CreditCard creditCard = handler.getCreditCard();
+    private ViewChanger viewChanger = new ViewChanger();
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
+
     @FXML
     private MenuBar menuBar;
     @FXML
@@ -49,17 +48,15 @@ public class CreditCardController implements Initializable {
     @FXML
     private ChoiceBox cardMonthChoiseBox;
     @FXML private Button continueButton;
+
     private ObservableList<String> cardYear = FXCollections.observableArrayList("16", "17", "18", "19", "20", "21", "22");
     private ObservableList<String> cardMonth = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-    private CreditCard creditCard = handler.getCreditCard();
-    private ViewChanger viewChanger = new ViewChanger();
-    private static boolean allFieldsFilled = false;
 
+    private static boolean allFieldsFilled = false;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
 
         //initialize the fields
         initTextFields();
@@ -75,7 +72,7 @@ public class CreditCardController implements Initializable {
     public void initTextFields() {
         cardHolderName.setText(creditCard.getHoldersName());
         creditCardNumbr.setText(creditCard.getCardNumber());
-        cvv.setText(creditCard.getVerificationCode() + ""); //dont know why i cant reach toString()
+        cvv.setText(creditCard.getVerificationCode() + ""); //vet inte varför jag inte kan nå toString()
     }
 
     public void initiChoiseBoxes() {
@@ -201,6 +198,7 @@ public class CreditCardController implements Initializable {
             allFieldsFilled = false;
         }
     }
+
     public static boolean getAllFieldsFilled(){
         return allFieldsFilled;
     }
