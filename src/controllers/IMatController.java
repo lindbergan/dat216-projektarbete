@@ -1,16 +1,24 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import properties.CategoryListCell;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import java.io.FileOutputStream;
@@ -18,16 +26,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class IMatController implements Initializable {
 
+    @FXML private Button searchButton;
+    @FXML private TextField searchField;
     @FXML
     public AnchorPane content;
     @FXML
     public ImageView imageView1;
-    IMatDataHandler handler = IMatDataHandler.getInstance();
     @FXML
     private MenuButton cartMenuButton;
     @FXML
@@ -43,14 +53,37 @@ public class IMatController implements Initializable {
     @FXML
     private MenuButton listMenu;
     @FXML
-    private AnchorPane bp1iMatCategoryAP;
-    @FXML
     private MenuItem totalMenu;
-    private Stage helpStage;
+    @FXML
+    private ListView<String> listView;
+
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    categoryMenuController categoryHandler = new categoryMenuController();
+
     private boolean isShopView;
+    private MenuItem temp;
+
+    /***
+     *
+     * 'Here lies the static variables
+     * They shall remain unknown but be essential for the war to come'
+     * contentProperty = getter för content
+     * listProperty = getter för listView
+     *
+     */
+
+    public static ListView<String> listProperty;
+    public static AnchorPane contentProperty;
+
+    /**
+     *
+     * Används för att vi ska kunna få deras storlek även när vi inte är i fönstret i fråga
+     *
+     */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        contentProperty = content;
         setImage();
         start();
         initToggleButtons();
@@ -58,6 +91,38 @@ public class IMatController implements Initializable {
         ifNoFavorites();
         ifNoLists();
         initButtons();
+        initListView();
+        listProperty = listView;
+    }
+
+    public ListView<String> getListProperty() {
+        return listProperty;
+    }
+
+    public void initListView() {
+        ObservableList<String> categories = FXCollections.observableArrayList(categoryHandler.getProductCategories());
+        listView.setItems(categories);
+        listView.getSelectionModel().selectedItemProperty().addListener(e -> {
+            try {
+                Properties prop = new Properties();
+                FileOutputStream out = new FileOutputStream("products.txt");
+                prop.setProperty("category", listView.getSelectionModel().getSelectedItem());
+                prop.store(out, null);
+                goToCategoryMenu();
+                categoryHandler.setPane();
+            }
+            catch (IOException ee) {
+                ee.printStackTrace();
+            }
+        });
+        listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> list) {
+                return new CategoryListCell();
+            }
+        });
+        double height = categoryHandler.getProductCategories().length * 40;
+        listView.setPrefHeight(height);
     }
 
     public void ifNoFavorites() {
@@ -163,7 +228,12 @@ public class IMatController implements Initializable {
         if (handler.getShoppingCart().getItems().size() != 0) {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
-                MenuItem temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                if(!cantBuyHalf(item.getProduct().getProductId())) {
+                    temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                }
+                if(cantBuyHalf(item.getProduct().getProductId())){
+                    temp = new MenuItem(item.getProduct().getName() + "     " + (int) item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                }
                 cartMenuButton.getItems().add(i, temp);
             }
         }
@@ -177,6 +247,10 @@ public class IMatController implements Initializable {
         }
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
+    }
+    public boolean cantBuyHalf(int i){
+        return handler.getProduct(i).getUnitSuffix().equals("st");
+
     }
 
     public void currentView() {
@@ -196,6 +270,26 @@ public class IMatController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void search(){
+        try {
+            AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/searchView.fxml/"));
+            content.getChildren().setAll(e);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        String input = searchField.getText().toLowerCase();
+        Properties prop = new Properties();
+        try {
+            FileOutputStream out = new FileOutputStream("search.txt");
+            prop.setProperty("input", input);
+            prop.store(out, null);
+        }
+        catch(Exception e){
+            e.getStackTrace();
+        }
+
     }
 
 

@@ -3,17 +3,28 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ProductCategory;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-public class categoryMenuController implements Initializable {
+public class categoryMenuController extends ProductView implements Initializable {
 
     @FXML
     public GridPane gridPane;
@@ -23,10 +34,22 @@ public class categoryMenuController implements Initializable {
     public AnchorPane bp1CategoryAP;
     @FXML
     public AnchorPane categoryMenuAP;
-    SelectedCategoryMenuController categoryHandler = new SelectedCategoryMenuController();
+    @FXML private Label hideThis;
+
+    public String[] productCategories = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk"
+            , "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
+
+    public static AnchorPane categoryMenuAPproperty;
+    private IMatDataHandler handler = IMatDataHandler.getInstance();
+
+    public String[] getProductCategories() {
+        return productCategories;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        categoryMenuAPproperty = categoryMenuAP;
+        hideThis.setVisible(false);
         showProductCategories();
     }
 
@@ -47,15 +70,16 @@ public class categoryMenuController implements Initializable {
     public void setPane() {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/SelectedCategoryMenu.fxml/"));
-            categoryMenuAP.getChildren().setAll(e);
+            categoryMenuAPproperty.getChildren().setAll(e);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void showProducts(String category) {
+        super.showProducts(category);
+    }
 
     public void showProductCategories() {
-        String[] productCategories = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk"
-                , "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
 
         int categoryListSize = productCategories.length;
         int rowNr = 0;
@@ -72,18 +96,31 @@ public class categoryMenuController implements Initializable {
         for (int i = 0; i < categoryListSize; i += 4) {
             for (int j = 0; j < 4; j++) {
 
-                Button newButton = new Button(productCategories[magicalNr]);
+                Button newButton = new Button();
                 newButton.setPrefWidth(200);
                 newButton.setPrefHeight(250);
+                showProducts(productCategories[magicalNr]);
+                String url = "/products/images/" + productList.get(2).getImageName();
+                ImageView img = new ImageView(new Image(url));
+                img.setFitWidth(newButton.getPrefWidth());
+                img.setFitHeight(newButton.getPrefHeight()*0.6);
+                img.setEffect(new DropShadow(8, Color.BEIGE));
+                newButton.getStyleClass().add("productButton");
+                newButton.setGraphic(img);
+                Label txt = new Label(productCategories[magicalNr]);
+                txt.setFont(hideThis.getFont());
+                txt.setTextFill(hideThis.getTextFill());
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
+                StackPane p = new StackPane(newButton,txt);
+                p.setAlignment(txt,Pos.TOP_CENTER);
                 newButton.setOnAction(e -> {
-                    if (!(newButton.getText() == null || newButton.getText().equals(""))) {
+                    if (!(txt.getText() == null || txt.getText().equals(""))) {
                         try {
                             Properties prop = new Properties();
 
                             FileOutputStream out = new FileOutputStream("products.txt");
-                            prop.setProperty("category", newButton.getText());
+                            prop.setProperty("category", txt.getText());
                             prop.store(out, null);
                             setPane();
                         } catch (Exception ex) {
@@ -91,8 +128,7 @@ public class categoryMenuController implements Initializable {
                         }
                     }
                 });
-
-                gridPane.add(newButton, j, rowNrAgain);
+                gridPane.add(p, j, rowNrAgain);
                 if (magicalNr < 10) {
                     magicalNr++;
                 }

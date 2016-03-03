@@ -13,8 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import properties.CartTextField;
+import properties.DelButton;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
@@ -30,14 +31,11 @@ import java.util.ResourceBundle;
  * Created by Razmus on 2016-02-21.
  */
 public class ShoppingCartController implements Initializable {
-    IMatController controller = new IMatController();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     ShoppingCart cart = handler.getShoppingCart();
 
     @FXML
     private AnchorPane cartPane;
-    @FXML
-    private Label itemUnit;
     @FXML
     private GridPane grid;
     @FXML
@@ -112,45 +110,41 @@ public class ShoppingCartController implements Initializable {
             e.getStackTrace();
         }
     }
+    public boolean isDouble(String s){
+        if(s.equals("0") || s.equals("0.0")){
+            s = "a";
+        }
+        try{
+            Double.parseDouble(s);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+    public boolean isInt(String s){
+        if(s.equals(0)){
+            s = "a";
+        }
+        try{
+            Integer.parseInt(s);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+    public void activateEnter(ActionEvent e){
+        refresh();
+    }
+    public boolean cantBuyHalf(int i){
+        return cart.getItems().get(i).getProduct().getUnitSuffix().equals("st");
+
+    }
 
     public ShoppingItem showItem(int i) {
         return handler.getShoppingCart().getItems().get(i);
     }
-
-    public void testAddItem() {
-        Product p = handler.getProduct(1);
-        cart.addItem(new ShoppingItem(p, 2));
-        cart.addItem(new ShoppingItem(handler.getProduct(3), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(4), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(6), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(29), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(99), 5));
-        cart.addItem(new ShoppingItem(handler.getProduct(12), 5));
-        refresh();
-
-
-    }
-    //ändra sökväg till er customer.txt fil, ändra den så den har fälten name =, adress=, samt city= på var sin rad, tryck sedan på till kassan
-    /*public void testFile(){
-        try {
-            Properties prop = new Properties();
-            InputStreamReader in = new FileReader("C:\\Users\\Razmus\\.dat215\\imat\\customer.txt");
-            prop.load(in);
-
-            FileOutputStream out = new FileOutputStream("C:\\Users\\Razmus\\.dat215\\imat\\customer.txt");
-            String hej = itemName.getText();
-            prop.setProperty("name", hej);
-            prop.setProperty("adress", hej);
-            prop.setProperty("city", hej);
-            prop.store(out, null);
-            price.setText(prop.getProperty("name"));
-
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }*/
 
 
     @Override
@@ -162,32 +156,64 @@ public class ShoppingCartController implements Initializable {
         for (int i = 0; i < handler.getShoppingCart().getItems().size(); i++) {
             grid.add(new Text(showItem(i).getProduct().getName()), 0, i);
             CartTextField temp = new CartTextField(i);
-            temp.setText("" + showItem(i).getAmount());
+            if(cantBuyHalf(temp.getRow())){
+                temp.setText("" +(int) showItem(i).getAmount());
+            }
+            if(!cantBuyHalf(temp.getRow())) {
+                temp.setText("" + showItem(i).getAmount());
+            }
             temp.setMaxSize(59, 31);
             temp.setOnMouseClicked(this::amountClicked);
-            temp.textProperty().addListener(new ChangeListener<String>() {
-                @Override
-                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    if (!temp.getText().isEmpty()) {
-                        cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
-                    }
-                }
-            });
-            temp.focusedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if (!newValue) {
-                        try {
-                            refresh();
-                        } catch (Exception e) {
+            if(!cantBuyHalf(temp.getRow())) {
 
+
+                temp.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        if (!isDouble(temp.getText())) {
+                            if (isDouble(oldValue)) {
+                                temp.setText(oldValue);
+                            } else temp.setText("1.0");
+                        } else if (!temp.getText().isEmpty()) {
+                            cart.getItems().get(temp.getRow()).setAmount(Double.parseDouble(newValue));
                         }
                     }
-                    if (temp.getText().isEmpty() || temp.getText().equals("0")) {
-                        temp.setText("1.0");
+                });
+            }
+            if(cantBuyHalf(temp.getRow())){
+                temp.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        if(!isInt(temp.getText())){
+                            if(isDouble(oldValue)){
+                                int old2 = (int)Double.parseDouble(oldValue);
+                                temp.setText(old2+"");
+
+
+                            }
+                            else temp.setText("1.0");
+                        } else if (!temp.getText().isEmpty()){
+                            cart.getItems().get(temp.getRow()).setAmount(Integer.parseInt(newValue));
+                        }
                     }
-                }
-            });
+                });
+            }
+                temp.focusedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                        if (!newValue) {
+                            try {
+                                refresh();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (!newValue && (temp.getText().isEmpty() || temp.getText().equals("0"))) {
+                            temp.setText("1.0");
+                        }
+                    }
+                });
+            temp.setOnAction(this :: activateEnter);
             grid.add(temp, 1, i);
             Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
             grid.add(suffix, 2, i);

@@ -1,0 +1,32 @@
+.buyButton {
+    -fx-background-color:#87CC87;
+    -fx-font-family:Verdana;
+    -fx-font-size:15;
+    -fx-border-width:0.5;
+    -fx-border-color:#116611;
+    -fx-border-style:solid;
+}
+
+.buyButton:hover {
+    -fx-background-color:#54AA54;
+    -fx-font-family:Verdana;
+    -fx-font-size:15;
+    -fx-border-width:0.5;
+    -fx-border-color:#116611;
+    -fx-border-style:solid;
+}
+
+.productButton {
+    -fx-background-color:#ffffff;
+    -fx-border-width:0.5;
+    -fx-border-color:#ccc;
+    -fx-border-style:solid;
+}
+
+.productButton:hover {
+
+}
+
+.productImage {
+
+}
