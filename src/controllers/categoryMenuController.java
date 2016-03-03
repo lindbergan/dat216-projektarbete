@@ -3,13 +3,24 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ProductCategory;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -23,11 +34,14 @@ public class categoryMenuController implements Initializable {
     public AnchorPane bp1CategoryAP;
     @FXML
     public AnchorPane categoryMenuAP;
+    @FXML private Label hideThis;
 
     public String[] productCategories = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk"
             , "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
 
     public static AnchorPane categoryMenuAPproperty;
+    private IMatDataHandler handler = IMatDataHandler.getInstance();
+    List<Product> productList;
 
     public String[] getProductCategories() {
         return productCategories;
@@ -36,6 +50,7 @@ public class categoryMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         categoryMenuAPproperty = categoryMenuAP;
+        hideThis.setVisible(false);
         showProductCategories();
     }
 
@@ -61,7 +76,63 @@ public class categoryMenuController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    public void showProducts(String category) {
+        switch (category) {
+            case "Baljväxter":
+                productList = handler.getProducts(ProductCategory.POD);
+                break;
+            case "Bröd":
+                productList = handler.getProducts(ProductCategory.BREAD);
+                break;
+            case "Frukt och grönt": {
+                productList = handler.getProducts(ProductCategory.FRUIT);
+                productList.addAll(handler.getProducts(ProductCategory.BERRY));
+                productList.addAll(handler.getProducts(ProductCategory.CITRUS_FRUIT));
+                productList.addAll(handler.getProducts(ProductCategory.EXOTIC_FRUIT));
+                productList.addAll(handler.getProducts(ProductCategory.VEGETABLE_FRUIT));
+                productList.addAll(handler.getProducts(ProductCategory.CABBAGE));
+                productList.addAll(handler.getProducts(ProductCategory.MELONS));
+            }
+            break;
+            case "Skafferi": {
+                productList = handler.getProducts(ProductCategory.FLOUR_SUGAR_SALT);
+            }
+            break;
+            case "Sötsaker och drycker": {
+                productList = handler.getProducts(ProductCategory.COLD_DRINKS);
+                productList.addAll(handler.getProducts(ProductCategory.SWEET));
+                productList.addAll(handler.getProducts(ProductCategory.HOT_DRINKS));
+            }
+            break;
+            case "Fisk": {
+                productList = handler.getProducts(ProductCategory.FISH);
+            }
+            break;
+            case "Kött": {
+                productList = handler.getProducts(ProductCategory.MEAT);
+            }
+            break;
+            case "Mejeri": {
+                productList = handler.getProducts(ProductCategory.DAIRIES);
+            }
+            break;
+            case "Nötter och frön": {
+                productList = handler.getProducts(ProductCategory.NUTS_AND_SEEDS);
+            }
+            break;
+            case "Pasta, potatis och ris": {
+                productList = handler.getProducts(ProductCategory.PASTA);
+                productList.addAll(handler.getProducts(ProductCategory.POTATO_RICE));
+            }
+            break;
+            case "Rotfrukter": {
+                productList = handler.getProducts(ProductCategory.ROOT_VEGETABLE);
+            }
+            break;
+            default:
+                productList = handler.getProducts();
+        }
+    }
     public void showProductCategories() {
 
         int categoryListSize = productCategories.length;
@@ -79,18 +150,30 @@ public class categoryMenuController implements Initializable {
         for (int i = 0; i < categoryListSize; i += 4) {
             for (int j = 0; j < 4; j++) {
 
-                Button newButton = new Button(productCategories[magicalNr]);
+                Button newButton = new Button();
                 newButton.setPrefWidth(200);
                 newButton.setPrefHeight(250);
+                showProducts(productCategories[magicalNr]);
+                String url = "/products/images/" + productList.get(2).getImageName();
+                ImageView img = new ImageView(new Image(url));
+                img.setFitWidth(newButton.getPrefWidth());
+                img.setFitHeight(newButton.getPrefHeight()*0.6);
+                img.setEffect(new DropShadow(8, Color.BEIGE));
+                newButton.setGraphic(img);
+                Label txt = new Label(productCategories[magicalNr]);
+                txt.setFont(hideThis.getFont());
+                txt.setTextFill(hideThis.getTextFill());
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
+                StackPane p = new StackPane(newButton,txt);
+                p.setAlignment(txt,Pos.TOP_CENTER);
                 newButton.setOnAction(e -> {
-                    if (!(newButton.getText() == null || newButton.getText().equals(""))) {
+                    if (!(txt.getText() == null || txt.getText().equals(""))) {
                         try {
                             Properties prop = new Properties();
 
                             FileOutputStream out = new FileOutputStream("products.txt");
-                            prop.setProperty("category", newButton.getText());
+                            prop.setProperty("category", txt.getText());
                             prop.store(out, null);
                             setPane();
                         } catch (Exception ex) {
@@ -98,8 +181,7 @@ public class categoryMenuController implements Initializable {
                         }
                     }
                 });
-
-                gridPane.add(newButton, j, rowNrAgain);
+                gridPane.add(p, j, rowNrAgain);
                 if (magicalNr < 10) {
                     magicalNr++;
                 }
