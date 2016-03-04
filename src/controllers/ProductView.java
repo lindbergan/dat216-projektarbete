@@ -1,8 +1,13 @@
 package controllers;
 
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
-import se.chalmers.ait.dat215.project.ProductCategory;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import properties.BuyButton;
+import se.chalmers.ait.dat215.project.*;
 
 import java.util.List;
 
@@ -12,6 +17,7 @@ import java.util.List;
 public abstract class ProductView {
     List<Product> productList;
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    ShoppingCart cart = handler.getShoppingCart();
 
     public void showProducts(String category){
         switch (category) {
@@ -69,6 +75,80 @@ public abstract class ProductView {
             default:
                 productList = handler.getProducts();
         }
+    }
+    public void buyItem(ActionEvent e) {
+        BuyButton bb = (BuyButton) e.getSource();
+        StackPane p = (StackPane) bb.getParent();
+
+        Button posButton = new Button("+");
+        Button negButton = new Button("-");
+        TextField tf = new TextField("1");
+        tf.setPrefWidth(50);
+        tf.setAlignment(Pos.CENTER);
+
+        p.getChildren().remove(bb);
+        incItem(bb.getProductId());
+
+        HBox hbox = new HBox(10, negButton, tf, posButton);
+        hbox.setAlignment(Pos.BOTTOM_CENTER);
+        p.getChildren().add(hbox);
+        p.setAlignment(hbox, Pos.BOTTOM_CENTER);
+
+        posButton.setOnAction(ee -> {
+            incItem(bb.getProductId());
+            int amount = Integer.parseInt(tf.getText());
+            amount++;
+            tf.setText(String.valueOf(amount));
+        });
+
+        negButton.setOnAction(ee -> {
+            int amount = Integer.parseInt(tf.getText());
+            if (amount < 2) {
+                hbox.getChildren().removeAll();
+                p.getChildren().removeAll();
+                hbox.setVisible(false);
+                p.getChildren().add(bb);
+                decItem(bb.getProductId());
+            } else {
+                amount--;
+                tf.setText(String.valueOf(amount));
+                decItem(bb.getProductId());
+            }
+        });
+
+
+    }
+    public void incItem(int idd) {
+        int id = idd;
+        int razzan = 0;
+        if (cart.getItems().size() == 0) {
+            cart.addItem((new ShoppingItem(handler.getProduct(id))));
+        } else
+            for (int i = 0; i < cart.getItems().size(); i++) {
+                if (cart.getItems().get(i).getProduct().getProductId() == id) {
+                    cart.getItems().get(i).setAmount(cart.getItems().get(i).getAmount() + 1);
+                } else {
+                    razzan = razzan + 1;
+                }
+
+            }
+        if (razzan == cart.getItems().size()) {
+            cart.addItem((new ShoppingItem(handler.getProduct(id))));
+        }
+    }
+    public void decItem(int idd) {
+        int id = idd;
+        if (cart.getItems().size() == 0) {
+            cart.addItem((new ShoppingItem(handler.getProduct(id))));
+        } else
+            for (int i = 0; i < cart.getItems().size(); i++) {
+                if (cart.getItems().get(i).getProduct().getProductId() == id) {
+                    if (cart.getItems().get(i).getAmount() > 1) {
+                        cart.getItems().get(i).setAmount(cart.getItems().get(i).getAmount() - 1);
+                    } else cart.getItems().remove(i);
+                }
+
+            }
     }
 
 }
