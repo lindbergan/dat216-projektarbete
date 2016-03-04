@@ -47,7 +47,7 @@
                     <RadioButton fx:id="cardPayment" layoutX="106.0" layoutY="491.0" mnemonicParsing="false" text="Kortbetalning" />
                     <RadioButton fx:id="invoicePayment" layoutX="106.0" layoutY="519.0" mnemonicParsing="false" text="Fakturabetalning" />
                     <Button layoutX="936.0" layoutY="518.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="33.0" prefWidth="125.0" text="Tillbaka till butik" />
-                    <Button defaultButton="true" layoutX="1082.0" layoutY="518.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="32.9609375" prefWidth="125.0" text="Fortsätt">
+                    <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="518.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="32.9609375" prefWidth="125.0" text="Fortsätt">
                       <tooltip>
                         <Tooltip text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" />
                       </tooltip>
@@ -99,6 +99,7 @@
                       </items>
                     </ChoiceBox>
                     <Label layoutX="1053.0" layoutY="389.0" text="och" />
+                    <Label fx:id="infoLabel" layoutX="796.0" layoutY="483.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" />
                   </children>
                 </Pane>
               </children>

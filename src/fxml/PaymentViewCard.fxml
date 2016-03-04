@@ -45,12 +45,14 @@
     </ChoiceBox>
     <Label layoutX="145.0" layoutY="419.0" text="CVV" />
     <TextField fx:id="cvv" layoutX="245.0" layoutY="414.0" prefHeight="27.0" prefWidth="51.0" />
-    <Button layoutX="310.0" layoutY="414.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" text="?">
+    <Button fx:id="helpButton" layoutX="310.0" layoutY="414.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#ifHelpButtonClicked" prefHeight="27.0" prefWidth="27.0" text="?">
       <tooltip>
         <Tooltip text="CVV är de tre sista siffrorna på baksidan av kortet" />
       </tooltip>
     </Button>
     <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="34.0" prefWidth="131.0" text="Tillbaka" />
     <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0" text="Fortsätt" />
+    <Label fx:id="infoLabel" layoutX="975.0" layoutY="472.0" prefWidth="238.0" text="Alla fält måste fyllas i för att kunna fortsätta" textFill="RED" />
+    <Label id="infoLabel" fx:id="cvvLabel" layoutX="358.0" layoutY="419.0" opacity="0.35" prefWidth="297.0" text="CVV är de tre sista siffrorna på baksidan av kortet" textFill="BLACK" visible="false" />
   </children>
 </AnchorPane>

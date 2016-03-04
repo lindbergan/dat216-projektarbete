@@ -48,11 +48,15 @@ public class CreditCardController implements Initializable {
     @FXML
     private ChoiceBox cardMonthChoiseBox;
     @FXML private Button continueButton;
+    @FXML private Label infoLabel;
+    @FXML private Button helpButton;
+    @FXML private Label cvvLabel;
 
     private ObservableList<String> cardYear = FXCollections.observableArrayList("16", "17", "18", "19", "20", "21", "22");
     private ObservableList<String> cardMonth = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
 
     private static boolean allFieldsFilled = false;
+    private boolean wasClickedBefore = false;
 
 
     @Override
@@ -67,6 +71,8 @@ public class CreditCardController implements Initializable {
         listenToTextField();
         listenToChoiseboxes();
         listenToRadioButtons();
+
+        checkIfAllFieldsFilled();
     }
 
     public void initTextFields() {
@@ -114,6 +120,7 @@ public class CreditCardController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 creditCard.setCardNumber(newValue);
+                checkIfAllFieldsFilled();
             }
         });
 
@@ -122,6 +129,7 @@ public class CreditCardController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 creditCard.setHoldersName(newValue);
+                checkIfAllFieldsFilled();
             }
         });
 
@@ -130,6 +138,7 @@ public class CreditCardController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 creditCard.setVerificationCode(Integer.parseInt(newValue));
+                checkIfAllFieldsFilled();
             }
         });
     }
@@ -142,6 +151,7 @@ public class CreditCardController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 creditCard.setValidYear(newValue.intValue());
+                checkIfAllFieldsFilled();
             }
         });
         //selected cardMonth
@@ -149,6 +159,7 @@ public class CreditCardController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 creditCard.setValidMonth(newValue.intValue());
+                checkIfAllFieldsFilled();
             }
         });
     }
@@ -180,11 +191,7 @@ public class CreditCardController implements Initializable {
 
     //gives us the confirmation view when clicked "continue" -->
     public void continueClicked() throws IOException {
-
-        checkIfAllFieldsFilled();
-        if(allFieldsFilled) {
             viewChanger.changeScene(paymentViewCard, "/fxml/ConfirmationView.fxml");
-        }
     }
 
     public void checkIfAllFieldsFilled() {
@@ -193,13 +200,31 @@ public class CreditCardController implements Initializable {
                 && cardYearChoiseBox != null && cardMonthChoiseBox != null) {
 
             allFieldsFilled = true;
+            continueButton.setDisable(false);
+            infoLabel.setVisible(false);
         }
         else {
             allFieldsFilled = false;
+            continueButton.setDisable(true);
+            infoLabel.setVisible(true);
         }
     }
 
     public static boolean getAllFieldsFilled(){
         return allFieldsFilled;
+    }
+
+    public void ifHelpButtonClicked(){
+
+        if(wasClickedBefore) {
+            helpButton.setDefaultButton(false);
+            cvvLabel.setVisible(false);
+            wasClickedBefore = false;
+        }
+        else{
+            helpButton.setDefaultButton(true);
+            cvvLabel.setVisible(true);
+            wasClickedBefore = true;
+        }
     }
 }

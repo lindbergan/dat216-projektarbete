@@ -66,6 +66,8 @@ public class DeliveryViewController implements Initializable {
     @FXML private ToggleButton deliveryButton;
     @FXML private ToggleButton paymentButton;
     @FXML private ToggleButton confirmationButton;
+    @FXML private Button continueButton;
+    @FXML private Label infoLabel;
 
 
     //the observable lists for the Choiseboxes
@@ -121,6 +123,8 @@ public class DeliveryViewController implements Initializable {
         listenToChoiseboxes();
         listenToRadioButtons();
         listenToToggleButtons();
+
+        checkIfAllFieldsFilledIn();
     }
 
     public void initTextFields() {
@@ -202,6 +206,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setFirstName(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -210,6 +215,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setLastName(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -218,6 +224,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setAddress(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -226,6 +233,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setPostCode(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -234,6 +242,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setPostAddress(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -242,6 +251,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setEmail(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -250,6 +260,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setPhoneNumber(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
     }
@@ -263,6 +274,7 @@ public class DeliveryViewController implements Initializable {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 int choiseBoxIndex = newValue.intValue();
                 userSpecifiedMonth = month.get(choiseBoxIndex);
+                checkIfAllFieldsFilledIn();
             }
         });
         //selected date
@@ -271,6 +283,7 @@ public class DeliveryViewController implements Initializable {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 int choiseBoxIndex = newValue.intValue();
                 userSpecifiedDate = date.get(choiseBoxIndex);
+                checkIfAllFieldsFilledIn();
             }
         });
         //selected minTime
@@ -279,6 +292,7 @@ public class DeliveryViewController implements Initializable {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 int choiseBoxIndex = newValue.intValue();
                 userSpecifiedMinTime = minTime.get(choiseBoxIndex);
+                checkIfAllFieldsFilledIn();
             }
         });
         //selected maxTime
@@ -287,6 +301,7 @@ public class DeliveryViewController implements Initializable {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 int choiseBoxIndex = newValue.intValue();
                 userSpecifiedMaxTime = maxTime.get(choiseBoxIndex);
+                checkIfAllFieldsFilledIn();
             }
         });
     }
@@ -320,50 +335,16 @@ public class DeliveryViewController implements Initializable {
     //gives us the right PaymentView depending on what radiobutton is selected
     public void continueClicked() throws IOException {
 
-        checkIfAllFieldsFilledIn();
-        if (allFieldsFilled) {
+        //checkIfAllFieldsFilledIn();
+        //if (allFieldsFilled) {
 
             if (paymentChoise == "Kortbetalning") {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
             } else {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
             }
-        }
+        //}
     }
-
-
-/*
-    //--------------------kanske att allt detta kan tas bort beroende på hur jag tänker göra med knapparna i headern------------------------------
-
-    //Associate the different buttons in the header to the corresponding View
-    public void DeliveryButtonPushed() throws IOException {
-        viewChanger.changeScene(deliveryView, "/fxml/DeliveryView.fxml");
-    }
-
-    public void PaymentButtonPushed() throws IOException {
-
-        continueClicked();
-
-        allFieldsFilledIn();
-        if (allFieldsFilled) {
-
-            if (paymentChoise == "Kortbetalning") {
-                viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
-            }
-            else {
-                viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
-            }
-        }
-    }
-
-    public void ConfirmationButtonPushed() throws IOException {
-        //makes sure that the customer has been to InvoiceView or CardView before entering ConfirmationView.
-            viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
-    }
-
-    //------------------------------------------------------------------------------------
-
-    */
 
     public void checkIfAllFieldsFilledIn() {
 
@@ -376,9 +357,14 @@ public class DeliveryViewController implements Initializable {
                 && userSpecifiedMaxTime!= null){
 
             allFieldsFilled = true;
+            continueButton.setDisable(false);
+            infoLabel.setVisible(false);
+
         }
         else {
             allFieldsFilled = false;
+            continueButton.setDisable(true);
+            infoLabel.setVisible(true);
         }
     }
 }
