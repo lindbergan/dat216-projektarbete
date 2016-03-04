@@ -79,6 +79,7 @@ public class categoryMenuController extends ProductView implements Initializable
         super.showProducts(category);
     }
 
+
     public void showProductCategories() {
 
         int categoryListSize = productCategories.length;
