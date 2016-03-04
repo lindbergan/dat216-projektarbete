@@ -8,14 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="categoryMenuAP" stylesheets="/css/stylesheet.css" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.categoryMenuController">
+<AnchorPane fx:id="categoryMenuAP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="/css/stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.categoryMenuController">
     <children>
-        <Text layoutX="402.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorivy">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Text>
-        <ScrollPane layoutX="11.0" layoutY="97.0" prefHeight="486.0" prefWidth="983.0">
+        <ScrollPane layoutX="11.0" layoutY="44.0" prefHeight="539.0" prefWidth="983.0">
             <content>
                 <AnchorPane fx:id="apGridWindow" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="952.0">
                     <children>
@@ -31,7 +26,7 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-      <Label fx:id="hideThis" layoutX="74.0" layoutY="51.0" text="Label">
+      <Label fx:id="hideThis" layoutX="74.0" layoutY="11.0" text="Label">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>

@@ -3,6 +3,7 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -51,6 +52,8 @@ public class categoryMenuController extends ProductView implements Initializable
         categoryMenuAPproperty = categoryMenuAP;
         hideThis.setVisible(false);
         showProductCategories();
+        gridPane.setPadding(new Insets(10, 0, 0, 0));
+        gridPane.setVgap(10);
     }
 
     /***
@@ -78,6 +81,7 @@ public class categoryMenuController extends ProductView implements Initializable
     public void showProducts(String category) {
         super.showProducts(category);
     }
+
 
     public void showProductCategories() {
 

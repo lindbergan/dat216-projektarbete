@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -59,6 +61,7 @@ public class IMatController implements Initializable {
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     categoryMenuController categoryHandler = new categoryMenuController();
+    private Properties prop = new Properties();
 
     private boolean isShopView;
     private MenuItem temp;
@@ -93,6 +96,29 @@ public class IMatController implements Initializable {
         initButtons();
         initListView();
         listProperty = listView;
+        try {
+            FileOutputStream clear = new FileOutputStream("search.txt");
+            prop.setProperty("input", "");
+            prop.store(clear, null);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+        searchField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    String input = searchField.getText().toLowerCase();
+                    FileOutputStream out = new FileOutputStream("search.txt");
+                    prop.setProperty("input", input);
+                    prop.store(out, null);
+                }
+                catch(Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     public ListView<String> getListProperty() {
@@ -279,16 +305,7 @@ public class IMatController implements Initializable {
         catch(Exception ex){
             ex.printStackTrace();
         }
-        String input = searchField.getText().toLowerCase();
-        Properties prop = new Properties();
-        try {
-            FileOutputStream out = new FileOutputStream("search.txt");
-            prop.setProperty("input", input);
-            prop.store(out, null);
-        }
-        catch(Exception e){
-            e.getStackTrace();
-        }
+
 
     }
 

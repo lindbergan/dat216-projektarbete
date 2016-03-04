@@ -39,6 +39,9 @@ public class SearchViewController implements Initializable {
         catch(Exception ex){
             ex.getStackTrace();
         }
+        int column = 0;
+        int row = 0;
+        int changeRow = 0;
         for(int i = 0; i<products.size(); i++){
             if (products.get(i).getName().toLowerCase().contains(input)){
                 Button newButton = new Button();
@@ -50,7 +53,13 @@ public class SearchViewController implements Initializable {
                 img.setFitHeight(newButton.getPrefHeight()*0.6);
                 img.setEffect(new DropShadow(8, Color.BEIGE));
                 newButton.setGraphic(img);
-                gridRazz.add(newButton,0,0);
+                gridRazz.add(newButton,column,changeRow);
+                column++;
+                row++;
+                if(row == 4){
+                    changeRow++;
+                    row = 0;
+                }
             }
         }
     }
