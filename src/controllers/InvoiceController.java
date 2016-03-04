@@ -20,10 +20,10 @@ import java.util.ResourceBundle;
 
 public class InvoiceController implements Initializable {
 
-
-    private static boolean visited = false;
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    private ViewChanger viewChanger = new ViewChanger();
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
+
     @FXML
     private AnchorPane paymentViewInvoice;
     @FXML
@@ -45,17 +45,9 @@ public class InvoiceController implements Initializable {
     private TextField invoiceEmail;
     @FXML
     private TextField invoicePhone;
-    private ViewChanger viewChanger = new ViewChanger();
-
-    public static boolean hasBeenVisited() {
-        return visited;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        //makes sure that it has been visited in order to be able to jump pass it from the buttons in the header
-        visited = true;
 
         initTextFields();
         initRadioButtons();
@@ -81,25 +73,11 @@ public class InvoiceController implements Initializable {
 
     //back to delivery view when clicked "go back" <--
     public void backToDeliveryClicked(ActionEvent event) throws IOException {
-
         viewChanger.changeScene(paymentViewInvoice, "/fxml/DeliveryView.fxml");
-
-        /*
-        AnchorPane deliveryView = FXMLLoader.load(getClass().getResource("/fxml/DeliveryView.fxml"));
-        paymentViewInvoice.getChildren().setAll(deliveryView);
-        */
     }
 
     //gives us the confirmation view when user clicked "continue" -->
     public void continueClicked() throws IOException {
-
         viewChanger.changeScene(paymentViewInvoice, "/fxml/ConfirmationView.fxml");
-
-        /*
-        AnchorPane confirmationView = FXMLLoader.load(getClass().getResource("/fxml/ConfirmationView.fxml"));
-        paymentViewInvoice.getChildren().setAll(confirmationView);
-        */
-
     }
-
 }
