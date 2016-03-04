@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:id="detailViewAP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DetailViewController">
+   <children>
+      <ImageView fx:id="productImage" fitHeight="280.0" fitWidth="354.0" layoutX="50.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="favButton" layoutX="50.0" layoutY="66.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="189.0" text="Lägg till i Favoriter">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="favImage" fitHeight="19.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button alignment="TOP_LEFT" layoutX="50.0" layoutY="118.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="189.0" text="Lägg till i Lista">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="listImage" fitHeight="19.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Label fx:id="price" layoutX="362.0" layoutY="463.0" text="Pris">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="productName" layoutX="500.0" layoutY="67.0" text="Produktnamn">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Button layoutX="750.0" layoutY="521.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="195.0" text="Lägg till i Kundvagn">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="cartImage" fitHeight="19.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="500.0" layoutY="521.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" text="-" />
+      <Button layoutX="643.0" layoutY="521.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" text="+" />
+      <TextField fx:id="amount" layoutX="533.0" layoutY="521.0" prefHeight="27.0" prefWidth="61.0" />
+      <Label fx:id="suffix" layoutX="600.0" layoutY="525.0" text="förp.">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button contentDisplay="GRAPHIC_ONLY" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" text="Tillbaka">
+         <graphic>
+            <ImageView fx:id="backImage" fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <TextArea fx:id="productDesc" layoutX="500.0" layoutY="125.0" prefHeight="365.0" prefWidth="445.0" />
+   </children>
+</AnchorPane>
