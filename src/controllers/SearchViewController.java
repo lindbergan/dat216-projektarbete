@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Razmus on 2016-03-03.
  */
-public class SearchViewController implements Initializable {
+public class SearchViewController extends ProductView implements Initializable {
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private String input;
     @FXML
@@ -51,7 +51,6 @@ public class SearchViewController implements Initializable {
         int column = 0;
         int row = 0;
         int changeRow = 0;
-        int debug = 0;
         int addRow = 0;
         double magicalHeight = 0.0;
         for(int i = 0; i<products.size(); i++){
@@ -73,7 +72,7 @@ public class SearchViewController implements Initializable {
                 newBottomButton.setAlignment(Pos.CENTER);
                 newBottomButton.setPickOnBounds(false);
                 newBottomButton.setFocusTraversable(false);
-              //  newBottomButton.setOnAction(this::buyItem);
+                newBottomButton.setOnAction(this::buyItem);
                 newBottomButton.getStyleClass().add("buyButton");
 
                 Label txt = new Label(products.get(i).getName());
@@ -87,7 +86,6 @@ public class SearchViewController implements Initializable {
                 gridRazz.add(panelLayout,column,changeRow);
                 column++;
                 row++;
-                debug++;
                 if(row == 4){
                     changeRow++;
                     row = 0;
