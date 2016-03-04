@@ -46,7 +46,7 @@ public class SearchViewController implements Initializable {
             if (products.get(i).getName().toLowerCase().contains(input)){
                 Button newButton = new Button();
                 newButton.setPrefWidth(200);
-                newButton.setPrefHeight(250);
+                newButton.setPrefHeight(240);
                 String url = "/products/images/" + products.get(i).getImageName();
                 ImageView img = new ImageView(new Image(url));
                 img.setFitWidth(newButton.getPrefWidth());
@@ -59,6 +59,7 @@ public class SearchViewController implements Initializable {
                 if(row == 4){
                     changeRow++;
                     row = 0;
+                    column = 0;
                 }
             }
         }
