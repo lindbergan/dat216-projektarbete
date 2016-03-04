@@ -94,8 +94,7 @@ public class ConfirmationViewController implements Initializable {
         customerPostCode.setText(customer.getPostCode());
         customerEmail.setText(customer.getEmail());
         customerPhone.setText(customer.getPhoneNumber());
-        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
-                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
+        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " mellan kl " +
                 DeliveryViewController.getUserSpecifiedMinTime() + " - " +
                 DeliveryViewController.getUserSpecifiedMaxTime());
 

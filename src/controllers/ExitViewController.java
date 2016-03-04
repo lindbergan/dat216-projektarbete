@@ -44,8 +44,7 @@ public class ExitViewController implements Initializable {
     public void initTextFields() {
 
         customerEmail.setText(customer.getEmail());
-        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
-                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
+        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " mellan kl " +
                 DeliveryViewController.getUserSpecifiedMinTime() + " - " +
                 DeliveryViewController.getUserSpecifiedMaxTime());
     }

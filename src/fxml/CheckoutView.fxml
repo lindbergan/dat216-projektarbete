@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.DeliveryViewController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DeliveryViewController">
   <children>
     <BorderPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
@@ -42,10 +42,10 @@
                     <Label layoutX="384.0" layoutY="259.0" text="Postort" />
                     <Label layoutX="105.0" layoutY="351.0" text="Telefon/Mobil *" />
                     <Label layoutX="384.0" layoutY="351.0" text="E-post *" />
-                    <Label layoutX="105.0" layoutY="423.0" text="* uppgifter markerade med (*) är obligatoriska " />
-                    <Label font="$x1" layoutX="106.0" layoutY="464.0" text="Betalsätt:" />
-                    <RadioButton fx:id="cardPayment" layoutX="106.0" layoutY="491.0" mnemonicParsing="false" text="Kortbetalning" />
-                    <RadioButton fx:id="invoicePayment" layoutX="106.0" layoutY="519.0" mnemonicParsing="false" text="Fakturabetalning" />
+                    <Label layoutX="105.0" layoutY="449.0" text="* uppgifter markerade med (*) är obligatoriska " />
+                    <Label font="$x1" layoutX="967.0" layoutY="259.0" text="Betalsätt:" />
+                    <RadioButton fx:id="cardPayment" layoutX="968.0" layoutY="297.0" mnemonicParsing="false" text="Kortbetalning" />
+                    <RadioButton fx:id="invoicePayment" layoutX="968.0" layoutY="325.0" mnemonicParsing="false" text="Fakturabetalning" />
                     <Button layoutX="936.0" layoutY="518.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="33.0" prefWidth="125.0" text="Tillbaka till butik" />
                     <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="518.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="32.9609375" prefWidth="125.0" text="Fortsätt">
                       <tooltip>
@@ -57,12 +57,10 @@
                         <Font name="System Bold" size="20.0" />
                       </font>
                     </Label>
-                    <Label font="$x1" layoutX="1009.0" layoutY="59.0" text="Leveranstid:" />
-                    <TextArea editable="false" layoutX="925.0" layoutY="105.0" opacity="0.5" prefHeight="109.0" prefWidth="262.0" text="Välj gärna ett så stort intervall som möjligt. Då blir det enklare för oss att planera våra rutter samtidigt som vi minskar vår miljöpåverkan. Tack!" wrapText="true" />
-                    <Label layoutX="954.0" layoutY="227.0" text="Månad" />
-                    <Label layoutX="1132.0" layoutY="227.0" text="Dag" />
-                    <Label layoutX="1013.0" layoutY="352.0" text="Mellan klockan" />
-                    <ChoiceBox fx:id="monthChoisebox" layoutX="925.0" layoutY="257.0" prefHeight="27.0" prefWidth="95.0">
+                    <Label font="$x1" layoutX="1013.0" layoutY="43.0" text="Leveranstid:" />
+                    <Label layoutX="893.0" layoutY="127.0" text="Datum" />
+                    <Label layoutX="873.0" layoutY="197.0" text="Mellan klockan" />
+                    <ChoiceBox fx:id="minTimeChoisebox" layoutX="967.0" layoutY="194.0" prefHeight="27.0" prefWidth="60.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -71,7 +69,7 @@
                         </FXCollections>
                       </items>
                     </ChoiceBox>
-                    <ChoiceBox fx:id="dateChoisebox" layoutX="1099.0" layoutY="257.0" prefHeight="27.0" prefWidth="88.0">
+                    <ChoiceBox fx:id="maxTimeChoisebox" layoutX="1082.0" layoutY="194.0" prefHeight="27.0" prefWidth="60.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -80,26 +78,9 @@
                         </FXCollections>
                       </items>
                     </ChoiceBox>
-                    <ChoiceBox fx:id="minTimeChoisebox" layoutX="959.0" layoutY="386.0" prefHeight="27.0" prefWidth="80.0">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
-                        </FXCollections>
-                      </items>
-                    </ChoiceBox>
-                    <ChoiceBox fx:id="maxTimeChoisebox" layoutX="1085.0" layoutY="386.0" prefHeight="27.0" prefWidth="80.0">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
-                        </FXCollections>
-                      </items>
-                    </ChoiceBox>
-                    <Label layoutX="1053.0" layoutY="389.0" text="och" />
+                    <Label layoutX="1043.0" layoutY="197.0" text="och" />
                     <Label fx:id="infoLabel" layoutX="796.0" layoutY="483.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" />
+                              <DatePicker fx:id="calendar" layoutX="966.0" layoutY="123.0" onAction="#listenToDatePicker" />
                   </children>
                 </Pane>
               </children>
@@ -129,13 +110,7 @@
                 </Button>
               </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="656.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="81.0">
-              <children>
-                <ToggleButton fx:id="deliveryButton" mnemonicParsing="false" prefHeight="26.6015625" prefWidth="190.0" text="Leverans" />
-                <ToggleButton fx:id="paymentButton" mnemonicParsing="false" prefHeight="26.6015625" prefWidth="190.0" text="Betalning" />
-                <ToggleButton fx:id="confirmationButton" mnemonicParsing="false" prefHeight="26.6015625" prefWidth="190.0" text="Genomför köp" />
-              </children>
-            </HBox>
+            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="656.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="81.0" />
           </children>
         </AnchorPane>
       </top>

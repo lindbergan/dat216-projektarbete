@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="exitView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ExitViewController">
+<AnchorPane id="AnchorPane" fx:id="exitView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExitViewController">
   <children>
     <HBox alignment="CENTER" AnchorPane.bottomAnchor="456.14" AnchorPane.leftAnchor="505.5" AnchorPane.rightAnchor="463.5" AnchorPane.topAnchor="314.86">
       <children>
@@ -52,7 +52,7 @@
         </ImageView>
       </children>
     </HBox>
-    <HBox alignment="CENTER" prefHeight="54.0" prefWidth="168.0" AnchorPane.bottomAnchor="163.4" AnchorPane.leftAnchor="577.0" AnchorPane.rightAnchor="535.0" AnchorPane.topAnchor="502.6">
+    <HBox alignment="CENTER" layoutX="578.0" layoutY="495.0" prefHeight="61.0" prefWidth="168.0" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="578.0" AnchorPane.rightAnchor="534.0" AnchorPane.topAnchor="495.0">
       <children>
         <Button defaultButton="true" mnemonicParsing="false" onAction="#continueShopping" prefHeight="51.0" prefWidth="155.0" text="Fortsätt handla" />
       </children>
@@ -62,7 +62,7 @@
         <Font name="System Bold" size="24.0" />
       </font>
     </Button>
-    <HBox alignment="CENTER" prefHeight="38.1400146484375" prefWidth="140.0" AnchorPane.bottomAnchor="405.14" AnchorPane.leftAnchor="587.37" AnchorPane.rightAnchor="552.63" AnchorPane.topAnchor="276.72">
+    <HBox alignment="CENTER" layoutX="555.0" layoutY="277.0" prefHeight="38.0" prefWidth="206.0" AnchorPane.bottomAnchor="405.0" AnchorPane.leftAnchor="555.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="277.0">
       <children>
         <Label fx:id="customerEmail" font="$x2" prefHeight="16.0" prefWidth="127.06640625" text="&quot;person@email.com&quot;." />
       </children>
