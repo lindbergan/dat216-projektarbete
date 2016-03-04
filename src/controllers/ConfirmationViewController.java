@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.*;
 import java.io.IOException;
 import java.net.URL;
@@ -64,25 +65,33 @@ public class ConfirmationViewController implements Initializable {
             ShoppingItem thisItem = ite.next();
             double totalItemCost = thisItem.getAmount()*thisItem.getProduct().getPrice();
 
-
+            listViewList.set(0, getStringSpacingThree("Kvitto"));
             listViewList.add(getStringSpacingOne(thisItem.getProduct().getName()) +
                     getStringSpacingTwo(thisItem.getAmount() + " * " + thisItem.getProduct().getPrice() +
                             " " + thisItem.getProduct().getUnit()) +totalItemCost + ":-");
+
         }
         shoppingCartSummary.setItems(listViewList);
     }
 
     public String getStringSpacingOne(String str){
 
-        while(str.length()<40){
+        while(str.length()<30){
             str = str + " ";
         }
         return str;
     }
     public String getStringSpacingTwo(String str){
 
-        while(str.length()<50){
+        while(str.length()<40){
             str = str + " ";
+        }
+        return str;
+    }
+    public String getStringSpacingThree(String str){
+
+        while(str.length()<50){
+            str = " " + str;
         }
         return str;
     }
@@ -95,8 +104,7 @@ public class ConfirmationViewController implements Initializable {
         customerEmail.setText(customer.getEmail());
         customerPhone.setText(customer.getPhoneNumber());
         customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " mellan kl " +
-                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
-                DeliveryViewController.getUserSpecifiedMaxTime());
+                DeliveryViewController.getUserSpecifiedTime());
 
         customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
     }

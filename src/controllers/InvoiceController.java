@@ -11,6 +11,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 

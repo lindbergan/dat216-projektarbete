@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
@@ -45,8 +46,7 @@ public class ExitViewController implements Initializable {
 
         customerEmail.setText(customer.getEmail());
         customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " mellan kl " +
-                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
-                DeliveryViewController.getUserSpecifiedMaxTime());
+                DeliveryViewController.getUserSpecifiedTime());
     }
 
     //clears the cart and goes back to the store when "continue shopping" button is pushed

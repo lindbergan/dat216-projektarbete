@@ -9,11 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.CreditCard;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -22,12 +22,10 @@ import java.util.ResourceBundle;
 //OBS: Detta är main-controllern OCH controllern för DeliveryView:n. Inte optimalt att ha dem sammanslagna, men lyckades inte ta mig runt detta.
 public class DeliveryViewController implements Initializable {
 
-
-    private static String userSpecifiedMonth;
-    private static String userSpecifiedDate;
-    private static String userSpecifiedMinTime;
-    private static String userSpecifiedMaxTime;
+    private static LocalDate userSpecifiedDate;
+    private static String userSpecifiedTime;
     private static String paymentChoise = "Kortbetalning";
+
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
@@ -56,39 +54,24 @@ public class DeliveryViewController implements Initializable {
     @FXML
     private TextField customerPhone;
     @FXML
-    private ChoiceBox minTimeChoisebox;
-    @FXML
-    private ChoiceBox maxTimeChoisebox;
+    private ChoiceBox timeIntervallChoisebox;
     @FXML private Button continueButton;
     @FXML private Label infoLabel;
     @FXML private DatePicker calendar;
-    private static LocalDate userDate;
     private static boolean allFieldsFilled = false;
 
-
     //the observable lists for the Choiseboxes
-    private ObservableList<String> minTime = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05",
-            "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-            "23", "24");
-    private ObservableList<String> maxTime = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05",
-            "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-            "23", "24");
-
+    private ObservableList<String> timeIntervall = FXCollections.observableArrayList("04 - 08", "05 - 09", "06 - 10",
+            "07 - 11", "08 - 12", "09 - 13", "10 - 14", "11 - 15", "12 - 16", "13 - 17", "14 - 18", "15 - 19",
+            "16 - 20", "17 - 21", "18 - 22", "19 - 23", "20 - 00");
 
     //The getters for our custom choisboxes and radiobuttons and Datepicker
     public static String getUserSpecifiedDate() {
-        return userDate.toString();
-    } //måste fixa denna så den retunerar ex en string
-
-    //public static String getUserSpecifiedMonth(){ return userSpecifiedMonth;}
-    public static String getUserSpecifiedMinTime() {
-        return userSpecifiedMinTime;
+        return userSpecifiedDate.toString();
     }
-
-    public static String getUserSpecifiedMaxTime() {
-        return userSpecifiedMaxTime;
+    public static String getUserSpecifiedTime() {
+        return userSpecifiedTime;
     }
-
     public static String getPaymentChoise() {
         return paymentChoise;
     }
@@ -127,8 +110,7 @@ public class DeliveryViewController implements Initializable {
     public void initChoiseBoxes() {
 
 
-        minTimeChoisebox.setItems(minTime);
-        maxTimeChoisebox.setItems(maxTime);
+        timeIntervallChoisebox.setItems(timeIntervall);
 
         //sets the choiesBoxes in case customer chose "go back" from paymentView
         userSpecifiedChoiseBox();
@@ -138,8 +120,7 @@ public class DeliveryViewController implements Initializable {
 
     public void userSpecifiedChoiseBox() {
 
-        minTimeChoisebox.setValue(userSpecifiedMinTime);
-        maxTimeChoisebox.setValue(userSpecifiedMaxTime);
+        timeIntervallChoisebox.setValue(userSpecifiedTime);
     }
 
     public void initRadioButtons() {
@@ -157,7 +138,7 @@ public class DeliveryViewController implements Initializable {
     }
 
     public void initDatePicker(){
-        calendar.setValue(userDate);
+        calendar.setValue(userSpecifiedDate);
     }
 
     //ChangeListener for the textfields:
@@ -230,21 +211,12 @@ public class DeliveryViewController implements Initializable {
     //ChangeListener for the choiseboxes
     public void listenToChoiseboxes() {
 
-        //selected minTime
-        minTimeChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        //selected timeIntervall
+        timeIntervallChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 int choiseBoxIndex = newValue.intValue();
-                userSpecifiedMinTime = minTime.get(choiseBoxIndex);
-                checkIfAllFieldsFilledIn();
-            }
-        });
-        //selected maxTime
-        maxTimeChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiseBoxIndex = newValue.intValue();
-                userSpecifiedMaxTime = maxTime.get(choiseBoxIndex);
+                userSpecifiedTime = timeIntervall.get(choiseBoxIndex);
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -268,7 +240,7 @@ public class DeliveryViewController implements Initializable {
 
     public void listenToDatePicker(){
         calendar.setOnAction(event -> {
-            userDate = calendar.getValue();
+            userSpecifiedDate = calendar.getValue();
             checkIfAllFieldsFilledIn();
         });
     }
@@ -299,8 +271,8 @@ public class DeliveryViewController implements Initializable {
                 && !customerLastName.getText().isEmpty() && customerAddress != null &&
                 !customerAddress.getText().isEmpty() && customerPostCode != null &&
                 !customerPostCode.getText().isEmpty()  && customerPhone!= null && !customerPhone.getText().isEmpty()
-                && customerEmail!= null && !customerEmail.getText().isEmpty() && userDate !=null
-                && userSpecifiedMinTime!= null && userSpecifiedMaxTime!= null){
+                && customerEmail!= null && !customerEmail.getText().isEmpty() && userSpecifiedDate !=null
+                && userSpecifiedTime!= null){
 
             allFieldsFilled = true;
             continueButton.setDisable(false);

@@ -34,9 +34,9 @@
             <Label layoutX="105.0" layoutY="351.0" text="Telefon/Mobil *" />
             <Label layoutX="384.0" layoutY="351.0" text="E-post *" />
             <Label layoutX="105.0" layoutY="449.0" text="* uppgifter markerade med (*) är obligatoriska " />
-            <Label font="$x1" layoutX="967.0" layoutY="259.0" text="Betalsätt:" />
-            <RadioButton fx:id="cardPayment" layoutX="968.0" layoutY="297.0" mnemonicParsing="false" text="Kortbetalning" />
-            <RadioButton fx:id="invoicePayment" layoutX="968.0" layoutY="325.0" mnemonicParsing="false" text="Fakturabetalning" />
+            <Label font="$x1" layoutX="970.0" layoutY="259.0" text="Betalsätt:" />
+            <RadioButton fx:id="cardPayment" layoutX="970.0" layoutY="297.0" mnemonicParsing="false" text="Kortbetalning" />
+            <RadioButton fx:id="invoicePayment" layoutX="970.0" layoutY="325.0" mnemonicParsing="false" text="Fakturabetalning" />
             <Button layoutX="936.0" layoutY="518.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="33.0" prefWidth="125.0" text="Tillbaka till butik" />
             <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="518.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="32.9609375" prefWidth="125.0" text="Fortsätt">
                <tooltip>
@@ -49,9 +49,9 @@
                </font>
             </Label>
             <Label font="$x1" layoutX="1013.0" layoutY="43.0" text="Leveranstid:" />
-            <Label layoutX="893.0" layoutY="127.0" text="Datum" />
+            <Label layoutX="915.0" layoutY="127.0" text="Datum" />
             <Label layoutX="873.0" layoutY="197.0" text="Mellan klockan" />
-            <ChoiceBox fx:id="minTimeChoisebox" layoutX="967.0" layoutY="194.0" prefHeight="27.0" prefWidth="60.0">
+            <ChoiceBox fx:id="timeIntervallChoisebox" layoutX="970.0" layoutY="194.0" prefHeight="27.0" prefWidth="100.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Item 1" />
@@ -60,18 +60,8 @@
                   </FXCollections>
                </items>
             </ChoiceBox>
-            <ChoiceBox fx:id="maxTimeChoisebox" layoutX="1082.0" layoutY="194.0" prefHeight="27.0" prefWidth="60.0">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Item 1" />
-                     <String fx:value="Item 2" />
-                     <String fx:value="Item 3" />
-                  </FXCollections>
-               </items>
-            </ChoiceBox>
-            <Label layoutX="1043.0" layoutY="197.0" text="och" />
             <Label fx:id="infoLabel" layoutX="796.0" layoutY="483.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" />
-            <DatePicker fx:id="calendar" layoutX="966.0" layoutY="123.0" onAction="#listenToDatePicker" />
+            <DatePicker fx:id="calendar" layoutX="970.0" layoutY="123.0" onAction="#listenToDatePicker" />
          </children>
       </Pane>
    </children>

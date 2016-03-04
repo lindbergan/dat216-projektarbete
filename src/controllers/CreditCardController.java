@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.CreditCard;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
