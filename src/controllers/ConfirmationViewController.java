@@ -12,22 +12,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import se.chalmers.ait.dat215.project.Customer;
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.ShoppingCart;
-import se.chalmers.ait.dat215.project.ShoppingItem;
-
+import se.chalmers.ait.dat215.project.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class ConfirmationViewController implements Initializable {
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    private Customer customer = handler.getCustomer();
+    private ShoppingCart shoppingCart = handler.getShoppingCart();
+    private ObservableList<ShoppingItem> cartItems = FXCollections.observableArrayList(shoppingCart.getItems());
+    private ViewChanger viewChanger = new ViewChanger();
+
     @FXML
     private AnchorPane confirmationView;
     @FXML
-    private ListView shoppingCartSummary;
+    private ListView<String> shoppingCartSummary = new ListView<String>();
     @FXML
     private Label customerName;
     @FXML
@@ -42,21 +44,47 @@ public class ConfirmationViewController implements Initializable {
     private Label customerDate;
     @FXML
     private Label customerPaymentChoise;
-    private ViewChanger viewChanger = new ViewChanger();
-    private Customer customer = handler.getCustomer();
-    private ShoppingCart shoppingCart = handler.getShoppingCart();
-    private ObservableList<ShoppingItem> cartItems = FXCollections.observableArrayList(shoppingCart.getItems());
+    @FXML private Label price;
+
+    private ObservableList<String> listViewList = FXCollections.observableArrayList("");
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         initTextFields();
+        initShoppingCartSummary();
+        setTotalPrice();
+    }
 
-        //places the shopping items in the ObservableList if the shoppingcart contains any items
-        //if(shoppingCart.getItems().size() != 0) {
-        //    shoppingCartSummary.setItems(cartItems);
-        //}
+    public void initShoppingCartSummary(){
+
+        for(Iterator<ShoppingItem> ite = cartItems.iterator(); ite.hasNext(); ) {
+
+            ShoppingItem thisItem = ite.next();
+            double totalItemCost = thisItem.getAmount()*thisItem.getProduct().getPrice();
+
+
+            listViewList.add(getStringSpacingOne(thisItem.getProduct().getName()) +
+                    getStringSpacingTwo(thisItem.getAmount() + " * " + thisItem.getProduct().getPrice() +
+                            " " + thisItem.getProduct().getUnit()) +totalItemCost + ":-");
+        }
+        shoppingCartSummary.setItems(listViewList);
+    }
+
+    public String getStringSpacingOne(String str){
+
+        while(str.length()<40){
+            str = str + " ";
+        }
+        return str;
+    }
+    public String getStringSpacingTwo(String str){
+
+        while(str.length()<50){
+            str = str + " ";
+        }
+        return str;
     }
 
     public void initTextFields() {
@@ -74,22 +102,23 @@ public class ConfirmationViewController implements Initializable {
         customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
     }
 
+    public void setTotalPrice(){
+        price.setText(shoppingCart.getTotal() + " :-");
+    }
+
     //back to the correct PaymentView when "go back" <-- is clicked
     public void backtoPaymentView() throws IOException {
 
         //need to determine what View to present - based on users Paymentchoise
         if (DeliveryViewController.getPaymentChoise() == "Kortbetalning") {
-
             viewChanger.changeScene(confirmationView, "/fxml/PaymentViewCard.fxml");
         } else {
-
             viewChanger.changeScene(confirmationView, "/fxml/PaymentViewInvoice.fxml");
         }
     }
 
     //go to ExitView
     public void confirmPurches(ActionEvent event) throws IOException {
-
-        viewChanger.changeStage(event, confirmationView, "/fxml/ExitView.fxml");
+        viewChanger.changeStageOverride(event, "/fxml/ExitView.fxml");
     }
 }
