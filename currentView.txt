@@ -1,2 +1,0 @@
-#Sat Mar 05 16:45:07 CET 2016
-URL=/fxml/shopView.fxml/
