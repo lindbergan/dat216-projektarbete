@@ -18,25 +18,37 @@ import java.util.ResourceBundle;
  */
 public class DetailViewController implements Initializable {
 
-    @FXML private AnchorPane detailViewAP;
-    @FXML private ImageView productImage;
-    @FXML private ImageView backImage;
-    @FXML private ImageView favImage;
-    @FXML private ImageView listImage;
-    @FXML private ImageView cartImage;
-    @FXML private Button favButton;
-    @FXML private Label price;
-    @FXML private Label productName;
-    @FXML private Label suffix;
-    @FXML private TextField amount;
-    @FXML private TextArea productDesc;
+    @FXML
+    private AnchorPane detailViewAP;
+    @FXML
+    private ImageView productImage;
+    @FXML
+    private ImageView backImage;
+    @FXML
+    private ImageView favImage;
+    @FXML
+    private ImageView listImage;
+    @FXML
+    private ImageView cartImage;
+    @FXML
+    private Button favButton;
+    @FXML
+    private Label price;
+    @FXML
+    private Label productName;
+    @FXML
+    private Label suffix;
+    @FXML
+    private TextField amount;
+    @FXML
+    private TextArea productDesc;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void setStaticImages(){
+    public void setStaticImages() {
         Image product = new Image("/images/Bröd.png/");
         Image back = new Image("/images/Fisk.png/");
         Image list = new Image("/images/Baljväxter.png/");
@@ -46,12 +58,13 @@ public class DetailViewController implements Initializable {
         listImage.setImage(list);
         cartImage.setImage(cart);
     }
-    public void setFavButton(boolean isSelected){
+
+    public void setFavButton(boolean isSelected) {
         Image fav;
-        if(isSelected){
+        if (isSelected) {
             favButton.setText("I Favoriter");
             fav = new Image("/images/Kött.png/");
-        }else{
+        } else {
             favButton.setText("Lägg till i Favoriter");
             fav = new Image("/images/Mejeri.png/");
         }

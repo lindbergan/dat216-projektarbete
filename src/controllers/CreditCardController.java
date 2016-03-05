@@ -22,11 +22,11 @@ import java.util.ResourceBundle;
 
 public class CreditCardController implements Initializable {
 
+    private static boolean allFieldsFilled = false;
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private CreditCard creditCard = handler.getCreditCard();
     private ViewChanger viewChanger = new ViewChanger();
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-
     @FXML
     private MenuBar menuBar;
     @FXML
@@ -47,13 +47,14 @@ public class CreditCardController implements Initializable {
     private ChoiceBox cardYearChoiseBox;
     @FXML
     private ChoiceBox cardMonthChoiseBox;
-    @FXML private Button continueButton;
-
+    @FXML
+    private Button continueButton;
     private ObservableList<String> cardYear = FXCollections.observableArrayList("16", "17", "18", "19", "20", "21", "22");
     private ObservableList<String> cardMonth = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
 
-    private static boolean allFieldsFilled = false;
-
+    public static boolean getAllFieldsFilled() {
+        return allFieldsFilled;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -97,11 +98,9 @@ public class CreditCardController implements Initializable {
 
         if (creditCard.getCardType().contains("mastercard")) {
             mastercard.setSelected(true);
-        }
-        else if (creditCard.getCardType().contains("other")) {
+        } else if (creditCard.getCardType().contains("other")) {
             other.setSelected(true);
-        }
-        else {
+        } else {
             visa.setSelected(true);
         }
     }
@@ -162,11 +161,9 @@ public class CreditCardController implements Initializable {
 
                 if (newValue == visa) {
                     creditCard.setCardType("visa");
-                }
-                else if (newValue == mastercard) {
+                } else if (newValue == mastercard) {
                     creditCard.setCardType("mastercard");
-                }
-                else{
+                } else {
                     creditCard.setCardType("other");
                 }
             }
@@ -182,7 +179,7 @@ public class CreditCardController implements Initializable {
     public void continueClicked() throws IOException {
 
         checkIfAllFieldsFilled();
-        if(allFieldsFilled) {
+        if (allFieldsFilled) {
             viewChanger.changeScene(paymentViewCard, "/fxml/ConfirmationView.fxml");
         }
     }
@@ -193,13 +190,8 @@ public class CreditCardController implements Initializable {
                 && cardYearChoiseBox != null && cardMonthChoiseBox != null) {
 
             allFieldsFilled = true;
-        }
-        else {
+        } else {
             allFieldsFilled = false;
         }
-    }
-
-    public static boolean getAllFieldsFilled(){
-        return allFieldsFilled;
     }
 }

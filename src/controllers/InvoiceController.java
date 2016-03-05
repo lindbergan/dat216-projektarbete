@@ -20,10 +20,9 @@ import java.util.ResourceBundle;
 
 public class InvoiceController implements Initializable {
 
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private ViewChanger viewChanger = new ViewChanger();
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-
     @FXML
     private AnchorPane paymentViewInvoice;
     @FXML

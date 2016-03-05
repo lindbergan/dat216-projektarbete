@@ -12,7 +12,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import se.chalmers.ait.dat215.project.*;
+import se.chalmers.ait.dat215.project.Customer;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.ShoppingCart;
+import se.chalmers.ait.dat215.project.ShoppingItem;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
@@ -44,7 +48,8 @@ public class ConfirmationViewController implements Initializable {
     private Label customerDate;
     @FXML
     private Label customerPaymentChoise;
-    @FXML private Label price;
+    @FXML
+    private Label price;
 
     private ObservableList<String> listViewList = FXCollections.observableArrayList("");
 
@@ -57,31 +62,32 @@ public class ConfirmationViewController implements Initializable {
         setTotalPrice();
     }
 
-    public void initShoppingCartSummary(){
+    public void initShoppingCartSummary() {
 
-        for(Iterator<ShoppingItem> ite = cartItems.iterator(); ite.hasNext(); ) {
+        for (Iterator<ShoppingItem> ite = cartItems.iterator(); ite.hasNext(); ) {
 
             ShoppingItem thisItem = ite.next();
-            double totalItemCost = thisItem.getAmount()*thisItem.getProduct().getPrice();
+            double totalItemCost = thisItem.getAmount() * thisItem.getProduct().getPrice();
 
 
             listViewList.add(getStringSpacingOne(thisItem.getProduct().getName()) +
                     getStringSpacingTwo(thisItem.getAmount() + " * " + thisItem.getProduct().getPrice() +
-                            " " + thisItem.getProduct().getUnit()) +totalItemCost + ":-");
+                            " " + thisItem.getProduct().getUnit()) + totalItemCost + ":-");
         }
         shoppingCartSummary.setItems(listViewList);
     }
 
-    public String getStringSpacingOne(String str){
+    public String getStringSpacingOne(String str) {
 
-        while(str.length()<40){
+        while (str.length() < 40) {
             str = str + " ";
         }
         return str;
     }
-    public String getStringSpacingTwo(String str){
 
-        while(str.length()<50){
+    public String getStringSpacingTwo(String str) {
+
+        while (str.length() < 50) {
             str = str + " ";
         }
         return str;
@@ -102,7 +108,7 @@ public class ConfirmationViewController implements Initializable {
         customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
     }
 
-    public void setTotalPrice(){
+    public void setTotalPrice() {
         price.setText(shoppingCart.getTotal() + " :-");
     }
 

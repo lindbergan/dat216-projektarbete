@@ -16,7 +16,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 
-
 /**
  * Created by Lisa on 2016-03-02.
  */
@@ -34,15 +33,15 @@ public class ShopViewController implements Initializable {
         setImage();
     }
 
-    public void setImage(){
+    public void setImage() {
         Image image = new Image("/images/IMat-butik.png/");
         shopView.setImage(image);
     }
 
     @FXML
-    public void buttonAction(ActionEvent e){
-        if(e.getSource() instanceof Button) {
-            Button button = (Button)e.getSource();
+    public void buttonAction(ActionEvent e) {
+        if (e.getSource() instanceof Button) {
+            Button button = (Button) e.getSource();
             if (!(button.getText() == null || button.getText().equals(""))) {
                 try {
                     Properties prop = new Properties();

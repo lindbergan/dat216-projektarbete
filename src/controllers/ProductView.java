@@ -19,7 +19,7 @@ public abstract class ProductView {
     IMatDataHandler handler = IMatDataHandler.getInstance();
     ShoppingCart cart = handler.getShoppingCart();
 
-    public void showProducts(String category){
+    public void showProducts(String category) {
         switch (category) {
             case "Baljväxter":
                 productList = handler.getProducts(ProductCategory.POD);
@@ -61,6 +61,7 @@ public abstract class ProductView {
             break;
             case "Nötter och frön": {
                 productList = handler.getProducts(ProductCategory.NUTS_AND_SEEDS);
+                productList.addAll(handler.getProducts(ProductCategory.HERB));
             }
             break;
             case "Pasta, potatis och ris": {
@@ -76,6 +77,7 @@ public abstract class ProductView {
                 productList = handler.getProducts();
         }
     }
+
     public void buyItem(ActionEvent e) {
         BuyButton bb = (BuyButton) e.getSource();
         StackPane p = (StackPane) bb.getParent();
@@ -118,6 +120,7 @@ public abstract class ProductView {
 
 
     }
+
     public void incItem(int idd) {
         int id = idd;
         int razzan = 0;
@@ -136,6 +139,7 @@ public abstract class ProductView {
             cart.addItem((new ShoppingItem(handler.getProduct(id))));
         }
     }
+
     public void decItem(int idd) {
         int id = idd;
         if (cart.getItems().size() == 0) {
@@ -149,6 +153,10 @@ public abstract class ProductView {
                 }
 
             }
+    }
+
+    public List<Product> getProductList() {
+        return productList;
     }
 
 }

@@ -62,7 +62,7 @@ public class ExitViewController implements Initializable {
     }
 
     //clears the cart and goes back to the store when "continue shopping" button is pushed
-    public void closeWindow(ActionEvent event)throws IOException {
+    public void closeWindow(ActionEvent event) throws IOException {
         handler.shutDown();
         cart.clear();
         viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");

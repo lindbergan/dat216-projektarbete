@@ -29,23 +29,23 @@ import java.util.ResourceBundle;
  */
 public class SearchViewController extends ProductView implements Initializable {
     IMatDataHandler handler = IMatDataHandler.getInstance();
-    private String input;
     @FXML
     GridPane gridRazz;
     @FXML
     AnchorPane razzPane;
-    @FXML private Label exampleText;
+    private String input;
+    @FXML
+    private Label exampleText;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Product> products = handler.getProducts();
-        try{
+        try {
             Properties prop = new Properties();
             InputStreamReader in = new FileReader("search.txt");
             prop.load(in);
             input = prop.getProperty("input");
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.getStackTrace();
         }
         int column = 0;
@@ -53,15 +53,15 @@ public class SearchViewController extends ProductView implements Initializable {
         int changeRow = 0;
         int addRow = 0;
         double magicalHeight = 0.0;
-        for(int i = 0; i<products.size(); i++){
-            if (products.get(i).getName().toLowerCase().contains(input)){
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getName().toLowerCase().contains(input)) {
                 Button newButton = new Button();
                 newButton.setPrefWidth(200);
                 newButton.setPrefHeight(240);
                 String url = "/products/images/" + products.get(i).getImageName();
                 ImageView img = new ImageView(new Image(url));
                 img.setFitWidth(newButton.getPrefWidth());
-                img.setFitHeight(newButton.getPrefHeight()*0.6);
+                img.setFitHeight(newButton.getPrefHeight() * 0.6);
                 img.setEffect(new DropShadow(8, Color.BEIGE));
                 newButton.setGraphic(img);
 
@@ -83,10 +83,10 @@ public class SearchViewController extends ProductView implements Initializable {
                 panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
                 panelLayout.setAlignment(txt, Pos.TOP_CENTER);
                 panelLayout.setMargin(newBottomButton, new Insets(0, 0, 5, 0));
-                gridRazz.add(panelLayout,column,changeRow);
+                gridRazz.add(panelLayout, column, changeRow);
                 column++;
                 row++;
-                if(row == 4){
+                if (row == 4) {
                     changeRow++;
                     row = 0;
                     column = 0;

@@ -13,7 +13,6 @@ import se.chalmers.ait.dat215.project.CreditCard;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,14 +26,13 @@ public class DeliveryViewController implements Initializable {
     private static String userSpecifiedMinTime;
     private static String userSpecifiedMaxTime;
     private static String paymentChoise = "Kortbetalning";
-
+    private static boolean allFieldsFilled = false;
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
+    final ToggleGroup headerButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
     private CreditCard creditCard = handler.getCreditCard();
     private ViewChanger viewChanger = new ViewChanger();
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-    final ToggleGroup headerButtonGroup = new ToggleGroup();
-
     @FXML
     private AnchorPane deliveryView;
     @FXML
@@ -63,11 +61,12 @@ public class DeliveryViewController implements Initializable {
     private ChoiceBox minTimeChoisebox;
     @FXML
     private ChoiceBox maxTimeChoisebox;
-    @FXML private ToggleButton deliveryButton;
-    @FXML private ToggleButton paymentButton;
-    @FXML private ToggleButton confirmationButton;
-
-
+    @FXML
+    private ToggleButton deliveryButton;
+    @FXML
+    private ToggleButton paymentButton;
+    @FXML
+    private ToggleButton confirmationButton;
     //the observable lists for the Choiseboxes
     private ObservableList<String> month = FXCollections.observableArrayList("Januari", "Februari", "Mars",
             "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December");
@@ -80,8 +79,6 @@ public class DeliveryViewController implements Initializable {
     private ObservableList<String> maxTime = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05",
             "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
             "23", "24");
-
-    private static boolean allFieldsFilled = false;
     private boolean firstTimeRun = true;
 
 
@@ -170,7 +167,7 @@ public class DeliveryViewController implements Initializable {
     }
 
     //sets the ToggleButtons to the same group and activates the default button (i.e "delivery")
-    public void initToggleButtons(){
+    public void initToggleButtons() {
 
         /*
         if(firstTimeRun) {
@@ -185,7 +182,7 @@ public class DeliveryViewController implements Initializable {
     }
 
     //Changelisteners for the ToggleButtons
-    public void listenToToggleButtons(){
+    public void listenToToggleButtons() {
 
         headerButtonGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -367,17 +364,16 @@ public class DeliveryViewController implements Initializable {
 
     public void checkIfAllFieldsFilledIn() {
 
-        if(customerFirstName != null && !customerFirstName.getText().isEmpty() && customerLastName!= null
+        if (customerFirstName != null && !customerFirstName.getText().isEmpty() && customerLastName != null
                 && !customerLastName.getText().isEmpty() && customerAddress != null &&
                 !customerAddress.getText().isEmpty() && customerPostCode != null &&
-                !customerPostCode.getText().isEmpty()  && customerPhone!= null && !customerPhone.getText().isEmpty()
-                && customerEmail!= null && !customerEmail.getText().isEmpty()
-                && userSpecifiedMonth!= null && userSpecifiedDate!= null && userSpecifiedMinTime!= null
-                && userSpecifiedMaxTime!= null){
+                !customerPostCode.getText().isEmpty() && customerPhone != null && !customerPhone.getText().isEmpty()
+                && customerEmail != null && !customerEmail.getText().isEmpty()
+                && userSpecifiedMonth != null && userSpecifiedDate != null && userSpecifiedMinTime != null
+                && userSpecifiedMaxTime != null) {
 
             allFieldsFilled = true;
-        }
-        else {
+        } else {
             allFieldsFilled = false;
         }
     }

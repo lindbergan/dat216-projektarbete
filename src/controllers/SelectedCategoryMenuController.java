@@ -1,29 +1,25 @@
 package controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import properties.BuyButton;
-import se.chalmers.ait.dat215.project.*;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.ShoppingCart;
 
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -76,7 +72,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     newButton.setFocusTraversable(false);
                     ImageView img = new ImageView(new Image(url));
                     img.setFitWidth(newButton.getPrefWidth());
-                    img.setFitHeight(newButton.getPrefHeight()*0.6);
+                    img.setFitHeight(newButton.getPrefHeight() * 0.6);
                     img.setEffect(new DropShadow(8, Color.BEIGE));
                     newButton.getStyleClass().add("productButton");
                     img.getStyleClass().add("productImage");
