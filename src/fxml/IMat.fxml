@@ -15,9 +15,9 @@
             <top>
                 <AnchorPane prefHeight="112.0" prefWidth="1280.0">
                     <children>
-                        <HBox alignment="BASELINE_LEFT" layoutX="253.0" layoutY="10.0" prefHeight="49.0" prefWidth="217.0" spacing="10.0" AnchorPane.leftAnchor="253.0">
+                        <HBox alignment="BASELINE_LEFT" layoutX="266.0" layoutY="14.0" prefHeight="49.0" prefWidth="316.0" spacing="10.0">
                             <children>
-                                <ToggleButton fx:id="toggle1" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#currentView" selected="true" text="Butiksvy">
+                                <ToggleButton fx:id="toggle1" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#currentView" prefHeight="29.0" prefWidth="146.0" selected="true" text="Butiksvy">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
@@ -25,7 +25,7 @@
                                         <Font size="15.0" />
                                     </font>
                                 </ToggleButton>
-                                <ToggleButton fx:id="toggle2" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#currentView" text="Kategorivy">
+                                <ToggleButton fx:id="toggle2" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#currentView" prefHeight="29.0" prefWidth="160.0" text="Kategorivy">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
@@ -35,12 +35,12 @@
                                 </ToggleButton>
                             </children>
                             <padding>
-                                <Insets bottom="10.0" left="10.0" top="10.0" />
+                                <Insets bottom="10.0" top="10.0" />
                             </padding>
                         </HBox>
-                        <HBox layoutX="266.0" layoutY="78.0" spacing="10.0">
+                        <HBox layoutX="266.0" layoutY="79.0" spacing="10.0">
                             <children>
-                                <MenuButton fx:id="favoritesMenu" cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Mina favoriter">
+                                <MenuButton fx:id="favoritesMenu" cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" prefWidth="146.0" scaleShape="false" text="Mina favoriter">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
@@ -86,7 +86,7 @@
                                 <Insets right="10.0" top="10.0" />
                             </padding>
                         </HBox>
-                        <StackPane layoutX="597.0" layoutY="23.0" prefHeight="29.0" prefWidth="381.0">
+                        <StackPane layoutX="598.0" layoutY="76.0" prefHeight="34.0" prefWidth="302.0">
                             <children>
                                 <TextField fx:id="searchField" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#search" pickOnBounds="false" prefHeight="29.0" prefWidth="327.0" promptText="Sök efter artiklar">
                                     <font>
@@ -96,17 +96,17 @@
                                 <Button fx:id="searchButton" alignment="CENTER" mnemonicParsing="false" onAction="#search" text="Sök" StackPane.alignment="CENTER_RIGHT" />
                             </children>
                         </StackPane>
-                        <Button fx:id="helpButton" layoutX="1208.0" layoutY="17.0" mnemonicParsing="false" opacity="0.74" prefHeight="25.0" prefWidth="25.0" text="?">
-                            <font>
-                                <Font size="25.0" />
-                            </font>
+                        <Button fx:id="helpButton" layoutX="1211.0" layoutY="25.0" mnemonicParsing="false" opacity="0.74" prefHeight="41.0" prefWidth="41.0" text="?">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
                         </Button>
-                        <ImageView fx:id="imageView1" fitHeight="100.0" fitWidth="250.0" layoutX="5.0" layoutY="5.0" pickOnBounds="false" preserveRatio="true" />
+                        <ImageView fx:id="imageView1" fitHeight="77.0" fitWidth="229.0" layoutX="16.0" layoutY="28.0" pickOnBounds="false" preserveRatio="true" />
                     </children>
                 </AnchorPane>
             </top>
             <left>
-                <AnchorPane prefHeight="693.0" prefWidth="256.0" BorderPane.alignment="CENTER">
+                <AnchorPane prefHeight="484.0" prefWidth="256.0" BorderPane.alignment="CENTER">
                <children>
                   <ListView fx:id="listView" prefHeight="608.0" prefWidth="256.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
