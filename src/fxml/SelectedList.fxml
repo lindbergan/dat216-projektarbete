@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="controllers.SelectedListController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SelectedListController">
     <children>
         <Label fx:id="listName" layoutX="447.0" layoutY="14.0" text="Listans namn" AnchorPane.topAnchor="10.0">
             <font>
-                <Font size="23.0"/>
+                <Font size="23.0" />
             </font>
         </Label>
-        <ListView layoutX="-1.0" layoutY="48.0" prefHeight="500.0" prefWidth="1005.0" AnchorPane.bottomAnchor="52.0"
-                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0"/>
-        <Button layoutX="70.0" layoutY="557.0" mnemonicParsing="false" text="Gå tillbaka "/>
-        <Button layoutX="834.0" layoutY="557.0" mnemonicParsing="false" text="Lägg till i kundvagnen"/>
-        <Button layoutX="177.0" layoutY="557.0" mnemonicParsing="false" text="Redigera lista"/>
+        <ListView fx:id="listView" layoutX="-1.0" layoutY="48.0" prefHeight="500.0" prefWidth="1005.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0" />
+        <Button layoutX="70.0" layoutY="557.0" mnemonicParsing="false" text="Gå tillbaka " />
+        <Button layoutX="834.0" layoutY="557.0" mnemonicParsing="false" text="Lägg till i kundvagnen" />
+        <Button layoutX="177.0" layoutY="557.0" mnemonicParsing="false" text="Redigera lista" />
     </children>
 </AnchorPane>

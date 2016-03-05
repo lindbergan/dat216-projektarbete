@@ -74,7 +74,7 @@ public class IMatController implements Initializable {
     private Properties prop = new Properties();
     private boolean isShopView;
     private MenuItem temp;
-
+    private static String tempName;
     /**
      * Används för att vi ska kunna få deras storlek även när vi inte är i fönstret i fråga
      */
@@ -167,10 +167,13 @@ public class IMatController implements Initializable {
         }
     }
 
+    public static String getTempName() {
+        return tempName;
+    }
+
     public void goToListView(String name) {
         try {
-            SelectedListController sp = new SelectedListController();
-            sp.setListName(name);
+            tempName = name;
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/selectedList.fxml/"));
             contentProperty.getChildren().setAll(e);
         } catch (IOException e) {
@@ -181,6 +184,7 @@ public class IMatController implements Initializable {
     public void initShoppingCartLists() {
         for (MenuItem m : listMenuProperty.getItems()) {
             m.setOnAction(e -> {
+
                 goToListView(m.getText());
             });
         }
