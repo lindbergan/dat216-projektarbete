@@ -35,8 +35,8 @@ public class ListCellReceipts extends ListCell<String> {
         gp.add(price, 3, 0, 1, 1);
 
         gp.getColumnConstraints().add(0, new ColumnConstraints(300));
-        gp.getColumnConstraints().add(1, new ColumnConstraints(400));
-        gp.getColumnConstraints().add(2, new ColumnConstraints(150));
+        gp.getColumnConstraints().add(1, new ColumnConstraints(350));
+        gp.getColumnConstraints().add(2, new ColumnConstraints(250));
         gp.getColumnConstraints().add(3, new ColumnConstraints(150));
         setInfo(name, date, quantity, price);
         gp.setVisible(true);
@@ -67,8 +67,8 @@ public class ListCellReceipts extends ListCell<String> {
             if (j <= nrReceipts) {
                 d.setText(date.get(j));
                 n.setText(fname.get(j) + " " + lname.get(j));
-                q.setText(quantity.get(j));
-                p.setText(price.get(j));
+                q.setText(quantity.get(j) + " (st/förp/kg)");
+                p.setText(price.get(j) + " kr");
                 j++;
             }
 

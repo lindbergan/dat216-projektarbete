@@ -22,6 +22,10 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -161,7 +165,7 @@ public class IMatController implements Initializable {
     public void goToReceipts(ActionEvent event) {
         ViewChanger vc = new ViewChanger();
         try {
-            vc.changeStage(event, content, "receipts.txt");
+            vc.changeStage(event, contentProperty, "receipts.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -169,20 +173,22 @@ public class IMatController implements Initializable {
 
     public void initReceipts() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("receipts.txt"));
-            if (br.readLine() != null) {
-                String[] arr = br.readLine().split(";");
-                for (int i = 0; i < arr.length - 1; i++) {
-                    if (arr[i].contains("date")) {
-                        MenuItem mi = new MenuItem(arr[i +1]);
+            List<String> list = Files.readAllLines(Paths.get("receipts.txt"));
+            if (list.size() != 0) {
+                String[] f = list.get(0).split(";");
+
+                for (int i = 0; i < f.length - 1; i++) {
+                    if (f[i].contains("date")) {
+                        MenuItem mi = new MenuItem(f[i + 1]);
                         mi.setOnAction(this::goToReceipts);
+                        receiptMenu.getItems().add(mi);
                     }
                 }
             }
             else {
-                MenuItem newMenuItem = new MenuItem("Inga kvitton.");
-                newMenuItem.setDisable(true);
-                receiptMenu.getItems().add(newMenuItem);
+                MenuItem mi = new MenuItem("Inga tidigare köp");
+                mi.setDisable(true);
+                receiptMenu.getItems().add(mi);
             }
         } catch (Exception e) {
             e.printStackTrace();

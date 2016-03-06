@@ -120,7 +120,7 @@ public class ConfirmationViewController implements Initializable {
     }
 
     //back to the correct PaymentView when "go back" <-- is clicked
-    public void backtoPaymentView() throws IOException {
+    public void backToPaymentView() throws IOException {
 
         //need to determine what View to present - based on users Paymentchoice
         if (DeliveryViewController.getPaymentChoice() == "Kortbetalning") {

@@ -21,7 +21,7 @@
                 <Font size="14.0"/>
             </font>
         </Button>
-        <Button layoutX="601.0" layoutY="514.0" mnemonicParsing="false" onAction="#backtoPaymentView"
+        <Button layoutX="601.0" layoutY="514.0" mnemonicParsing="false" onAction="#backToPaymentView"
                 prefHeight="27.000099999997474" prefWidth="78.0" text="Tillbaka"/>
         <Label layoutX="324.0" layoutY="398.0" text="Totalt :">
             <font>
