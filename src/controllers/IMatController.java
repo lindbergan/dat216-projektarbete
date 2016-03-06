@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,26 +17,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import properties.CategoryListCell;
-import properties.NewShoppingList;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class IMatController implements Initializable {
-
-    /***
-     * 'Here lies the static variables
-     * They shall remain unknown but be essential for the war to come'
-     * contentProperty = getter för content
-     * listProperty = getter för listView
-     */
 
     public static ListView<String> listProperty;
     public static AnchorPane contentProperty;
@@ -48,7 +38,6 @@ public class IMatController implements Initializable {
     CategoryMenuController categoryHandler = new CategoryMenuController();
     @FXML
     AnchorPane headerPane;
-    MenuItem newMenuItem;
     @FXML
     private Button searchButton;
     @FXML
@@ -71,13 +60,10 @@ public class IMatController implements Initializable {
     private MenuItem totalMenu;
     @FXML
     private ListView<String> listView;
+
     private Properties prop = new Properties();
     private boolean isShopView;
     private MenuItem temp;
-    private static String tempName;
-    /**
-     * Används för att vi ska kunna få deras storlek även när vi inte är i fönstret i fråga
-     */
 
     public void setIds() {
         headerPane.setId("headerPane");
@@ -98,10 +84,9 @@ public class IMatController implements Initializable {
         setImage();
         start();
         initToggleButtons();
-        ifNoReciepts();
+        initReceipts();
         ifNoFavorites();
         listMenuProperty = listMenu;
-        ifNoLists();
         initButtons();
         initListView();
         hataTraversable();
@@ -167,52 +152,43 @@ public class IMatController implements Initializable {
         }
     }
 
-    public static String getTempName() {
-        return tempName;
-    }
-
-    public void goToListView(String name) {
-        try {
-            tempName = name;
-            AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/selectedList.fxml/"));
-            contentProperty.getChildren().setAll(e);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void initShoppingCartLists() {
-        for (MenuItem m : listMenuProperty.getItems()) {
-            m.setOnAction(e -> {
-
-                goToListView(m.getText());
-            });
-        }
-    }
-
-    public void ifNoLists() {
-        if (listMenuProperty.getItems().isEmpty()) {
-            newMenuItem = new MenuItem("Skapa ny lista.");
-            listMenuProperty.getItems().add(newMenuItem);
-            newMenuItem.setOnAction(e -> {
-                listMenuProperty.getItems().remove(newMenuItem);
-                new NewShoppingList(contentProperty, listMenuProperty, newMenuItem);
-            });
-        }
-    }
-
     public void initButtons() {
         helpButton.setOnAction(e -> {
             helpMenu();
         });
     }
 
-    public void ifNoReciepts() {
-        if (receiptMenu.getItems().isEmpty()) {
-            MenuItem newMenuItem = new MenuItem("Inga kvitton.");
-            newMenuItem.setDisable(true);
-            receiptMenu.getItems().add(newMenuItem);
+    public void goToReceipts(ActionEvent event) {
+        ViewChanger vc = new ViewChanger();
+        try {
+            vc.changeStage(event, content, "receipts.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void initReceipts() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("receipts.txt"));
+            if (br.readLine() != null) {
+                String[] arr = br.readLine().split(";");
+                for (int i = 0; i < arr.length - 1; i++) {
+                    if (arr[i].contains("date")) {
+                        MenuItem mi = new MenuItem(arr[i +1]);
+                        mi.setOnAction(this::goToReceipts);
+                    }
+                }
+            }
+            else {
+                MenuItem newMenuItem = new MenuItem("Inga kvitton.");
+                newMenuItem.setDisable(true);
+                receiptMenu.getItems().add(newMenuItem);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void setImage() {

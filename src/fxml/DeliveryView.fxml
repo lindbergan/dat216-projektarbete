@@ -62,7 +62,7 @@
                 <Label layoutX="954.0" layoutY="227.0" text="Månad"/>
                 <Label layoutX="1132.0" layoutY="227.0" text="Dag"/>
                 <Label layoutX="1013.0" layoutY="352.0" text="Mellan klockan"/>
-                <ChoiceBox fx:id="monthChoisebox" layoutX="925.0" layoutY="257.0" prefHeight="27.0" prefWidth="95.0">
+                <ChoiceBox fx:id="monthChoicebox" layoutX="925.0" layoutY="257.0" prefHeight="27.0" prefWidth="95.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Item 1"/>
@@ -71,7 +71,7 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
-                <ChoiceBox fx:id="dateChoisebox" layoutX="1099.0" layoutY="257.0" prefHeight="27.0" prefWidth="88.0">
+                <ChoiceBox fx:id="dateChoicebox" layoutX="1099.0" layoutY="257.0" prefHeight="27.0" prefWidth="88.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Item 1"/>
@@ -80,7 +80,7 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
-                <ChoiceBox fx:id="minTimeChoisebox" layoutX="959.0" layoutY="386.0" prefHeight="27.0" prefWidth="80.0">
+                <ChoiceBox fx:id="minTimeChoicebox" layoutX="959.0" layoutY="386.0" prefHeight="27.0" prefWidth="80.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Item 1"/>
@@ -89,7 +89,7 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
-                <ChoiceBox fx:id="maxTimeChoisebox" layoutX="1085.0" layoutY="386.0" prefHeight="27.0" prefWidth="80.0">
+                <ChoiceBox fx:id="maxTimeChoicebox" layoutX="1085.0" layoutY="386.0" prefHeight="27.0" prefWidth="80.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Item 1"/>

@@ -24,9 +24,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-/**
- * Created by Razmus on 2016-03-03.
- */
 public class SearchViewController extends ProductView implements Initializable {
     IMatDataHandler handler = IMatDataHandler.getInstance();
     @FXML

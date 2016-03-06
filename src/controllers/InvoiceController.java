@@ -1,8 +1,5 @@
 package controllers;
 
-/**
- * Created by Jolo on 2/26/16.
- */
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

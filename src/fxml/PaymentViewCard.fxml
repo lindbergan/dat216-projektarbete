@@ -23,7 +23,7 @@
         <Label layoutX="145.0" layoutY="259.0" text="Kortnummer"/>
         <Label layoutX="145.0" layoutY="301.0" text="Kortinnehavare"/>
         <Label layoutX="145.0" layoutY="373.0" text="Utgångsdatum"/>
-        <ChoiceBox fx:id="cardMonthChoiseBox" layoutX="245.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
+        <ChoiceBox fx:id="cardMonthChoiceBox" layoutX="245.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Item 1"/>
@@ -33,7 +33,7 @@
             </items>
         </ChoiceBox>
         <Label layoutX="321.0" layoutY="375.0" text="/"/>
-        <ChoiceBox fx:id="cardYearChoiseBox" layoutX="337.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
+        <ChoiceBox fx:id="cardYearChoiceBox" layoutX="337.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Item 1"/>

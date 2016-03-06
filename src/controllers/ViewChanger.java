@@ -10,9 +10,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * Created by Jolo on 3/1/16.
- */
 public class ViewChanger {
 
     //change Scene

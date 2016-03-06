@@ -1,8 +1,5 @@
 package controllers;
 
-/**
- * Created by Jolo on 2/26/16.
- */
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,10 +14,12 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.ResourceBundle;
+import java.nio.CharBuffer;
+import java.time.Instant;
+import java.util.*;
+import java.io.FileWriter;
 
 public class ConfirmationViewController implements Initializable {
 
@@ -29,6 +28,7 @@ public class ConfirmationViewController implements Initializable {
     private ShoppingCart shoppingCart = handler.getShoppingCart();
     private ObservableList<ShoppingItem> cartItems = FXCollections.observableArrayList(shoppingCart.getItems());
     private ViewChanger viewChanger = new ViewChanger();
+    private ReceiptsController rc = new ReceiptsController();
 
     @FXML
     private AnchorPane confirmationView;
@@ -47,11 +47,15 @@ public class ConfirmationViewController implements Initializable {
     @FXML
     private Label customerDate;
     @FXML
-    private Label customerPaymentChoise;
+    private Label customerPaymentChoice;
     @FXML
     private Label price;
 
     private ObservableList<String> listViewList = FXCollections.observableArrayList("");
+    ObservableList<String> listProductNames = FXCollections.observableArrayList();
+    ObservableList<String> listProductQuantity = FXCollections.observableArrayList();
+    ObservableList<String> listProductPricePerUnit = FXCollections.observableArrayList();
+    ObservableList<String> listProductPrice = FXCollections.observableArrayList();
 
 
     @Override
@@ -68,7 +72,10 @@ public class ConfirmationViewController implements Initializable {
 
             ShoppingItem thisItem = ite.next();
             double totalItemCost = thisItem.getAmount() * thisItem.getProduct().getPrice();
-
+            listProductNames.add(thisItem.getProduct().getName());
+            listProductQuantity.add(String.valueOf(thisItem.getAmount()));
+            listProductPricePerUnit.add(String.valueOf(thisItem.getProduct().getPrice()));
+            listProductPrice.add(String.valueOf(totalItemCost));
 
             listViewList.add(getStringSpacingOne(thisItem.getProduct().getName()) +
                     getStringSpacingTwo(thisItem.getAmount() + " * " + thisItem.getProduct().getPrice() +
@@ -105,7 +112,7 @@ public class ConfirmationViewController implements Initializable {
                 DeliveryViewController.getUserSpecifiedMinTime() + " - " +
                 DeliveryViewController.getUserSpecifiedMaxTime());
 
-        customerPaymentChoise.setText(DeliveryViewController.getPaymentChoise());
+        customerPaymentChoice.setText(DeliveryViewController.getPaymentChoice());
     }
 
     public void setTotalPrice() {
@@ -115,16 +122,47 @@ public class ConfirmationViewController implements Initializable {
     //back to the correct PaymentView when "go back" <-- is clicked
     public void backtoPaymentView() throws IOException {
 
-        //need to determine what View to present - based on users Paymentchoise
-        if (DeliveryViewController.getPaymentChoise() == "Kortbetalning") {
-            viewChanger.changeScene(confirmationView, "/fxml/PaymentViewCard.fxml");
+        //need to determine what View to present - based on users Paymentchoice
+        if (DeliveryViewController.getPaymentChoice() == "Kortbetalning") {
+            //viewChanger.changeScene(confirmationView, "/fxml/PaymentViewCard.fxml");
         } else {
             viewChanger.changeScene(confirmationView, "/fxml/PaymentViewInvoice.fxml");
         }
     }
 
     //go to ExitView
-    public void confirmPurches(ActionEvent event) throws IOException {
+    public void confirmPurchase(ActionEvent event) throws IOException {
+        saveAllInfo();
+        handler.getShoppingCart().clear();
         viewChanger.changeStageOverride(event, "/fxml/ExitView.fxml");
+    }
+
+    public void saveAllInfo() throws IOException{
+        try {
+            double quantitySum = 0;
+            double priceSum = 0;
+            FileWriter writer = new FileWriter("receipts.txt", true);
+            writer.append("date;");
+            writer.append(String.valueOf(Date.from(Instant.now())) + ";");
+            writer.append("name;");
+            writer.append(customer.getFirstName() + ";");
+            writer.append(customer.getLastName() + ";");
+            for (int startNr = 0; startNr < listProductNames.size(); startNr++) {
+                writer.append(listProductNames.get(startNr) + ";");
+                writer.append(listProductQuantity.get(startNr) + ";");
+                writer.append(listProductPricePerUnit.get(startNr) + ";");
+                writer.append(listProductPrice.get(startNr) + ";");
+                quantitySum = quantitySum + Double.valueOf(listProductQuantity.get(startNr));
+                priceSum = priceSum + Double.valueOf(listProductPrice.get(startNr));
+            }
+            writer.append("price;");
+            writer.append(String.valueOf(priceSum) + ";");
+            writer.append("quantity;");
+            writer.append(String.valueOf(quantitySum) + ";");
+            writer.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

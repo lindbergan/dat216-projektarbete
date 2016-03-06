@@ -16,9 +16,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 
-/**
- * Created by Lisa on 2016-03-02.
- */
 public class ShopViewController implements Initializable {
 
     SelectedCategoryMenuController categoryHandler = new SelectedCategoryMenuController();

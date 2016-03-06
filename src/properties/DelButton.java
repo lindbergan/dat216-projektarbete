@@ -2,9 +2,6 @@ package properties;
 
 import javafx.scene.control.Button;
 
-/**
- * Created by Razmus on 2016-02-28.
- */
 public class DelButton extends Button {
     private int row;
 

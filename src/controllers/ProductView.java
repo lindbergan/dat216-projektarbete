@@ -11,9 +11,6 @@ import se.chalmers.ait.dat215.project.*;
 
 import java.util.List;
 
-/**
- * Created by Razmus on 2016-03-03.
- */
 public abstract class ProductView {
     List<Product> productList;
     IMatDataHandler handler = IMatDataHandler.getInstance();

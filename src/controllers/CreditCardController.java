@@ -1,8 +1,5 @@
 package controllers;
 
-/**
- * Created by Jolo on 2/26/16.
- */
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -44,9 +41,9 @@ public class CreditCardController implements Initializable {
     @FXML
     private TextField cvv;
     @FXML
-    private ChoiceBox cardYearChoiseBox;
+    private ChoiceBox cardYearChoiceBox;
     @FXML
-    private ChoiceBox cardMonthChoiseBox;
+    private ChoiceBox cardMonthChoiceBox;
     @FXML
     private Button continueButton;
     private ObservableList<String> cardYear = FXCollections.observableArrayList("16", "17", "18", "19", "20", "21", "22");
@@ -61,12 +58,12 @@ public class CreditCardController implements Initializable {
 
         //initialize the fields
         initTextFields();
-        initiChoiseBoxes();
+        initiChoiceBoxes();
         initRadioButtons();
 
         //listen to all the fields user can change
         listenToTextField();
-        listenToChoiseboxes();
+        listenToChoiceboxes();
         listenToRadioButtons();
     }
 
@@ -76,13 +73,13 @@ public class CreditCardController implements Initializable {
         cvv.setText(creditCard.getVerificationCode() + ""); //vet inte varför jag inte kan nå toString()
     }
 
-    public void initiChoiseBoxes() {
-        cardYearChoiseBox.setItems(cardYear);
-        cardMonthChoiseBox.setItems(cardMonth);
+    public void initiChoiceBoxes() {
+        cardYearChoiceBox.setItems(cardYear);
+        cardMonthChoiceBox.setItems(cardMonth);
 
         //get the value from previous session
-        cardYearChoiseBox.setValue(cardYear.get(creditCard.getValidYear()));
-        cardMonthChoiseBox.setValue(cardMonth.get(creditCard.getValidMonth()));
+        cardYearChoiceBox.setValue(cardYear.get(creditCard.getValidYear()));
+        cardMonthChoiceBox.setValue(cardMonth.get(creditCard.getValidMonth()));
     }
 
     public void initRadioButtons() {
@@ -133,18 +130,18 @@ public class CreditCardController implements Initializable {
         });
     }
 
-    //ChangeListener for the choiseboxes
-    public void listenToChoiseboxes() {
+    //ChangeListener for the choiceboxes
+    public void listenToChoiceboxes() {
 
         //selected cardYear
-        cardYearChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        cardYearChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 creditCard.setValidYear(newValue.intValue());
             }
         });
         //selected cardMonth
-        cardMonthChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        cardMonthChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 creditCard.setValidMonth(newValue.intValue());
@@ -187,7 +184,7 @@ public class CreditCardController implements Initializable {
     public void checkIfAllFieldsFilled() {
         if (cardHolderName != null && !cardHolderName.getText().isEmpty() && creditCardNumbr != null &&
                 !creditCardNumbr.getText().isEmpty() && cvv != null && !cvv.getText().isEmpty()
-                && cardYearChoiseBox != null && cardMonthChoiseBox != null) {
+                && cardYearChoiceBox != null && cardMonthChoiceBox != null) {
 
             allFieldsFilled = true;
         } else {

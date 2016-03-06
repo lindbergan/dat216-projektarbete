@@ -13,9 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by Lisa on 2016-03-04.
- */
 public class DetailViewController implements Initializable {
 
     @FXML

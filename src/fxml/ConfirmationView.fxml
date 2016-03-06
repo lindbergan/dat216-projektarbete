@@ -16,7 +16,7 @@
             </font>
         </Label>
         <Button id="" defaultButton="true" layoutX="549.0" layoutY="437.0" mnemonicParsing="false"
-                onAction="#confirmPurches" prefHeight="55.0" prefWidth="181.0" text="Genomför köp">
+                onAction="#confirmPurchase" prefHeight="55.0" prefWidth="181.0" text="Genomför köp">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -46,7 +46,7 @@
         <Label fx:id="customerPostCode" layoutX="919.0" layoutY="197.0" text="getPostalCode"/>
         <Label fx:id="customerEmail" layoutX="919.0" layoutY="231.0" text="getEmail"/>
         <Label fx:id="customerPhone" layoutX="918.0" layoutY="264.0" text="getPhone"/>
-        <Label fx:id="customerPaymentChoise" layoutX="918.0" layoutY="329.0" text="getPaymentMethod"/>
+        <Label fx:id="customerPaymentChoice" layoutX="918.0" layoutY="329.0" text="getPaymentMethod"/>
         <Label fx:id="customerDate" layoutX="918.0" layoutY="370.0" text="gDate"/>
         <Label fx:id="price" layoutX="458.0" layoutY="400.0" text="getPrice()"/>
         <Label font="$x1" layoutX="256.0" layoutY="78.0" text="Min kundvagn"/>
