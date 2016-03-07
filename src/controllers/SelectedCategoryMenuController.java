@@ -67,7 +67,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
             for (int i = 0; i < productListSize - 1; i += 4) {
                 for (int j = 0; j < 4; j++) {
                     String url = "/products/images/" + productList.get(adrianplz).getImageName();
-                    String price = getPriceText(productList.get(adrianplz));
+                    String price = super.getPriceText(productList.get(adrianplz));
                     ImageView img = new ImageView(new Image(url));
                     img.setEffect(new DropShadow(8, Color.BEIGE));
                     Button newButton = new Button(price, img);
@@ -82,8 +82,6 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     img.getStyleClass().add("productImage");
                     newButton.setContentDisplay(ContentDisplay.TOP);
                     newButton.setStyle("-fx-font: 15 system");
-                    //newButton.setGraphic(img);
-
 
                     BuyButton newBottomButton = new BuyButton("Köp", productList.get(adrianplz).getProductId());
                     newBottomButton.setPrefWidth(75);
@@ -118,18 +116,5 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
         } else {
             System.out.println("Productlist is empty. ");
         }
-    }
-
-    public String getPriceText(Product p){
-        String s;
-        double d = p.getPrice();
-        if(d == Math.floor(d)){
-            int i = (int)d;
-            s = i + p.getUnit();
-        }else{
-            s = String.format("%.2f", d);
-            s += p.getUnit();
-        }
-        return s;
     }
 }

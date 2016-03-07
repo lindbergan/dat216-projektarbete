@@ -156,4 +156,16 @@ public abstract class ProductView {
         return productList;
     }
 
+    public String getPriceText(Product p){
+        String s;
+        double d = p.getPrice();
+        if(d == Math.floor(d)){
+            int i = (int)d;
+            s = i + p.getUnit();
+        }else{
+            s = String.format("%.2f", d);
+            s += p.getUnit();
+        }
+        return s;
+    }
 }

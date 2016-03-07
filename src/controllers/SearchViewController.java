@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -53,15 +54,21 @@ public class SearchViewController extends ProductView implements Initializable {
         double magicalHeight = 0.0;
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getName().toLowerCase().contains(input)) {
-                Button newButton = new Button();
+                String url = "/products/images/" + products.get(i).getImageName();
+                String price = super.getPriceText(products.get(i));
+                ImageView img = new ImageView(new Image(url));
+                img.setEffect(new DropShadow(8, Color.BEIGE));
+                Button newButton = new Button(price, img);
                 newButton.setPrefWidth(200);
                 newButton.setPrefHeight(240);
-                String url = "/products/images/" + products.get(i).getImageName();
-                ImageView img = new ImageView(new Image(url));
+                newButton.setPickOnBounds(false);
+                newButton.setFocusTraversable(false);
                 img.setFitWidth(newButton.getPrefWidth());
                 img.setFitHeight(newButton.getPrefHeight() * 0.6);
-                img.setEffect(new DropShadow(8, Color.BEIGE));
-                newButton.setGraphic(img);
+                newButton.getStyleClass().add("productButton");
+                img.getStyleClass().add("productImage");
+                newButton.setContentDisplay(ContentDisplay.TOP);
+                newButton.setStyle("-fx-font: 15 system");
 
                 BuyButton newBottomButton = new BuyButton("Köp", products.get(i).getProductId());
                 newBottomButton.setPrefWidth(75);
