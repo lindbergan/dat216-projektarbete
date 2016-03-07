@@ -304,7 +304,7 @@ public class IMatController implements Initializable {
     }
 
     public boolean cantBuyHalf(int i) {
-        return handler.getProduct(i).getUnitSuffix().equals("st");
+        return handler.getProduct(i).getUnitSuffix().equals("st") || handler.getProduct(i).getUnitSuffix().equals("förp");
 
     }
 
