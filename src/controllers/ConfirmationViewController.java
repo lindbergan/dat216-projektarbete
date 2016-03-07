@@ -10,9 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
+import javafx.util.Callback;
+import properties.CustomCell;
 import properties.ViewChanger;
+import properties.ViewSingelton;
 import se.chalmers.ait.dat215.project.*;
 import java.io.IOException;
 import java.net.URL;
@@ -47,7 +51,8 @@ public class ConfirmationViewController implements Initializable {
     private Label customerPaymentChoise;
     @FXML private Label price;
 
-    private ObservableList<String> listViewList = FXCollections.observableArrayList("");
+    private ObservableList<String> listViewList = FXCollections.observableArrayList();
+    ViewSingelton currentView = ViewSingelton.getInstance();
 
 
     @Override
@@ -65,33 +70,29 @@ public class ConfirmationViewController implements Initializable {
             ShoppingItem thisItem = ite.next();
             double totalItemCost = thisItem.getAmount()*thisItem.getProduct().getPrice();
 
-            listViewList.set(0, getStringSpacingThree("Kvitto"));
-            listViewList.add(getStringSpacingOne(thisItem.getProduct().getName()) +
-                    getStringSpacingTwo(thisItem.getAmount() + " * " + thisItem.getProduct().getPrice() +
+            listViewList.add(getStringSpacing(thisItem.getProduct().getName() +", " +
+                    thisItem.getAmount() + " x " + thisItem.getProduct().getPrice() +
                             " " + thisItem.getProduct().getUnit()) +totalItemCost + ":-");
 
+
         }
+
         shoppingCartSummary.setItems(listViewList);
+
+        shoppingCartSummary.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+
+                    return new CustomCell();
+
+            }
+        });
     }
 
-    public String getStringSpacingOne(String str){
-
-        while(str.length()<30){
-            str = str + " ";
-        }
-        return str;
-    }
-    public String getStringSpacingTwo(String str){
-
-        while(str.length()<40){
-            str = str + " ";
-        }
-        return str;
-    }
-    public String getStringSpacingThree(String str){
+    public String getStringSpacing(String str){
 
         while(str.length()<50){
-            str = " " + str;
+            str = str + " ";
         }
         return str;
     }
@@ -115,6 +116,8 @@ public class ConfirmationViewController implements Initializable {
 
     //back to the correct PaymentView when "go back" <-- is clicked
     public void backtoPaymentView() throws IOException {
+
+        currentView.setCurrentViewName("paymentView");
 
         //need to determine what View to present - based on users Paymentchoise
         if (DeliveryViewController.getPaymentChoise() == "Kortbetalning") {

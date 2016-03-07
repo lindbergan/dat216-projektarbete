@@ -23,7 +23,7 @@ public class ViewChanger {
         oldView.getChildren().setAll(confirmationView);
     }
 
-    //change Stage
+    //Change Stage - the new Stage gets the same resolution as the old one
     public void changeStage(ActionEvent event, AnchorPane pane, String url) throws IOException {
 
         Parent parent = FXMLLoader.load(getClass().getResource(url));
@@ -34,7 +34,7 @@ public class ViewChanger {
         stage.show();
     }
 
-    //Change stage avd override to specified Resolution : 1280x720
+    //Change stage and override to specified Resolution : 1280x720
     public void changeStageOverride(ActionEvent event, String url) throws IOException {
 
         Parent parent = FXMLLoader.load(getClass().getResource(url));

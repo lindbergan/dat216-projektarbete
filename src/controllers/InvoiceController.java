@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import properties.ViewChanger;
+import properties.ViewSingelton;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
@@ -46,6 +47,8 @@ public class InvoiceController implements Initializable {
     private TextField invoiceEmail;
     @FXML
     private TextField invoicePhone;
+    ViewSingelton currentView = ViewSingelton.getInstance();
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,10 +78,12 @@ public class InvoiceController implements Initializable {
     //back to delivery view when clicked "go back" <--
     public void backToDeliveryClicked(ActionEvent event) throws IOException {
         viewChanger.changeScene(paymentViewInvoice, "/fxml/DeliveryView.fxml");
+        currentView.setCurrentViewName("deliveryView");
     }
 
     //gives us the confirmation view when user clicked "continue" -->
     public void continueClicked() throws IOException {
         viewChanger.changeScene(paymentViewInvoice, "/fxml/ConfirmationView.fxml");
+        currentView.setCurrentViewName("confirmationView");
     }
 }

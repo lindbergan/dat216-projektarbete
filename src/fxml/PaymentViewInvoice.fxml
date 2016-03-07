@@ -7,36 +7,40 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="paymentViewInvoice" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.InvoiceController">
+<AnchorPane id="AnchorPane" fx:id="paymentViewInvoice" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InvoiceController">
   <children>
-    <TextField fx:id="invoiceFirstName" disable="true" layoutX="84.0" layoutY="214.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
-    <TextField fx:id="invoiceLastName" disable="true" layoutX="361.0" layoutY="214.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
-    <TextField fx:id="invoiceAddress" disable="true" layoutX="84.0" layoutY="297.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
-    <TextField fx:id="invoicePostCode" disable="true" layoutX="82.0" layoutY="377.0" prefHeight="32.9609375" prefWidth="80.0" />
-    <TextField fx:id="invoicePostAddress" disable="true" layoutX="361.0" layoutY="377.0" prefHeight="32.9609375" prefWidth="235.0" />
-    <TextField fx:id="invoicePhone" disable="true" layoutX="80.0" layoutY="456.0" prefHeight="32.9609375" prefWidth="165.0" />
-    <TextField fx:id="invoiceEmail" disable="true" layoutX="361.0" layoutY="456.0" prefHeight="32.9609375" prefWidth="235.0" />
-    <Label layoutX="80.0" layoutY="73.0" prefHeight="33.0" prefWidth="101.0" text="Levereras till:">
+    <TextField fx:id="invoiceFirstName" disable="true" layoutX="105.0" layoutY="214.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
+    <TextField fx:id="invoiceLastName" disable="true" layoutX="382.0" layoutY="214.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
+    <TextField fx:id="invoiceAddress" disable="true" layoutX="105.0" layoutY="297.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
+    <TextField fx:id="invoicePostCode" disable="true" layoutX="105.0" layoutY="377.0" prefHeight="32.9609375" prefWidth="80.0" />
+    <TextField fx:id="invoicePostAddress" disable="true" layoutX="382.0" layoutY="377.0" prefHeight="32.9609375" prefWidth="235.0" />
+    <TextField fx:id="invoicePhone" disable="true" layoutX="105.0" layoutY="456.0" prefHeight="32.9609375" prefWidth="165.0" />
+    <TextField fx:id="invoiceEmail" disable="true" layoutX="382.0" layoutY="456.0" prefHeight="32.9609375" prefWidth="235.0" />
+    <Label layoutX="105.0" layoutY="73.0" prefHeight="33.0" prefWidth="101.0" text="Levereras till:">
       <font>
         <Font name="System Bold" size="14.0" />
       </font>
     </Label>
-    <Label layoutX="84.0" layoutY="187.0" text="Förnamn *" />
-    <Label layoutX="82.0" layoutY="268.0" text="Adress *" />
-    <Label layoutX="361.0" layoutY="187.0" text="Efternamn *" />
-    <Label layoutX="84.0" layoutY="352.0" text="Postnummer *" />
-    <Label layoutX="361.0" layoutY="352.0" text="Postort" />
-    <Label layoutX="82.0" layoutY="431.0" text="Telefon/Mobil *" />
-    <Label layoutX="361.0" layoutY="431.0" text="E-post *" />
-    <Label layoutX="80.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
-    <Button layoutX="936.0" layoutY="518.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="34.0" prefWidth="131.0" text="Tillbaka" />
-    <Button defaultButton="true" layoutX="1082.0" layoutY="518.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0" text="Fortsätt" />
-    <Label layoutX="546.0" layoutY="20.0" text="Fakturabetalning">
-      <font>
-        <Font name="System Bold" size="20.0" />
-      </font>
-    </Label>
-    <RadioButton fx:id="sameAsDelivery" layoutX="82.0" layoutY="116.0" mnemonicParsing="false" text="Samma som leveransadress" />
-    <RadioButton fx:id="otherAdress" disable="true" layoutX="82.0" layoutY="148.0" mnemonicParsing="false" text="Annan adress" />
+    <Label layoutX="105.0" layoutY="187.0" text="Förnamn *" />
+    <Label layoutX="105.0" layoutY="268.0" text="Adress *" />
+    <Label layoutX="382.0" layoutY="187.0" text="Efternamn *" />
+    <Label layoutX="105.0" layoutY="352.0" text="Postnummer *" />
+    <Label layoutX="382.0" layoutY="352.0" text="Postort" />
+    <Label layoutX="105.0" layoutY="431.0" text="Telefon/Mobil *" />
+    <Label layoutX="382.0" layoutY="431.0" text="E-post *" />
+    <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
+    <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka" />
+    <Button defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt" />
+      <HBox alignment="CENTER" layoutX="546.0" layoutY="20.0" AnchorPane.leftAnchor="546.0" AnchorPane.rightAnchor="573.0">
+         <children>
+          <Label alignment="CENTER" layoutX="546.0" layoutY="20.0" text="Fakturabetalning">
+            <font>
+              <Font name="System Bold" size="20.0" />
+            </font>
+          </Label>
+         </children>
+      </HBox>
+    <RadioButton fx:id="sameAsDelivery" layoutX="105.0" layoutY="116.0" mnemonicParsing="false" text="Samma som leveransadress" />
+    <RadioButton fx:id="otherAdress" disable="true" layoutX="105.0" layoutY="148.0" mnemonicParsing="false" text="Annan adress" />
   </children>
 </AnchorPane>

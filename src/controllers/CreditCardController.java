@@ -12,7 +12,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import properties.StringComparer;
 import properties.ViewChanger;
+import properties.ViewSingelton;
 import se.chalmers.ait.dat215.project.CreditCard;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
@@ -58,7 +60,7 @@ public class CreditCardController implements Initializable {
 
     private static boolean allFieldsFilled = false;
     private boolean wasClickedBefore = false;
-
+    ViewSingelton currentView = ViewSingelton.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -120,8 +122,16 @@ public class CreditCardController implements Initializable {
         creditCardNumbr.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                creditCard.setCardNumber(newValue);
+
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 17) {
+                    creditCard.setCardNumber(newValue);
+                    creditCardNumbr.setText(newValue);
+                }
+                else{
+                    creditCardNumbr.setText(oldValue);
+                }
                 checkIfAllFieldsFilled();
+
             }
         });
 
@@ -129,7 +139,13 @@ public class CreditCardController implements Initializable {
         cardHolderName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                creditCard.setHoldersName(newValue);
+
+                if (StringComparer.onlyContainsLetter(newValue)){
+                    creditCard.setHoldersName(newValue);
+                }
+                else {
+                    cardHolderName.setText(oldValue);
+                }
                 checkIfAllFieldsFilled();
             }
         });
@@ -138,8 +154,16 @@ public class CreditCardController implements Initializable {
         cvv.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                creditCard.setVerificationCode(Integer.parseInt(newValue));
+
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 4) {
+                    creditCard.setVerificationCode(Integer.parseInt(newValue));
+                    cvv.setText(newValue);
+                }
+                else{
+                    cvv.setText(oldValue);
+                }
                 checkIfAllFieldsFilled();
+
             }
         });
     }
@@ -211,7 +235,7 @@ public class CreditCardController implements Initializable {
         }
     }
 
-    public static boolean getAllFieldsFilled(){
+    public static boolean areAllFieldsFilled(){
         return allFieldsFilled;
     }
 

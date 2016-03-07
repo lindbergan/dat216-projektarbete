@@ -9,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import properties.StringComparer;
 import properties.ViewChanger;
+import properties.ViewSingelton;
 import se.chalmers.ait.dat215.project.CreditCard;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
@@ -58,12 +60,18 @@ public class DeliveryViewController implements Initializable {
     @FXML private Button continueButton;
     @FXML private Label infoLabel;
     @FXML private DatePicker calendar;
+
+    @FXML private Button deliveryButton;
+    @FXML private Button paymentButton;
+    @FXML private Button confirmationButton;
+
     private static boolean allFieldsFilled = false;
+    private static ViewSingelton currentView = ViewSingelton.getInstance();
 
     //the observable lists for the Choiseboxes
-    private ObservableList<String> timeIntervall = FXCollections.observableArrayList("04 - 08", "05 - 09", "06 - 10",
-            "07 - 11", "08 - 12", "09 - 13", "10 - 14", "11 - 15", "12 - 16", "13 - 17", "14 - 18", "15 - 19",
-            "16 - 20", "17 - 21", "18 - 22", "19 - 23", "20 - 00");
+    private ObservableList<String> timeIntervall = FXCollections.observableArrayList("04.00 - 08.00", "05.00 - 09.00", "06.00 - 10.00",
+            "07.00 - 11.00", "08.00 - 12.00", "09.00 - 13.00", "10.00 - 14.00", "11.00 - 15.00", "12.00 - 16.00", "13.00 - 17.00", "14.00 - 18.00", "15.00 - 19.00",
+            "16.00 - 20.00", "17.00 - 21.00", "18.00 - 22.00", "19.00 - 23.00", "20.00 - 00.00");
 
     //The getters for our custom choisboxes and radiobuttons and Datepicker
     public static String getUserSpecifiedDate() {
@@ -148,7 +156,13 @@ public class DeliveryViewController implements Initializable {
         customerFirstName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setFirstName(newValue);
+
+                if (StringComparer.onlyContainsLetter(newValue)){
+                    customer.setFirstName(newValue);
+                }
+                else {
+                    customerFirstName.setText(oldValue);
+                }
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -157,7 +171,13 @@ public class DeliveryViewController implements Initializable {
         customerLastName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setLastName(newValue);
+
+                if (StringComparer.onlyContainsLetter(newValue)){
+                    customer.setLastName(newValue);
+                }
+                else {
+                    customerLastName.setText(oldValue);
+                }
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -175,7 +195,13 @@ public class DeliveryViewController implements Initializable {
         customerPostCode.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setPostCode(newValue);
+
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length()<6){
+                    customer.setPostCode(newValue);
+                }
+                else {
+                    customerPostCode.setText(oldValue);
+                }
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -184,7 +210,13 @@ public class DeliveryViewController implements Initializable {
         customerPostAddress.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setPostAddress(newValue);
+
+                if (StringComparer.onlyContainsLetter(newValue)){
+                    customer.setPostAddress(newValue);
+                }
+                else {
+                    customerPostAddress.setText(oldValue);
+                }
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -202,7 +234,13 @@ public class DeliveryViewController implements Initializable {
         customerPhone.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setPhoneNumber(newValue);
+
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length()<11){
+                    customer.setPhoneNumber(newValue);
+                }
+                else {
+                    customerPhone.setText(oldValue);
+                }
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -258,7 +296,9 @@ public class DeliveryViewController implements Initializable {
     //gives us the right PaymentView depending on what radiobutton is selected
     public void continueClicked() throws IOException {
 
-            if (paymentChoise == "Kortbetalning") {
+        currentView.setCurrentViewName("paymentView");
+
+        if (paymentChoise == "Kortbetalning") {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
             } else {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
@@ -277,12 +317,53 @@ public class DeliveryViewController implements Initializable {
             allFieldsFilled = true;
             continueButton.setDisable(false);
             infoLabel.setVisible(false);
-
         }
+
         else {
             allFieldsFilled = false;
             continueButton.setDisable(true);
             infoLabel.setVisible(true);
+        }
+    }
+
+    public void deliveryButtonClicked()throws IOException{
+        viewChanger.changeScene(deliveryView,"/fxml/DeliveryView.fxml" );
+    }
+
+    public void paymentButtonClicked()throws IOException{
+
+        if(allFieldsFilled){
+            continueClicked();
+        }
+    }
+
+    public void confirmationButtonClicked()throws IOException{
+
+        if(allFieldsFilled && CreditCardController.areAllFieldsFilled()){
+            viewChanger.changeScene(deliveryView,"/fxml/ConfirmationView.fxml");
+}    }
+
+    //Need somehow to create a listener that can listen to changes to viewName in the class ViewSingelton.
+    // String is primitive - thus, cant listen to changes. But we need to find a workaround.
+
+    public void setCorrectHeaderButton(){
+        if(currentView.getCurrentViewName() == "deliveryView"){
+
+            System.out.println("deliveryView");
+            //buttonAction
+
+        }
+        else if(currentView.getCurrentViewName() == "paymentView"){
+
+            System.out.println("paymentView");
+            //buttonAction
+
+        }
+        else{
+            System.out.println("ConfirmationView");
+            //buttonAction
+
+
         }
     }
 }
