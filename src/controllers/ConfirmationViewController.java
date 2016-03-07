@@ -138,7 +138,7 @@ public class ConfirmationViewController implements Initializable {
         currentView.setCurrentViewName("paymentView");
 
         //need to determine what View to present - based on users Paymentchoise
-        if (DeliveryViewController.getPaymentChoise() == "Kortbetalning") {
+        if (DeliveryViewController.getPaymentChoice() == "Kortbetalning") {
             viewChanger.changeScene(confirmationView, "/fxml/PaymentViewCard.fxml");
         } else {
             viewChanger.changeScene(confirmationView, "/fxml/PaymentViewInvoice.fxml");

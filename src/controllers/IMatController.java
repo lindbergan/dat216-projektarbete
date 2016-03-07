@@ -163,7 +163,7 @@ public class IMatController implements Initializable {
     }
 
     public void goToReceipts(ActionEvent event) {
-        ViewChanger vc = new ViewChanger();
+        properties.ViewChanger vc = new properties.ViewChanger();
         try {
             vc.changeStage(event, contentProperty, "receipts.txt");
         } catch (IOException e) {

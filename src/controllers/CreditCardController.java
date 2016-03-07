@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class CreditCardController implements Initializable {
 
-    private static boolean allFieldsFilled = false;
+    //private static boolean allFieldsFilled = false;
     final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private CreditCard creditCard = handler.getCreditCard();
@@ -47,7 +47,7 @@ public class CreditCardController implements Initializable {
     private ChoiceBox cardYearChoiceBox;
     @FXML
 
-    private ChoiceBox cardMonthChoiseBox;
+    private ChoiceBox cardMonthChoiceBox;
     @FXML private Button continueButton;
     @FXML private Label infoLabel;
     @FXML private Button helpButton;

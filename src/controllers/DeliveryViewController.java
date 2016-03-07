@@ -27,7 +27,7 @@ public class DeliveryViewController implements Initializable {
 
     private static LocalDate userSpecifiedDate;
     private static String userSpecifiedTime;
-    private static String paymentChoise = "Kortbetalning";
+    private static String paymentChoice = "Kortbetalning";
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
@@ -83,8 +83,8 @@ public class DeliveryViewController implements Initializable {
         return userSpecifiedTime;
     }
 
-    public static String getPaymentChoise() {
-        return paymentChoise;
+    public static String getPaymentChoice() {
+        return paymentChoice;
     }
 
 
@@ -131,7 +131,7 @@ public class DeliveryViewController implements Initializable {
 
 
 
-    public void userSpecifiedChoiseBox() {
+    public void userSpecifiedChoiceBox() {
 
         timeIntervallChoisebox.setValue(userSpecifiedTime);
     }
@@ -304,7 +304,7 @@ public class DeliveryViewController implements Initializable {
         currentView.setCurrentViewName("paymentView");
 
 
-        if (paymentChoise == "Kortbetalning") {
+        if (paymentChoice == "Kortbetalning") {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
             } else {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
