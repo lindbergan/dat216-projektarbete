@@ -165,11 +165,11 @@ public class ConfirmationViewController implements Initializable {
             for (int startNr = 0; startNr < listProductNames.size(); startNr++) {
                 writer.append("pid;");
                 writer.append(listProductNames.get(startNr) + ";");
-                writer.append("pamount");
+                writer.append("pamount;");
                 writer.append(listProductQuantity.get(startNr) + ";");
-                writer.append("pprice");
+                writer.append("pprice;");
                 writer.append(listProductPricePerUnit.get(startNr) + ";");
-                writer.append("ptotal");
+                writer.append("ptotal;");
                 writer.append(listProductPrice.get(startNr) + ";");
                 quantitySum = quantitySum + Double.valueOf(listProductQuantity.get(startNr));
                 priceSum = priceSum + Double.valueOf(listProductPrice.get(startNr));

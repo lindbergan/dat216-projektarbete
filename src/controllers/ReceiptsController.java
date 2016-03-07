@@ -53,7 +53,7 @@ public class ReceiptsController implements Initializable {
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 properties.ViewChanger vc = new properties.ViewChanger();
                 try {
-                    vc.changeScene(IMatController.contentProperty, "SelectedReceipt.fxml");
+                    vc.changeScene(IMatController.contentProperty, "/fxml/SelectedReceipt.fxml/");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

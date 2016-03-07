@@ -62,7 +62,7 @@ public class ExitViewController implements Initializable {
         try  {
             IMatController imc  = new IMatController();
             viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");
-            viewChanger.changeScene(imc.contentProperty, "/fxml/Receipts.fxml");
+            viewChanger.changeScene(imc.contentProperty, "/fxml/Receipts.fxml/");
         }
         catch (IOException e) {
             e.printStackTrace();
