@@ -345,7 +345,7 @@ public class DeliveryViewController implements Initializable {
 
     public void confirmationButtonClicked()throws IOException{
 
-        if(allFieldsFilled && CreditCardController.areAllFieldsFilled()){
+        if(allFieldsFilled && CreditCardController.AllFieldsFilled() && InvoiceController.AllFieldsFilled()){
             viewChanger.changeScene(deliveryView,"/fxml/ConfirmationView.fxml");
 }    }
 
