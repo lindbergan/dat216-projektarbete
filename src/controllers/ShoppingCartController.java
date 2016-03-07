@@ -138,7 +138,8 @@ public class ShoppingCartController implements Initializable {
     }
 
     public boolean cantBuyHalf(int i) {
-        return cart.getItems().get(i).getProduct().getUnitSuffix().equals("st");
+        return cart.getItems().get(i).getProduct().getUnitSuffix().equals("st") || cart.getItems().get(i).getProduct().getUnitSuffix().equals("förp");
+
 
     }
 
