@@ -9,13 +9,13 @@
 
 <AnchorPane id="AnchorPane" fx:id="paymentViewInvoice" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InvoiceController">
   <children>
-    <TextField fx:id="invoiceFirstName" disable="true" layoutX="105.0" layoutY="173.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
-    <TextField fx:id="invoiceLastName" disable="true" layoutX="382.0" layoutY="173.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
-    <TextField fx:id="invoiceAddress" disable="true" layoutX="105.0" layoutY="256.0" prefHeight="32.9609375" prefWidth="235.0" promptText="samma som angetts vid leverans" />
-    <TextField fx:id="invoicePostCode" disable="true" layoutX="105.0" layoutY="336.0" prefHeight="32.9609375" prefWidth="80.0" />
-    <TextField fx:id="invoicePostAddress" disable="true" layoutX="382.0" layoutY="336.0" prefHeight="32.9609375" prefWidth="235.0" />
-    <TextField fx:id="invoicePhone" disable="true" layoutX="105.0" layoutY="415.0" prefHeight="32.9609375" prefWidth="165.0" />
-    <TextField fx:id="invoiceEmail" disable="true" layoutX="382.0" layoutY="415.0" prefHeight="32.9609375" prefWidth="235.0" />
+    <TextField fx:id="invoiceFirstName" layoutX="105.0" layoutY="173.0" prefHeight="32.9609375" prefWidth="235.0" promptText="Förnamn" />
+    <TextField fx:id="invoiceLastName" layoutX="382.0" layoutY="173.0" prefHeight="32.9609375" prefWidth="235.0" promptText="Efternamn" />
+    <TextField fx:id="invoiceAddress" layoutX="105.0" layoutY="256.0" prefHeight="32.9609375" prefWidth="235.0" promptText="Adress" />
+    <TextField fx:id="invoicePostCode" layoutX="105.0" layoutY="336.0" prefHeight="33.0" prefWidth="93.0" promptText="Postnummer" />
+    <TextField fx:id="invoicePostAddress" layoutX="382.0" layoutY="336.0" prefHeight="32.9609375" prefWidth="235.0" promptText="Postort" />
+    <TextField fx:id="invoicePhone" layoutX="105.0" layoutY="415.0" prefHeight="32.9609375" prefWidth="165.0" promptText="Telefonnummer" />
+    <TextField fx:id="invoiceEmail" layoutX="382.0" layoutY="415.0" prefHeight="32.9609375" prefWidth="235.0" promptText="E-post" />
     <Label layoutX="105.0" layoutY="36.0" prefHeight="33.0" prefWidth="101.0" text="Levereras till:">
       <font>
         <Font name="System Bold" size="14.0" />
@@ -30,7 +30,7 @@
     <Label layoutX="382.0" layoutY="390.0" text="E-post *" />
     <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
     <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka" />
-    <Button defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt" />
+    <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt" />
       <HBox alignment="CENTER" layoutX="587.0" layoutY="21.0" prefHeight="26.0" prefWidth="189.0" AnchorPane.leftAnchor="546.0" AnchorPane.rightAnchor="545.0">
          <children>
           <Label alignment="CENTER" layoutX="587.0" layoutY="21.0" text="Fakturabetalning">
@@ -41,6 +41,7 @@
          </children>
       </HBox>
     <RadioButton fx:id="sameAsDelivery" layoutX="105.0" layoutY="75.0" mnemonicParsing="false" text="Samma som leveransadress" />
-    <RadioButton fx:id="otherAdress" disable="true" layoutX="105.0" layoutY="107.0" mnemonicParsing="false" text="Annan adress" />
+    <RadioButton fx:id="otherAdress" layoutX="105.0" layoutY="107.0" mnemonicParsing="false" text="Annan adress" />
+      <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" visible="false" />
   </children>
 </AnchorPane>
