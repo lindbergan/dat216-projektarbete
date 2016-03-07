@@ -165,7 +165,7 @@ public class IMatController implements Initializable {
     public void goToReceipts(ActionEvent event) {
         properties.ViewChanger vc = new properties.ViewChanger();
         try {
-            vc.changeStage(event, contentProperty, "receipts.txt");
+            vc.changeScene(content, "/fxml/Receipts.fxml");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -184,6 +184,17 @@ public class IMatController implements Initializable {
                         receiptMenu.getItems().add(mi);
                     }
                 }
+                receiptMenu.getItems().add(new SeparatorMenuItem());
+                MenuItem item = new MenuItem("Hantera alla kvitton");
+                properties.ViewChanger vc = new properties.ViewChanger();
+                    item.setOnAction(e -> {
+                        try {
+                            vc.changeScene(content, "/fxml/Receipts.fxml/");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    });
+                receiptMenu.getItems().add(item);
             }
             else {
                 MenuItem mi = new MenuItem("Inga tidigare köp");

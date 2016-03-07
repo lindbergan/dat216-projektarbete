@@ -36,6 +36,7 @@ public class ExitViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initTextFields();
+        initButtons();
     }
 
     public void initTextFields() {
@@ -45,6 +46,10 @@ public class ExitViewController implements Initializable {
                 DeliveryViewController.getUserSpecifiedTime());
     }
 
+    public void initButtons() {
+        receipts.setOnAction(e -> receiptsButtonPushed(e));
+    }
+
     //clears the cart and goes back to the store when "continue shopping" button is pushed
     public void continueShopping(ActionEvent event) throws IOException {
         cart.clear();
@@ -52,11 +57,16 @@ public class ExitViewController implements Initializable {
     }
 
     //goes back to iMatView and shows receipts
-    public void receiptsButtonPushed(ActionEvent event) throws IOException {
+    public void receiptsButtonPushed(ActionEvent event) {
         //byt stage till kvitto-stage:n
-        IMatController imc  = new IMatController();
-        viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");
-        viewChanger.changeScene(imc.contentProperty, "/fxml/Receipts.fxml");
+        try  {
+            IMatController imc  = new IMatController();
+            viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");
+            viewChanger.changeScene(imc.contentProperty, "/fxml/Receipts.fxml/");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //clears the cart and goes back to the store when "continue shopping" button is pushed
