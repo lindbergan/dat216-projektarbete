@@ -184,6 +184,17 @@ public class IMatController implements Initializable {
                         receiptMenu.getItems().add(mi);
                     }
                 }
+                receiptMenu.getItems().add(new SeparatorMenuItem());
+                MenuItem item = new MenuItem("Hantera alla listor");
+                properties.ViewChanger vc = new properties.ViewChanger();
+                    item.setOnAction(e -> {
+                        try {
+                            vc.changeStage(e, content, "receipts.txt");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    });
+                receiptMenu.getItems().add(item);
             }
             else {
                 MenuItem mi = new MenuItem("Inga tidigare köp");
