@@ -231,7 +231,7 @@ public class CreditCardController implements Initializable {
     }
 
 
-    public static boolean areAllFieldsFilled(){
+    public static boolean AllFieldsFilled(){
         return allFieldsFilled;
     }
 
