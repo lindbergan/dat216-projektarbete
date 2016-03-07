@@ -95,7 +95,7 @@ public class ConfirmationViewController implements Initializable {
 
         }
 
-        //shoppingCartSummary.setItems(listViewList);
+        shoppingCartSummary.setItems(listViewList);
 
         shoppingCartSummary.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
@@ -137,7 +137,7 @@ public class ConfirmationViewController implements Initializable {
 
         currentView.setCurrentViewName("paymentView");
 
-        //need to determine what View to present - based on users Paymentchoise
+        //need to determine what View to present - based on users Paymentchoice
         if (DeliveryViewController.getPaymentChoice() == "Kortbetalning") {
             viewChanger.changeScene(confirmationView, "/fxml/PaymentViewCard.fxml");
         } else {

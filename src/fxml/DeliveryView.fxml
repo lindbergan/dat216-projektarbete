@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="deliveryView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DeliveryViewController">
@@ -47,7 +51,7 @@
             <Label font="$x1" layoutX="1013.0" layoutY="43.0" text="Leveranstid:" />
             <Label layoutX="915.0" layoutY="127.0" text="Datum" />
             <Label layoutX="873.0" layoutY="197.0" text="Mellan klockan" />
-            <ChoiceBox fx:id="timeIntervallChoisebox" layoutX="970.0" layoutY="194.0" prefHeight="27.0" prefWidth="100.0">
+            <ChoiceBox fx:id="timeIntervallChoicebox" layoutX="970.0" layoutY="194.0" prefHeight="27.0" prefWidth="100.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Item 1" />

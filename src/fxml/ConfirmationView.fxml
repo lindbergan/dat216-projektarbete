@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.shape.Line?>
-
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" fx:id="confirmationView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ConfirmationViewController">
@@ -20,7 +22,7 @@
       </HBox>
       <HBox alignment="CENTER" layoutX="558.0" layoutY="442.0" prefHeight="53.0" prefWidth="143.0" AnchorPane.leftAnchor="558.0" AnchorPane.rightAnchor="579.0">
          <children>
-          <Button id="" defaultButton="true" layoutX="554.0" layoutY="454.0" mnemonicParsing="false" onAction="#confirmPurches" prefHeight="53.0" prefWidth="151.0" text="Genomför köp">
+          <Button id="" defaultButton="true" layoutX="554.0" layoutY="454.0" mnemonicParsing="false" onAction="#confirmPurchase" prefHeight="53.0" prefWidth="151.0" text="Genomför köp">
             <font>
               <Font size="14.0" />
             </font>
@@ -29,7 +31,7 @@
       </HBox>
       <HBox alignment="CENTER" layoutX="581.0" layoutY="509.0" prefHeight="42.0" prefWidth="96.0">
          <children>
-          <Button layoutX="581.0" layoutY="522.0" mnemonicParsing="false" onAction="#backtoPaymentView" prefHeight="32.0" prefWidth="96.0" text="Tillbaka" />
+          <Button layoutX="581.0" layoutY="522.0" mnemonicParsing="false" onAction="#backToPaymentView" prefHeight="32.0" prefWidth="96.0" text="Tillbaka" />
          </children>
       </HBox>
     <Label layoutX="465.0" layoutY="386.0" text="Totalt :">
@@ -55,7 +57,7 @@
     <Label fx:id="customerPostCode" layoutX="804.0" layoutY="184.0" text="getPostalCode" />
     <Label fx:id="customerEmail" layoutX="804.0" layoutY="214.0" text="getEmail" />
     <Label fx:id="customerPhone" layoutX="804.0" layoutY="244.0" text="getPhone" />
-    <Label fx:id="customerPaymentChoise" layoutX="804.0" layoutY="304.0" text="getPaymentMethod" />
+    <Label fx:id="customerPaymentChoice" layoutX="804.0" layoutY="304.0" text="getPaymentMethod" />
     <Label fx:id="customerDate" layoutX="804.0" layoutY="334.0" text="gDate" />
     <Label fx:id="price" layoutX="569.0" layoutY="386.0" text="getPrice()">
          <font>

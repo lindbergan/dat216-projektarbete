@@ -58,7 +58,7 @@ public class DeliveryViewController implements Initializable {
     private TextField customerPhone;
     @FXML
 
-    private ChoiceBox timeIntervallChoisebox;
+    private ChoiceBox timeIntervallChoicebox;
     @FXML private Button continueButton;
     @FXML private Label infoLabel;
     @FXML private DatePicker calendar;
@@ -70,7 +70,7 @@ public class DeliveryViewController implements Initializable {
     private static boolean allFieldsFilled = false;
     private static ViewSingelton currentView = ViewSingelton.getInstance();
 
-    //the observable lists for the Choiseboxes
+    //the observable lists for the Choiceboxes
     private ObservableList<String> timeIntervall = FXCollections.observableArrayList("04.00 - 08.00", "05.00 - 09.00", "06.00 - 10.00",
             "07.00 - 11.00", "08.00 - 12.00", "09.00 - 13.00", "10.00 - 14.00", "11.00 - 15.00", "12.00 - 16.00", "13.00 - 17.00", "14.00 - 18.00", "15.00 - 19.00",
             "16.00 - 20.00", "17.00 - 21.00", "18.00 - 22.00", "19.00 - 23.00", "20.00 - 00.00");
@@ -122,7 +122,7 @@ public class DeliveryViewController implements Initializable {
 
 
 
-        timeIntervallChoisebox.setItems(timeIntervall);
+        timeIntervallChoicebox.setItems(timeIntervall);
 
         //sets the choiesBoxes in case customer chose "go back" from paymentView
         userSpecifiedChoiceBox();
@@ -133,7 +133,7 @@ public class DeliveryViewController implements Initializable {
 
     public void userSpecifiedChoiceBox() {
 
-        timeIntervallChoisebox.setValue(userSpecifiedTime);
+        timeIntervallChoicebox.setValue(userSpecifiedTime);
     }
 
     public void initRadioButtons() {
@@ -142,8 +142,8 @@ public class DeliveryViewController implements Initializable {
         invoicePayment.setToggleGroup(radioButtonGroup);
 
         if (paymentChoice == "Kortbetalning") {
-            cardPayment.setSelected(false);
-            invoicePayment.setSelected(true);
+            cardPayment.setSelected(true);
+            invoicePayment.setSelected(false);
         } else {
             cardPayment.setSelected(false);
             invoicePayment.setSelected(true);
@@ -255,11 +255,11 @@ public class DeliveryViewController implements Initializable {
     public void listenToChoiceboxes() {
 
         //selected timeIntervall
-        timeIntervallChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        timeIntervallChoicebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiseBoxIndex = newValue.intValue();
-                userSpecifiedTime = timeIntervall.get(choiseBoxIndex);
+                int choiceBoxIndex = newValue.intValue();
+                userSpecifiedTime = timeIntervall.get(choiceBoxIndex);
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -273,7 +273,7 @@ public class DeliveryViewController implements Initializable {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 
                 if (newValue == cardPayment) {
-                    paymentChoice = "Fakturabetalning";
+                    paymentChoice = "Kortbetalning";
                 } else {
                     paymentChoice = "Fakturabetalning";
                 }
