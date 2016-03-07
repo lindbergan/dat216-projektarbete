@@ -28,7 +28,7 @@
     <Label layoutX="382.0" layoutY="352.0" text="Postort" />
     <Label layoutX="105.0" layoutY="431.0" text="Telefon/Mobil *" />
     <Label layoutX="382.0" layoutY="431.0" text="E-post *" />
-    <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
+    <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " AnchorPane.bottomAnchor="50.0" />
     <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka" />
     <Button defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt" />
       <HBox alignment="CENTER" layoutX="546.0" layoutY="20.0" AnchorPane.leftAnchor="546.0" AnchorPane.rightAnchor="573.0">
