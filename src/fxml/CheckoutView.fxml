@@ -52,7 +52,7 @@
                         <Tooltip text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" />
                       </tooltip>
                     </Button>
-                    <Label layoutX="587.0" layoutY="21.0" text="Leverans">
+                    <Label alignment="CENTER" layoutX="546.0" layoutY="21.0" prefWidth="189.0" text="Leverans">
                       <font>
                         <Font name="System Bold" size="20.0" />
                       </font>
@@ -60,7 +60,7 @@
                     <Label font="$x1" layoutX="1013.0" layoutY="43.0" text="Leveranstid:" />
                     <Label layoutX="915.0" layoutY="127.0" text="Datum" />
                     <Label layoutX="873.0" layoutY="197.0" text="Mellan klockan" />
-                    <ChoiceBox fx:id="timeIntervallChoicebox" layoutX="970.0" layoutY="194.0" prefHeight="27.0" prefWidth="100.0">
+                    <ChoiceBox fx:id="timeIntervallChoicebox" layoutX="970.0" layoutY="194.0" prefHeight="27.0" prefWidth="127.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
