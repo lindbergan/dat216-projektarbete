@@ -36,6 +36,7 @@ public class SearchViewController extends ProductView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        exampleText.setVisible(false);
         List<Product> products = handler.getProducts();
         try {
             Properties prop = new Properties();
