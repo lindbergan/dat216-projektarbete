@@ -4,56 +4,51 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import java.lang.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" fx:id="paymentViewCard" maxHeight="-Infinity"
-            maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0"
-            xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.CreditCardController">
-    <children>
-        <Label layoutX="569.0" layoutY="25.0" text="Kortbetalning">
-            <font>
-                <Font name="System Bold" size="20.0"/>
-            </font>
-        </Label>
-        <RadioButton fx:id="visa" layoutX="145.0" layoutY="118.0" mnemonicParsing="false" text="Visa"/>
-        <RadioButton fx:id="mastercard" layoutX="145.0" layoutY="151.0" mnemonicParsing="false" text="Mastercard"/>
-        <RadioButton fx:id="other" layoutX="145.0" layoutY="185.0" mnemonicParsing="false" text="Annat"/>
-        <TextField fx:id="creditCardNumbr" layoutX="245.0" layoutY="254.0" prefHeight="27.0" prefWidth="200.0"/>
-        <TextField fx:id="cardHolderName" layoutX="245.0" layoutY="296.0" prefHeight="27.0" prefWidth="200.0"/>
-        <Label layoutX="145.0" layoutY="259.0" text="Kortnummer"/>
-        <Label layoutX="145.0" layoutY="301.0" text="Kortinnehavare"/>
-        <Label layoutX="145.0" layoutY="373.0" text="Utgångsdatum"/>
-        <ChoiceBox fx:id="cardMonthChoiceBox" layoutX="245.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Item 1"/>
-                    <String fx:value="Item 2"/>
-                    <String fx:value="Item 3"/>
-                </FXCollections>
-            </items>
-        </ChoiceBox>
-        <Label layoutX="321.0" layoutY="375.0" text="/"/>
-        <ChoiceBox fx:id="cardYearChoiceBox" layoutX="337.0" layoutY="370.0" prefHeight="27.0" prefWidth="67.0">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Item 1"/>
-                    <String fx:value="Item 2"/>
-                    <String fx:value="Item 3"/>
-                </FXCollections>
-            </items>
-        </ChoiceBox>
-        <Label layoutX="145.0" layoutY="419.0" text="CVV"/>
-        <TextField fx:id="cvv" layoutX="245.0" layoutY="414.0" prefHeight="27.0" prefWidth="51.0"/>
-        <Button layoutX="310.0" layoutY="414.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false"
-                prefHeight="27.0" prefWidth="27.0" text="?">
-            <tooltip>
-                <Tooltip text="CVV är de tre sista siffrorna på baksidan av kortet"/>
-            </tooltip>
-        </Button>
-        <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false"
-                onAction="#backToDeliveryClicked" prefHeight="34.0" prefWidth="131.0" text="Tillbaka"/>
-        <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0"
-                minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="34.0" prefWidth="131.0"
-                text="Fortsätt"/>
-    </children>
+
+<AnchorPane id="AnchorPane" fx:id="paymentViewCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreditCardController">
+  <children>
+    <Label layoutX="569.0" layoutY="25.0" text="Kortbetalning">
+      <font>
+        <Font name="System Bold" size="20.0" />
+      </font>
+    </Label>
+    <RadioButton fx:id="visa" layoutX="105.0" layoutY="120.0" mnemonicParsing="false" text="Visa" />
+    <RadioButton fx:id="mastercard" layoutX="105.0" layoutY="153.0" mnemonicParsing="false" text="Mastercard" />
+    <RadioButton fx:id="other" layoutX="105.0" layoutY="187.0" mnemonicParsing="false" text="Annat" />
+    <TextField fx:id="creditCardNumbr" layoutX="205.0" layoutY="256.0" prefHeight="27.0" prefWidth="200.0" />
+    <TextField fx:id="cardHolderName" layoutX="205.0" layoutY="298.0" prefHeight="27.0" prefWidth="200.0" />
+    <Label layoutX="105.0" layoutY="261.0" text="Kortnummer" />
+    <Label layoutX="105.0" layoutY="303.0" text="Kortinnehavare" />
+    <Label layoutX="105.0" layoutY="375.0" text="Utgångsdatum" />
+    <ChoiceBox fx:id="cardMonthChoiseBox" layoutX="205.0" layoutY="372.0" prefHeight="27.0" prefWidth="67.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+    <Label layoutX="281.0" layoutY="377.0" text="/" />
+    <ChoiceBox fx:id="cardYearChoiseBox" layoutX="297.0" layoutY="372.0" prefHeight="27.0" prefWidth="67.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+    <Label layoutX="105.0" layoutY="421.0" text="CVV" />
+    <TextField fx:id="cvv" layoutX="205.0" layoutY="416.0" prefHeight="27.0" prefWidth="51.0" />
+    <Button fx:id="helpButton" layoutX="270.0" layoutY="416.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#ifHelpButtonClicked" prefHeight="27.0" prefWidth="27.0" text="?">
+      <tooltip>
+        <Tooltip text="CVV är de tre sista siffrorna på baksidan av kortet" />
+      </tooltip>
+    </Button>
+    <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka" />
+    <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt" />
+    <Label fx:id="infoLabel" layoutX="975.0" layoutY="472.0" prefWidth="238.0" text="Alla fält måste fyllas i för att kunna fortsätta" textFill="RED" />
+    <Label id="infoLabel" fx:id="cvvLabel" layoutX="314.0" layoutY="421.0" opacity="0.35" prefWidth="297.0" text="CVV är de tre sista siffrorna på baksidan av kortet" textFill="BLACK" visible="false" />
+  </children>
 </AnchorPane>

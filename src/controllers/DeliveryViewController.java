@@ -9,30 +9,33 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import properties.StringComparer;
+import properties.ViewChanger;
+import properties.ViewSingelton;
 import se.chalmers.ait.dat215.project.CreditCard;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 //OBS: Detta är main-controllern OCH controllern för DeliveryView:n. Inte optimalt att ha dem sammanslagna, men lyckades inte ta mig runt detta.
 public class DeliveryViewController implements Initializable {
 
 
-    private static String userSpecifiedMonth;
-    private static String userSpecifiedDate;
-    private static String userSpecifiedMinTime;
-    private static String userSpecifiedMaxTime;
-    private static String paymentChoice = "Kortbetalning";
-    private static boolean allFieldsFilled = false;
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-    final ToggleGroup headerButtonGroup = new ToggleGroup();
+    private static LocalDate userSpecifiedDate;
+    private static String userSpecifiedTime;
+    private static String paymentChoise = "Kortbetalning";
+
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
     private CreditCard creditCard = handler.getCreditCard();
     private ViewChanger viewChanger = new ViewChanger();
+
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
+
     @FXML
     private AnchorPane deliveryView;
     @FXML
@@ -54,53 +57,34 @@ public class DeliveryViewController implements Initializable {
     @FXML
     private TextField customerPhone;
     @FXML
-    private ChoiceBox monthChoicebox;
-    @FXML
-    private ChoiceBox dateChoicebox;
-    @FXML
-    private ChoiceBox minTimeChoicebox;
-    @FXML
-    private ChoiceBox maxTimeChoicebox;
-    @FXML
-    private ToggleButton deliveryButton;
-    @FXML
-    private ToggleButton paymentButton;
-    @FXML
-    private ToggleButton confirmationButton;
-    //the observable lists for the Choiceboxes
-    private ObservableList<String> month = FXCollections.observableArrayList("Januari", "Februari", "Mars",
-            "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December");
-    private ObservableList<String> date = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7",
-            "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
-            "25", "26", "27", "28", "29", "30", "31");
-    private ObservableList<String> minTime = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05",
-            "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-            "23", "24");
-    private ObservableList<String> maxTime = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05",
-            "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-            "23", "24");
-    private boolean firstTimeRun = true;
 
+    private ChoiceBox timeIntervallChoisebox;
+    @FXML private Button continueButton;
+    @FXML private Label infoLabel;
+    @FXML private DatePicker calendar;
 
-    //The getters for our custom choisboxes and radiobuttons:
-    public static String getUserSpecifiedMonth() {
-        return userSpecifiedMonth;
-    }
+    @FXML private Button deliveryButton;
+    @FXML private Button paymentButton;
+    @FXML private Button confirmationButton;
 
+    private static boolean allFieldsFilled = false;
+    private static ViewSingelton currentView = ViewSingelton.getInstance();
+
+    //the observable lists for the Choiseboxes
+    private ObservableList<String> timeIntervall = FXCollections.observableArrayList("04.00 - 08.00", "05.00 - 09.00", "06.00 - 10.00",
+            "07.00 - 11.00", "08.00 - 12.00", "09.00 - 13.00", "10.00 - 14.00", "11.00 - 15.00", "12.00 - 16.00", "13.00 - 17.00", "14.00 - 18.00", "15.00 - 19.00",
+            "16.00 - 20.00", "17.00 - 21.00", "18.00 - 22.00", "19.00 - 23.00", "20.00 - 00.00");
+
+    //The getters for our custom choisboxes and radiobuttons and Datepicker
     public static String getUserSpecifiedDate() {
-        return userSpecifiedDate;
+        return userSpecifiedDate.toString();
+    }
+    public static String getUserSpecifiedTime() {
+        return userSpecifiedTime;
     }
 
-    public static String getUserSpecifiedMinTime() {
-        return userSpecifiedMinTime;
-    }
-
-    public static String getUserSpecifiedMaxTime() {
-        return userSpecifiedMaxTime;
-    }
-
-    public static String getPaymentChoice() {
-        return paymentChoice;
+    public static String getPaymentChoise() {
+        return paymentChoise;
     }
 
 
@@ -111,13 +95,15 @@ public class DeliveryViewController implements Initializable {
         initTextFields();
         initChoiceBoxes();
         initRadioButtons();
-        //initToggleButtons();
+        initDatePicker();
 
         //listen to all the fields user can change
         listenToTextField();
         listenToChoiceboxes();
         listenToRadioButtons();
-        listenToToggleButtons();
+        listenToDatePicker();
+
+        checkIfAllFieldsFilledIn();
     }
 
     public void initTextFields() {
@@ -134,26 +120,20 @@ public class DeliveryViewController implements Initializable {
 
     public void initChoiceBoxes() {
 
-        monthChoicebox.setItems(month);
-        dateChoicebox.setItems(date);
-        minTimeChoicebox.setItems(minTime);
-        maxTimeChoicebox.setItems(maxTime);
+
+
+        timeIntervallChoisebox.setItems(timeIntervall);
 
         //sets the choiesBoxes in case customer chose "go back" from paymentView
         userSpecifiedChoiceBox();
 
     }
 
-    public void userSpecifiedChoiceBox() {
 
-        monthChoicebox.setValue(userSpecifiedMonth);
-        userSpecifiedMonth = month.get(1);
-        dateChoicebox.setValue(userSpecifiedDate);
-        userSpecifiedDate = date.get(1);
-        minTimeChoicebox.setValue(userSpecifiedMinTime);
-        userSpecifiedMinTime = minTime.get(1);
-        maxTimeChoicebox.setValue(userSpecifiedMaxTime);
-        userSpecifiedMaxTime = maxTime.get(1);
+
+    public void userSpecifiedChoiseBox() {
+
+        timeIntervallChoisebox.setValue(userSpecifiedTime);
     }
 
     public void initRadioButtons() {
@@ -170,29 +150,8 @@ public class DeliveryViewController implements Initializable {
         }
     }
 
-    //sets the ToggleButtons to the same group and activates the default button (i.e "delivery")
-    public void initToggleButtons() {
-
-        /*
-        if(firstTimeRun) {
-            deliveryButton.setToggleGroup(headerButtonGroup);
-            paymentButton.setToggleGroup(headerButtonGroup);
-            confirmationButton.setToggleGroup(headerButtonGroup);
-            firstTimeRun=false;
-        }
-        */
-        //set the default
-        //deliveryButton.setSelected(true);
-    }
-
-    //Changelisteners for the ToggleButtons
-    public void listenToToggleButtons() {
-
-        headerButtonGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-            }
-        });
+    public void initDatePicker(){
+        calendar.setValue(userSpecifiedDate);
     }
 
     //ChangeListener for the textfields:
@@ -202,7 +161,14 @@ public class DeliveryViewController implements Initializable {
         customerFirstName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setFirstName(newValue);
+
+                if (StringComparer.onlyContainsLetter(newValue)){
+                    customer.setFirstName(newValue);
+                }
+                else {
+                    customerFirstName.setText(oldValue);
+                }
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -210,7 +176,14 @@ public class DeliveryViewController implements Initializable {
         customerLastName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setLastName(newValue);
+
+                if (StringComparer.onlyContainsLetter(newValue)){
+                    customer.setLastName(newValue);
+                }
+                else {
+                    customerLastName.setText(oldValue);
+                }
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -219,6 +192,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setAddress(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -226,7 +200,14 @@ public class DeliveryViewController implements Initializable {
         customerPostCode.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setPostCode(newValue);
+
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length()<6){
+                    customer.setPostCode(newValue);
+                }
+                else {
+                    customerPostCode.setText(oldValue);
+                }
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -234,7 +215,14 @@ public class DeliveryViewController implements Initializable {
         customerPostAddress.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setPostAddress(newValue);
+
+                if (StringComparer.onlyContainsLetter(newValue)){
+                    customer.setPostAddress(newValue);
+                }
+                else {
+                    customerPostAddress.setText(oldValue);
+                }
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -243,6 +231,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setEmail(newValue);
+                checkIfAllFieldsFilledIn();
             }
         });
 
@@ -250,7 +239,14 @@ public class DeliveryViewController implements Initializable {
         customerPhone.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                customer.setPhoneNumber(newValue);
+
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length()<11){
+                    customer.setPhoneNumber(newValue);
+                }
+                else {
+                    customerPhone.setText(oldValue);
+                }
+                checkIfAllFieldsFilledIn();
             }
         });
     }
@@ -258,36 +254,13 @@ public class DeliveryViewController implements Initializable {
     //ChangeListener for the choiceboxes
     public void listenToChoiceboxes() {
 
-        //selected month
-        monthChoicebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        //selected timeIntervall
+        timeIntervallChoisebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiceBoxIndex = newValue.intValue();
-                userSpecifiedMonth = month.get(choiceBoxIndex);
-            }
-        });
-        //selected date
-        dateChoicebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiceBoxIndex = newValue.intValue();
-                userSpecifiedDate = date.get(choiceBoxIndex);
-            }
-        });
-        //selected minTime
-        minTimeChoicebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiceBoxIndex = newValue.intValue();
-                userSpecifiedMinTime = minTime.get(choiceBoxIndex);
-            }
-        });
-        //selected maxTime
-        maxTimeChoicebox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int choiceBoxIndex = newValue.intValue();
-                userSpecifiedMaxTime = maxTime.get(choiceBoxIndex);
+                int choiseBoxIndex = newValue.intValue();
+                userSpecifiedTime = timeIntervall.get(choiseBoxIndex);
+                checkIfAllFieldsFilledIn();
             }
         });
     }
@@ -308,6 +281,13 @@ public class DeliveryViewController implements Initializable {
         });
     }
 
+    public void listenToDatePicker(){
+        calendar.setOnAction(event -> {
+            userSpecifiedDate = calendar.getValue();
+            checkIfAllFieldsFilledIn();
+        });
+    }
+
     //back to IMat store when user clicked the Logotype
     public void logoClicked(ActionEvent event) throws IOException {
         viewChanger.changeStageOverride(event, "/fxml/IMat.fxml");
@@ -321,64 +301,73 @@ public class DeliveryViewController implements Initializable {
     //gives us the right PaymentView depending on what radiobutton is selected
     public void continueClicked() throws IOException {
 
-        checkIfAllFieldsFilledIn();
-        if (allFieldsFilled) {
+        currentView.setCurrentViewName("paymentView");
 
-            if (paymentChoice == "Fakturabetalning") {
-                viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
+
+        if (paymentChoise == "Kortbetalning") {
+                viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
             } else {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
             }
-        }
     }
-
-
-/*
-    //--------------------kanske att allt detta kan tas bort beroende på hur jag tänker göra med knapparna i headern------------------------------
-
-    //Associate the different buttons in the header to the corresponding View
-    public void DeliveryButtonPushed() throws IOException {
-        viewChanger.changeScene(deliveryView, "/fxml/DeliveryView.fxml");
-    }
-
-    public void PaymentButtonPushed() throws IOException {
-
-        continueClicked();
-
-        allFieldsFilledIn();
-        if (allFieldsFilled) {
-
-            if (paymentChoice == "Kortbetalning") {
-                viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
-            }
-            else {
-                viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
-            }
-        }
-    }
-
-    public void ConfirmationButtonPushed() throws IOException {
-        //makes sure that the customer has been to InvoiceView or CardView before entering ConfirmationView.
-            viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
-    }
-
-    //------------------------------------------------------------------------------------
-
-    */
 
     public void checkIfAllFieldsFilledIn() {
 
-        if (customerFirstName != null && !customerFirstName.getText().isEmpty() && customerLastName != null
+        if(customerFirstName != null && !customerFirstName.getText().isEmpty() && customerLastName!= null
                 && !customerLastName.getText().isEmpty() && customerAddress != null &&
                 !customerAddress.getText().isEmpty() && customerPostCode != null &&
-                !customerPostCode.getText().isEmpty() && customerPhone != null && !customerPhone.getText().isEmpty()
-                && customerEmail != null && !customerEmail.getText().isEmpty()
-                && userSpecifiedMonth != null && userSpecifiedDate != null && userSpecifiedMinTime != null
-                && userSpecifiedMaxTime != null) {
+                !customerPostCode.getText().isEmpty()  && customerPhone!= null && !customerPhone.getText().isEmpty()
+                && customerEmail!= null && !customerEmail.getText().isEmpty() && userSpecifiedDate !=null
+                && userSpecifiedTime!= null){
 
             allFieldsFilled = true;
-        } else {
+            continueButton.setDisable(false);
+            infoLabel.setVisible(false);
+        }
+
+        else {
             allFieldsFilled = false;
+            continueButton.setDisable(true);
+            infoLabel.setVisible(true);
+        }
+    }
+
+    public void deliveryButtonClicked()throws IOException{
+        viewChanger.changeScene(deliveryView,"/fxml/DeliveryView.fxml" );
+    }
+
+    public void paymentButtonClicked()throws IOException{
+
+        if(allFieldsFilled){
+            continueClicked();
+        }
+    }
+
+    public void confirmationButtonClicked()throws IOException{
+
+        if(allFieldsFilled && CreditCardController.areAllFieldsFilled()){
+            viewChanger.changeScene(deliveryView,"/fxml/ConfirmationView.fxml");
+}    }
+
+    //Need somehow to create a listener that can listen to changes to viewName in the class ViewSingelton.
+    // String is primitive - thus, cant listen to changes. But we need to find a workaround.
+
+    public void setCorrectHeaderButton(){
+        if(currentView.getCurrentViewName() == "deliveryView"){
+
+            System.out.println("deliveryView");
+            //buttonAction
+
+        }
+        else if(currentView.getCurrentViewName() == "paymentView"){
+
+            System.out.println("paymentView");
+            //buttonAction
+
+        }
+        else{
+            System.out.println("ConfirmationView");
+            //buttonAction
         }
     }
 }

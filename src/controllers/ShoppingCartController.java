@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import properties.CartTextField;
 import properties.DelButton;
+import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;

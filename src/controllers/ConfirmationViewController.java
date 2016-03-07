@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import se.chalmers.ait.dat215.project.Customer;
@@ -15,6 +16,13 @@ import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import java.io.*;
+import javafx.scene.layout.*;
+import javafx.util.Callback;
+import properties.CustomCell;
+import properties.ViewChanger;
+import properties.ViewSingelton;
+import se.chalmers.ait.dat215.project.*;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.CharBuffer;
 import java.time.Instant;
@@ -51,11 +59,14 @@ public class ConfirmationViewController implements Initializable {
     @FXML
     private Label price;
 
-    private ObservableList<String> listViewList = FXCollections.observableArrayList("");
+    //private ObservableList<String> listViewList = FXCollections.observableArrayList("");
     ObservableList<String> listProductNames = FXCollections.observableArrayList();
     ObservableList<String> listProductQuantity = FXCollections.observableArrayList();
     ObservableList<String> listProductPricePerUnit = FXCollections.observableArrayList();
     ObservableList<String> listProductPrice = FXCollections.observableArrayList();
+    private ObservableList<String> listViewList = FXCollections.observableArrayList();
+    ViewSingelton currentView = ViewSingelton.getInstance();
+
 
 
     @Override
@@ -71,28 +82,32 @@ public class ConfirmationViewController implements Initializable {
         for (Iterator<ShoppingItem> ite = cartItems.iterator(); ite.hasNext(); ) {
 
             ShoppingItem thisItem = ite.next();
-            double totalItemCost = thisItem.getAmount() * thisItem.getProduct().getPrice();
+            double totalItemCost = thisItem.getAmount()*thisItem.getProduct().getPrice();
+
             listProductNames.add(thisItem.getProduct().getName());
             listProductQuantity.add(String.valueOf(thisItem.getAmount()));
             listProductPricePerUnit.add(String.valueOf(thisItem.getProduct().getPrice()));
             listProductPrice.add(String.valueOf(totalItemCost));
 
-            listViewList.add(getStringSpacingOne(thisItem.getProduct().getName()) +
-                    getStringSpacingTwo(thisItem.getAmount() + " * " + thisItem.getProduct().getPrice() +
-                            " " + thisItem.getProduct().getUnit()) + totalItemCost + ":-");
+            listViewList.add(getStringSpacing(thisItem.getProduct().getName() +", " +
+                    thisItem.getAmount() + " x " + thisItem.getProduct().getPrice() +
+                            " " + thisItem.getProduct().getUnit()) +totalItemCost + ":-");
+
         }
-        shoppingCartSummary.setItems(listViewList);
+
+        //shoppingCartSummary.setItems(listViewList);
+
+        shoppingCartSummary.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+
+                    return new CustomCell();
+
+            }
+        });
     }
 
-    public String getStringSpacingOne(String str) {
-
-        while (str.length() < 40) {
-            str = str + " ";
-        }
-        return str;
-    }
-
-    public String getStringSpacingTwo(String str) {
+    public String getStringSpacing(String str){
 
         while (str.length() < 50) {
             str = str + " ";
@@ -107,10 +122,8 @@ public class ConfirmationViewController implements Initializable {
         customerPostCode.setText(customer.getPostCode());
         customerEmail.setText(customer.getEmail());
         customerPhone.setText(customer.getPhoneNumber());
-        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " " +
-                DeliveryViewController.getUserSpecifiedMonth() + " mellan kl " +
-                DeliveryViewController.getUserSpecifiedMinTime() + " - " +
-                DeliveryViewController.getUserSpecifiedMaxTime());
+        customerDate.setText(DeliveryViewController.getUserSpecifiedDate() + " mellan kl " +
+                DeliveryViewController.getUserSpecifiedTime());
 
         customerPaymentChoice.setText(DeliveryViewController.getPaymentChoice());
     }
@@ -122,9 +135,11 @@ public class ConfirmationViewController implements Initializable {
     //back to the correct PaymentView when "go back" <-- is clicked
     public void backToPaymentView() throws IOException {
 
-        //need to determine what View to present - based on users Paymentchoice
-        if (DeliveryViewController.getPaymentChoice() == "Kortbetalning") {
-            //viewChanger.changeScene(confirmationView, "/fxml/PaymentViewCard.fxml");
+        currentView.setCurrentViewName("paymentView");
+
+        //need to determine what View to present - based on users Paymentchoise
+        if (DeliveryViewController.getPaymentChoise() == "Kortbetalning") {
+            viewChanger.changeScene(confirmationView, "/fxml/PaymentViewCard.fxml");
         } else {
             viewChanger.changeScene(confirmationView, "/fxml/PaymentViewInvoice.fxml");
         }
