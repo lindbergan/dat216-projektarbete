@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -15,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import properties.BuyButton;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 
 import java.io.FileReader;
@@ -65,18 +67,22 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
             for (int i = 0; i < productListSize - 1; i += 4) {
                 for (int j = 0; j < 4; j++) {
                     String url = "/products/images/" + productList.get(adrianplz).getImageName();
-                    Button newButton = new Button();
+                    String price = getPriceText(productList.get(adrianplz));
+                    ImageView img = new ImageView(new Image(url));
+                    img.setEffect(new DropShadow(8, Color.BEIGE));
+                    Button newButton = new Button(price, img);
                     newButton.setPrefWidth(200);
                     newButton.setPrefHeight(240);
                     newButton.setPickOnBounds(false);
                     newButton.setFocusTraversable(false);
-                    ImageView img = new ImageView(new Image(url));
+
                     img.setFitWidth(newButton.getPrefWidth());
                     img.setFitHeight(newButton.getPrefHeight() * 0.6);
-                    img.setEffect(new DropShadow(8, Color.BEIGE));
                     newButton.getStyleClass().add("productButton");
                     img.getStyleClass().add("productImage");
-                    newButton.setGraphic(img);
+                    newButton.setContentDisplay(ContentDisplay.TOP);
+                    newButton.setStyle("-fx-font: 15 system");
+                    //newButton.setGraphic(img);
 
 
                     BuyButton newBottomButton = new BuyButton("Köp", productList.get(adrianplz).getProductId());
@@ -92,6 +98,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     Label txt = new Label(productList.get(adrianplz).getName());
                     txt.setTextFill(exampleText.getTextFill());
                     txt.setFont(exampleText.getFont());
+
 
                     StackPane panelLayout = new StackPane(newButton, newBottomButton, txt);
                     panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
@@ -113,4 +120,16 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
         }
     }
 
+    public String getPriceText(Product p){
+        String s;
+        double d = p.getPrice();
+        if(d == Math.floor(d)){
+            int i = (int)d;
+            s = i + p.getUnit();
+        }else{
+            s = String.format("%.2f", d);
+            s += p.getUnit();
+        }
+        return s;
+    }
 }
