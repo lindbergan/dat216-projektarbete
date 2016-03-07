@@ -15,18 +15,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
-import se.chalmers.ait.dat215.project.ProductCategory;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-public class categoryMenuController extends ProductView implements Initializable {
+public class CategoryMenuController extends ProductView implements Initializable {
 
+    public static AnchorPane categoryMenuAPproperty;
     @FXML
     public GridPane gridPane;
     @FXML
@@ -35,12 +33,10 @@ public class categoryMenuController extends ProductView implements Initializable
     public AnchorPane bp1CategoryAP;
     @FXML
     public AnchorPane categoryMenuAP;
-    @FXML private Label hideThis;
-
     public String[] productCategories = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk"
             , "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
-
-    public static AnchorPane categoryMenuAPproperty;
+    @FXML
+    private Label hideThis;
     private IMatDataHandler handler = IMatDataHandler.getInstance();
 
     public String[] getProductCategories() {
@@ -78,6 +74,7 @@ public class categoryMenuController extends ProductView implements Initializable
             e.printStackTrace();
         }
     }
+
     public void showProducts(String category) {
         super.showProducts(category);
     }
@@ -107,7 +104,7 @@ public class categoryMenuController extends ProductView implements Initializable
                 String url = "/products/images/" + productList.get(2).getImageName();
                 ImageView img = new ImageView(new Image(url));
                 img.setFitWidth(newButton.getPrefWidth());
-                img.setFitHeight(newButton.getPrefHeight()*0.6);
+                img.setFitHeight(newButton.getPrefHeight() * 0.6);
                 img.setEffect(new DropShadow(8, Color.BEIGE));
                 newButton.getStyleClass().add("productButton");
                 newButton.setGraphic(img);
@@ -116,8 +113,8 @@ public class categoryMenuController extends ProductView implements Initializable
                 txt.setTextFill(hideThis.getTextFill());
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
-                StackPane p = new StackPane(newButton,txt);
-                p.setAlignment(txt,Pos.TOP_CENTER);
+                StackPane p = new StackPane(newButton, txt);
+                p.setAlignment(txt, Pos.TOP_CENTER);
                 newButton.setOnAction(e -> {
                     if (!(txt.getText() == null || txt.getText().equals(""))) {
                         try {

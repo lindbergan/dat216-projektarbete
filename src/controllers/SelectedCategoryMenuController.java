@@ -1,29 +1,25 @@
 package controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import properties.BuyButton;
-import se.chalmers.ait.dat215.project.*;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.ShoppingCart;
 
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -53,83 +49,6 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
         }
     }
 
-    public void buyItem(ActionEvent e) {
-        BuyButton bb = (BuyButton) e.getSource();
-        StackPane p = (StackPane) bb.getParent();
-
-        Button posButton = new Button("+");
-        Button negButton = new Button("-");
-        TextField tf = new TextField("1");
-        tf.setPrefWidth(50);
-        tf.setAlignment(Pos.CENTER);
-
-        p.getChildren().remove(bb);
-        incItem(bb.getProductId());
-
-        HBox hbox = new HBox(10, negButton, tf, posButton);
-        hbox.setAlignment(Pos.BOTTOM_CENTER);
-        p.getChildren().add(hbox);
-        p.setAlignment(hbox, Pos.BOTTOM_CENTER);
-
-        posButton.setOnAction(ee -> {
-            incItem(bb.getProductId());
-            int amount = Integer.parseInt(tf.getText());
-            amount++;
-            tf.setText(String.valueOf(amount));
-        });
-
-        negButton.setOnAction(ee -> {
-            int amount = Integer.parseInt(tf.getText());
-            if (amount < 2) {
-                hbox.getChildren().removeAll();
-                p.getChildren().removeAll();
-                hbox.setVisible(false);
-                p.getChildren().add(bb);
-                decItem(bb.getProductId());
-            } else {
-                amount--;
-                tf.setText(String.valueOf(amount));
-                decItem(bb.getProductId());
-            }
-        });
-
-
-    }
-
-    public void incItem(int idd) {
-        int id = idd;
-        int razzan = 0;
-        if (cart.getItems().size() == 0) {
-            cart.addItem((new ShoppingItem(handler.getProduct(id))));
-        } else
-            for (int i = 0; i < cart.getItems().size(); i++) {
-                if (cart.getItems().get(i).getProduct().getProductId() == id) {
-                    cart.getItems().get(i).setAmount(cart.getItems().get(i).getAmount() + 1);
-                } else {
-                    razzan = razzan + 1;
-                }
-
-            }
-        if (razzan == cart.getItems().size()) {
-            cart.addItem((new ShoppingItem(handler.getProduct(id))));
-        }
-    }
-
-    public void decItem(int idd) {
-        int id = idd;
-        if (cart.getItems().size() == 0) {
-            cart.addItem((new ShoppingItem(handler.getProduct(id))));
-        } else
-            for (int i = 0; i < cart.getItems().size(); i++) {
-                if (cart.getItems().get(i).getProduct().getProductId() == id) {
-                    if (cart.getItems().get(i).getAmount() > 1) {
-                        cart.getItems().get(i).setAmount(cart.getItems().get(i).getAmount() - 1);
-                    } else cart.getItems().remove(i);
-                }
-
-            }
-    }
-
     public void showProducts(String category) {
         super.showProducts(category);
 
@@ -153,7 +72,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     newButton.setFocusTraversable(false);
                     ImageView img = new ImageView(new Image(url));
                     img.setFitWidth(newButton.getPrefWidth());
-                    img.setFitHeight(newButton.getPrefHeight()*0.6);
+                    img.setFitHeight(newButton.getPrefHeight() * 0.6);
                     img.setEffect(new DropShadow(8, Color.BEIGE));
                     newButton.getStyleClass().add("productButton");
                     img.getStyleClass().add("productImage");

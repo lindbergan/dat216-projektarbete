@@ -4,42 +4,48 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import properties.CategoryListCell;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class IMatController implements Initializable {
 
-    @FXML private Button searchButton;
-    @FXML private TextField searchField;
+    public static ListView<String> listProperty;
+    public static AnchorPane contentProperty;
+    public static MenuButton listMenuProperty;
     @FXML
     public AnchorPane content;
     @FXML
     public ImageView imageView1;
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    CategoryMenuController categoryHandler = new CategoryMenuController();
+    @FXML
+    AnchorPane headerPane;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private TextField searchField;
     @FXML
     private MenuButton cartMenuButton;
     @FXML
@@ -59,30 +65,22 @@ public class IMatController implements Initializable {
     @FXML
     private ListView<String> listView;
 
-    IMatDataHandler handler = IMatDataHandler.getInstance();
-    categoryMenuController categoryHandler = new categoryMenuController();
     private Properties prop = new Properties();
-
     private boolean isShopView;
     private MenuItem temp;
 
-    /***
-     *
-     * 'Here lies the static variables
-     * They shall remain unknown but be essential for the war to come'
-     * contentProperty = getter för content
-     * listProperty = getter för listView
-     *
-     */
+    public void setIds() {
+        headerPane.setId("headerPane");
+        content.setId("content");
+        searchButton.setId("searchButton");
+        listView.setId("listView");
+    }
 
-    public static ListView<String> listProperty;
-    public static AnchorPane contentProperty;
-
-    /**
-     *
-     * Används för att vi ska kunna få deras storlek även när vi inte är i fönstret i fråga
-     *
-     */
+    public void hataTraversable() {
+        searchButton.setFocusTraversable(false);
+        listView.setFocusTraversable(false);
+        helpButton.setFocusTraversable(false);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,18 +88,20 @@ public class IMatController implements Initializable {
         setImage();
         start();
         initToggleButtons();
-        ifNoReciepts();
+        initReceipts();
         ifNoFavorites();
-        ifNoLists();
+        listMenuProperty = listMenu;
         initButtons();
         initListView();
+        hataTraversable();
+        setIds();
+
         listProperty = listView;
         try {
             FileOutputStream clear = new FileOutputStream("search.txt");
             prop.setProperty("input", "");
             prop.store(clear, null);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -113,8 +113,7 @@ public class IMatController implements Initializable {
                     FileOutputStream out = new FileOutputStream("search.txt");
                     prop.setProperty("input", input);
                     prop.store(out, null);
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
@@ -126,6 +125,7 @@ public class IMatController implements Initializable {
     }
 
     public void initListView() {
+
         ObservableList<String> categories = FXCollections.observableArrayList(categoryHandler.getProductCategories());
         listView.setItems(categories);
         listView.getSelectionModel().selectedItemProperty().addListener(e -> {
@@ -136,8 +136,7 @@ public class IMatController implements Initializable {
                 prop.store(out, null);
                 goToCategoryMenu();
                 categoryHandler.setPane();
-            }
-            catch (IOException ee) {
+            } catch (IOException ee) {
                 ee.printStackTrace();
             }
         });
@@ -147,26 +146,13 @@ public class IMatController implements Initializable {
                 return new CategoryListCell();
             }
         });
-        double height = categoryHandler.getProductCategories().length * 40;
-        listView.setPrefHeight(height);
     }
 
     public void ifNoFavorites() {
         if (favoritesMenu.getItems().isEmpty()) {
             MenuItem newMenuItem = new MenuItem("Inga favoriter.");
             newMenuItem.setDisable(true);
-            newMenuItem.styleProperty().set("-fx-pref-width:138px;");
-            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
             favoritesMenu.getItems().add(newMenuItem);
-        }
-    }
-
-    public void ifNoLists() {
-        if (listMenu.getItems().isEmpty()) {
-            MenuItem newMenuItem = new MenuItem("Skapa ny lista.");
-            newMenuItem.styleProperty().set("-fx-pref-width:159px;");
-            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
-            listMenu.getItems().add(newMenuItem);
         }
     }
 
@@ -176,14 +162,39 @@ public class IMatController implements Initializable {
         });
     }
 
-    public void ifNoReciepts() {
-        if (receiptMenu.getItems().isEmpty()) {
-            MenuItem newMenuItem = new MenuItem("Inga kvitton.");
-            newMenuItem.setDisable(true);
-            newMenuItem.styleProperty().set("-fx-pref-width:175px;");
-            newMenuItem.styleProperty().set("-fx-pref-height:29px;");
-            receiptMenu.getItems().add(newMenuItem);
+    public void goToReceipts(ActionEvent event) {
+        ViewChanger vc = new ViewChanger();
+        try {
+            vc.changeStage(event, contentProperty, "receipts.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void initReceipts() {
+        try {
+            List<String> list = Files.readAllLines(Paths.get("receipts.txt"));
+            if (list.size() != 0) {
+                String[] f = list.get(0).split(";");
+
+                for (int i = 0; i < f.length - 1; i++) {
+                    if (f[i].contains("date")) {
+                        MenuItem mi = new MenuItem(f[i + 1]);
+                        mi.setOnAction(this::goToReceipts);
+                        receiptMenu.getItems().add(mi);
+                    }
+                }
+            }
+            else {
+                MenuItem mi = new MenuItem("Inga tidigare köp");
+                mi.setDisable(true);
+                receiptMenu.getItems().add(mi);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void setImage() {
@@ -192,12 +203,18 @@ public class IMatController implements Initializable {
     }
 
     public void initToggleButtons() {
+        toggle1.setSelected(true);
+        toggle1.setId("selected");
         toggle1.setOnAction(e -> {
+            toggle1.setId("selected");
+            toggle2.setId("notSelected");
             toggle1.setSelected(true);
             toggle2.setSelected(false);
             start();
         });
         toggle2.setOnAction(e -> {
+            toggle1.setId("notSelected");
+            toggle2.setId("selected");
             toggle2.setSelected(true);
             toggle1.setSelected(false);
             goToCategoryMenu();
@@ -254,10 +271,10 @@ public class IMatController implements Initializable {
         if (handler.getShoppingCart().getItems().size() != 0) {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
-                if(!cantBuyHalf(item.getProduct().getProductId())) {
+                if (!cantBuyHalf(item.getProduct().getProductId())) {
                     temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
                 }
-                if(cantBuyHalf(item.getProduct().getProductId())){
+                if (cantBuyHalf(item.getProduct().getProductId())) {
                     temp = new MenuItem(item.getProduct().getName() + "     " + (int) item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
                 }
                 cartMenuButton.getItems().add(i, temp);
@@ -274,7 +291,8 @@ public class IMatController implements Initializable {
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
     }
-    public boolean cantBuyHalf(int i){
+
+    public boolean cantBuyHalf(int i) {
         return handler.getProduct(i).getUnitSuffix().equals("st");
 
     }
@@ -297,12 +315,12 @@ public class IMatController implements Initializable {
             e.printStackTrace();
         }
     }
-    public void search(){
+
+    public void search() {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/searchView.fxml/"));
             content.getChildren().setAll(e);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 

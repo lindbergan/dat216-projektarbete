@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="exitView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ExitViewController">
-  <children>
-    <HBox alignment="CENTER" AnchorPane.bottomAnchor="456.14" AnchorPane.leftAnchor="505.5" AnchorPane.rightAnchor="463.5" AnchorPane.topAnchor="314.86">
-      <children>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Betalningen är nu godkänd och ett mail  med ditt kvitto&#10;har skickats till ">
-          <font>
-            <Font size="12.0" fx:id="x2" />
-          </font>
-        </Text>
-      </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="58.0" prefWidth="186.0" AnchorPane.bottomAnchor="467.0" AnchorPane.leftAnchor="568.0" AnchorPane.rightAnchor="526.0" AnchorPane.topAnchor="195.0">
-      <children>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tack för ditt köp!">
-          <font>
-            <Font name="System Bold" size="18.0" fx:id="x1" />
-          </font>
-        </Text>
-      </children>
-    </HBox>
-    <HBox alignment="CENTER" AnchorPane.bottomAnchor="290.43" AnchorPane.leftAnchor="582.5" AnchorPane.rightAnchor="540.5" AnchorPane.topAnchor="487.57">
-      <children>
-        <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Välkommen Åter!" />
-      </children>
-    </HBox>
-    <HBox alignment="CENTER" AnchorPane.bottomAnchor="392.0" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="544.0" AnchorPane.topAnchor="392.0">
-      <children>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leveranstid beräknas till" />
-      </children>
-    </HBox>
-    <HBox alignment="CENTER" AnchorPane.bottomAnchor="351.52" AnchorPane.leftAnchor="545.0" AnchorPane.rightAnchor="503.0" AnchorPane.topAnchor="431.48">
-      <children>
-        <Label fx:id="customerDate" alignment="CENTER" prefHeight="17.0" prefWidth="232.0" text="getDate" />
-      </children>
-    </HBox>
-    <HBox alignment="CENTER" minHeight="127.0" prefHeight="162.0" AnchorPane.bottomAnchor="525.0" AnchorPane.leftAnchor="534.0" AnchorPane.rightAnchor="492.0" AnchorPane.topAnchor="33.0">
-      <children>
-        <ImageView fitHeight="146.0" fitWidth="254.0" pickOnBounds="false" preserveRatio="true">
-          <image>
-            <Image url="@../images/IMat-logga.png" />
-          </image>
-        </ImageView>
-      </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="54.0" prefWidth="168.0" AnchorPane.bottomAnchor="163.4" AnchorPane.leftAnchor="577.0" AnchorPane.rightAnchor="535.0" AnchorPane.topAnchor="502.6">
-      <children>
-        <Button defaultButton="true" mnemonicParsing="false" onAction="#continueShopping" prefHeight="51.0" prefWidth="155.0" text="Fortsätt handla" />
-      </children>
-    </HBox>
-    <Button mnemonicParsing="false" onAction="#closeWindow" prefHeight="51.0" text="X" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="33.0">
-      <font>
-        <Font name="System Bold" size="24.0" />
-      </font>
-    </Button>
-    <HBox alignment="CENTER" prefHeight="38.1400146484375" prefWidth="140.0" AnchorPane.bottomAnchor="405.14" AnchorPane.leftAnchor="587.37" AnchorPane.rightAnchor="552.63" AnchorPane.topAnchor="276.72">
-      <children>
-        <Label fx:id="customerEmail" font="$x2" prefHeight="16.0" prefWidth="127.06640625" text="&quot;person@email.com&quot;." />
-      </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="61.0" prefWidth="168.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="577.5" AnchorPane.rightAnchor="534.5" AnchorPane.topAnchor="567.0">
-      <children>
-        <Button fx:id="receipts" mnemonicParsing="false" prefHeight="31.921875" prefWidth="127.0" text="Kvitton" />
-      </children>
-    </HBox>
-  </children>
+<AnchorPane id="AnchorPane" fx:id="exitView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExitViewController">
+    <children>
+        <HBox alignment="CENTER" AnchorPane.bottomAnchor="456.14" AnchorPane.leftAnchor="505.5" AnchorPane.rightAnchor="463.5" AnchorPane.topAnchor="314.86">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Betalningen är nu godkänd och ett mail  med ditt kvitto&#10;har skickats till ">
+                    <font>
+                        <Font size="12.0" fx:id="x2" />
+                    </font>
+                </Text>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="58.0" prefWidth="186.0" AnchorPane.bottomAnchor="467.0" AnchorPane.leftAnchor="568.0" AnchorPane.rightAnchor="526.0" AnchorPane.topAnchor="195.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tack för ditt köp!">
+                    <font>
+                        <Font name="System Bold" size="18.0" fx:id="x1" />
+                    </font>
+                </Text>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" AnchorPane.bottomAnchor="290.43" AnchorPane.leftAnchor="582.5" AnchorPane.rightAnchor="540.5" AnchorPane.topAnchor="487.57">
+            <children>
+                <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Välkommen Åter!" />
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" AnchorPane.bottomAnchor="392.0" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="544.0" AnchorPane.topAnchor="392.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leveranstid beräknas till" />
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" AnchorPane.bottomAnchor="351.52" AnchorPane.leftAnchor="545.0" AnchorPane.rightAnchor="503.0" AnchorPane.topAnchor="431.48">
+            <children>
+                <Label fx:id="customerDate" alignment="CENTER" prefHeight="17.0" prefWidth="232.0" text="getDate" />
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" minHeight="127.0" prefHeight="162.0" AnchorPane.bottomAnchor="525.0" AnchorPane.leftAnchor="534.0" AnchorPane.rightAnchor="492.0" AnchorPane.topAnchor="33.0">
+            <children>
+                <ImageView fitHeight="146.0" fitWidth="254.0" pickOnBounds="false" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/IMat-logga.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="54.0" prefWidth="168.0" AnchorPane.bottomAnchor="163.4" AnchorPane.leftAnchor="577.0" AnchorPane.rightAnchor="535.0" AnchorPane.topAnchor="502.6">
+            <children>
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#continueShopping" prefHeight="51.0" prefWidth="155.0" text="Fortsätt handla" />
+            </children>
+        </HBox>
+        <Button mnemonicParsing="false" onAction="#closeWindow" prefHeight="51.0" text="X" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="33.0">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Button>
+        <HBox alignment="CENTER" prefHeight="38.1400146484375" prefWidth="140.0" AnchorPane.bottomAnchor="405.14" AnchorPane.leftAnchor="587.37" AnchorPane.rightAnchor="552.63" AnchorPane.topAnchor="276.72">
+            <children>
+                <Label fx:id="customerEmail" font="$x2" prefHeight="16.0" prefWidth="127.06640625" text="&quot;person@email.com&quot;." />
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="61.0" prefWidth="168.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="577.5" AnchorPane.rightAnchor="534.5" AnchorPane.topAnchor="567.0">
+            <children>
+                <Button fx:id="receipts" mnemonicParsing="false" onAction="#receiptsButtonPushed" prefHeight="31.921875" prefWidth="127.0" text="Kvitton" />
+            </children>
+        </HBox>
+    </children>
 </AnchorPane>

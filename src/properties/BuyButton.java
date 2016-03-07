@@ -2,9 +2,6 @@ package properties;
 
 import javafx.scene.control.Button;
 
-/**
- * Created by Razmus on 2016-03-01.
- */
 public class BuyButton extends Button {
     private int productId;
 

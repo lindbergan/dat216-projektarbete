@@ -1,8 +1,5 @@
 package controllers;
 
-/**
- * Created by Jolo on 2/26/16.
- */
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,7 +34,6 @@ public class ExitViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         initTextFields();
     }
 
@@ -57,12 +53,15 @@ public class ExitViewController implements Initializable {
     }
 
     //goes back to iMatView and shows receipts
-    public void receiptsButtonPushed(ActionEvent event) {
+    public void receiptsButtonPushed(ActionEvent event) throws IOException {
         //byt stage till kvitto-stage:n
+        IMatController imc  = new IMatController();
+        viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");
+        viewChanger.changeScene(imc.contentProperty, "/fxml/Receipts.fxml");
     }
 
     //clears the cart and goes back to the store when "continue shopping" button is pushed
-    public void closeWindow(ActionEvent event)throws IOException {
+    public void closeWindow(ActionEvent event) throws IOException {
         handler.shutDown();
         cart.clear();
         viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");

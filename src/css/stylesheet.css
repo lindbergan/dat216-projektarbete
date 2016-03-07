@@ -1,3 +1,4 @@
+
 .buyButton {
     -fx-background-color:#87CC87;
     -fx-font-family:Verdana;
@@ -24,9 +25,54 @@
 }
 
 .productButton:hover {
- -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 .productImage {
 
+}
+
+.newShoppingList {
+    -fx-background-color:#ccc;
+        -fx-border-width:0.5;
+        -fx-border-color:#666;
+        -fx-border-style:solid;
+}
+
+#content {
+    -fx-background-color:#ffffff;
+}
+
+#headerPane {
+    -fx-background-color:#ffffff;
+}
+
+#selected {
+    -fx-background-color:#A9D990;
+}
+
+#selected:hover {
+    -fx-background-color:#A9D990;
+    -fx-border-color:#559434;
+    -fx-border:1;
+}
+
+#unSelected {
+    -fx-background-color:#CDEABD;
+    -fx-border-color:#A9D990;
+    -fx-border:1;
+}
+
+#unSelected:hover {
+    -fx-background-color:#A9D990;
+    -fx-border-color:#559434;
+    -fx-border:1;
+}
+
+#searchButton {
+    -fx-background-color:#A9D990;
+}
+
+#searchButton:hover {
+    -fx-background-color:#559434;
 }

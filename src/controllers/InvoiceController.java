@@ -1,8 +1,5 @@
 package controllers;
 
-/**
- * Created by Jolo on 2/26/16.
- */
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,10 +17,9 @@ import java.util.ResourceBundle;
 
 public class InvoiceController implements Initializable {
 
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private ViewChanger viewChanger = new ViewChanger();
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-
     @FXML
     private AnchorPane paymentViewInvoice;
     @FXML
