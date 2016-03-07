@@ -60,7 +60,6 @@ public class InvoiceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-
         initRadioButtons();
         listenToRadioButtons();
         initTextFields();
@@ -94,17 +93,26 @@ public class InvoiceController implements Initializable {
                 else {
                     invoiceDeliveryAdress = "Annan adress";
                     setAllFieldsDisabled(false);
+                    setDeliveryAsDefault();
                 }
             }
         });
+    }
+
+    public void setDeliveryAsDefault(){
+        userInputFirstName = customer.getFirstName();
+        userInputLastName = customer.getLastName();
+        userInputAdress = customer.getAddress();
+        userInputPostCode = customer.getPostCode();
+        userInputPostAdress = customer.getPostAddress();
+        userInputEmail = customer.getEmail();
+        userInputPhone = customer.getPhoneNumber();
     }
 
     public void initTextFields() {
 
         if(sameAsDelivery.isSelected()) {
             //sets the textfields to the same as delivery by default
-
-
             invoiceFirstName.setText(customer.getFirstName());
             invoiceLastName.setText(customer.getLastName());
             invoiceAddress.setText(customer.getAddress());
@@ -116,7 +124,6 @@ public class InvoiceController implements Initializable {
 
         }
         else{
-
             invoiceFirstName.setText(userInputFirstName);
             invoiceLastName.setText(userInputLastName);
             invoiceAddress.setText(userInputAdress);
