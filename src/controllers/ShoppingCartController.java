@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -13,12 +14,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import properties.CartTextField;
 import properties.DelButton;
 import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
+import sun.tools.jstat.Alignment;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -215,7 +218,7 @@ public class ShoppingCartController implements Initializable {
             });
             temp.setOnAction(this::activateEnter);
             grid.add(temp, 1, i);
-            Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
+            Text suffix = new Text(" " +showItem(i).getProduct().getUnitSuffix());
             grid.add(suffix, 2, i);
             String tempString;
             double tempPrice =showItem(i).getProduct().getPrice() * showItem(i).getAmount();
@@ -224,11 +227,13 @@ public class ShoppingCartController implements Initializable {
             }else{
                 tempString = String.format("%.2f", tempPrice)+ " :-";
             }
-            grid.add(new Text(tempString), 3, i);
+            Text alignTxt = new Text(tempString);
+            grid.add(alignTxt, 3, i);
+            grid.setHalignment(alignTxt, HPos.RIGHT);
             totalPrice.setText(String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
             delButton = new DelButton("Ta bort", i);
             delButton.setOnAction(this::deleteItem);
-            grid.add(delButton, 4, i);
+            grid.add(delButton, 5, i);
         }
     }
 }
