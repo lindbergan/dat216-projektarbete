@@ -18,16 +18,12 @@ public class CategoryListCell extends ListCell<String> {
         if(item != null) {
             super.updateItem(item, empty);
             Label l = new Label(item);
-            System.out.println(item);
 
             String url = "/images/" + item + ".png/";
-            System.out.println(url);
             Image image = new Image(url);
             ImageView l2 = new ImageView(image);
             l2.setFitHeight(46);
             l2.setFitWidth(75);
-
-            //Label l2 = new Label();
 
             l.setFont(Font.font("Verdana", 15));
 
