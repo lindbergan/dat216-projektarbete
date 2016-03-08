@@ -27,8 +27,8 @@ public class SelectedReceiptController implements Initializable {
     @FXML private Text totalText;
     IMatDataHandler handler = IMatDataHandler.getInstance();
     public static int variable = 0;
-    static Order o;
 
+    static Order o;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

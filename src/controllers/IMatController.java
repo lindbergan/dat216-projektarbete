@@ -162,6 +162,7 @@ public class IMatController implements Initializable {
     }
 
     public void initButtons() {
+        helpButton.getStyleClass().add("helpButton");
         helpButton.setOnAction(e -> {
             helpMenu();
         });
