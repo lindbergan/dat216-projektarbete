@@ -62,9 +62,9 @@
         <Font name="System Bold" size="24.0" />
       </font>
     </Button>
-    <HBox alignment="CENTER" layoutX="555.0" layoutY="277.0" prefHeight="38.0" prefWidth="206.0" AnchorPane.bottomAnchor="405.0" AnchorPane.leftAnchor="555.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="277.0">
+    <HBox alignment="CENTER_RIGHT" layoutX="532.0" layoutY="283.0" prefHeight="32.0" prefWidth="232.0" AnchorPane.bottomAnchor="405.0" AnchorPane.leftAnchor="532.0" AnchorPane.rightAnchor="516.0" AnchorPane.topAnchor="283.0">
       <children>
-        <Label fx:id="customerEmail" font="$x2" prefHeight="16.0" prefWidth="127.06640625" text="&quot;person@email.com&quot;." />
+        <Label fx:id="customerEmail" alignment="TOP_LEFT" font="$x2" prefHeight="20.0" prefWidth="170.0" text="&quot;person@email.com&quot;." />
       </children>
     </HBox>
     <HBox alignment="CENTER" prefHeight="61.0" prefWidth="168.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="577.5" AnchorPane.rightAnchor="534.5" AnchorPane.topAnchor="567.0">
