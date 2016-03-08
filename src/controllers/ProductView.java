@@ -79,15 +79,23 @@ public abstract class ProductView {
     public void buyItem(ActionEvent e) {
         BuyButton bb = (BuyButton) e.getSource();
         StackPane p = (StackPane) bb.getParent();
+        ShoppingItem pra = getProductInCart(handler.getProduct(bb.getProductId()));
+        String aamount;
+        if(pra == null){
+            aamount = "1";
+            incItem(bb.getProductId());
+        }else {
+            aamount = (int)pra.getAmount() + "";
+        }
 
         Button posButton = new Button("+");
         Button negButton = new Button("-");
-        TextField tf = new TextField("1");
+        TextField tf = new TextField(aamount);
         tf.setPrefWidth(50);
         tf.setAlignment(Pos.CENTER);
 
         p.getChildren().remove(bb);
-        incItem(bb.getProductId());
+
 
         HBox hbox = new HBox(10, negButton, tf, posButton);
         hbox.setAlignment(Pos.BOTTOM_CENTER);
@@ -169,5 +177,15 @@ public abstract class ProductView {
             s += p.getUnit();
         }
         return s;
+    }
+
+    public ShoppingItem getProductInCart(Product product){
+        List<ShoppingItem> inCart = cart.getItems();
+        for(ShoppingItem shoppingItem : inCart){
+            if(shoppingItem.getProduct().equals(product)){
+                return shoppingItem;
+            }
+        }
+        return null;
     }
 }
