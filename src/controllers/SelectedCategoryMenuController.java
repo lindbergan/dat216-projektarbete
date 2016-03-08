@@ -85,7 +85,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
 
                     BuyButton newBottomButton = new BuyButton("Köp", productList.get(adrianplz).getProductId());
                     newBottomButton.setPrefWidth(75);
-                    newBottomButton.setPrefHeight(35);
+                    newBottomButton.setPrefHeight(30);
                     newBottomButton.toFront();
                     newBottomButton.setAlignment(Pos.CENTER);
                     newBottomButton.setPickOnBounds(false);
