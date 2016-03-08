@@ -168,15 +168,6 @@ public class IMatController implements Initializable {
         });
     }
 
-    public void goToReceipts(ActionEvent event) {
-        ViewChanger vc = new ViewChanger();
-        try {
-            vc.changeScene(content, "/fxml/Receipts.fxml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void initReceipts() {
         if (handler.getOrders().size() != 0) {
             ViewChanger vc = new ViewChanger();
@@ -191,6 +182,16 @@ public class IMatController implements Initializable {
                 });
                 receiptMenu.getItems().add(mi);
             }
+            MenuItem item = new MenuItem("Hantera alla kvitton");
+            item.setOnAction(e -> {
+                try {
+                    vc.changeScene(content, "/fxml/Receipts.fxml");
+                }
+                catch (IOException eee) {
+                    eee.printStackTrace();
+                }
+            });
+            receiptMenu.getItems().addAll(new SeparatorMenuItem(), item);
         }
         else {
             MenuItem menuItem = new MenuItem("Inga kvitton");

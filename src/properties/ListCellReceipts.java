@@ -1,6 +1,7 @@
 package properties;
 
 
+import controllers.ReceiptsController;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -15,20 +16,17 @@ public class ListCellReceipts extends ListCell<Order> {
     IMatDataHandler handler = IMatDataHandler.getInstance();
     Customer c = handler.getCustomer();
 
-    static int variable = 0;
-
-    public void ListCellReceipts() {
+    public ListCellReceipts() {
         GridPane gp = new GridPane();
+        if (ReceiptsController.variable < handler.getOrders().size()) {
 
-        if (variable < handler.getOrders().size() - 1) {
-
-            Order o = handler.getOrders().get(variable);
+            Order o = handler.getOrders().get(ReceiptsController.variable);
 
             Text name = new Text(c.getFirstName() + " " + c.getLastName());
             Text date = new Text(o.getDate().toString());
             Text quantity = new Text(String.valueOf(o.getItems().size()));
             double sum = 0;
-            for (int i = 0; i < o.getItems().size() - 1; i++) {
+            for (int i = 0; i < o.getItems().size(); i++) {
                 sum = sum + (o.getItems().get(i).getProduct().getPrice() * o.getItems().get(i).getAmount());
             }
 
@@ -46,8 +44,8 @@ public class ListCellReceipts extends ListCell<Order> {
             gp.setVisible(true);
             setVisible(true);
             setGraphic(gp);
-            variable++;
         }
+        ReceiptsController.variable++;
     }
 
 }

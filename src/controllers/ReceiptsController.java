@@ -5,28 +5,37 @@ import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.input.ScrollEvent;
 import javafx.util.Callback;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import properties.ListCellReceipts;
+import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOError;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 
 public class ReceiptsController implements Initializable {
 
-    @FXML ListView listView;
+    public static int variable = 0;
+
+    @FXML ListView<Order> listView;
     IMatDataHandler handler = IMatDataHandler.getInstance();
 
     @Override
@@ -35,11 +44,8 @@ public class ReceiptsController implements Initializable {
 
         ObservableList<Order> ror = FXCollections.observableArrayList();
 
-        for (Order o : orderList) {
-            ror.add(o);
-        }
-
-        listView.setItems(ror);
+        ror.addAll(orderList.stream().collect(Collectors.toList()));
+        System.out.println(ror.size());
 
         listView.setCellFactory(new Callback<ListView<Order>, ListCell<Order>>() {
             @Override
@@ -47,18 +53,21 @@ public class ReceiptsController implements Initializable {
                 return new ListCellReceipts();
             }
         });
-
-        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        variable = 0;
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Order>() {
             @Override
-            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                properties.ViewChanger vc = new properties.ViewChanger();
+            public void changed(ObservableValue<? extends Order> observable, Order oldValue, Order newValue) {
+                SelectedReceiptController.setOrder(newValue);
+                ViewChanger vc = new ViewChanger();
                 try {
-                    vc.changeScene(IMatController.contentProperty, "/fxml/SelectedReceipt.fxml/");
+                    System.out.println("RC " + newValue.getDate().toString());
+                    vc.changeScene(IMatController.contentProperty, "/fxml/SelectedReceipt.fxml");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
+        listView.setItems(ror);
 
     }
 
