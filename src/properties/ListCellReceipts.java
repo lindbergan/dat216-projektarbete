@@ -1,80 +1,53 @@
 package properties;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import se.chalmers.ait.dat215.project.Customer;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Order;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 
-public class ListCellReceipts extends ListCell<String> {
+public class ListCellReceipts extends ListCell<Order> {
 
-    static int j = 0;
-    BufferedReader reader;
-    String[] temp;
-    ObservableList<String> date = FXCollections.observableArrayList();
-    ObservableList<String> fname = FXCollections.observableArrayList();
-    ObservableList<String> lname = FXCollections.observableArrayList();
-    ObservableList<String> quantity = FXCollections.observableArrayList();
-    ObservableList<String> price = FXCollections.observableArrayList();
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    Customer c = handler.getCustomer();
 
-    public ListCellReceipts() {
+    static int variable = 0;
+
+    public void ListCellReceipts() {
         GridPane gp = new GridPane();
 
-        Text name = new Text();
-        Text date = new Text();
-        Text quantity = new Text();
-        Text price = new Text();
+        if (variable < handler.getOrders().size() - 1) {
 
-        gp.add(name, 0, 0, 1, 1);
-        gp.add(date, 1, 0, 1, 1);
-        gp.add(quantity, 2, 0, 1, 1);
-        gp.add(price, 3, 0, 1, 1);
+            Order o = handler.getOrders().get(variable);
 
-        gp.getColumnConstraints().add(0, new ColumnConstraints(300));
-        gp.getColumnConstraints().add(1, new ColumnConstraints(350));
-        gp.getColumnConstraints().add(2, new ColumnConstraints(250));
-        gp.getColumnConstraints().add(3, new ColumnConstraints(150));
-        setInfo(name, date, quantity, price);
-        gp.setVisible(true);
-        setVisible(true);
-        setGraphic(gp);
-    }
-
-    public void setInfo(Text n, Text d, Text q, Text p) {
-        try {
-            reader = new BufferedReader(new FileReader("receipts.txt"));
-            temp = reader.readLine().split(";");
-
-            for (int i = 0; i < temp.length; i++)  {
-                switch (temp[i]) {
-                    case "date" : date.add(temp[i + 1]);
-                        break;
-                    case "name" : fname.add(temp[i + 1]);
-                        lname.add(temp[i + 2]);
-                        break;
-                    case "price" : price.add(temp[i + 1]);
-                        break;
-                    case "quantity" : quantity.add(temp[i + 1]);
-                        break;
-                    default: break;
-                }
-            }
-            int nrReceipts = date.size() - 1;
-            if (j <= nrReceipts) {
-                d.setText(date.get(j));
-                n.setText(fname.get(j) + " " + lname.get(j));
-                q.setText(quantity.get(j) + " (st/förp/kg)");
-                p.setText(price.get(j) + " kr");
-                j++;
+            Text name = new Text(c.getFirstName() + " " + c.getLastName());
+            Text date = new Text(o.getDate().toString());
+            Text quantity = new Text(String.valueOf(o.getItems().size()));
+            double sum = 0;
+            for (int i = 0; i < o.getItems().size() - 1; i++) {
+                sum = sum + (o.getItems().get(i).getProduct().getPrice() * o.getItems().get(i).getAmount());
             }
 
+            Text price = new Text(String.format("%.2f", sum));
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            gp.add(name, 0, 0, 1, 1);
+            gp.add(date, 1, 0, 1, 1);
+            gp.add(quantity, 2, 0, 1, 1);
+            gp.add(price, 3, 0, 1, 1);
+
+            gp.getColumnConstraints().add(0, new ColumnConstraints(300));
+            gp.getColumnConstraints().add(1, new ColumnConstraints(350));
+            gp.getColumnConstraints().add(2, new ColumnConstraints(250));
+            gp.getColumnConstraints().add(3, new ColumnConstraints(150));
+            gp.setVisible(true);
+            setVisible(true);
+            setGraphic(gp);
+            variable++;
         }
     }
+
 }

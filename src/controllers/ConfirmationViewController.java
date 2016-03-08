@@ -147,8 +147,7 @@ public class ConfirmationViewController implements Initializable {
 
     //go to ExitView
     public void confirmPurchase(ActionEvent event) throws IOException {
-        saveAllInfo();
-        handler.getShoppingCart().clear();
+        handler.placeOrder(true);
         viewChanger.changeStageOverride(event, "/fxml/ExitView.fxml");
     }
 

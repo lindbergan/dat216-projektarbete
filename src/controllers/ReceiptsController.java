@@ -12,41 +12,41 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import properties.ListCellReceipts;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Order;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOError;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
 public class ReceiptsController implements Initializable {
 
     @FXML ListView listView;
+    IMatDataHandler handler = IMatDataHandler.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> list = FXCollections.observableArrayList();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("receipts.txt"));
-            String[] arr = reader.readLine().split(";");
-            for (int i = 0; i < arr.length - 1; i++) {
-                if (arr[i].contains("date")) {
-                    list.add(arr[i + 1]);
-                }
-            }
+        List<Order> orderList = handler.getOrders();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        ObservableList<Order> ror = FXCollections.observableArrayList();
+
+        for (Order o : orderList) {
+            ror.add(o);
         }
 
-        listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+        listView.setItems(ror);
+
+        listView.setCellFactory(new Callback<ListView<Order>, ListCell<Order>>() {
             @Override
-            public ListCell<String> call(ListView<String> param) {
+            public ListCell<Order> call(ListView<Order> param) {
                 return new ListCellReceipts();
             }
         });
-        listView.setItems(list);
 
         listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -59,6 +59,7 @@ public class ReceiptsController implements Initializable {
                 }
             }
         });
+
     }
 
 }

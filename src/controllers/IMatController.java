@@ -17,7 +17,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import properties.CategoryListCell;
+import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import java.io.*;
@@ -166,7 +168,7 @@ public class IMatController implements Initializable {
     }
 
     public void goToReceipts(ActionEvent event) {
-        properties.ViewChanger vc = new properties.ViewChanger();
+        ViewChanger vc = new ViewChanger();
         try {
             vc.changeScene(content, "/fxml/Receipts.fxml");
         } catch (IOException e) {
@@ -175,42 +177,26 @@ public class IMatController implements Initializable {
     }
 
     public void initReceipts() {
-        try {
-            List<String> list = Files.readAllLines(Paths.get("receipts.txt"));
-            if (list.size() != 0) {
-                String[] f = list.get(0).split(";");
-
-                for (int i = 0; i < f.length - 1; i++) {
-                    if (f[i].contains("date")) {
-                        MenuItem mi = new MenuItem(f[i + 1]);
-                        mi.setOnAction(this::goToReceipts);
-                        receiptMenu.getItems().add(mi);
+        if (handler.getOrders().size() != 0) {
+            ViewChanger vc = new ViewChanger();
+            for (Order o : handler.getOrders()) {
+                MenuItem mi = new MenuItem(o.getDate().toString());
+                mi.setOnAction(e -> {
+                    try {
+                        vc.changeScene(content, "/fxml/Receipts.fxml/");
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
-                }
-                receiptMenu.getItems().add(new SeparatorMenuItem());
-                MenuItem item = new MenuItem("Hantera alla kvitton");
-                properties.ViewChanger vc = new properties.ViewChanger();
-                    item.setOnAction(e -> {
-                        try {
-                            vc.changeScene(content, "/fxml/Receipts.fxml/");
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    });
-                receiptMenu.getItems().add(item);
-            }
-            else {
-                MenuItem mi = new MenuItem("Inga tidigare köp");
-                mi.setDisable(true);
+                });
                 receiptMenu.getItems().add(mi);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
-
+        else {
+            MenuItem menuItem = new MenuItem("Inga kvitton");
+            menuItem.setDisable(true);
+            receiptMenu.getItems().add(menuItem);
+        }
     }
-
     public void setImage() {
         Image image = new Image("/images/IMat-logga.png/");
         imageView1.setImage(image);
