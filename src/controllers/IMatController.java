@@ -145,6 +145,7 @@ public class IMatController implements Initializable {
                 ee.printStackTrace();
             }
         });
+
         listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
