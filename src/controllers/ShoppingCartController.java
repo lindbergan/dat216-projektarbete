@@ -158,7 +158,7 @@ public class ShoppingCartController implements Initializable {
             scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         }
         for (int i = 0; i < handler.getShoppingCart().getItems().size(); i++) {
-            grid.add(new Text(showItem(i).getProduct().getName()), 0, i);
+            grid.add(new Text("        "+showItem(i).getProduct().getName()), 0, i);
             CartTextField temp = new CartTextField(i);
             if (cantBuyHalf(temp.getRow())) {
                 temp.setText("" + (int) showItem(i).getAmount());
