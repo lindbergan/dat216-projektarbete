@@ -91,6 +91,9 @@ public abstract class ProductView {
         Button posButton = new Button("+");
         Button negButton = new Button("-");
         TextField tf = new TextField(aamount);
+        tf.setFocusTraversable(false);
+        negButton.setFocusTraversable(false);
+        posButton.setFocusTraversable(false);
         tf.setPrefWidth(50);
         tf.setAlignment(Pos.CENTER);
 
