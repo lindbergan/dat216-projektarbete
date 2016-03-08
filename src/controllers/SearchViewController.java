@@ -73,7 +73,7 @@ public class SearchViewController extends ProductView implements Initializable {
 
                 BuyButton newBottomButton = new BuyButton("Köp", products.get(i).getProductId());
                 newBottomButton.setPrefWidth(75);
-                newBottomButton.setPrefHeight(35);
+                newBottomButton.setPrefHeight(30);
                 newBottomButton.toFront();
                 newBottomButton.setAlignment(Pos.CENTER);
                 newBottomButton.setPickOnBounds(false);
@@ -89,6 +89,9 @@ public class SearchViewController extends ProductView implements Initializable {
                 panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
                 panelLayout.setAlignment(txt, Pos.TOP_CENTER);
                 panelLayout.setMargin(newBottomButton, new Insets(0, 0, 5, 0));
+                if(getProductInCart(products.get(i)) != null) {
+                    newBottomButton.fire();
+                }
                 gridRazz.add(panelLayout, column, changeRow);
                 column++;
                 row++;
