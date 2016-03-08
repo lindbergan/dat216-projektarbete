@@ -118,12 +118,21 @@ public class CategoryMenuController extends ProductView implements Initializable
                 newButton.setOnAction(e -> {
                     if (!(txt.getText() == null || txt.getText().equals(""))) {
                         try {
-                            Properties prop = new Properties();
+                            /*Properties prop = new Properties();
 
                             FileOutputStream out = new FileOutputStream("products.txt");
                             prop.setProperty("category", txt.getText());
                             prop.store(out, null);
-                            setPane();
+                            setPane();*/
+                            int index = -1;
+                            for (int q = 0; (q < productCategories.length) && (index == -1); q++) {
+                                if (productCategories[q].equals(txt.getText())) {
+                                    index = q;
+                                }
+                            }
+                            if(index != -1) {
+                                DataHolder.iMat.selectCategory(index);
+                            }
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }

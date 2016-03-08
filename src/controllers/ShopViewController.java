@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -24,6 +25,7 @@ public class ShopViewController implements Initializable {
     @FXML
     private ImageView shopView;
 
+    private final String[] categoryArr = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk", "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,13 +43,21 @@ public class ShopViewController implements Initializable {
             Button button = (Button) e.getSource();
             if (!(button.getText() == null || button.getText().equals(""))) {
                 try {
-                    Properties prop = new Properties();
+                    /*Properties prop = new Properties();
 
                     FileOutputStream out = new FileOutputStream("products.txt");
                     prop.setProperty("category", button.getText());
                     prop.store(out, null);
-                    setPane();
-                    DataHolder.iMat.selectCategory(1);
+                    setPane();*/
+                    int index = -1;
+                    for (int i = 0; (i < categoryArr.length) && (index == -1); i++) {
+                        if (categoryArr[i].equals(button.getText())) {
+                            index = i;
+                        }
+                    }
+                    if(index != -1) {
+                        DataHolder.iMat.selectCategory(index);
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

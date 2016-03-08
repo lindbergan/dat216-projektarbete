@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -92,6 +93,7 @@ public abstract class ProductView {
         hbox.setAlignment(Pos.BOTTOM_CENTER);
         p.getChildren().add(hbox);
         p.setAlignment(hbox, Pos.BOTTOM_CENTER);
+        p.setMargin(hbox, new Insets(0, 0, 5, 0));
 
         posButton.setOnAction(ee -> {
             incItem(bb.getProductId());

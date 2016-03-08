@@ -217,8 +217,15 @@ public class ShoppingCartController implements Initializable {
             grid.add(temp, 1, i);
             Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
             grid.add(suffix, 2, i);
-            grid.add(new Text("" + String.format("%.2f",showItem(i).getProduct().getPrice() * showItem(i).getAmount())), 3, i);
-            totalPrice.setText(handler.getShoppingCart().getTotal() + " :-");
+            String tempString;
+            double tempPrice =showItem(i).getProduct().getPrice() * showItem(i).getAmount();
+            if(tempPrice == Math.floor(tempPrice)){
+                tempString = (int) tempPrice + " :-";
+            }else{
+                tempString = String.format("%.2f", tempPrice)+ " :-";
+            }
+            grid.add(new Text(tempString), 3, i);
+            totalPrice.setText(String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
             delButton = new DelButton("Ta bort", i);
             delButton.setOnAction(this::deleteItem);
             grid.add(delButton, 4, i);
