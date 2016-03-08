@@ -103,6 +103,9 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     panelLayout.setAlignment(txt, Pos.TOP_CENTER);
                     panelLayout.setMargin(newBottomButton, new Insets(0, 0, 5, 0));
                     gridPane123.add(panelLayout, j, rowNrAgain);
+                    if(getProductInCart(productList.get(adrianplz)) != null) {
+                        newBottomButton.fire();
+                    }
                     if (adrianplz < productListSize - 1) {
                         adrianplz = adrianplz + 1;
                     } else break;
@@ -116,5 +119,6 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
         } else {
             System.out.println("Productlist is empty. ");
         }
+
     }
 }
