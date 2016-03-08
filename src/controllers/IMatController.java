@@ -84,6 +84,7 @@ public class IMatController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        DataHolder.iMat = this;
         contentProperty = content;
         setImage();
         start();
@@ -130,12 +131,14 @@ public class IMatController implements Initializable {
         listView.setItems(categories);
         listView.getSelectionModel().selectedItemProperty().addListener(e -> {
             try {
-                Properties prop = new Properties();
-                FileOutputStream out = new FileOutputStream("products.txt");
-                prop.setProperty("category", listView.getSelectionModel().getSelectedItem());
-                prop.store(out, null);
-                goToCategoryMenu();
-                categoryHandler.setPane();
+                if(!(listView.getSelectionModel().getSelectedItem() == null)) {
+                    Properties prop = new Properties();
+                    FileOutputStream out = new FileOutputStream("products.txt");
+                    prop.setProperty("category", listView.getSelectionModel().getSelectedItem());
+                    prop.store(out, null);
+                    goToCategoryMenu();
+                    categoryHandler.setPane();
+                }
             } catch (IOException ee) {
                 ee.printStackTrace();
             }
@@ -221,6 +224,7 @@ public class IMatController implements Initializable {
             toggle2.setId("notSelected");
             toggle1.setSelected(true);
             toggle2.setSelected(false);
+            this.deselectCategory();
             start();
         });
         toggle2.setOnAction(e -> {
@@ -228,6 +232,7 @@ public class IMatController implements Initializable {
             toggle2.setId("selected");
             toggle2.setSelected(true);
             toggle1.setSelected(false);
+            this.deselectCategory();
             goToCategoryMenu();
         });
     }
@@ -255,6 +260,7 @@ public class IMatController implements Initializable {
         try {
             AnchorPane e = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCart.fxml/"));
             content.getChildren().setAll(e);
+            this.deselectCategory();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -334,9 +340,13 @@ public class IMatController implements Initializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-
     }
 
+    public void selectCategory(int index){
+        listView.getSelectionModel().select(index);
+    }
 
+    public void deselectCategory(){
+        listView.getSelectionModel().clearSelection();
+    }
 }

@@ -217,7 +217,7 @@ public class ShoppingCartController implements Initializable {
             grid.add(temp, 1, i);
             Text suffix = new Text(showItem(i).getProduct().getUnitSuffix());
             grid.add(suffix, 2, i);
-            grid.add(new Text("" + showItem(i).getProduct().getPrice() * showItem(i).getAmount()), 3, i);
+            grid.add(new Text("" + String.format("%.2f",showItem(i).getProduct().getPrice() * showItem(i).getAmount())), 3, i);
             totalPrice.setText(handler.getShoppingCart().getTotal() + " :-");
             delButton = new DelButton("Ta bort", i);
             delButton.setOnAction(this::deleteItem);

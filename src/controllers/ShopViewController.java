@@ -47,6 +47,7 @@ public class ShopViewController implements Initializable {
                     prop.setProperty("category", button.getText());
                     prop.store(out, null);
                     setPane();
+                    DataHolder.iMat.selectCategory(1);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

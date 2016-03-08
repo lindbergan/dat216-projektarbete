@@ -44,6 +44,7 @@ public class SearchViewController extends ProductView implements Initializable {
             InputStreamReader in = new FileReader("search.txt");
             prop.load(in);
             input = prop.getProperty("input");
+            DataHolder.iMat.deselectCategory();
         } catch (Exception ex) {
             ex.getStackTrace();
         }
