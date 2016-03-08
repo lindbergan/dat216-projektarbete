@@ -121,6 +121,9 @@ public class IMatController implements Initializable {
                 }
             }
         });
+
+        helpMenu();
+
     }
 
     public ListView<String> getListProperty() {
