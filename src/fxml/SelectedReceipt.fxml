@@ -33,9 +33,6 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
                <children>
                   <Button fx:id="backButton" mnemonicParsing="false" text="Tillbaka" />
-                  <Button fx:id="manageButton" mnemonicParsing="false" text="Hantera alla listor" />
-                  <Button fx:id="editButton" mnemonicParsing="false" text="Redigera lista" />
-                  <Button fx:id="addButton" mnemonicParsing="false" text="Lägg till lista i kundvagnen" />
                </children>
                <GridPane.margin>
                   <Insets bottom="10.0" />
