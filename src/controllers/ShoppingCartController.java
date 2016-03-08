@@ -21,7 +21,7 @@ import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
-import sun.tools.jstat.Alignment;
+//import sun.tools.jstat.Alignment;
 
 import java.io.FileReader;
 import java.io.IOException;
