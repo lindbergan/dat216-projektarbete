@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -21,7 +22,7 @@ import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
-import sun.tools.jstat.Alignment;
+//import sun.tools.jstat.Alignment;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -158,7 +159,7 @@ public class ShoppingCartController implements Initializable {
             scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         }
         for (int i = 0; i < handler.getShoppingCart().getItems().size(); i++) {
-            grid.add(new Text(showItem(i).getProduct().getName()), 0, i);
+            grid.add(new Text("        "+showItem(i).getProduct().getName()), 0, i);
             CartTextField temp = new CartTextField(i);
             if (cantBuyHalf(temp.getRow())) {
                 temp.setText("" + (int) showItem(i).getAmount());
@@ -233,6 +234,7 @@ public class ShoppingCartController implements Initializable {
             totalPrice.setText(String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
             delButton = new DelButton("Ta bort", i);
             delButton.setOnAction(this::deleteItem);
+            delButton.setCursor(Cursor.HAND);
             grid.add(delButton, 5, i);
         }
     }

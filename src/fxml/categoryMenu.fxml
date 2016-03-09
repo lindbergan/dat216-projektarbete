@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="categoryMenuAP" maxHeight="1.7976931348623157E308"
-            maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="1000.0" stylesheets="/css/stylesheet.css" xmlns="http://javafx.com/javafx/8"
-            fx:controller="controllers.CategoryMenuController">
+
+<AnchorPane fx:id="categoryMenuAP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="/css/stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CategoryMenuController">
     <children>
-        <ScrollPane layoutX="11.0" layoutY="44.0" prefHeight="539.0" prefWidth="983.0">
+        <ScrollPane layoutX="11.0" layoutY="44.0" prefHeight="540.0" prefWidth="990.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
             <content>
-                <AnchorPane fx:id="apGridWindow" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="952.0">
+                <AnchorPane fx:id="apGridWindow" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="980.0">
                     <children>
-                        <GridPane fx:id="gridPane" prefHeight="515.0" prefWidth="952.0" AnchorPane.bottomAnchor="0.0"
-                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <GridPane fx:id="gridPane" prefHeight="525.0" prefWidth="975.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                         </GridPane>
                     </children>
@@ -28,7 +28,7 @@
         </ScrollPane>
         <Label fx:id="hideThis" layoutX="74.0" layoutY="11.0" text="Label">
             <font>
-                <Font name="System Bold" size="19.0"/>
+                <Font name="System Bold" size="19.0" />
             </font>
         </Label>
     </children>

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -80,6 +81,7 @@ public class SearchViewController extends ProductView implements Initializable {
                 newBottomButton.setFocusTraversable(false);
                 newBottomButton.setOnAction(this::buyItem);
                 newBottomButton.getStyleClass().add("buyButton");
+                newBottomButton.setCursor(Cursor.HAND);
 
                 Label txt = new Label(products.get(i).getName());
                 txt.setTextFill(exampleText.getTextFill());

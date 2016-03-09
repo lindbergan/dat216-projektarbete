@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -54,7 +55,10 @@
     </HBox>
     <HBox alignment="CENTER" layoutX="578.0" layoutY="495.0" prefHeight="61.0" prefWidth="168.0" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="578.0" AnchorPane.rightAnchor="534.0" AnchorPane.topAnchor="495.0">
       <children>
-        <Button defaultButton="true" mnemonicParsing="false" onAction="#continueShopping" prefHeight="51.0" prefWidth="155.0" text="Fortsätt handla" />
+        <Button defaultButton="true" mnemonicParsing="false" onAction="#continueShopping" prefHeight="51.0" prefWidth="155.0" text="Fortsätt handla">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
       </children>
     </HBox>
     <Button mnemonicParsing="false" onAction="#closeWindow" prefHeight="51.0" text="X" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="33.0">
@@ -62,14 +66,17 @@
         <Font name="System Bold" size="24.0" />
       </font>
     </Button>
-    <HBox alignment="CENTER" layoutX="555.0" layoutY="277.0" prefHeight="38.0" prefWidth="206.0" AnchorPane.bottomAnchor="405.0" AnchorPane.leftAnchor="555.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="277.0">
+    <HBox alignment="CENTER_RIGHT" layoutX="532.0" layoutY="283.0" prefHeight="32.0" prefWidth="232.0" AnchorPane.bottomAnchor="405.0" AnchorPane.leftAnchor="532.0" AnchorPane.rightAnchor="516.0" AnchorPane.topAnchor="283.0">
       <children>
-        <Label fx:id="customerEmail" font="$x2" prefHeight="16.0" prefWidth="127.06640625" text="&quot;person@email.com&quot;." />
+        <Label fx:id="customerEmail" alignment="TOP_LEFT" font="$x2" prefHeight="20.0" prefWidth="170.0" text="&quot;person@email.com&quot;." />
       </children>
     </HBox>
     <HBox alignment="CENTER" prefHeight="61.0" prefWidth="168.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="577.5" AnchorPane.rightAnchor="534.5" AnchorPane.topAnchor="567.0">
       <children>
-        <Button fx:id="receipts" mnemonicParsing="false" prefHeight="31.921875" prefWidth="127.0" text="Kvitton" />
+        <Button fx:id="receipts" mnemonicParsing="false" prefHeight="31.921875" prefWidth="127.0" text="Kvitton">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
       </children>
     </HBox>
   </children>

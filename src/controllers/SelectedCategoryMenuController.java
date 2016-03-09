@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -92,6 +93,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     newBottomButton.setFocusTraversable(false);
                     newBottomButton.setOnAction(this::buyItem);
                     newBottomButton.getStyleClass().add("buyButton");
+                    newBottomButton.setCursor(Cursor.HAND);
 
                     Label txt = new Label(productList.get(adrianplz).getName());
                     txt.setTextFill(exampleText.getTextFill());

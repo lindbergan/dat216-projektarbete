@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import properties.StringComparer;
@@ -322,12 +323,14 @@ public class DeliveryViewController implements Initializable {
 
             allFieldsFilled = true;
             continueButton.setDisable(false);
+            continueButton.setCursor(Cursor.HAND);
             infoLabel.setVisible(false);
         }
 
         else {
             allFieldsFilled = false;
             continueButton.setDisable(true);
+            continueButton.setCursor(Cursor.DEFAULT);
             infoLabel.setVisible(true);
         }
     }

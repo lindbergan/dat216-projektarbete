@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -78,6 +79,12 @@ public class IMatController implements Initializable {
         listView.setId("listView");
     }
 
+    public void setCursors(){
+        helpButton.setCursor(Cursor.HAND);
+        searchButton.setCursor(Cursor.HAND);
+        listView.setCursor(Cursor.HAND);
+    }
+
     public void hataTraversable() {
         searchButton.setFocusTraversable(false);
         listView.setFocusTraversable(false);
@@ -98,6 +105,7 @@ public class IMatController implements Initializable {
         initListView();
         hataTraversable();
         setIds();
+        setCursors();
 
         listProperty = listView;
         try {
@@ -148,6 +156,7 @@ public class IMatController implements Initializable {
                 ee.printStackTrace();
             }
         });
+
         listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
