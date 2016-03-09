@@ -25,6 +25,7 @@ public class IMat extends Application {
 
         primaryStage.setTitle("IMat");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {

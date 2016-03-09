@@ -310,6 +310,7 @@ public class IMatController implements Initializable {
             Parent helpParent = FXMLLoader.load(getClass().getResource("/fxml/helpMenu.fxml"));
             Scene helpScene = new Scene(helpParent);
             Stage helpStage = new Stage();
+            helpStage.setResizable(false);
             helpStage.setScene(helpScene);
             helpStage.showAndWait();
         } catch (IOException e) {
