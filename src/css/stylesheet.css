@@ -88,3 +88,15 @@
     -fx-border-color:#559434;
     -fx-border:1;
 }
+
+#shoppingCartItem {
+    -fx-background-color:#A9D990;
+    -fx-font-color:black;
+}
+
+#shoppingCartItem:hover {
+    -fx-background-color:#A9D990;
+    -fx-font-color:black;
+    -fx-border-color:#559434;
+    -fx-border:1;
+}
