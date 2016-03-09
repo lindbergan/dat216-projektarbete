@@ -125,6 +125,7 @@ public class IMatController implements Initializable {
 
     public void ifNoItems() {
         ifNoFavorites();
+        ifNoLists();
     }
 
     public void initSearch() {
@@ -191,6 +192,14 @@ public class IMatController implements Initializable {
             MenuItem newMenuItem = new MenuItem("Inga favoriter.");
             newMenuItem.setDisable(true);
             favoritesMenu.getItems().add(newMenuItem);
+        }
+    }
+
+    public void ifNoLists() {
+        if (listMenu.getItems().isEmpty()) {
+            MenuItem newMenuItem = new MenuItem("Inga listor.");
+            newMenuItem.setDisable(true);
+            listMenu.getItems().add(newMenuItem);
         }
     }
 
