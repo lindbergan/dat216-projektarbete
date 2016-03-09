@@ -14,9 +14,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import properties.CategoryListCell;
+import properties.ShoppingCartMenuItem;
 import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
@@ -329,6 +331,7 @@ public class IMatController implements Initializable {
     }
 
     public void cartMenuOnAction() {
+        cartMenuButton.getStyleClass().add("cartMenuButton");
         cartMenuButton.getItems().remove(0, cartMenuButton.getItems().size() - 3);
         int limit = 5;
         if (handler.getShoppingCart().getItems().size() < limit) {
@@ -338,10 +341,10 @@ public class IMatController implements Initializable {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
                 if (!cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                    temp = new ShoppingCartMenuItem(cartMenuButton, item.getProduct().getName(), item.getAmount(), item.getProduct().getUnitSuffix(), item.getProduct().getPrice());
                 }
                 if (cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new MenuItem(item.getProduct().getName() + "     " + (int) item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                    temp = new ShoppingCartMenuItem(cartMenuButton, item.getProduct().getName(), item.getAmount(), item.getProduct().getUnitSuffix(), item.getProduct().getPrice());
                 }
                 cartMenuButton.getItems().add(i, temp);
             }
