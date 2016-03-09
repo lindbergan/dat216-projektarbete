@@ -24,7 +24,6 @@ public class HelpMenuController {
         if(pane1.isVisible()){
             pane1.setVisible(false);
             pane2.setVisible(true);
-            System.out.println("hej");
         }
         else
         if(pane2.isVisible()){
