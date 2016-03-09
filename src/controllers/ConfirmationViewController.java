@@ -10,34 +10,38 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
+import properties.CustomCell;
+import properties.ViewChanger;
+import properties.ViewSingelton;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
-import java.io.*;
-import javafx.scene.layout.*;
-import javafx.util.Callback;
-import properties.CustomCell;
-import properties.ViewChanger;
-import properties.ViewSingelton;
-import se.chalmers.ait.dat215.project.*;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.CharBuffer;
 import java.time.Instant;
-import java.util.*;
-import java.io.FileWriter;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.ResourceBundle;
 
 public class ConfirmationViewController implements Initializable {
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    //private ObservableList<String> listViewList = FXCollections.observableArrayList("");
+    ObservableList<String> listProductNames = FXCollections.observableArrayList();
+    ObservableList<String> listProductQuantity = FXCollections.observableArrayList();
+    ObservableList<String> listProductPricePerUnit = FXCollections.observableArrayList();
+    ObservableList<String> listProductPrice = FXCollections.observableArrayList();
+    ViewSingelton currentView = ViewSingelton.getInstance();
     private Customer customer = handler.getCustomer();
     private ShoppingCart shoppingCart = handler.getShoppingCart();
     private ObservableList<ShoppingItem> cartItems = FXCollections.observableArrayList(shoppingCart.getItems());
     private ViewChanger viewChanger = new ViewChanger();
     private ReceiptsController rc = new ReceiptsController();
-
     @FXML
     private AnchorPane confirmationView;
     @FXML
@@ -58,16 +62,7 @@ public class ConfirmationViewController implements Initializable {
     private Label customerPaymentChoice;
     @FXML
     private Label price;
-
-    //private ObservableList<String> listViewList = FXCollections.observableArrayList("");
-    ObservableList<String> listProductNames = FXCollections.observableArrayList();
-    ObservableList<String> listProductQuantity = FXCollections.observableArrayList();
-    ObservableList<String> listProductPricePerUnit = FXCollections.observableArrayList();
-    ObservableList<String> listProductPrice = FXCollections.observableArrayList();
     private ObservableList<String> listViewList = FXCollections.observableArrayList();
-    ViewSingelton currentView = ViewSingelton.getInstance();
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -82,16 +77,16 @@ public class ConfirmationViewController implements Initializable {
         for (Iterator<ShoppingItem> ite = cartItems.iterator(); ite.hasNext(); ) {
 
             ShoppingItem thisItem = ite.next();
-            double totalItemCost = thisItem.getAmount()*thisItem.getProduct().getPrice();
+            double totalItemCost = thisItem.getAmount() * thisItem.getProduct().getPrice();
 
             listProductNames.add(thisItem.getProduct().getName());
             listProductQuantity.add(String.valueOf(thisItem.getAmount()));
             listProductPricePerUnit.add(String.valueOf(thisItem.getProduct().getPrice()));
             listProductPrice.add(String.valueOf(totalItemCost));
 
-            listViewList.add(getStringSpacing(thisItem.getProduct().getName() +", " +
+            listViewList.add(getStringSpacing(thisItem.getProduct().getName() + ", " +
                     thisItem.getAmount() + " x " + thisItem.getProduct().getPrice() +
-                            " " + thisItem.getProduct().getUnit()) +totalItemCost + ":-");
+                    " " + thisItem.getProduct().getUnit()) + totalItemCost + ":-");
 
         }
 
@@ -101,13 +96,13 @@ public class ConfirmationViewController implements Initializable {
             @Override
             public ListCell<String> call(ListView<String> param) {
 
-                    return new CustomCell();
+                return new CustomCell();
 
             }
         });
     }
 
-    public String getStringSpacing(String str){
+    public String getStringSpacing(String str) {
 
         while (str.length() < 50) {
             str = str + " ";
@@ -136,6 +131,7 @@ public class ConfirmationViewController implements Initializable {
     public void backToPaymentView() throws IOException {
 
         currentView.setCurrentViewName("paymentView");
+        DataHolder.deliveryViewController.setPaymentProgImage();
 
         //need to determine what View to present - based on users Paymentchoice
         if (DeliveryViewController.getPaymentChoice() == "Kortbetalning") {
@@ -151,7 +147,7 @@ public class ConfirmationViewController implements Initializable {
         viewChanger.changeStageOverride(event, "/fxml/ExitView.fxml");
     }
 
-    public void saveAllInfo() throws IOException{
+    public void saveAllInfo() throws IOException {
         try {
             double quantitySum = 0;
             double priceSum = 0;

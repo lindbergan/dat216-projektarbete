@@ -15,7 +15,7 @@ public class CategoryListCell extends ListCell<String> {
 
     @Override
     public void updateItem(String item, boolean empty) {
-        if(item != null) {
+        if (item != null) {
             super.updateItem(item, empty);
             Label l = new Label(item);
 

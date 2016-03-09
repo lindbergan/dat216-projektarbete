@@ -8,21 +8,22 @@ public class ViewSingelton {
     private String viewName;
 
 
-    private ViewSingelton(){}
+    private ViewSingelton() {
+    }
 
-    public static ViewSingelton getInstance(){
+    public static ViewSingelton getInstance() {
 
-        if(instance == null) {
+        if (instance == null) {
             return instance = new ViewSingelton();
         }
         return instance;
     }
 
-    public void setCurrentViewName(String name){
-        viewName = name;
-    }
-
     public String getCurrentViewName() {
         return viewName;
+    }
+
+    public void setCurrentViewName(String name) {
+        viewName = name;
     }
 }

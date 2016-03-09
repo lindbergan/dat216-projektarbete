@@ -91,7 +91,7 @@ public class SearchViewController extends ProductView implements Initializable {
                 panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
                 panelLayout.setAlignment(txt, Pos.TOP_CENTER);
                 panelLayout.setMargin(newBottomButton, new Insets(0, 0, 5, 0));
-                if(getProductInCart(products.get(i)) != null) {
+                if (getProductInCart(products.get(i)) != null) {
                     newBottomButton.fire();
                 }
                 gridRazz.add(panelLayout, column, changeRow);

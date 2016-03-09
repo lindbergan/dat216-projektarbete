@@ -15,14 +15,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import properties.CartTextField;
 import properties.DelButton;
 import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
-//import sun.tools.jstat.Alignment;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -30,6 +28,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
+
+//import sun.tools.jstat.Alignment;
 
 
 public class ShoppingCartController implements Initializable {
@@ -159,7 +159,7 @@ public class ShoppingCartController implements Initializable {
             scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         }
         for (int i = 0; i < handler.getShoppingCart().getItems().size(); i++) {
-            grid.add(new Text("        "+showItem(i).getProduct().getName()), 0, i);
+            grid.add(new Text("        " + showItem(i).getProduct().getName()), 0, i);
             CartTextField temp = new CartTextField(i);
             temp.setFocusTraversable(false);
             if (cantBuyHalf(temp.getRow())) {
@@ -220,19 +220,19 @@ public class ShoppingCartController implements Initializable {
             });
             temp.setOnAction(this::activateEnter);
             grid.add(temp, 1, i);
-            Text suffix = new Text(" " +showItem(i).getProduct().getUnitSuffix());
+            Text suffix = new Text(" " + showItem(i).getProduct().getUnitSuffix());
             grid.add(suffix, 2, i);
             String tempString;
-            double tempPrice =showItem(i).getProduct().getPrice() * showItem(i).getAmount();
-            if(tempPrice == Math.floor(tempPrice)){
+            double tempPrice = showItem(i).getProduct().getPrice() * showItem(i).getAmount();
+            if (tempPrice == Math.floor(tempPrice)) {
                 tempString = (int) tempPrice + " :-";
-            }else{
-                tempString = String.format("%.2f", tempPrice)+ " :-";
+            } else {
+                tempString = String.format("%.2f", tempPrice) + " :-";
             }
             Text alignTxt = new Text(tempString);
             grid.add(alignTxt, 3, i);
             grid.setHalignment(alignTxt, HPos.RIGHT);
-            totalPrice.setText(String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
+            totalPrice.setText(String.format("%.2f", handler.getShoppingCart().getTotal()) + " :-");
             delButton = new DelButton("Ta bort", i);
             delButton.setFocusTraversable(false);
             delButton.setOnAction(this::deleteItem);

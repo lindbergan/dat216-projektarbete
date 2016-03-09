@@ -82,11 +82,11 @@ public abstract class ProductView {
         StackPane p = (StackPane) bb.getParent();
         ShoppingItem pra = getProductInCart(handler.getProduct(bb.getProductId()));
         String aamount;
-        if(pra == null){
+        if (pra == null) {
             aamount = "1";
             incItem(bb.getProductId());
-        }else {
-            aamount = (int)pra.getAmount() + "";
+        } else {
+            aamount = (int) pra.getAmount() + "";
         }
 
         Button posButton = new Button("+");
@@ -172,23 +172,23 @@ public abstract class ProductView {
         return productList;
     }
 
-    public String getPriceText(Product p){
+    public String getPriceText(Product p) {
         String s;
         double d = p.getPrice();
-        if(d == Math.floor(d)){
-            int i = (int)d;
+        if (d == Math.floor(d)) {
+            int i = (int) d;
             s = i + p.getUnit();
-        }else{
+        } else {
             s = String.format("%.2f", d);
             s += p.getUnit();
         }
         return s;
     }
 
-    public ShoppingItem getProductInCart(Product product){
+    public ShoppingItem getProductInCart(Product product) {
         List<ShoppingItem> inCart = cart.getItems();
-        for(ShoppingItem shoppingItem : inCart){
-            if(shoppingItem.getProduct().equals(product)){
+        for (ShoppingItem shoppingItem : inCart) {
+            if (shoppingItem.getProduct().equals(product)) {
                 return shoppingItem;
             }
         }

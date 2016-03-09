@@ -17,10 +17,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CategoryMenuController extends ProductView implements Initializable {
@@ -132,7 +130,7 @@ public class CategoryMenuController extends ProductView implements Initializable
                                     index = q;
                                 }
                             }
-                            if(index != -1) {
+                            if (index != -1) {
                                 DataHolder.iMat.selectCategory(index);
                             }
                         } catch (Exception ex) {

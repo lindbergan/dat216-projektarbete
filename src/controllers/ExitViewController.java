@@ -59,12 +59,11 @@ public class ExitViewController implements Initializable {
     //goes back to iMatView and shows receipts
     public void receiptsButtonPushed(ActionEvent event) {
         //byt stage till kvitto-stage:n
-        try  {
-            IMatController imc  = new IMatController();
+        try {
+            IMatController imc = new IMatController();
             viewChanger.changeStage(event, exitView, "/fxml/IMat.fxml");
             viewChanger.changeScene(imc.contentProperty, "/fxml/Receipts.fxml/");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

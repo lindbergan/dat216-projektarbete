@@ -17,7 +17,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import properties.BuyButton;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 
 import java.io.FileReader;
@@ -105,7 +104,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     panelLayout.setAlignment(txt, Pos.TOP_CENTER);
                     panelLayout.setMargin(newBottomButton, new Insets(0, 0, 5, 0));
                     gridPane123.add(panelLayout, j, rowNrAgain);
-                    if(getProductInCart(productList.get(adrianplz)) != null) {
+                    if (getProductInCart(productList.get(adrianplz)) != null) {
                         newBottomButton.fire();
                     }
                     if (adrianplz < productListSize - 1) {

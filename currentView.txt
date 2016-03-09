@@ -1,2 +1,0 @@
-#Tue Mar 08 16:17:55 CET 2016
-URL=/fxml/categoryMenu.fxml/

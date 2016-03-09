@@ -1,18 +1,10 @@
 package properties;
 
-import controllers.SelectedReceiptController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.ShoppingItem;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.stream.Collectors;
 
 public class ListCellProducts extends ListCell<ShoppingItem> {
 
@@ -23,9 +15,7 @@ public class ListCellProducts extends ListCell<ShoppingItem> {
         if (s == null || empty) {
             setGraphic(null);
             setText(null);
-        }
-
-        else {
+        } else {
             GridPane gp = new GridPane();
             Text name = new Text(s.getProduct().getName());
             Text quantity = new Text(String.valueOf(s.getAmount()));
