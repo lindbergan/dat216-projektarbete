@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,10 +21,10 @@ import javafx.util.Callback;
 import properties.CategoryListCell;
 import properties.ShoppingCartMenuItem;
 import properties.ViewChanger;
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Order;
-import se.chalmers.ait.dat215.project.ShoppingItem;
+import se.chalmers.ait.dat215.project.*;
 
+import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
 import java.util.Properties;
@@ -66,15 +67,32 @@ public class IMatController implements Initializable {
     private MenuItem totalMenu;
     @FXML
     private ListView<String> listView;
+    @FXML Button ohKnapp;
 
     private Properties prop = new Properties();
     private boolean isShopView;
     private MenuItem temp;
+    Timer timer = new Timer(1500,new TimerListener());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         start();
         init();
+        ohKnapp.setLayoutX(ohKnapp.getLayoutX() + 170);
+        ohKnapp.setLayoutY(ohKnapp.getLayoutY() + 43);
+        ohKnapp.setVisible(false);
+        ShoppingCart cart = handler.getShoppingCart();
+        cart.addShoppingCartListener(new ShoppingCartListener() {
+            @Override
+            public void shoppingCartChanged() {
+                cartMenuButton.setVisible(false);
+                ohKnapp.setVisible(true);
+                ohKnapp.setDefaultButton(true);
+                timer.start();
+
+
+            }
+        });
 
     }
 
@@ -403,5 +421,13 @@ public class IMatController implements Initializable {
 
     public void deselectCategory() {
         listView.getSelectionModel().clearSelection();
+    }
+    class TimerListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            cartMenuButton.setVisible(true);
+            ohKnapp.setVisible(false);
+        }
     }
 }
