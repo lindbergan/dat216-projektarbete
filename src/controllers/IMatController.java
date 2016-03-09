@@ -65,21 +65,27 @@ public class IMatController implements Initializable {
     private MenuItem totalMenu;
     @FXML
     private ListView<String> listView;
+    @FXML Button ohKnapp;
 
     private Properties prop = new Properties();
     private boolean isShopView;
     private MenuItem temp;
+    Timer timer = new Timer(1500,new TimerListener());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         start();
         init();
+        ohKnapp.setLayoutX(ohKnapp.getLayoutX() + 170);
+        ohKnapp.setLayoutY(ohKnapp.getLayoutY() + 43);
+        ohKnapp.setVisible(false);
         ShoppingCart cart = handler.getShoppingCart();
         cart.addShoppingCartListener(new ShoppingCartListener() {
             @Override
             public void shoppingCartChanged() {
                 cartMenuButton.setVisible(false);
-                Timer timer = new Timer(1000,new TimerListener());
+                ohKnapp.setVisible(true);
+                ohKnapp.setDefaultButton(true);
                 timer.start();
 
 
@@ -418,6 +424,7 @@ public class IMatController implements Initializable {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             cartMenuButton.setVisible(true);
+            ohKnapp.setVisible(false);
         }
     }
 }
