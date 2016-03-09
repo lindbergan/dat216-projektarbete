@@ -100,9 +100,17 @@ public class IMatController implements Initializable {
         hataTraversable();
         setIds();
         setCursors();
+        if (isFirstTime()) {
+            helpMenu();
+        }
 
         listProperty = listView;
+
+        isFirstTime();
+
         try {
+            File file = new File("search.txt");
+            if (!(file.exists())) file.createNewFile();
             FileOutputStream clear = new FileOutputStream("search.txt");
             prop.setProperty("input", "");
             prop.store(clear, null);
@@ -136,6 +144,8 @@ public class IMatController implements Initializable {
         listView.getSelectionModel().selectedItemProperty().addListener(e -> {
             try {
                 if(!(listView.getSelectionModel().getSelectedItem() == null)) {
+                    File file = new File("products.txt");
+                    if (!(file.exists())) file.createNewFile();
                     Properties prop = new Properties();
                     FileOutputStream out = new FileOutputStream("products.txt");
                     prop.setProperty("category", listView.getSelectionModel().getSelectedItem());
@@ -169,6 +179,25 @@ public class IMatController implements Initializable {
         helpButton.setOnAction(e -> {
             helpMenu();
         });
+    }
+
+    public boolean isFirstTime() {
+        File file = new File("help.txt");
+        try {
+            if (!(file.exists())) file.createNewFile();
+            BufferedReader read = new BufferedReader(new FileReader("help.txt"));
+            if (read.readLine() == null) {
+                Properties prop = new Properties();
+                FileOutputStream out = new FileOutputStream("help.txt");
+                prop.setProperty("bool", "true");
+                prop.store(out, null);
+                return true;
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void initReceipts() {
@@ -312,6 +341,8 @@ public class IMatController implements Initializable {
             url = "/fxml/shopView.fxml/";
         } else url = "/fxml/categoryMenu.fxml/";
         try {
+            File file = new File("currentView.txt");
+            if (!(file.exists())) file.createNewFile();
             Properties prop = new Properties();
             InputStreamReader in = new FileReader("currentView.txt");
             prop.load(in);
@@ -319,7 +350,7 @@ public class IMatController implements Initializable {
             FileOutputStream out = new FileOutputStream("currentView.txt");
             prop.setProperty("URL", url);
             prop.store(out, null);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
