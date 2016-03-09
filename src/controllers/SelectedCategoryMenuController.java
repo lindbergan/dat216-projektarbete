@@ -116,6 +116,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     apGridWindow.setPrefHeight(magicalHeight + 250);
                     magicalHeight = magicalHeight + 250;
                 }
+                gridPane123.setPadding(new Insets(20, 0, 20, 0));
             }
         } else {
             System.out.println("Productlist is empty. ");
