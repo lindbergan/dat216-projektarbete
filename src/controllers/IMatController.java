@@ -31,6 +31,7 @@ public class IMatController implements Initializable {
     public static ListView<String> listProperty;
     public static AnchorPane contentProperty;
     public static MenuButton listMenuProperty;
+
     @FXML
     public AnchorPane content;
     @FXML
@@ -66,6 +67,30 @@ public class IMatController implements Initializable {
     private boolean isShopView;
     private MenuItem temp;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        start();
+        init();
+        ifNoItems();
+
+    }
+
+    public void init() {
+        initToggleButtons();
+        initReceipts();
+        initButtons();
+        initListView();
+        initSearch();
+        initSettings();
+        initProperties();
+    }
+
+    public void weHateTraversable() {
+        searchButton.setFocusTraversable(false);
+        listView.setFocusTraversable(false);
+        helpButton.setFocusTraversable(false);
+    }
+
     public void setIds() {
         headerPane.setId("headerPane");
         content.setId("content");
@@ -85,16 +110,17 @@ public class IMatController implements Initializable {
         helpButton.setFocusTraversable(false);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initSettings() {
+        setImage();
+        weHateTraversable();
+        setIds();
+    }
+
+    public void initProperties() {
         DataHolder.iMat = this;
         contentProperty = content;
-        setImage();
-        start();
-        initToggleButtons();
-        initReceipts();
-        ifNoFavorites();
         listMenuProperty = listMenu;
+
         initButtons();
         initListView();
         hataTraversable();
@@ -108,6 +134,14 @@ public class IMatController implements Initializable {
 
         isFirstTime();
 
+        listProperty = listView;
+    }
+
+    public void ifNoItems() {
+        ifNoFavorites();
+    }
+
+    public void initSearch() {
         try {
             File file = new File("search.txt");
             if (!(file.exists())) file.createNewFile();
