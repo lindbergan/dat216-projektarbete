@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity"
-            prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="controllers.HelpMenuController">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HelpMenuController">
     <bottom>
         <AnchorPane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="closeHelp" cacheShape="false" centerShape="false" focusTraversable="false"
-                        layoutY="137.0" mnemonicParsing="false" onAction="#closeWindow" pickOnBounds="false"
-                        prefHeight="191.0" prefWidth="600.0" scaleShape="false" text="Stäng fönstret och börja handla"
-                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                        AnchorPane.topAnchor="0.0">
+                <Button fx:id="closeHelp" cacheShape="false" centerShape="false" focusTraversable="false" layoutY="137.0" mnemonicParsing="false" onAction="#closeWindow" pickOnBounds="false" prefHeight="191.0" prefWidth="600.0" scaleShape="false" text="Stäng fönstret och börja handla" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <font>
-                        <Font size="28.0"/>
+                        <Font size="28.0" />
                     </font>
                 </Button>
             </children>
@@ -27,37 +24,127 @@
             <children>
                 <Label layoutX="957.0" layoutY="6.0" text="?">
                     <font>
-                        <Font size="36.0"/>
+                        <Font size="36.0" />
                     </font>
                 </Label>
                 <Label layoutX="334.0" layoutY="16.0" text="Hej och välkommen till iMat!">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="24.0" />
                     </font>
                 </Label>
             </children>
         </AnchorPane>
     </top>
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="481.0" prefWidth="943.0">
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" StackPane.alignment="CENTER">
+                     <children>
+                        <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="192.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/helpimages/helpmenushopview.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="451.0" layoutY="341.0" text="Butiksvy" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="174.0" layoutY="378.0" prefHeight="81.0" prefWidth="652.0" text="Programmet erbjuder två olika vyer att navigera i – en butiksvy respektive en kategorivy. &#10;Butiksvyn återspeglar en riktig butik där man navigerar till rätt sektion genom att kicka på rätt bild (I detta fall vill vi handla pasta och väljer bilden för pasta, potatis och ris, se bild)." wrapText="true" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="186.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/helpimages/helpmenucategoryview.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="146.0" layoutY="369.0" prefHeight="81.0" prefWidth="652.0" text="Ett annat sätt att navigera i butiken är genom att använda kategorivyn. Denna får man fram genom att trycka på knappen “Kategorivy” (se bild). I kategorivyn väljer man lämplig kategori för att därefter få fram alla produkter i sortimentet som ligger under denna kategori." wrapText="true" />
+                        <Label layoutX="442.0" layoutY="340.0" text="Kategorivy" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" StackPane.alignment="CENTER">
+                     <children>
+                        <ImageView fitHeight="325.0" fitWidth="454.0" layoutX="314.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/helpimages/helpmenybrows.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="157.0" layoutY="365.0" prefHeight="81.0" prefWidth="652.0" text="Man kan slutligen också navigera med hjälp av browsingmenyn (se bild). Denna liknar kategorivyn, där man genom att trycka på önskad rad/kategorinamn kommer till innehållet i den kategorin." wrapText="true" />
+                        <Label layoutX="433.0" layoutY="344.0" text="Browsmeny" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="187.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/helpimages/helpmenubuy.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="160.0" layoutY="376.0" prefHeight="81.0" prefWidth="652.0" text="Man lägger en vara i kundvagnen genom att trycka på knappen ”köp”. Om man därefter vill ändra antalet till fler eller färre använder man sig av knapparna till höger respektive vänster om textrutan. Man kan även skriva in önskat antal i textfältet." wrapText="true" />
+                        <Label layoutX="368.0" layoutY="347.0" text="knappen Köp och ändra antal" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="322.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/helpimages/helpmenushoppingcart.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="179.0" layoutY="386.0" prefHeight="81.0" prefWidth="652.0" text="Genom att klicka på knappen ”Kundvagn/Kassa” kan man se innehållet i kundvagnen. Om man vill ändra innehållet eller gå till kassan trycker man ”Gå till kundvagnen/kassan” i listan." wrapText="true" />
+                        <Label layoutX="328.0" layoutY="365.0" text="Gå till kassa och ändra kundvagnens innehåll" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="186.0" layoutY="365.0" prefHeight="81.0" prefWidth="652.0" text="Om man vill se sina tidigare kvitton klickar man på knappen ”mina tidigare inköp” (se bild). Där kan man välja om man vill se alla kvitton som en lista eller om man vill titta på ett specifikt kvitto." wrapText="true" />
+                        <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="186.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/helpimages/receiptshelp.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="436.0" layoutY="344.0" text="Se kvitton" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+         </children></AnchorPane>
     </center>
     <left>
         <AnchorPane prefHeight="285.0" prefWidth="20.0" BorderPane.alignment="CENTER">
             <children>
-                <Button alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false"
-                        layoutX="20.0" layoutY="63.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="285.0"
-                        prefWidth="36.0" scaleShape="false" text="&lt;" AnchorPane.bottomAnchor="0.0"
-                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                <Button alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="20.0" layoutY="63.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>
     </left>
     <right>
         <AnchorPane prefHeight="285.0" prefWidth="28.0" BorderPane.alignment="CENTER">
             <children>
-                <Button cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false"
-                        pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&gt;"
-                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                        AnchorPane.topAnchor="0.0"/>
+                <Button cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>
     </right>
