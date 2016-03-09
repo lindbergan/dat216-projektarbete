@@ -21,8 +21,18 @@ import java.util.ResourceBundle;
 
 public class InvoiceController implements Initializable {
 
+    private static String invoiceDeliveryAdress = "Samma som leveransadress";
+    private static String userInputFirstName;
+    private static String userInputLastName;
+    private static String userInputAdress;
+    private static String userInputPostCode;
+    private static String userInputPostAdress;
+    private static String userInputEmail;
+    private static String userInputPhone;
+    private static boolean allFieldsFilled = true; //default
     final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    ViewSingelton currentView = ViewSingelton.getInstance();
     private ViewChanger viewChanger = new ViewChanger();
     @FXML
     private AnchorPane paymentViewInvoice;
@@ -45,18 +55,14 @@ public class InvoiceController implements Initializable {
     private TextField invoiceEmail;
     @FXML
     private TextField invoicePhone;
-    @FXML private Label infoLabel;
-    @FXML private Button continueButton;
-    ViewSingelton currentView = ViewSingelton.getInstance();
-    private static String invoiceDeliveryAdress = "Samma som leveransadress";
-    private static String userInputFirstName;
-    private static String userInputLastName;
-    private static String userInputAdress;
-    private static String userInputPostCode;
-    private static String userInputPostAdress;
-    private static String userInputEmail;
-    private static String userInputPhone;
-    private static boolean allFieldsFilled = true; //default
+    @FXML
+    private Label infoLabel;
+    @FXML
+    private Button continueButton;
+
+    public static boolean AllFieldsFilled() {
+        return allFieldsFilled;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,10 +79,9 @@ public class InvoiceController implements Initializable {
         sameAsDelivery.setToggleGroup(radioButtonGroup);
         otherAdress.setToggleGroup(radioButtonGroup);
 
-        if(invoiceDeliveryAdress == "Samma som leveransadress") {
+        if (invoiceDeliveryAdress == "Samma som leveransadress") {
             sameAsDelivery.setSelected(true);
-        }
-        else{
+        } else {
             otherAdress.setSelected(true);
         }
     }
@@ -90,8 +95,8 @@ public class InvoiceController implements Initializable {
 
                 if (newValue == sameAsDelivery) {
                     invoiceDeliveryAdress = "Samma som leveransadress";
-                    initTextFields();}
-                else {
+                    initTextFields();
+                } else {
                     invoiceDeliveryAdress = "Annan adress";
                     setAllFieldsDisabled(false);
                     setDeliveryAsDefault();
@@ -100,7 +105,7 @@ public class InvoiceController implements Initializable {
         });
     }
 
-    public void setDeliveryAsDefault(){
+    public void setDeliveryAsDefault() {
         userInputFirstName = customer.getFirstName();
         userInputLastName = customer.getLastName();
         userInputAdress = customer.getAddress();
@@ -112,7 +117,7 @@ public class InvoiceController implements Initializable {
 
     public void initTextFields() {
 
-        if(sameAsDelivery.isSelected()) {
+        if (sameAsDelivery.isSelected()) {
             //sets the textfields to the same as delivery by default
             invoiceFirstName.setText(customer.getFirstName());
             invoiceLastName.setText(customer.getLastName());
@@ -123,8 +128,7 @@ public class InvoiceController implements Initializable {
             invoicePhone.setText(customer.getPhoneNumber());
             setAllFieldsDisabled(true);
 
-        }
-        else{
+        } else {
             invoiceFirstName.setText(userInputFirstName);
             invoiceLastName.setText(userInputLastName);
             invoiceAddress.setText(userInputAdress);
@@ -136,7 +140,7 @@ public class InvoiceController implements Initializable {
         }
     }
 
-    public void setAllFieldsDisabled(boolean bol){
+    public void setAllFieldsDisabled(boolean bol) {
         invoiceFirstName.setDisable(bol);
         invoiceLastName.setDisable(bol);
         invoiceAddress.setDisable(bol);
@@ -154,10 +158,9 @@ public class InvoiceController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsLetter(newValue)){
+                if (StringComparer.onlyContainsLetter(newValue)) {
                     userInputFirstName = newValue;
-                }
-                else {
+                } else {
                     invoiceFirstName.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -169,10 +172,9 @@ public class InvoiceController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsLetter(newValue)){
+                if (StringComparer.onlyContainsLetter(newValue)) {
                     userInputLastName = newValue;
-                }
-                else {
+                } else {
                     invoiceLastName.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -194,10 +196,9 @@ public class InvoiceController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length()<6){
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 6) {
                     userInputPostCode = newValue;
-                }
-                else {
+                } else {
                     invoicePostCode.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -209,10 +210,9 @@ public class InvoiceController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsLetter(newValue)){
+                if (StringComparer.onlyContainsLetter(newValue)) {
                     userInputPostAdress = newValue;
-                }
-                else {
+                } else {
                     invoicePostAddress.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -233,10 +233,9 @@ public class InvoiceController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length()<11){
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 11) {
                     userInputPhone = newValue;
-                }
-                else {
+                } else {
                     invoicePhone.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -261,27 +260,21 @@ public class InvoiceController implements Initializable {
 
     public void checkIfAllFieldsFilledIn() {
 
-        if(invoiceFirstName != null && !invoiceFirstName.getText().isEmpty() && invoiceLastName!= null
+        if (invoiceFirstName != null && !invoiceFirstName.getText().isEmpty() && invoiceLastName != null
                 && !invoiceLastName.getText().isEmpty() && invoiceAddress != null &&
                 !invoiceAddress.getText().isEmpty() && invoicePostCode != null &&
-                !invoicePostCode.getText().isEmpty()  && invoicePhone!= null && !invoicePhone.getText().isEmpty()
-                && invoiceEmail!= null && !invoiceEmail.getText().isEmpty()){
+                !invoicePostCode.getText().isEmpty() && invoicePhone != null && !invoicePhone.getText().isEmpty()
+                && invoiceEmail != null && !invoiceEmail.getText().isEmpty()) {
 
             allFieldsFilled = true;
             continueButton.setDisable(false);
             continueButton.setCursor(Cursor.HAND);
             infoLabel.setVisible(false);
-        }
-
-        else {
+        } else {
             allFieldsFilled = false;
             continueButton.setDisable(true);
             continueButton.setCursor(Cursor.DEFAULT);
             infoLabel.setVisible(true);
         }
-    }
-
-    public static boolean AllFieldsFilled(){
-        return allFieldsFilled;
     }
 }

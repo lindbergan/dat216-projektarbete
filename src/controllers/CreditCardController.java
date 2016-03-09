@@ -23,9 +23,11 @@ import java.util.ResourceBundle;
 
 public class CreditCardController implements Initializable {
 
+    private static boolean allFieldsFilled = false;
     //private static boolean allFieldsFilled = false;
     final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
+    ViewSingelton currentView = ViewSingelton.getInstance();
     private CreditCard creditCard = handler.getCreditCard();
     private ViewChanger viewChanger = new ViewChanger();
     @FXML
@@ -49,17 +51,21 @@ public class CreditCardController implements Initializable {
     @FXML
 
     private ChoiceBox cardMonthChoiceBox;
-    @FXML private Button continueButton;
-    @FXML private Label infoLabel;
-    @FXML private Button helpButton;
-    @FXML private Label cvvLabel;
-
+    @FXML
+    private Button continueButton;
+    @FXML
+    private Label infoLabel;
+    @FXML
+    private Button helpButton;
+    @FXML
+    private Label cvvLabel;
     private ObservableList<String> cardYear = FXCollections.observableArrayList("16", "17", "18", "19", "20", "21", "22");
     private ObservableList<String> cardMonth = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-
-    private static boolean allFieldsFilled = false;
     private boolean wasClickedBefore = false;
-    ViewSingelton currentView = ViewSingelton.getInstance();
+
+    public static boolean AllFieldsFilled() {
+        return allFieldsFilled;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -123,8 +129,7 @@ public class CreditCardController implements Initializable {
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 17) {
                     creditCard.setCardNumber(newValue);
                     creditCardNumbr.setText(newValue);
-                }
-                else{
+                } else {
                     creditCardNumbr.setText(oldValue);
                 }
                 checkIfAllFieldsFilled();
@@ -137,10 +142,9 @@ public class CreditCardController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsLetter(newValue)){
+                if (StringComparer.onlyContainsLetter(newValue)) {
                     creditCard.setHoldersName(newValue);
-                }
-                else {
+                } else {
                     cardHolderName.setText(oldValue);
                 }
                 checkIfAllFieldsFilled();
@@ -155,8 +159,7 @@ public class CreditCardController implements Initializable {
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 4) {
                     creditCard.setVerificationCode(Integer.parseInt(newValue));
                     cvv.setText(newValue);
-                }
-                else{
+                } else {
                     cvv.setText(oldValue);
                 }
                 checkIfAllFieldsFilled();
@@ -225,8 +228,7 @@ public class CreditCardController implements Initializable {
             continueButton.setDisable(false);
             continueButton.setCursor(Cursor.HAND);
             infoLabel.setVisible(false);
-        }
-        else {
+        } else {
             allFieldsFilled = false;
             continueButton.setDisable(true);
             continueButton.setCursor(Cursor.DEFAULT);
@@ -234,19 +236,13 @@ public class CreditCardController implements Initializable {
         }
     }
 
+    public void ifHelpButtonClicked() {
 
-    public static boolean AllFieldsFilled(){
-        return allFieldsFilled;
-    }
-
-    public void ifHelpButtonClicked(){
-
-        if(wasClickedBefore) {
+        if (wasClickedBefore) {
             helpButton.setDefaultButton(false);
             cvvLabel.setVisible(false);
             wasClickedBefore = false;
-        }
-        else{
+        } else {
             helpButton.setDefaultButton(true);
             cvvLabel.setVisible(true);
             wasClickedBefore = true;

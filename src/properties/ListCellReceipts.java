@@ -1,7 +1,6 @@
 package properties;
 
 
-import controllers.ReceiptsController;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -23,9 +22,7 @@ public class ListCellReceipts extends ListCell<Order> {
         if (empty || o == null) {
             setText(null);
             setGraphic(null);
-        }
-
-        else {
+        } else {
             GridPane gp = new GridPane();
 
             Text name = new Text(c.getFirstName() + " " + c.getLastName());

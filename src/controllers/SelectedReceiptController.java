@@ -17,15 +17,22 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
 public class SelectedReceiptController implements Initializable {
 
-    @FXML private Button backButton;
-    @FXML private ListView<ShoppingItem> listView;
-    @FXML private Text totalText;
-    IMatDataHandler handler = IMatDataHandler.getInstance();
     static Order o;
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    @FXML
+    private Button backButton;
+    @FXML
+    private ListView<ShoppingItem> listView;
+    @FXML
+    private Text totalText;
+
+    public static void setOrder(Order order) {
+        o = order;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,15 +56,11 @@ public class SelectedReceiptController implements Initializable {
 
         double sum = 0;
 
-        for (ShoppingItem shi: o.getItems()) {
-            sum = sum + (shi.getProduct().getPrice()*shi.getAmount());
+        for (ShoppingItem shi : o.getItems()) {
+            sum = sum + (shi.getProduct().getPrice() * shi.getAmount());
         }
         totalText.setText(String.valueOf(sum));
 
-    }
-
-    public static void setOrder(Order order) {
-        o = order;
     }
 
 }

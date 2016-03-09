@@ -35,14 +35,14 @@ public class DeliveryViewController implements Initializable {
     private static Image payImage = new Image("/images/IMat-progess-betalning.png");
     private static Image deliveryImage = new Image("/images/IMat-progess-leverans.png");
     private static int nummer = 1;
-
+    private static ImageView progressImageViewProperty;
+    private static boolean allFieldsFilled = false;
+    private static ViewSingelton currentView = ViewSingelton.getInstance();
+    final ToggleGroup radioButtonGroup = new ToggleGroup();
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
     private CreditCard creditCard = handler.getCreditCard();
     private ViewChanger viewChanger = new ViewChanger();
-
-    final ToggleGroup radioButtonGroup = new ToggleGroup();
-
     @FXML
     private AnchorPane deliveryView;
     @FXML
@@ -65,19 +65,20 @@ public class DeliveryViewController implements Initializable {
     private TextField customerPhone;
     @FXML
     private ChoiceBox timeIntervallChoicebox;
-    @FXML private Button continueButton;
-    @FXML private Label infoLabel;
-    @FXML private DatePicker calendar;
-    @FXML private ImageView progressImageView;
-    private static ImageView progressImageViewProperty;
-
-    @FXML private Button deliveryButton;
-    @FXML private Button paymentButton;
-    @FXML private Button confirmationButton;
-
-    private static boolean allFieldsFilled = false;
-    private static ViewSingelton currentView = ViewSingelton.getInstance();
-
+    @FXML
+    private Button continueButton;
+    @FXML
+    private Label infoLabel;
+    @FXML
+    private DatePicker calendar;
+    @FXML
+    private ImageView progressImageView;
+    @FXML
+    private Button deliveryButton;
+    @FXML
+    private Button paymentButton;
+    @FXML
+    private Button confirmationButton;
     //the observable lists for the Choiceboxes
     private ObservableList<String> timeIntervall = FXCollections.observableArrayList(
             "07.00 - 11.00", "08.00 - 12.00", "09.00 - 13.00", "10.00 - 14.00", "11.00 - 15.00", "12.00 - 16.00", "13.00 - 17.00", "14.00 - 18.00", "15.00 - 19.00",
@@ -87,6 +88,7 @@ public class DeliveryViewController implements Initializable {
     public static String getUserSpecifiedDate() {
         return userSpecifiedDate.toString();
     }
+
     public static String getUserSpecifiedTime() {
         return userSpecifiedTime;
     }
@@ -98,7 +100,7 @@ public class DeliveryViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if(nummer == 1) {
+        if (nummer == 1) {
             DataHolder.deliveryViewController = this;
             progressImageViewProperty = progressImageView;
             nummer++;
@@ -134,14 +136,12 @@ public class DeliveryViewController implements Initializable {
     public void initChoiceBoxes() {
 
 
-
         timeIntervallChoicebox.setItems(timeIntervall);
 
         //sets the choiesBoxes in case customer chose "go back" from paymentView
         userSpecifiedChoiceBox();
 
     }
-
 
 
     public void userSpecifiedChoiceBox() {
@@ -163,7 +163,7 @@ public class DeliveryViewController implements Initializable {
         }
     }
 
-    public void initDatePicker(){
+    public void initDatePicker() {
         calendar.setValue(userSpecifiedDate);
     }
 
@@ -175,10 +175,9 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsLetter(newValue)){
+                if (StringComparer.onlyContainsLetter(newValue)) {
                     customer.setFirstName(newValue);
-                }
-                else {
+                } else {
                     customerFirstName.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -190,10 +189,9 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsLetter(newValue)){
+                if (StringComparer.onlyContainsLetter(newValue)) {
                     customer.setLastName(newValue);
-                }
-                else {
+                } else {
                     customerLastName.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -214,10 +212,9 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length()<6){
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 6) {
                     customer.setPostCode(newValue);
-                }
-                else {
+                } else {
                     customerPostCode.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -229,10 +226,9 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsLetter(newValue)){
+                if (StringComparer.onlyContainsLetter(newValue)) {
                     customer.setPostAddress(newValue);
-                }
-                else {
+                } else {
                     customerPostAddress.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -253,10 +249,9 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length()<11){
+                if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 11) {
                     customer.setPhoneNumber(newValue);
-                }
-                else {
+                } else {
                     customerPhone.setText(oldValue);
                 }
                 checkIfAllFieldsFilledIn();
@@ -294,7 +289,7 @@ public class DeliveryViewController implements Initializable {
         });
     }
 
-    public void listenToDatePicker(){
+    public void listenToDatePicker() {
         calendar.setOnAction(event -> {
             userSpecifiedDate = calendar.getValue();
             checkIfAllFieldsFilledIn();
@@ -317,28 +312,26 @@ public class DeliveryViewController implements Initializable {
         currentView.setCurrentViewName("paymentView");
 
         if (paymentChoice == "Kortbetalning") {
-                viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
-            } else {
-                viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
-            }
+            viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
+        } else {
+            viewChanger.changeScene(deliveryView, "/fxml/PaymentViewInvoice.fxml");
+        }
     }
 
     public void checkIfAllFieldsFilledIn() {
 
-        if(customerFirstName != null && !customerFirstName.getText().isEmpty() && customerLastName!= null
+        if (customerFirstName != null && !customerFirstName.getText().isEmpty() && customerLastName != null
                 && !customerLastName.getText().isEmpty() && customerAddress != null &&
                 !customerAddress.getText().isEmpty() && customerPostCode != null &&
-                !customerPostCode.getText().isEmpty()  && customerPhone!= null && !customerPhone.getText().isEmpty()
-                && customerEmail!= null && !customerEmail.getText().isEmpty() && userSpecifiedDate !=null
-                && userSpecifiedTime!= null){
+                !customerPostCode.getText().isEmpty() && customerPhone != null && !customerPhone.getText().isEmpty()
+                && customerEmail != null && !customerEmail.getText().isEmpty() && userSpecifiedDate != null
+                && userSpecifiedTime != null) {
 
             allFieldsFilled = true;
             continueButton.setDisable(false);
             continueButton.setCursor(Cursor.HAND);
             infoLabel.setVisible(false);
-        }
-
-        else {
+        } else {
             allFieldsFilled = false;
             continueButton.setDisable(true);
             continueButton.setCursor(Cursor.DEFAULT);
@@ -346,27 +339,27 @@ public class DeliveryViewController implements Initializable {
         }
     }
 
-    public void deliveryButtonClicked()throws IOException{
+    public void deliveryButtonClicked() throws IOException {
         setDeliveryProgImage();
-        viewChanger.changeScene(deliveryView,"/fxml/DeliveryView.fxml" );
+        viewChanger.changeScene(deliveryView, "/fxml/DeliveryView.fxml");
     }
 
-    public void paymentButtonClicked()throws IOException{
+    public void paymentButtonClicked() throws IOException {
         setPaymentProgImage();
-        if(allFieldsFilled){
+        if (allFieldsFilled) {
             continueClicked();
         }
     }
 
-    public void confirmationButtonClicked()throws IOException{
+    public void confirmationButtonClicked() throws IOException {
         setConfirmationProgImage();
-        if(paymentChoice.equals("Kortbetalning")){
+        if (paymentChoice.equals("Kortbetalning")) {
 
-              if(allFieldsFilled && CreditCardController.AllFieldsFilled()) {
-                  viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
-              }
-        }else{
-            if(allFieldsFilled && InvoiceController.AllFieldsFilled()) {
+            if (allFieldsFilled && CreditCardController.AllFieldsFilled()) {
+                viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
+            }
+        } else {
+            if (allFieldsFilled && InvoiceController.AllFieldsFilled()) {
                 viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
             }
         }
@@ -375,39 +368,37 @@ public class DeliveryViewController implements Initializable {
     //Need somehow to create a listener that can listen to changes to viewName in the class ViewSingelton.
     // String is primitive - thus, cant listen to changes. But we need to find a workaround.
 
-    public void setCorrectHeaderButton(){
-        if(currentView.getCurrentViewName() == "deliveryView"){
+    public void setCorrectHeaderButton() {
+        if (currentView.getCurrentViewName() == "deliveryView") {
 
             System.out.println("deliveryView");
             //buttonAction
 
-        }
-        else if(currentView.getCurrentViewName() == "paymentView"){
+        } else if (currentView.getCurrentViewName() == "paymentView") {
 
             System.out.println("paymentView");
             //buttonAction
 
-        }
-        else{
+        } else {
             System.out.println("ConfirmationView");
             //buttonAction
         }
     }
 
-    public void setDeliveryProgImage(){
-        if((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(deliveryImage))) {
+    public void setDeliveryProgImage() {
+        if ((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(deliveryImage))) {
             progressImageViewProperty.setImage(deliveryImage);
         }
     }
 
-    public void setPaymentProgImage(){
-        if((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(payImage))) {
+    public void setPaymentProgImage() {
+        if ((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(payImage))) {
             progressImageViewProperty.setImage(payImage);
         }
     }
 
-    public void setConfirmationProgImage(){
-        if((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(confirmImage))) {
+    public void setConfirmationProgImage() {
+        if ((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(confirmImage))) {
             progressImageViewProperty.setImage(confirmImage);
         }
     }

@@ -1,141 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DeliveryViewController">
-  <children>
-    <BorderPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <center>
-        <StackPane opacity="1.0" prefHeight="593.0" prefWidth="1280.0">
-          <children>
-            <AnchorPane id="AnchorPane" fx:id="deliveryView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0">
-              <children>
-                <Pane prefHeight="593.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <children>
-                    <TextField fx:id="customerFirstName" layoutX="105.0" layoutY="119.0" prefHeight="32.9609375" prefWidth="235.0" />
-                    <TextField fx:id="customerLastName" layoutX="382.0" layoutY="119.0" prefHeight="32.9609375" prefWidth="235.0" />
-                    <TextField fx:id="customerAddress" layoutX="105.0" layoutY="191.0" prefHeight="32.9609375" prefWidth="235.0" />
-                    <TextField fx:id="customerPostCode" layoutX="105.0" layoutY="294.0" prefHeight="32.9609375" prefWidth="80.0" />
-                    <TextField fx:id="customerPostAddress" layoutX="382.0" layoutY="293.0" prefHeight="32.9609375" prefWidth="235.0" />
-                    <TextField fx:id="customerPhone" layoutX="105.0" layoutY="382.0" prefHeight="32.9609375" prefWidth="165.0" />
-                    <TextField fx:id="customerEmail" layoutX="382.0" layoutY="382.0" prefHeight="32.9609375" prefWidth="235.0" />
-                    <Label layoutX="105.0" layoutY="36.0" prefHeight="33.0" prefWidth="107.0" text="Levereras till:">
-                      <font>
-                        <Font name="System Bold" size="14.0" fx:id="x1" />
-                      </font>
-                    </Label>
-                    <Label layoutX="105.0" layoutY="89.0" text="Förnamn *" />
-                    <Label layoutX="105.0" layoutY="162.0" text="Adress *" />
-                    <Label layoutX="382.0" layoutY="89.0" text="Efternamn *" />
-                    <Label layoutX="105.0" layoutY="259.0" text="Postnummer *" />
-                    <Label layoutX="382.0" layoutY="259.0" text="Postort" />
-                    <Label layoutX="105.0" layoutY="351.0" text="Telefon/Mobil *" />
-                    <Label layoutX="382.0" layoutY="351.0" text="E-post *" />
-                    <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
-                    <Label font="$x1" layoutX="970.0" layoutY="259.0" text="Betalsätt:" />
-                    <RadioButton fx:id="cardPayment" layoutX="970.0" layoutY="297.0" mnemonicParsing="false" text="Kortbetalning">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor></RadioButton>
-                    <RadioButton fx:id="invoicePayment" layoutX="970.0" layoutY="325.0" mnemonicParsing="false" text="Fakturabetalning">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor></RadioButton>
-                    <Button layoutX="936.0" layoutY="508.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka till butik">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor></Button>
-                    <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt">
-                      <tooltip>
-                        <Tooltip text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" />
-                      </tooltip>
-                    </Button>
-                    <Label alignment="CENTER" layoutX="546.0" layoutY="21.0" prefWidth="189.0" text="Leverans">
-                      <font>
-                        <Font name="System Bold" size="20.0" />
-                      </font>
-                    </Label>
-                    <Label font="$x1" layoutX="1013.0" layoutY="43.0" text="Leveranstid:" />
-                    <Label layoutX="915.0" layoutY="127.0" text="Datum" />
-                    <Label layoutX="873.0" layoutY="197.0" text="Mellan klockan" />
-                    <ChoiceBox fx:id="timeIntervallChoicebox" layoutX="970.0" layoutY="194.0" prefHeight="27.0" prefWidth="127.0">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
-                        </FXCollections>
-                      </items>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                    </ChoiceBox>
-                    <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" />
-                              <DatePicker fx:id="calendar" layoutX="970.0" layoutY="123.0" onAction="#listenToDatePicker">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor></DatePicker>
-                  </children>
-                </Pane>
-              </children>
-            </AnchorPane>
-          </children>
-          <BorderPane.margin>
-            <Insets />
-          </BorderPane.margin>
-        </StackPane>
-      </center>
-      <top>
-        <AnchorPane prefHeight="125.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
-          <children>
-                  <ImageView fx:id="progressImageView" fitHeight="110.0" fitWidth="640.0" layoutX="320.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0">
-                     <image>
-                        <Image url="@../images/IMat-progess-leverans.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="deliveryButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="404.0" layoutY="15.0" mnemonicParsing="false" onAction="#deliveryButtonClicked" opacity="0.0" prefHeight="96.0" prefWidth="134.0" text="Leverans">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="paymentButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY" layoutX="571.0" layoutY="15.0" mnemonicParsing="false" onAction="#paymentButtonClicked" opacity="0.0" prefHeight="96.0" prefWidth="132.0" text="Betalning">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="confirmationButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY" layoutX="724.0" layoutY="16.0" mnemonicParsing="false" onAction="#confirmationButtonClicked" opacity="0.0" prefHeight="95.0" prefWidth="187.0" text="Bekräfta köp">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-          <Button layoutX="2.0" layoutY="9.0" mnemonicParsing="false" onAction="#logoClicked" opacity="0.0" prefHeight="109.0" prefWidth="195.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-          </Button>
-        <ImageView fitHeight="88.0" fitWidth="291.0" pickOnBounds="false" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0">
-          <image>
-            <Image url="@../images/IMat-logga.png" />
-          </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-        </ImageView>
-          </children>
-        </AnchorPane>
-      </top>
-    </BorderPane>
-  </children>
+<?import java.lang.String?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="controllers.DeliveryViewController">
+    <children>
+        <BorderPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <StackPane opacity="1.0" prefHeight="593.0" prefWidth="1280.0">
+                    <children>
+                        <AnchorPane id="AnchorPane" fx:id="deliveryView" maxHeight="-Infinity" maxWidth="-Infinity"
+                                    minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1280.0">
+                            <children>
+                                <Pane prefHeight="593.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0"
+                                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <TextField fx:id="customerFirstName" layoutX="105.0" layoutY="119.0"
+                                                   prefHeight="32.9609375" prefWidth="235.0"/>
+                                        <TextField fx:id="customerLastName" layoutX="382.0" layoutY="119.0"
+                                                   prefHeight="32.9609375" prefWidth="235.0"/>
+                                        <TextField fx:id="customerAddress" layoutX="105.0" layoutY="191.0"
+                                                   prefHeight="32.9609375" prefWidth="235.0"/>
+                                        <TextField fx:id="customerPostCode" layoutX="105.0" layoutY="294.0"
+                                                   prefHeight="32.9609375" prefWidth="80.0"/>
+                                        <TextField fx:id="customerPostAddress" layoutX="382.0" layoutY="293.0"
+                                                   prefHeight="32.9609375" prefWidth="235.0"/>
+                                        <TextField fx:id="customerPhone" layoutX="105.0" layoutY="382.0"
+                                                   prefHeight="32.9609375" prefWidth="165.0"/>
+                                        <TextField fx:id="customerEmail" layoutX="382.0" layoutY="382.0"
+                                                   prefHeight="32.9609375" prefWidth="235.0"/>
+                                        <Label layoutX="105.0" layoutY="36.0" prefHeight="33.0" prefWidth="107.0"
+                                               text="Levereras till:">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" fx:id="x1"/>
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="105.0" layoutY="89.0" text="Förnamn *"/>
+                                        <Label layoutX="105.0" layoutY="162.0" text="Adress *"/>
+                                        <Label layoutX="382.0" layoutY="89.0" text="Efternamn *"/>
+                                        <Label layoutX="105.0" layoutY="259.0" text="Postnummer *"/>
+                                        <Label layoutX="382.0" layoutY="259.0" text="Postort"/>
+                                        <Label layoutX="105.0" layoutY="351.0" text="Telefon/Mobil *"/>
+                                        <Label layoutX="382.0" layoutY="351.0" text="E-post *"/>
+                                        <Label layoutX="105.0" layoutY="526.0"
+                                               text="* uppgifter markerade med (*) är obligatoriska "/>
+                                        <Label font="$x1" layoutX="970.0" layoutY="259.0" text="Betalsätt:"/>
+                                        <RadioButton fx:id="cardPayment" layoutX="970.0" layoutY="297.0"
+                                                     mnemonicParsing="false" text="Kortbetalning">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND"/>
+                                            </cursor>
+                                        </RadioButton>
+                                        <RadioButton fx:id="invoicePayment" layoutX="970.0" layoutY="325.0"
+                                                     mnemonicParsing="false" text="Fakturabetalning">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND"/>
+                                            </cursor>
+                                        </RadioButton>
+                                        <Button layoutX="936.0" layoutY="508.0" mnemonicParsing="false"
+                                                onAction="#backtoStoreClicked" prefHeight="35.0" prefWidth="130.0"
+                                                text="Tillbaka till butik">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND"/>
+                                            </cursor>
+                                        </Button>
+                                        <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0"
+                                                layoutY="508.0" mnemonicParsing="false" onAction="#continueClicked"
+                                                prefHeight="35.0" prefWidth="130.0" text="Fortsätt">
+                                            <tooltip>
+                                                <Tooltip
+                                                        text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta"/>
+                                            </tooltip>
+                                        </Button>
+                                        <Label alignment="CENTER" layoutX="546.0" layoutY="21.0" prefWidth="189.0"
+                                               text="Leverans">
+                                            <font>
+                                                <Font name="System Bold" size="20.0"/>
+                                            </font>
+                                        </Label>
+                                        <Label font="$x1" layoutX="1013.0" layoutY="43.0" text="Leveranstid:"/>
+                                        <Label layoutX="915.0" layoutY="127.0" text="Datum"/>
+                                        <Label layoutX="873.0" layoutY="197.0" text="Mellan klockan"/>
+                                        <ChoiceBox fx:id="timeIntervallChoicebox" layoutX="970.0" layoutY="194.0"
+                                                   prefHeight="27.0" prefWidth="127.0">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Item 1"/>
+                                                    <String fx:value="Item 2"/>
+                                                    <String fx:value="Item 3"/>
+                                                </FXCollections>
+                                            </items>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND"/>
+                                            </cursor>
+                                        </ChoiceBox>
+                                        <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0"
+                                               text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta"
+                                               textFill="RED"/>
+                                        <DatePicker fx:id="calendar" layoutX="970.0" layoutY="123.0"
+                                                    onAction="#listenToDatePicker">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND"/>
+                                            </cursor>
+                                        </DatePicker>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets/>
+                    </BorderPane.margin>
+                </StackPane>
+            </center>
+            <top>
+                <AnchorPane prefHeight="125.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fx:id="progressImageView" fitHeight="110.0" fitWidth="640.0" layoutX="320.0"
+                                   layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="320.0"
+                                   AnchorPane.rightAnchor="320.0">
+                            <image>
+                                <Image url="@../images/IMat-progess-leverans.png"/>
+                            </image>
+                        </ImageView>
+                        <Button fx:id="deliveryButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY"
+                                focusTraversable="false" layoutX="404.0" layoutY="15.0" mnemonicParsing="false"
+                                onAction="#deliveryButtonClicked" opacity="0.0" prefHeight="96.0" prefWidth="134.0"
+                                text="Leverans">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button fx:id="paymentButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY" layoutX="571.0"
+                                layoutY="15.0" mnemonicParsing="false" onAction="#paymentButtonClicked" opacity="0.0"
+                                prefHeight="96.0" prefWidth="132.0" text="Betalning">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button fx:id="confirmationButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY"
+                                layoutX="724.0" layoutY="16.0" mnemonicParsing="false"
+                                onAction="#confirmationButtonClicked" opacity="0.0" prefHeight="95.0" prefWidth="187.0"
+                                text="Bekräfta köp">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button layoutX="2.0" layoutY="9.0" mnemonicParsing="false" onAction="#logoClicked"
+                                opacity="0.0" prefHeight="109.0" prefWidth="195.0">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <ImageView fitHeight="88.0" fitWidth="291.0" pickOnBounds="false" preserveRatio="true"
+                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0"
+                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0">
+                            <image>
+                                <Image url="@../images/IMat-logga.png"/>
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </top>
+        </BorderPane>
+    </children>
 </AnchorPane>

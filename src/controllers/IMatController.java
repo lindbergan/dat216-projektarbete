@@ -21,6 +21,7 @@ import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.ShoppingItem;
+
 import java.io.*;
 import java.net.URL;
 import java.util.Properties;
@@ -71,7 +72,6 @@ public class IMatController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         start();
         init();
-        ifNoItems();
 
     }
 
@@ -98,16 +98,10 @@ public class IMatController implements Initializable {
         listView.setId("listView");
     }
 
-    public void setCursors(){
+    public void setCursors() {
         helpButton.setCursor(Cursor.HAND);
         searchButton.setCursor(Cursor.HAND);
         listView.setCursor(Cursor.HAND);
-    }
-
-    public void hataTraversable() {
-        searchButton.setFocusTraversable(false);
-        listView.setFocusTraversable(false);
-        helpButton.setFocusTraversable(false);
     }
 
     public void initSettings() {
@@ -120,21 +114,13 @@ public class IMatController implements Initializable {
         DataHolder.iMat = this;
         contentProperty = content;
         listMenuProperty = listMenu;
-
-        initButtons();
-        initListView();
-        hataTraversable();
-        setIds();
+        listProperty = listView;
         setCursors();
+        ifNoItems();
         if (isFirstTime()) {
             helpMenu();
         }
 
-        listProperty = listView;
-
-        isFirstTime();
-
-        listProperty = listView;
     }
 
     public void ifNoItems() {
@@ -177,7 +163,7 @@ public class IMatController implements Initializable {
         listView.setItems(categories);
         listView.getSelectionModel().selectedItemProperty().addListener(e -> {
             try {
-                if(!(listView.getSelectionModel().getSelectedItem() == null)) {
+                if (!(listView.getSelectionModel().getSelectedItem() == null)) {
                     File file = new File("products.txt");
                     if (!(file.exists())) file.createNewFile();
                     Properties prop = new Properties();
@@ -227,8 +213,7 @@ public class IMatController implements Initializable {
                 prop.store(out, null);
                 return true;
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return false;
@@ -252,19 +237,18 @@ public class IMatController implements Initializable {
             item.setOnAction(e -> {
                 try {
                     vc.changeScene(content, "/fxml/Receipts.fxml");
-                }
-                catch (IOException eee) {
+                } catch (IOException eee) {
                     eee.printStackTrace();
                 }
             });
             receiptMenu.getItems().addAll(new SeparatorMenuItem(), item);
-        }
-        else {
+        } else {
             MenuItem menuItem = new MenuItem("Inga kvitton");
             menuItem.setDisable(true);
             receiptMenu.getItems().add(menuItem);
         }
     }
+
     public void setImage() {
         Image image = new Image("/images/IMat-logga.png/");
         imageView1.setImage(image);
@@ -398,11 +382,11 @@ public class IMatController implements Initializable {
         }
     }
 
-    public void selectCategory(int index){
+    public void selectCategory(int index) {
         listView.getSelectionModel().select(index);
     }
 
-    public void deselectCategory(){
+    public void deselectCategory() {
         listView.getSelectionModel().clearSelection();
     }
 }

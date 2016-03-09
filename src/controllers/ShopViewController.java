@@ -9,23 +9,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 
 public class ShopViewController implements Initializable {
 
+    private final String[] categoryArr = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk", "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
     SelectedCategoryMenuController categoryHandler = new SelectedCategoryMenuController();
     @FXML
     private AnchorPane shopMenuAP;
     @FXML
     private ImageView shopView;
-
-    private final String[] categoryArr = {"Baljväxter", "Bröd", "Frukt och grönt", "Skafferi", "Sötsaker och drycker", "Fisk", "Kött", "Mejeri", "Nötter och frön", "Pasta, potatis och ris", "Rotfrukter"};
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,7 +51,7 @@ public class ShopViewController implements Initializable {
                             index = i;
                         }
                     }
-                    if(index != -1) {
+                    if (index != -1) {
                         DataHolder.iMat.selectCategory(index);
                     }
                 } catch (Exception ex) {

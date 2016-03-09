@@ -14,6 +14,7 @@ import properties.ListCellReceipts;
 import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +22,8 @@ import java.util.ResourceBundle;
 
 public class ReceiptsController implements Initializable {
 
-    @FXML ListView<Order> listView;
+    @FXML
+    ListView<Order> listView;
     IMatDataHandler handler = IMatDataHandler.getInstance();
 
     @Override
