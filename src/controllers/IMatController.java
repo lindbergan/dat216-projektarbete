@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,10 +19,10 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import properties.CategoryListCell;
 import properties.ViewChanger;
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Order;
-import se.chalmers.ait.dat215.project.ShoppingItem;
+import se.chalmers.ait.dat215.project.*;
 
+import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
 import java.util.Properties;
@@ -72,6 +73,17 @@ public class IMatController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         start();
         init();
+        ShoppingCart cart = handler.getShoppingCart();
+        cart.addShoppingCartListener(new ShoppingCartListener() {
+            @Override
+            public void shoppingCartChanged() {
+                cartMenuButton.setVisible(false);
+                Timer timer = new Timer(1000,new TimerListener());
+                timer.start();
+
+
+            }
+        });
 
     }
 
@@ -398,5 +410,12 @@ public class IMatController implements Initializable {
 
     public void deselectCategory() {
         listView.getSelectionModel().clearSelection();
+    }
+    class TimerListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            cartMenuButton.setVisible(true);
+        }
     }
 }
