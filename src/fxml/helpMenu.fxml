@@ -40,7 +40,7 @@
          <children>
             <StackPane prefHeight="481.0" prefWidth="943.0">
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" StackPane.alignment="CENTER">
+                  <AnchorPane fx:id="pane1" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
                      <children>
                         <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="192.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -55,7 +55,7 @@
                         <Label layoutX="174.0" layoutY="378.0" prefHeight="81.0" prefWidth="652.0" text="Programmet erbjuder två olika vyer att navigera i – en butiksvy respektive en kategorivy. &#10;Butiksvyn återspeglar en riktig butik där man navigerar till rätt sektion genom att kicka på rätt bild (I detta fall vill vi handla pasta och väljer bilden för pasta, potatis och ris, se bild)." wrapText="true" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false">
+                  <AnchorPane fx:id="pane2" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="186.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -70,7 +70,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" StackPane.alignment="CENTER">
+                  <AnchorPane fx:id="pane3" prefHeight="200.0" prefWidth="200.0" visible="false" StackPane.alignment="CENTER">
                      <children>
                         <ImageView fitHeight="325.0" fitWidth="454.0" layoutX="314.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -85,7 +85,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false">
+                  <AnchorPane fx:id="pane4" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="187.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -100,7 +100,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false">
+                  <AnchorPane fx:id="pane5" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="322.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -115,7 +115,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane fx:id="pane6" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <Label layoutX="186.0" layoutY="365.0" prefHeight="81.0" prefWidth="652.0" text="Om man vill se sina tidigare kvitton klickar man på knappen ”mina tidigare inköp” (se bild). Där kan man välja om man vill se alla kvitton som en lista eller om man vill titta på ett specifikt kvitto." wrapText="true" />
                         <ImageView fitHeight="325.0" fitWidth="572.0" layoutX="186.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
@@ -137,14 +137,14 @@
     <left>
         <AnchorPane prefHeight="285.0" prefWidth="20.0" BorderPane.alignment="CENTER">
             <children>
-                <Button alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="20.0" layoutY="63.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <Button alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="20.0" layoutY="63.0" mnemonicParsing="false" onAction="#backClicked" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>
     </left>
     <right>
         <AnchorPane prefHeight="285.0" prefWidth="28.0" BorderPane.alignment="CENTER">
             <children>
-                <Button cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <Button cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" onAction="#forwardClicked" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>
     </right>
