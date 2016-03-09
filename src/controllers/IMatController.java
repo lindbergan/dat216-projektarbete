@@ -4,7 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,13 +20,8 @@ import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.ShoppingItem;
-
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -36,6 +30,7 @@ public class IMatController implements Initializable {
     public static ListView<String> listProperty;
     public static AnchorPane contentProperty;
     public static MenuButton listMenuProperty;
+
     @FXML
     public AnchorPane content;
     @FXML
@@ -71,6 +66,30 @@ public class IMatController implements Initializable {
     private boolean isShopView;
     private MenuItem temp;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        start();
+        init();
+        ifNoItems();
+
+    }
+
+    public void init() {
+        initToggleButtons();
+        initReceipts();
+        initButtons();
+        initListView();
+        initSearch();
+        initSettings();
+        initProperties();
+    }
+
+    public void weHateTraversable() {
+        searchButton.setFocusTraversable(false);
+        listView.setFocusTraversable(false);
+        helpButton.setFocusTraversable(false);
+    }
+
     public void setIds() {
         headerPane.setId("headerPane");
         content.setId("content");
@@ -78,28 +97,24 @@ public class IMatController implements Initializable {
         listView.setId("listView");
     }
 
-    public void hataTraversable() {
-        searchButton.setFocusTraversable(false);
-        listView.setFocusTraversable(false);
-        helpButton.setFocusTraversable(false);
+    public void initSettings() {
+        setImage();
+        weHateTraversable();
+        setIds();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initProperties() {
         DataHolder.iMat = this;
         contentProperty = content;
-        setImage();
-        start();
-        initToggleButtons();
-        initReceipts();
-        ifNoFavorites();
         listMenuProperty = listMenu;
-        initButtons();
-        initListView();
-        hataTraversable();
-        setIds();
-
         listProperty = listView;
+    }
+
+    public void ifNoItems() {
+        ifNoFavorites();
+    }
+
+    public void initSearch() {
         try {
             FileOutputStream clear = new FileOutputStream("search.txt");
             prop.setProperty("input", "");
@@ -134,7 +149,6 @@ public class IMatController implements Initializable {
         listView.getSelectionModel().selectedItemProperty().addListener(e -> {
             try {
                 if(!(listView.getSelectionModel().getSelectedItem() == null)) {
-                    Properties prop = new Properties();
                     FileOutputStream out = new FileOutputStream("products.txt");
                     prop.setProperty("category", listView.getSelectionModel().getSelectedItem());
                     prop.store(out, null);
@@ -308,7 +322,6 @@ public class IMatController implements Initializable {
             url = "/fxml/shopView.fxml/";
         } else url = "/fxml/categoryMenu.fxml/";
         try {
-            Properties prop = new Properties();
             InputStreamReader in = new FileReader("currentView.txt");
             prop.load(in);
 

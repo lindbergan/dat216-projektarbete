@@ -14,18 +14,23 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.stream.Collectors;
 
-public class ListCellProducts extends ListCell {
+public class ListCellProducts extends ListCell<ShoppingItem> {
 
-    public ListCellProducts(Order o, ObservableList<ShoppingItem> items) {
+    @Override
+    public void updateItem(ShoppingItem s, boolean empty) {
+        super.updateItem(s, empty);
 
+        if (s == null || empty) {
+            setGraphic(null);
+            setText(null);
+        }
 
-        if (SelectedReceiptController.variable < items.size()) {
+        else {
             GridPane gp = new GridPane();
-
-            Text name = new Text(items.get(SelectedReceiptController.variable).getProduct().getName());
-            Text quantity = new Text(String.valueOf(items.get(SelectedReceiptController.variable).getAmount()));
-            Text price = new Text(String.valueOf(items.get(SelectedReceiptController.variable).getProduct().getPrice()));
-            Text total = new Text(String.valueOf(items.get(SelectedReceiptController.variable).getTotal()));
+            Text name = new Text(s.getProduct().getName());
+            Text quantity = new Text(String.valueOf(s.getAmount()));
+            Text price = new Text(String.valueOf(s.getProduct().getPrice()));
+            Text total = new Text(String.valueOf(s.getTotal()));
 
             gp.add(name, 1, 0, 1, 1);
             gp.add(quantity, 2, 0, 1, 1);
@@ -42,7 +47,7 @@ public class ListCellProducts extends ListCell {
             setVisible(true);
             setGraphic(gp);
         }
-        SelectedReceiptController.variable++;
+
     }
 
 }
