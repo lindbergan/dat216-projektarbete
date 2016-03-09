@@ -428,6 +428,7 @@ public class IMatController implements Initializable {
         public void actionPerformed(java.awt.event.ActionEvent e) {
             cartMenuButton.setVisible(true);
             ohKnapp.setVisible(false);
+            timer.stop();
         }
     }
 }
