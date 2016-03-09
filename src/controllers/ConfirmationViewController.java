@@ -136,6 +136,7 @@ public class ConfirmationViewController implements Initializable {
     public void backToPaymentView() throws IOException {
 
         currentView.setCurrentViewName("paymentView");
+        DataHolder.deliveryViewController.setPaymentProgImage();
 
         //need to determine what View to present - based on users Paymentchoice
         if (DeliveryViewController.getPaymentChoice() == "Kortbetalning") {

@@ -206,13 +206,14 @@ public class CreditCardController implements Initializable {
 
     //back to deliveryView when clicked "go back" <--
     public void backToDeliveryClicked() throws IOException {
+        DataHolder.deliveryViewController.setDeliveryProgImage();
         viewChanger.changeScene(paymentViewCard, "/fxml/DeliveryView.fxml");
     }
 
     //gives us the confirmation view when clicked "continue" -->
     public void continueClicked() throws IOException {
-
-            viewChanger.changeScene(paymentViewCard, "/fxml/ConfirmationView.fxml");
+        DataHolder.deliveryViewController.setConfirmationProgImage();
+        viewChanger.changeScene(paymentViewCard, "/fxml/ConfirmationView.fxml");
     }
 
     public void checkIfAllFieldsFilled() {

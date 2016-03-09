@@ -246,12 +246,14 @@ public class InvoiceController implements Initializable {
 
     //back to delivery view when clicked "go back" <--
     public void backToDeliveryClicked(ActionEvent event) throws IOException {
+        DataHolder.deliveryViewController.setDeliveryProgImage();
         viewChanger.changeScene(paymentViewInvoice, "/fxml/DeliveryView.fxml");
         currentView.setCurrentViewName("deliveryView");
     }
 
     //gives us the confirmation view when user clicked "continue" -->
     public void continueClicked() throws IOException {
+        DataHolder.deliveryViewController.setConfirmationProgImage();
 
         viewChanger.changeScene(paymentViewInvoice, "/fxml/ConfirmationView.fxml");
         currentView.setCurrentViewName("confirmationView");

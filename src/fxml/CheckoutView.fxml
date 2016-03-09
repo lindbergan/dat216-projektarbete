@@ -119,21 +119,26 @@
                 </Button>
               </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="656.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="81.0">
-                     <children>
-                        <Button fx:id="deliveryButton" mnemonicParsing="false" onAction="#deliveryButtonClicked" prefHeight="25.0" prefWidth="150.0" text="Leverans">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#paymentButtonClicked" prefHeight="25.0" prefWidth="150.0" text="Betalning">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="confirmationButton" mnemonicParsing="false" onAction="#confirmationButtonClicked" prefWidth="150.0" text="Bekräfta köp">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                     </children></HBox>
+                  <ImageView fx:id="progressImageView" fitHeight="110.0" fitWidth="640.0" layoutX="320.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0">
+                     <image>
+                        <Image url="@../images/IMat-progess-leverans.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="deliveryButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="404.0" layoutY="15.0" mnemonicParsing="false" onAction="#deliveryButtonClicked" opacity="0.0" prefHeight="96.0" prefWidth="134.0" text="Leverans">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="paymentButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY" layoutX="571.0" layoutY="15.0" mnemonicParsing="false" onAction="#paymentButtonClicked" opacity="0.0" prefHeight="96.0" prefWidth="132.0" text="Betalning">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="confirmationButton" blendMode="MULTIPLY" contentDisplay="GRAPHIC_ONLY" layoutX="724.0" layoutY="16.0" mnemonicParsing="false" onAction="#confirmationButtonClicked" opacity="0.0" prefHeight="95.0" prefWidth="187.0" text="Bekräfta köp">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
           </children>
         </AnchorPane>
       </top>

@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import properties.StringComparer;
 import properties.ViewChanger;
@@ -29,6 +31,10 @@ public class DeliveryViewController implements Initializable {
     private static LocalDate userSpecifiedDate;
     private static String userSpecifiedTime;
     private static String paymentChoice = "Kortbetalning";
+    private static Image confirmImage = new Image("/images/IMat-progess-bekräfta.png");
+    private static Image payImage = new Image("/images/IMat-progess-betalning.png");
+    private static Image deliveryImage = new Image("/images/IMat-progess-leverans.png");
+    private static int nummer = 1;
 
     IMatDataHandler handler = IMatDataHandler.getInstance();
     private Customer customer = handler.getCustomer();
@@ -58,11 +64,12 @@ public class DeliveryViewController implements Initializable {
     @FXML
     private TextField customerPhone;
     @FXML
-
     private ChoiceBox timeIntervallChoicebox;
     @FXML private Button continueButton;
     @FXML private Label infoLabel;
     @FXML private DatePicker calendar;
+    @FXML private ImageView progressImageView;
+    private static ImageView progressImageViewProperty;
 
     @FXML private Button deliveryButton;
     @FXML private Button paymentButton;
@@ -72,9 +79,9 @@ public class DeliveryViewController implements Initializable {
     private static ViewSingelton currentView = ViewSingelton.getInstance();
 
     //the observable lists for the Choiceboxes
-    private ObservableList<String> timeIntervall = FXCollections.observableArrayList("04.00 - 08.00", "05.00 - 09.00", "06.00 - 10.00",
+    private ObservableList<String> timeIntervall = FXCollections.observableArrayList(
             "07.00 - 11.00", "08.00 - 12.00", "09.00 - 13.00", "10.00 - 14.00", "11.00 - 15.00", "12.00 - 16.00", "13.00 - 17.00", "14.00 - 18.00", "15.00 - 19.00",
-            "16.00 - 20.00", "17.00 - 21.00", "18.00 - 22.00", "19.00 - 23.00", "20.00 - 00.00");
+            "16.00 - 20.00", "17.00 - 21.00", "18.00 - 22.00");
 
     //The getters for our custom choisboxes and radiobuttons and Datepicker
     public static String getUserSpecifiedDate() {
@@ -91,6 +98,11 @@ public class DeliveryViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if(nummer == 1) {
+            DataHolder.deliveryViewController = this;
+            progressImageViewProperty = progressImageView;
+            nummer++;
+        }
 
         //initialize the fields
         initTextFields();
@@ -301,9 +313,8 @@ public class DeliveryViewController implements Initializable {
 
     //gives us the right PaymentView depending on what radiobutton is selected
     public void continueClicked() throws IOException {
-
+        DataHolder.deliveryViewController.setPaymentProgImage();
         currentView.setCurrentViewName("paymentView");
-
 
         if (paymentChoice == "Kortbetalning") {
                 viewChanger.changeScene(deliveryView, "/fxml/PaymentViewCard.fxml");
@@ -336,21 +347,30 @@ public class DeliveryViewController implements Initializable {
     }
 
     public void deliveryButtonClicked()throws IOException{
+        setDeliveryProgImage();
         viewChanger.changeScene(deliveryView,"/fxml/DeliveryView.fxml" );
     }
 
     public void paymentButtonClicked()throws IOException{
-
+        setPaymentProgImage();
         if(allFieldsFilled){
             continueClicked();
         }
     }
 
     public void confirmationButtonClicked()throws IOException{
+        setConfirmationProgImage();
+        if(paymentChoice.equals("Kortbetalning")){
 
-        if(allFieldsFilled && CreditCardController.AllFieldsFilled() && InvoiceController.AllFieldsFilled()){
-            viewChanger.changeScene(deliveryView,"/fxml/ConfirmationView.fxml");
-}    }
+              if(allFieldsFilled && CreditCardController.AllFieldsFilled()) {
+                  viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
+              }
+        }else{
+            if(allFieldsFilled && InvoiceController.AllFieldsFilled()) {
+                viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
+            }
+        }
+    }
 
     //Need somehow to create a listener that can listen to changes to viewName in the class ViewSingelton.
     // String is primitive - thus, cant listen to changes. But we need to find a workaround.
@@ -371,6 +391,24 @@ public class DeliveryViewController implements Initializable {
         else{
             System.out.println("ConfirmationView");
             //buttonAction
+        }
+    }
+
+    public void setDeliveryProgImage(){
+        if((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(deliveryImage))) {
+            progressImageViewProperty.setImage(deliveryImage);
+        }
+    }
+
+    public void setPaymentProgImage(){
+        if((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(payImage))) {
+            progressImageViewProperty.setImage(payImage);
+        }
+    }
+
+    public void setConfirmationProgImage(){
+        if((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(confirmImage))) {
+            progressImageViewProperty.setImage(confirmImage);
         }
     }
 }
