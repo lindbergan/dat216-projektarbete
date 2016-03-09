@@ -161,6 +161,7 @@ public class ShoppingCartController implements Initializable {
         for (int i = 0; i < handler.getShoppingCart().getItems().size(); i++) {
             grid.add(new Text("        "+showItem(i).getProduct().getName()), 0, i);
             CartTextField temp = new CartTextField(i);
+            temp.setFocusTraversable(false);
             if (cantBuyHalf(temp.getRow())) {
                 temp.setText("" + (int) showItem(i).getAmount());
             }
@@ -233,6 +234,7 @@ public class ShoppingCartController implements Initializable {
             grid.setHalignment(alignTxt, HPos.RIGHT);
             totalPrice.setText(String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
             delButton = new DelButton("Ta bort", i);
+            delButton.setFocusTraversable(false);
             delButton.setOnAction(this::deleteItem);
             delButton.setCursor(Cursor.HAND);
             grid.add(delButton, 5, i);

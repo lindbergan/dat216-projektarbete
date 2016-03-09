@@ -74,5 +74,17 @@
 }
 
 #searchButton:hover {
-    -fx-background-color:#559434;
+    -fx-background-color:#A9D990;
+    -fx-border-color:#559434;
+    -fx-border:1;
+}
+
+#helpButton {
+    -fx-background-color:#A9D990;
+}
+
+#helpButton:hover {
+    -fx-background-color:#A9D990;
+    -fx-border-color:#559434;
+    -fx-border:1;
 }

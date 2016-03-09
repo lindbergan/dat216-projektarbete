@@ -18,17 +18,14 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SelectedReceiptController implements Initializable {
 
     @FXML private Button backButton;
-    @FXML private ListView listView;
+    @FXML private ListView<ShoppingItem> listView;
     @FXML private Text totalText;
     IMatDataHandler handler = IMatDataHandler.getInstance();
-    public static int variable = 0;
     static Order o;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,16 +38,13 @@ public class SelectedReceiptController implements Initializable {
             }
         });
 
-        ObservableList<ShoppingItem> items = FXCollections.observableArrayList();
-        items.addAll(o.getItems().stream().collect(Collectors.toList()));
-
-        listView.setCellFactory(new Callback<ListView, ListCell>() {
+        listView.setCellFactory(new Callback<ListView<ShoppingItem>, ListCell<ShoppingItem>>() {
             @Override
-            public ListCell call(ListView param) {
-                return new ListCellProducts(o, items);
+            public ListCell<ShoppingItem> call(ListView<ShoppingItem> param) {
+                return new ListCellProducts();
             }
         });
-        variable = 0;
+        ObservableList<ShoppingItem> items = FXCollections.observableArrayList(o.getItems());
         listView.setItems(items);
 
         double sum = 0;
@@ -62,7 +56,8 @@ public class SelectedReceiptController implements Initializable {
 
     }
 
-    public static void setOrder(Order op) {
-        o = op;
+    public static void setOrder(Order order) {
+        o = order;
     }
+
 }

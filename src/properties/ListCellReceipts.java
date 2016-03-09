@@ -16,11 +16,17 @@ public class ListCellReceipts extends ListCell<Order> {
     IMatDataHandler handler = IMatDataHandler.getInstance();
     Customer c = handler.getCustomer();
 
-    public ListCellReceipts() {
-        GridPane gp = new GridPane();
-        if (ReceiptsController.variable < handler.getOrders().size()) {
+    @Override
+    public void updateItem(Order o, boolean empty) {
+        super.updateItem(o, empty);
 
-            Order o = handler.getOrders().get(ReceiptsController.variable);
+        if (empty || o == null) {
+            setText(null);
+            setGraphic(null);
+        }
+
+        else {
+            GridPane gp = new GridPane();
 
             Text name = new Text(c.getFirstName() + " " + c.getLastName());
             Text date = new Text(o.getDate().toString());
@@ -45,7 +51,7 @@ public class ListCellReceipts extends ListCell<Order> {
             setVisible(true);
             setGraphic(gp);
         }
-        ReceiptsController.variable++;
+
     }
 
 }

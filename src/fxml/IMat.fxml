@@ -19,8 +19,9 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.3465576171875" minWidth="10.0" prefWidth="56.0804443359375" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.3465576171875" minWidth="10.0" prefWidth="162.82794189453125" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.3465576171875" minWidth="10.0" prefWidth="42.8392333984375" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1034.6412506103516" minWidth="10.0" prefWidth="288.1607666015625" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1034.6412506103516" minWidth="10.0" prefWidth="106.4710693359375" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1034.6412506103516" minWidth="10.0" prefWidth="298.7498779296875" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1034.6412506103516" minWidth="10.0" prefWidth="113.2501220703125" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1034.6412506103516" minWidth="10.0" prefWidth="33.366943359375" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="129.39517211914062" minHeight="0.0" prefHeight="24.149513244628906" vgrow="SOMETIMES" />
@@ -81,7 +82,7 @@
                 <ImageView fx:id="imageView1" fitHeight="88.0" fitWidth="291.0" pickOnBounds="false" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnSpan="2" GridPane.rowSpan="3" />
             </children>
         </AnchorPane>
-        <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="373.0" spacing="10.0" GridPane.columnIndex="6" GridPane.columnSpan="3" GridPane.rowIndex="3">
+        <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="373.0" spacing="10.0" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="3">
             <children>
                 <MenuButton fx:id="receiptMenu" cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" pickOnBounds="false" scaleShape="false" text="Mina tidigare inköp">
                     <cursor>
