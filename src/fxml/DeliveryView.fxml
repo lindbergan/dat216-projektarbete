@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.collections.*?>
@@ -36,9 +37,18 @@
             <Label layoutX="382.0" layoutY="351.0" text="E-post *" />
             <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
             <Label font="$x1" layoutX="970.0" layoutY="259.0" text="Betalsätt:" />
-            <RadioButton fx:id="cardPayment" layoutX="970.0" layoutY="297.0" mnemonicParsing="false" text="Kortbetalning" />
-            <RadioButton fx:id="invoicePayment" layoutX="970.0" layoutY="325.0" mnemonicParsing="false" text="Fakturabetalning" />
-            <Button layoutX="936.0" layoutY="508.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka till butik" />
+            <RadioButton fx:id="cardPayment" layoutX="970.0" layoutY="297.0" mnemonicParsing="false" text="Kortbetalning">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></RadioButton>
+            <RadioButton fx:id="invoicePayment" layoutX="970.0" layoutY="325.0" mnemonicParsing="false" text="Fakturabetalning">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></RadioButton>
+            <Button layoutX="936.0" layoutY="508.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka till butik">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt">
                <tooltip>
                   <Tooltip text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" />
@@ -60,9 +70,15 @@
                      <String fx:value="Item 3" />
                   </FXCollections>
                </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ChoiceBox>
             <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" />
-            <DatePicker fx:id="calendar" layoutX="970.0" layoutY="123.0" onAction="#listenToDatePicker" />
+            <DatePicker fx:id="calendar" layoutX="970.0" layoutY="123.0" onAction="#listenToDatePicker">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></DatePicker>
          </children>
       </Pane>
    </children>

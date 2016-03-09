@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -113,6 +114,7 @@ public class CategoryMenuController extends ProductView implements Initializable
                 txt.setTextFill(hideThis.getTextFill());
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
+                newButton.setCursor(Cursor.HAND);
                 StackPane p = new StackPane(newButton, txt);
                 p.setAlignment(txt, Pos.TOP_CENTER);
                 newButton.setOnAction(e -> {

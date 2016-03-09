@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -29,8 +30,14 @@
     <Label layoutX="105.0" layoutY="390.0" text="Telefon/Mobil *" />
     <Label layoutX="382.0" layoutY="390.0" text="E-post *" />
     <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
-    <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka" />
-    <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt" />
+    <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+    <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <HBox alignment="CENTER" layoutX="587.0" layoutY="21.0" prefHeight="26.0" prefWidth="189.0" AnchorPane.leftAnchor="546.0" AnchorPane.rightAnchor="545.0">
          <children>
           <Label alignment="CENTER" layoutX="587.0" layoutY="21.0" text="Fakturabetalning">
@@ -40,8 +47,14 @@
           </Label>
          </children>
       </HBox>
-    <RadioButton fx:id="sameAsDelivery" layoutX="105.0" layoutY="75.0" mnemonicParsing="false" text="Samma som leveransadress" />
-    <RadioButton fx:id="otherAdress" layoutX="105.0" layoutY="107.0" mnemonicParsing="false" text="Annan adress" />
+    <RadioButton fx:id="sameAsDelivery" layoutX="105.0" layoutY="75.0" mnemonicParsing="false" text="Samma som leveransadress">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></RadioButton>
+    <RadioButton fx:id="otherAdress" layoutX="105.0" layoutY="107.0" mnemonicParsing="false" text="Annan adress">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></RadioButton>
       <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" visible="false" />
   </children>
 </AnchorPane>

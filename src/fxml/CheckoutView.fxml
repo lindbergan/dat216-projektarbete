@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.collections.FXCollections?>
@@ -44,9 +45,18 @@
                     <Label layoutX="382.0" layoutY="351.0" text="E-post *" />
                     <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
                     <Label font="$x1" layoutX="970.0" layoutY="259.0" text="Betalsätt:" />
-                    <RadioButton fx:id="cardPayment" layoutX="970.0" layoutY="297.0" mnemonicParsing="false" text="Kortbetalning" />
-                    <RadioButton fx:id="invoicePayment" layoutX="970.0" layoutY="325.0" mnemonicParsing="false" text="Fakturabetalning" />
-                    <Button layoutX="936.0" layoutY="508.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka till butik" />
+                    <RadioButton fx:id="cardPayment" layoutX="970.0" layoutY="297.0" mnemonicParsing="false" text="Kortbetalning">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                    <RadioButton fx:id="invoicePayment" layoutX="970.0" layoutY="325.0" mnemonicParsing="false" text="Fakturabetalning">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                    <Button layoutX="936.0" layoutY="508.0" mnemonicParsing="false" onAction="#backtoStoreClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka till butik">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></Button>
                     <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt">
                       <tooltip>
                         <Tooltip text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" />
@@ -68,9 +78,15 @@
                           <String fx:value="Item 3" />
                         </FXCollections>
                       </items>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                     </ChoiceBox>
                     <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" />
-                              <DatePicker fx:id="calendar" layoutX="970.0" layoutY="123.0" onAction="#listenToDatePicker" />
+                              <DatePicker fx:id="calendar" layoutX="970.0" layoutY="123.0" onAction="#listenToDatePicker">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></DatePicker>
                   </children>
                 </Pane>
               </children>
@@ -92,6 +108,9 @@
                       <image>
                         <Image url="@../images/IMat-logga.png" />
                       </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                     </ImageView>
                   </graphic>
                   <HBox.margin>
@@ -102,9 +121,18 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="43.0" prefWidth="656.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="81.0">
                      <children>
-                        <Button fx:id="deliveryButton" mnemonicParsing="false" onAction="#deliveryButtonClicked" prefHeight="25.0" prefWidth="150.0" text="Leverans" />
-                        <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#paymentButtonClicked" prefHeight="25.0" prefWidth="150.0" text="Betalning" />
-                        <Button fx:id="confirmationButton" mnemonicParsing="false" onAction="#confirmationButtonClicked" prefWidth="150.0" text="Bekräfta köp" />
+                        <Button fx:id="deliveryButton" mnemonicParsing="false" onAction="#deliveryButtonClicked" prefHeight="25.0" prefWidth="150.0" text="Leverans">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#paymentButtonClicked" prefHeight="25.0" prefWidth="150.0" text="Betalning">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button fx:id="confirmationButton" mnemonicParsing="false" onAction="#confirmationButtonClicked" prefWidth="150.0" text="Bekräfta köp">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children></HBox>
           </children>
         </AnchorPane>

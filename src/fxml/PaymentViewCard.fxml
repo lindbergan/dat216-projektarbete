@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
@@ -13,9 +14,18 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <RadioButton fx:id="visa" layoutX="105.0" layoutY="75.0" mnemonicParsing="false" text="Visa" />
-      <RadioButton fx:id="mastercard" layoutX="105.0" layoutY="107.0" mnemonicParsing="false" text="Mastercard" />
-      <RadioButton fx:id="other" layoutX="105.0" layoutY="139.0" mnemonicParsing="false" text="Annat" />
+      <RadioButton fx:id="visa" layoutX="105.0" layoutY="75.0" mnemonicParsing="false" text="Visa">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></RadioButton>
+      <RadioButton fx:id="mastercard" layoutX="105.0" layoutY="107.0" mnemonicParsing="false" text="Mastercard">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></RadioButton>
+      <RadioButton fx:id="other" layoutX="105.0" layoutY="139.0" mnemonicParsing="false" text="Annat">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></RadioButton>
       <TextField fx:id="creditCardNumbr" layoutX="205.0" layoutY="185.0" prefHeight="33.0" prefWidth="200.0" />
       <TextField fx:id="cardHolderName" layoutX="205.0" layoutY="235.0" prefHeight="33.0" prefWidth="200.0" />
       <Label layoutX="105.0" layoutY="190.0" text="Kortnummer" />
@@ -29,6 +39,9 @@
                <String fx:value="Item 3" />
             </FXCollections>
          </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ChoiceBox>
       <Label layoutX="281.0" layoutY="300.0" text="/" />
       <ChoiceBox fx:id="cardYearChoiceBox" layoutX="295.0" layoutY="295.0" prefHeight="27.0" prefWidth="65.0">
@@ -39,6 +52,9 @@
                <String fx:value="Item 3" />
             </FXCollections>
          </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ChoiceBox>
       <Label layoutX="105.0" layoutY="350.0" text="CVV" />
       <TextField fx:id="cvv" layoutX="205.0" layoutY="350.0" prefHeight="27.0" prefWidth="51.0" />
@@ -46,8 +62,14 @@
          <tooltip>
             <Tooltip text="CVV är de tre sista siffrorna på baksidan av kortet" />
          </tooltip>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka" />
+      <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt" />
       <Label fx:id="infoLabel" layoutX="975.0" layoutY="472.0" prefWidth="238.0" text="Alla fält måste fyllas i för att kunna fortsätta" textFill="RED" />
       <Label id="infoLabel" fx:id="cvvLabel" layoutX="322.0" layoutY="355.0" opacity="0.35" prefWidth="297.0" text="CVV är de tre sista siffrorna på baksidan av kortet" textFill="BLACK" visible="false" />

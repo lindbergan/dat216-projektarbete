@@ -3,6 +3,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -90,12 +91,14 @@ public abstract class ProductView {
 
         Button posButton = new Button("+");
         Button negButton = new Button("-");
+        posButton.setCursor(Cursor.HAND);
+        negButton.setCursor(Cursor.HAND);
         TextField tf = new TextField(aamount);
+        tf.setPrefWidth(50);
+        tf.setAlignment(Pos.CENTER);
         tf.setFocusTraversable(false);
         negButton.setFocusTraversable(false);
         posButton.setFocusTraversable(false);
-        tf.setPrefWidth(50);
-        tf.setAlignment(Pos.CENTER);
 
         p.getChildren().remove(bb);
 

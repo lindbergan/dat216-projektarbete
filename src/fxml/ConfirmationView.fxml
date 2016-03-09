@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -26,12 +27,18 @@
             <font>
               <Font size="14.0" />
             </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
           </Button>
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutX="581.0" layoutY="509.0" prefHeight="42.0" prefWidth="96.0" AnchorPane.leftAnchor="546.0" AnchorPane.rightAnchor="545.0">
          <children>
-          <Button layoutX="581.0" layoutY="522.0" mnemonicParsing="false" onAction="#backToPaymentView" prefHeight="32.0" prefWidth="96.0" text="Tillbaka" />
+          <Button layoutX="581.0" layoutY="522.0" mnemonicParsing="false" onAction="#backToPaymentView" prefHeight="32.0" prefWidth="96.0" text="Tillbaka">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </children>
       </HBox>
     <Label layoutX="465.0" layoutY="386.0" text="Totalt :">

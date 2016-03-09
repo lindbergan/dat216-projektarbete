@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -233,6 +234,7 @@ public class ShoppingCartController implements Initializable {
             totalPrice.setText(String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
             delButton = new DelButton("Ta bort", i);
             delButton.setOnAction(this::deleteItem);
+            delButton.setCursor(Cursor.HAND);
             grid.add(delButton, 5, i);
         }
     }
