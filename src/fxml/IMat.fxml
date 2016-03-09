@@ -124,7 +124,7 @@
                     <items>
                         <MenuItem fx:id="totalMenu" mnemonicParsing="false" styleClass="-fx-text-fill: blue;"/>
                         <SeparatorMenuItem mnemonicParsing="false"/>
-                        <MenuItem mnemonicParsing="false" onAction="#goToCart" text="Gå till kundvagnen / kassan"/>
+                        <MenuItem fx:id="shoppingCartItem" mnemonicParsing="false" onAction="#goToCart" text="Gå till kundvagnen / kassan"/>
                     </items>
                 </MenuButton>
             </children>

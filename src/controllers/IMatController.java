@@ -36,6 +36,7 @@ public class IMatController implements Initializable {
 
     @FXML
     public AnchorPane content;
+    @FXML private MenuItem shoppingCartItem;
     @FXML
     public ImageView imageView1;
     IMatDataHandler handler = IMatDataHandler.getInstance();
@@ -364,6 +365,7 @@ public class IMatController implements Initializable {
             if (handler.getShoppingCart().getItems().size() != 0) {
                 cartMenuButton.getItems().add(handler.getShoppingCart().getItems().size(), new SeparatorMenuItem());
             }
+            shoppingCartItem.getStyleClass().add("shoppingCartItem");
         }
 
         totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");

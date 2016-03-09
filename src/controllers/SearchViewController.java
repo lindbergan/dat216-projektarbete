@@ -39,7 +39,6 @@ public class SearchViewController extends ProductView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         exampleText.setVisible(false);
-        List<Product> products = handler.getProducts();
         try {
             Properties prop = new Properties();
             InputStreamReader in = new FileReader("search.txt");
@@ -49,15 +48,22 @@ public class SearchViewController extends ProductView implements Initializable {
         } catch (Exception ex) {
             ex.getStackTrace();
         }
-        int column = 0;
-        int row = 0;
-        int changeRow = 0;
-        int addRow = 0;
+        int adrianplz = 0;
+
+        List<Product> products = handler.findProducts(input);
+        int productListSize = products.size();
+        int rowNr = 0;
+        for (int i = 0; i < productListSize - 1; i = i + 4) {
+            gridRazz.addRow(rowNr);
+            rowNr++;
+        }
+        int rowNrAgain = 0;
         double magicalHeight = 0.0;
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getName().toLowerCase().contains(input)) {
-                String url = "/products/images/" + products.get(i).getImageName();
-                String price = super.getPriceText(products.get(i));
+
+        for (int i = 0; i < products.size() - 1; i += 4) {
+            for (int j = 0; j < 4; j++) {
+                String url = "/products/images/" + products.get(adrianplz).getImageName();
+                String price = super.getPriceText(products.get(adrianplz));
                 ImageView img = new ImageView(new Image(url));
                 img.setEffect(new DropShadow(8, Color.BEIGE));
                 Button newButton = new Button(price, img);
@@ -65,6 +71,7 @@ public class SearchViewController extends ProductView implements Initializable {
                 newButton.setPrefHeight(240);
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
+
                 img.setFitWidth(newButton.getPrefWidth());
                 img.setFitHeight(newButton.getPrefHeight() * 0.6);
                 newButton.getStyleClass().add("productButton");
@@ -72,7 +79,7 @@ public class SearchViewController extends ProductView implements Initializable {
                 newButton.setContentDisplay(ContentDisplay.TOP);
                 newButton.setStyle("-fx-font: 15 system");
 
-                BuyButton newBottomButton = new BuyButton("Köp", products.get(i).getProductId());
+                BuyButton newBottomButton = new BuyButton("Köp", products.get(adrianplz).getProductId());
                 newBottomButton.setPrefWidth(75);
                 newBottomButton.setPrefHeight(30);
                 newBottomButton.toFront();
@@ -83,32 +90,32 @@ public class SearchViewController extends ProductView implements Initializable {
                 newBottomButton.getStyleClass().add("buyButton");
                 newBottomButton.setCursor(Cursor.HAND);
 
-                Label txt = new Label(products.get(i).getName());
+                Label txt = new Label(products.get(adrianplz).getName());
                 txt.setTextFill(exampleText.getTextFill());
                 txt.setFont(exampleText.getFont());
+
 
                 StackPane panelLayout = new StackPane(newButton, newBottomButton, txt);
                 panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
                 panelLayout.setAlignment(txt, Pos.TOP_CENTER);
                 panelLayout.setMargin(newBottomButton, new Insets(0, 0, 5, 0));
-                if (getProductInCart(products.get(i)) != null) {
+                gridRazz.add(panelLayout, j, rowNrAgain);
+                if (getProductInCart(products.get(adrianplz)) != null) {
                     newBottomButton.fire();
                 }
-                gridRazz.add(panelLayout, column, changeRow);
-                column++;
-                row++;
-                if (row == 4) {
-                    changeRow++;
-                    row = 0;
-                    column = 0;
-                    addRow++;
-                }
-                if (addRow % 6 == 1) {
-                    razzPane.setPrefHeight(magicalHeight + 238);
-                    magicalHeight = magicalHeight + 238;
-                }
+                if (adrianplz < productListSize - 1) {
+                    adrianplz = adrianplz + 1;
+                } else break;
             }
+            if (rowNrAgain < rowNr) {
+                rowNrAgain++;
+                razzPane.setPrefHeight(magicalHeight + 250);
+                magicalHeight = magicalHeight + 250;
+            }
+            gridRazz.setPadding(new Insets(20, 0, 20, 0));
+            gridRazz.setVgap(10);
+        }
 
         }
     }
-}
+

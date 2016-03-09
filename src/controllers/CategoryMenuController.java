@@ -152,6 +152,8 @@ public class CategoryMenuController extends ProductView implements Initializable
                 apGridWindow.setPrefHeight(magicalHeight + 250);
                 magicalHeight = magicalHeight + 250;
             }
+
+            gridPane.setPadding(new Insets(0, 0, 20, 0));
         }
     }
 
