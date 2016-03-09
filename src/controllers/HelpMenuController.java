@@ -24,23 +24,29 @@ public class HelpMenuController {
         if(pane1.isVisible()){
             pane1.setVisible(false);
             pane2.setVisible(true);
+            System.out.println("hej");
         }
+        else
         if(pane2.isVisible()){
             pane2.setVisible(false);
             pane3.setVisible(true);
         }
+        else
         if(pane3.isVisible()){
             pane3.setVisible(false);
             pane4.setVisible(true);
         }
+        else
         if(pane4.isVisible()){
             pane4.setVisible(false);
             pane5.setVisible(true);
         }
+        else
         if(pane5.isVisible()){
             pane5.setVisible(false);
             pane6.setVisible(true);
         }
+        else
         if(pane6.isVisible()){
             pane6.setVisible(false);
             pane1.setVisible(true);
