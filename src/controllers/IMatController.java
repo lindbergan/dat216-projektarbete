@@ -28,6 +28,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
+import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -446,5 +447,14 @@ public class IMatController implements Initializable {
             cartMenuButton.setStyle("-fx-background-color");
             timer.stop();
         }
+    }
+
+    public void escapeHatchAction(ActionEvent e){
+        if(toggle1.isSelected()){
+            start();
+        }else{
+            goToCategoryMenu();
+        }
+        deselectCategory();
     }
 }
