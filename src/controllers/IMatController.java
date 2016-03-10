@@ -34,17 +34,11 @@ import java.util.ResourceBundle;
 
 public class IMatController implements Initializable {
 
-    public static ListView<String> listProperty;
-    public static AnchorPane contentProperty;
-    public static MenuButton listMenuProperty;
-
     @FXML
-    public AnchorPane content;
+    private AnchorPane content;
     @FXML private MenuItem shoppingCartItem;
     @FXML
     public ImageView imageView1;
-    IMatDataHandler handler = IMatDataHandler.getInstance();
-    CategoryMenuController categoryHandler = new CategoryMenuController();
     @FXML
     AnchorPane headerPane;
     @FXML
@@ -70,12 +64,16 @@ public class IMatController implements Initializable {
     @FXML
     private ListView<String> listView;
     @FXML Button ohKnapp;
+
     @FXML ImageView heartImage;
 
     private Properties prop = new Properties();
+
     private boolean isShopView;
     private MenuItem temp;
     Timer timer = new Timer(1500,new TimerListener());
+    IMatDataHandler handler = IMatDataHandler.getInstance();
+    CategoryMenuController categoryHandler = new CategoryMenuController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,8 +88,6 @@ public class IMatController implements Initializable {
             public void shoppingCartChanged() {
                 cartMenuButton.setStyle("-fx-background-color:#C8DAE5");
                 timer.start();
-
-
             }
         });
 
@@ -127,6 +123,10 @@ public class IMatController implements Initializable {
         listView.setCursor(Cursor.HAND);
     }
 
+    public AnchorPane getContent() {
+        return content;
+    }
+
     public void initSettings() {
         setImage();
         weHateTraversable();
@@ -135,19 +135,15 @@ public class IMatController implements Initializable {
 
     public void initProperties() {
         DataHolder.iMat = this;
-        contentProperty = content;
-        listMenuProperty = listMenu;
-        listProperty = listView;
         setCursors();
         ifNoItems();
         if (isFirstTime()) {
             helpMenu();
         }
-
     }
 
     public void ifNoItems() {
-        ifNoFavorites();
+        updateFavorites();
         ifNoLists();
     }
 
@@ -177,8 +173,8 @@ public class IMatController implements Initializable {
         });
     }
 
-    public ListView<String> getListProperty() {
-        return listProperty;
+    public ListView<String> getListView() {
+        return listView;
     }
 
     public void initListView() {
@@ -210,11 +206,19 @@ public class IMatController implements Initializable {
         });
     }
 
-    public void ifNoFavorites() {
-        if (favoritesMenu.getItems().isEmpty()) {
+    public void updateFavorites() {
+        if (handler.favorites().isEmpty()) {
+            favoritesMenu.getItems().clear();
             MenuItem newMenuItem = new MenuItem("Inga favoriter.");
             newMenuItem.setDisable(true);
             favoritesMenu.getItems().add(newMenuItem);
+        }
+        else {
+            ObservableList<Product> favorites = FXCollections.observableArrayList(handler.favorites());
+            favoritesMenu.getItems().clear();
+            for (Product p : favorites) {
+                favoritesMenu.getItems().add(new MenuItem(p.getName()));
+            }
         }
     }
 

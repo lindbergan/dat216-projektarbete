@@ -24,13 +24,13 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="105.0" layoutY="146.0" text="Förnamn *" />
-        <Label layoutX="105.0" layoutY="227.0" text="Adress *" />
-        <Label layoutX="382.0" layoutY="146.0" text="Efternamn *" />
-        <Label layoutX="105.0" layoutY="311.0" text="Postnummer *" />
+        <Label fx:id="firstNameLabel" layoutX="105.0" layoutY="146.0" text="Förnamn *" />
+        <Label fx:id="adressLabel" layoutX="105.0" layoutY="227.0" text="Adress *" />
+        <Label fx:id="lastNameLabel" layoutX="382.0" layoutY="146.0" text="Efternamn *" />
+        <Label fx:id="postCodeLabel" layoutX="105.0" layoutY="311.0" text="Postnummer *" />
         <Label layoutX="382.0" layoutY="311.0" text="Postort" />
-        <Label layoutX="105.0" layoutY="390.0" text="Telefon/Mobil *" />
-        <Label layoutX="382.0" layoutY="390.0" text="E-post *" />
+        <Label fx:id="phoneNumberLabel" layoutX="105.0" layoutY="390.0" text="Telefon/Mobil *" />
+        <Label fx:id="emailLabel" layoutX="382.0" layoutY="390.0" text="E-post *" />
         <Label layoutX="105.0" layoutY="526.0" text="* uppgifter markerade med (*) är obligatoriska " />
         <Button layoutX="936.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#backToDeliveryClicked" prefHeight="35.0" prefWidth="130.0" text="Tillbaka">
             <cursor>
@@ -61,6 +61,6 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </RadioButton>
-        <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" visible="false" />
+        <Label fx:id="infoLabel" layoutX="699.0" layoutY="475.0" prefHeight="21.0" prefWidth="508.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" visible="false" />
     </children>
 </AnchorPane>

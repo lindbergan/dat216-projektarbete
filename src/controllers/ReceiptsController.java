@@ -44,7 +44,7 @@ public class ReceiptsController implements Initializable {
                 SelectedReceiptController.setOrder(newValue);
                 ViewChanger vc = new ViewChanger();
                 try {
-                    vc.changeScene(IMatController.contentProperty, "/fxml/SelectedReceipt.fxml");
+                    vc.changeScene(DataHolder.iMat.getContent(), "/fxml/SelectedReceipt.fxml");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

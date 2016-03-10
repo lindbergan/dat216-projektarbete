@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import properties.StringComparer;
 import properties.ViewChanger;
@@ -81,6 +82,14 @@ public class DeliveryViewController implements Initializable {
     private Button paymentButton;
     @FXML
     private Button confirmationButton;
+    @FXML private Label firstNameLabel;
+    @FXML private Label lastNameLabel;
+    @FXML private Label adressLabel;
+    @FXML private Label postCodeLabel;
+    @FXML private Label emailLabel;
+    @FXML private Label phoneNumberLabel;
+
+
     //the observable lists for the Choiceboxes
     private ObservableList<String> timeIntervall = FXCollections.observableArrayList(
             "07.00 - 11.00", "08.00 - 12.00", "09.00 - 13.00", "10.00 - 14.00", "11.00 - 15.00", "12.00 - 16.00", "13.00 - 17.00", "14.00 - 18.00", "15.00 - 19.00",
@@ -204,6 +213,7 @@ public class DeliveryViewController implements Initializable {
 
                 if (StringComparer.onlyContainsLetter(newValue)) {
                     customer.setFirstName(newValue);
+                    setCorrectlabelColor(newValue,firstNameLabel);
                 } else {
                     customerFirstName.setText(oldValue);
                 }
@@ -218,6 +228,7 @@ public class DeliveryViewController implements Initializable {
 
                 if (StringComparer.onlyContainsLetter(newValue)) {
                     customer.setLastName(newValue);
+                    setCorrectlabelColor(newValue,lastNameLabel);
                 } else {
                     customerLastName.setText(oldValue);
                 }
@@ -230,6 +241,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setAddress(newValue);
+                setCorrectlabelColor(newValue,adressLabel);
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -241,6 +253,7 @@ public class DeliveryViewController implements Initializable {
 
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 6) {
                     customer.setPostCode(newValue);
+                    setCorrectlabelColor(newValue,postCodeLabel);
                 } else {
                     customerPostCode.setText(oldValue);
                 }
@@ -267,6 +280,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setEmail(newValue);
+                setCorrectlabelColor(newValue,emailLabel);
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -278,6 +292,7 @@ public class DeliveryViewController implements Initializable {
 
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 11) {
                     customer.setPhoneNumber(newValue);
+                    setCorrectlabelColor(newValue,phoneNumberLabel);
                 } else {
                     customerPhone.setText(oldValue);
                 }
@@ -428,6 +443,15 @@ public class DeliveryViewController implements Initializable {
     public void setConfirmationProgImage() {
         if ((progressImageViewProperty != null) && !(progressImageViewProperty.getImage().equals(confirmImage))) {
             progressImageViewProperty.setImage(confirmImage);
+        }
+    }
+
+    public void setCorrectlabelColor(String str, Label l) {
+        if (str.length() == 0) {
+            l.setTextFill(Color.RED);
+        }
+        else{
+            l.setTextFill(Color.BLACK);
         }
     }
 }
