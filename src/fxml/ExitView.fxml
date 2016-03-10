@@ -16,7 +16,7 @@
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Betalningen är nu godkänd och ett mail  med ditt kvitto&#10;har skickats till ">
                     <font>
-                        <Font size="12.0" fx:id="x2" />
+                        <Font size="17.0" fx:id="x2" />
                     </font>
                 </Text>
             </children>
@@ -63,14 +63,9 @@
                 </Button>
             </children>
         </HBox>
-        <Button mnemonicParsing="false" onAction="#closeWindow" prefHeight="51.0" text="X" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="33.0">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Button>
-        <HBox alignment="CENTER_RIGHT" layoutX="532.0" layoutY="283.0" prefHeight="32.0" prefWidth="232.0" AnchorPane.bottomAnchor="405.0" AnchorPane.leftAnchor="532.0" AnchorPane.rightAnchor="516.0" AnchorPane.topAnchor="283.0">
+        <HBox alignment="CENTER_RIGHT" layoutX="532.0" layoutY="280.0" prefHeight="38.0" prefWidth="417.0" AnchorPane.bottomAnchor="399.0" AnchorPane.leftAnchor="532.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="283.0">
             <children>
-                <Label fx:id="customerEmail" alignment="TOP_LEFT" font="$x2" prefHeight="20.0" prefWidth="170.0" text="&quot;person@email.com&quot;." />
+                <Label fx:id="customerEmail" alignment="TOP_LEFT" font="$x2" prefHeight="26.0" prefWidth="380.0" text="&quot;person@email.com&quot;." />
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="61.0" prefWidth="168.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="577.5" AnchorPane.rightAnchor="534.5" AnchorPane.topAnchor="567.0">
