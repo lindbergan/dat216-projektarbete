@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import properties.StringComparer;
 import properties.ViewChanger;
 import properties.ViewSingelton;
@@ -59,6 +60,12 @@ public class InvoiceController implements Initializable {
     private Label infoLabel;
     @FXML
     private Button continueButton;
+    @FXML private Label firstNameLabel;
+    @FXML private Label lastNameLabel;
+    @FXML private Label adressLabel;
+    @FXML private Label postCodeLabel;
+    @FXML private Label emailLabel;
+    @FXML private Label phoneNumberLabel;
 
     public static boolean AllFieldsFilled() {
         return allFieldsFilled;
@@ -160,6 +167,7 @@ public class InvoiceController implements Initializable {
 
                 if (StringComparer.onlyContainsLetter(newValue)) {
                     userInputFirstName = newValue;
+                    setCorrectlabelColor(newValue, firstNameLabel);
                 } else {
                     invoiceFirstName.setText(oldValue);
                 }
@@ -174,6 +182,7 @@ public class InvoiceController implements Initializable {
 
                 if (StringComparer.onlyContainsLetter(newValue)) {
                     userInputLastName = newValue;
+                    setCorrectlabelColor(newValue, lastNameLabel);
                 } else {
                     invoiceLastName.setText(oldValue);
                 }
@@ -187,6 +196,7 @@ public class InvoiceController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
                 userInputAdress = newValue;
+                setCorrectlabelColor(newValue, adressLabel);
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -198,6 +208,7 @@ public class InvoiceController implements Initializable {
 
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 6) {
                     userInputPostCode = newValue;
+                    setCorrectlabelColor(newValue, postCodeLabel);
                 } else {
                     invoicePostCode.setText(oldValue);
                 }
@@ -224,6 +235,7 @@ public class InvoiceController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 userInputEmail = newValue;
+                setCorrectlabelColor(newValue, emailLabel);
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -235,6 +247,7 @@ public class InvoiceController implements Initializable {
 
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 11) {
                     userInputPhone = newValue;
+                    setCorrectlabelColor(newValue, phoneNumberLabel);
                 } else {
                     invoicePhone.setText(oldValue);
                 }
@@ -275,6 +288,14 @@ public class InvoiceController implements Initializable {
             continueButton.setDisable(true);
             continueButton.setCursor(Cursor.DEFAULT);
             infoLabel.setVisible(true);
+        }
+    }
+    public void setCorrectlabelColor(String str, Label l) {
+        if (str.length() == 0) {
+            l.setTextFill(Color.RED);
+        }
+        else{
+            l.setTextFill(Color.BLACK);
         }
     }
 }
