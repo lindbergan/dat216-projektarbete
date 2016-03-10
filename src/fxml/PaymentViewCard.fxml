@@ -34,8 +34,8 @@
         </RadioButton>
         <TextField fx:id="creditCardNumbr" layoutX="205.0" layoutY="185.0" prefHeight="33.0" prefWidth="200.0" />
         <TextField fx:id="cardHolderName" layoutX="205.0" layoutY="235.0" prefHeight="33.0" prefWidth="200.0" />
-        <Label layoutX="105.0" layoutY="190.0" text="Kortnummer" />
-        <Label layoutX="105.0" layoutY="240.0" text="Kortinnehavare" />
+        <Label fx:id="cardNumberLabel" layoutX="105.0" layoutY="190.0" text="Kortnummer" />
+        <Label fx:id="cardHolderLabel" layoutX="105.0" layoutY="240.0" text="Kortinnehavare" />
         <Label layoutX="105.0" layoutY="300.0" text="Utgångsdatum" />
         <ChoiceBox fx:id="cardMonthChoiceBox" layoutX="205.0" layoutY="295.0" prefHeight="27.0" prefWidth="65.0">
             <items>
@@ -62,7 +62,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ChoiceBox>
-        <Label layoutX="105.0" layoutY="350.0" text="CVV" />
+        <Label fx:id="cvvLabel" layoutX="105.0" layoutY="350.0" text="CVV" />
         <TextField fx:id="cvv" layoutX="205.0" layoutY="350.0" prefHeight="27.0" prefWidth="51.0" />
         <Button fx:id="helpButton" layoutX="270.0" layoutY="350.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#ifHelpButtonClicked" prefHeight="27.0" prefWidth="27.0" text="?">
             <tooltip>
