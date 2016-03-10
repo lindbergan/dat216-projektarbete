@@ -160,37 +160,4 @@ public class ConfirmationViewController implements Initializable {
         handler.placeOrder(true);
         viewChanger.changeStageOverride(event, "/fxml/ExitView.fxml");
     }
-
-    public void saveAllInfo() throws IOException {
-        try {
-            double quantitySum = 0;
-            double priceSum = 0;
-            FileWriter writer = new FileWriter("receipts.txt", true);
-            writer.append("date;");
-            writer.append(String.valueOf(Date.from(Instant.now())) + ";");
-            writer.append("name;");
-            writer.append(customer.getFirstName() + ";");
-            writer.append(customer.getLastName() + ";");
-            for (int startNr = 0; startNr < listProductNames.size(); startNr++) {
-                writer.append("pid;");
-                writer.append(listProductNames.get(startNr) + ";");
-                writer.append("pamount;");
-                writer.append(listProductQuantity.get(startNr) + ";");
-                writer.append("pprice;");
-                writer.append(listProductPricePerUnit.get(startNr) + ";");
-                writer.append("ptotal;");
-                writer.append(listProductPrice.get(startNr) + ";");
-                quantitySum = quantitySum + Double.valueOf(listProductQuantity.get(startNr));
-                priceSum = priceSum + Double.valueOf(listProductPrice.get(startNr));
-            }
-            writer.append("price;");
-            writer.append(String.valueOf(priceSum) + ";");
-            writer.append("quantity;");
-            writer.append(String.valueOf(quantitySum) + ";");
-            writer.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 }

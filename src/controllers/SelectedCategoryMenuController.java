@@ -67,11 +67,11 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
             }
             int rowNrAgain = 0;
             double magicalHeight = 0.0;
-            int adrianplz = 1;
+            int adrianplz = 0;
             for (int i = 0; i < productListSize - 1; i += 4) {
                 for (int j = 0; j < 4; j++) {
                     List<Product> favorites = handler.favorites();
-                    Product p = handler.getProduct(adrianplz);
+                    Product p = handler.getProduct(productList.get(adrianplz).getProductId());
                     String url = "/products/images/" + productList.get(adrianplz).getImageName();
                     String price = super.getPriceText(productList.get(adrianplz));
                     ImageView img = new ImageView(new Image(url));
@@ -125,11 +125,15 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                         public void handle(ActionEvent event) {
                             if (handler.isFavorite(p)) {
                                 favoriteB.setGraphic(im);
-                                if (!(p == null)) handler.favorites().remove(p);
+                                if (!(p == null)) {
+                                    handler.favorites().remove(p);
+                                    DataHolder.iMat.updateFavorites();
+                                }
                             }
                             else {
                                 if (!(p == null)) handler.favorites().add(p);
                                 favoriteB.setGraphic(selIm);
+                                DataHolder.iMat.updateFavorites();
                             }
                         }
                     });
