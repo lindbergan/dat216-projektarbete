@@ -357,10 +357,10 @@ public class IMatController implements Initializable {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
                 if (!cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new ShoppingCartMenuItem(cartMenuButton, item.getProduct().getName(), item.getAmount(), item.getProduct().getUnitSuffix(), item.getProduct().getPrice());
+                    temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
                 }
                 if (cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new ShoppingCartMenuItem(cartMenuButton, item.getProduct().getName(), item.getAmount(), item.getProduct().getUnitSuffix(), item.getProduct().getPrice());
+                    temp = new MenuItem(item.getProduct().getName() + "     " + (int) item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
                 }
                 cartMenuButton.getItems().add(i, temp);
             }

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -154,6 +155,17 @@ public class ShoppingCartController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        double magicHeight = 0;
+
+        for (int i = 0; i < handler.getShoppingCart().getItems().size(); i++) {
+            magicHeight = magicHeight + 50;
+        }
+        grid.setPrefHeight(magicHeight);
+        grid.setVgap(20);
+        grid.setPadding(new Insets(10, 0, 10, 0));
+
+
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         if (handler.getShoppingCart().getItems().size() > 5) {
             scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
