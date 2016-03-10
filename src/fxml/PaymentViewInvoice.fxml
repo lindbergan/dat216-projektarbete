@@ -61,6 +61,6 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </RadioButton>
-        <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" visible="false" />
+        <Label fx:id="infoLabel" layoutX="699.0" layoutY="475.0" prefHeight="21.0" prefWidth="508.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" visible="false" />
     </children>
 </AnchorPane>
