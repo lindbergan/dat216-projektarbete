@@ -33,6 +33,7 @@ public abstract class ProductView {
                 productList.addAll(handler.getProducts(ProductCategory.EXOTIC_FRUIT));
                 productList.addAll(handler.getProducts(ProductCategory.VEGETABLE_FRUIT));
                 productList.addAll(handler.getProducts(ProductCategory.CABBAGE));
+                productList.addAll(handler.getProducts(ProductCategory.HERB));
                 productList.addAll(handler.getProducts(ProductCategory.MELONS));
             }
             break;
@@ -60,7 +61,6 @@ public abstract class ProductView {
             break;
             case "Nötter och frön": {
                 productList = handler.getProducts(ProductCategory.NUTS_AND_SEEDS);
-                productList.addAll(handler.getProducts(ProductCategory.HERB));
             }
             break;
             case "Pasta, potatis och ris": {
