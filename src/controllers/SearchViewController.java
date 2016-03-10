@@ -53,10 +53,7 @@ public class SearchViewController extends ProductView implements Initializable {
         }
         int adrianplz = 0;
 
-        ObservableList<Product> products = FXCollections.observableArrayList();
-
-        products.addAll(handler.getProducts().stream().filter(p -> p.getName().contains(input)).collect(Collectors.toList()));
-
+        List<Product> products = handler.findProducts(input);
         int productListSize = products.size();
         int rowNr = 0;
         for (int i = 0; i < productListSize - 1; i = i + 4) {
@@ -73,8 +70,8 @@ public class SearchViewController extends ProductView implements Initializable {
                 ImageView img = new ImageView(new Image(url));
                 img.setEffect(new DropShadow(8, Color.BEIGE));
                 Button newButton = new Button(price, img);
-                newButton.setPrefWidth(200);
-                newButton.setPrefHeight(240);
+                newButton.setPrefWidth(250);
+                newButton.setPrefHeight(250);
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
 
