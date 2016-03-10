@@ -78,7 +78,7 @@
             </cursor>
         </Button>
         <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0" minHeight="22.0" minWidth="27.0" mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0" text="Fortsätt" />
-        <Label fx:id="infoLabel" layoutX="975.0" layoutY="472.0" prefWidth="238.0" text="Alla fält måste fyllas i för att kunna fortsätta" textFill="RED" />
+        <Label fx:id="infoLabel" layoutX="916.0" layoutY="472.0" prefHeight="21.0" prefWidth="297.0" text="Alla fält måste fyllas i för att kunna fortsätta" textFill="RED" />
         <Label id="infoLabel" fx:id="cvvLabel" layoutX="322.0" layoutY="355.0" opacity="0.35" prefWidth="297.0" text="CVV är de tre sista siffrorna på baksidan av kortet" textFill="BLACK" visible="false" />
         <Label layoutX="105.0" layoutY="36.0" prefHeight="33.0" prefWidth="101.0" text="Korttyp:">
             <font>
