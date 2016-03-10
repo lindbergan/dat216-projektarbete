@@ -23,6 +23,7 @@ import properties.ShoppingCartMenuItem;
 import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.*;
 
+import javax.management.StringValueExp;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -346,6 +347,24 @@ public class IMatController implements Initializable {
         }
     }
 
+    public String calculateSpaces(String name) {
+        int length = name.length();
+        String returnThisString = "";
+        for (int i = 0; i < 30 - length; i++) {
+            returnThisString = returnThisString + " ";
+        }
+        return returnThisString;
+    }
+
+    public String calculateSpacesForInt(String name) {
+        int length = name.length();
+        String returnThisString = "";
+        for (int i = 0; i < 10 - length; i++) {
+            returnThisString = returnThisString + " ";
+        }
+        return returnThisString;
+    }
+
     public void cartMenuOnAction() {
         cartMenuButton.getStyleClass().add("cartMenuButton");
         cartMenuButton.getItems().remove(0, cartMenuButton.getItems().size() - 3);
@@ -357,10 +376,10 @@ public class IMatController implements Initializable {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
                 if (!cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new MenuItem(item.getProduct().getName() + "     " + item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + item.getProduct().getPrice() + " :-");
                 }
                 if (cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new MenuItem(item.getProduct().getName() + "     " + (int) item.getAmount() + "   " + item.getProduct().getUnitSuffix() + "  " + item.getProduct().getPrice() + " :-");
+                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + (int) item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + item.getProduct().getPrice() + " :-");
                 }
                 cartMenuButton.getItems().add(i, temp);
             }

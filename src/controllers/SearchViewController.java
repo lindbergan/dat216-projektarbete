@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -25,6 +27,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class SearchViewController extends ProductView implements Initializable {
     IMatDataHandler handler = IMatDataHandler.getInstance();
@@ -50,7 +53,10 @@ public class SearchViewController extends ProductView implements Initializable {
         }
         int adrianplz = 0;
 
-        List<Product> products = handler.findProducts(input);
+        ObservableList<Product> products = FXCollections.observableArrayList();
+
+        products.addAll(handler.getProducts().stream().filter(p -> p.getName().contains(input)).collect(Collectors.toList()));
+
         int productListSize = products.size();
         int rowNr = 0;
         for (int i = 0; i < productListSize - 1; i = i + 4) {
