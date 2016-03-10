@@ -70,6 +70,7 @@ public class IMatController implements Initializable {
     @FXML
     private ListView<String> listView;
     @FXML Button ohKnapp;
+    @FXML ImageView heartImage;
 
     private Properties prop = new Properties();
     private boolean isShopView;
@@ -104,6 +105,7 @@ public class IMatController implements Initializable {
         initSearch();
         initSettings();
         initProperties();
+        initHeartImage();
     }
 
     public void weHateTraversable() {
@@ -463,4 +465,11 @@ public class IMatController implements Initializable {
         }
         deselectCategory();
     }
+    public void initHeartImage(){
+        Image i = new Image("/products/selectedFavorite.png");
+        heartImage.setImage(i);
+        heartImage.setFitWidth(19);
+        heartImage.setFitHeight(19);
+    }
+
 }
