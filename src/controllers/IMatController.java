@@ -376,11 +376,17 @@ public class IMatController implements Initializable {
         if (handler.getShoppingCart().getItems().size() != 0) {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
+                String price;
+                if(item.getProduct().getPrice() == Math.floor(item.getProduct().getPrice())){
+                    price = (int)item.getProduct().getPrice()+"";
+                }else{
+                    price = String.format("%.2f", item.getProduct().getPrice());
+                }
                 if (!cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + item.getProduct().getPrice() + " :-");
+                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + price + " :-");
                 }
                 if (cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + (int) item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + item.getProduct().getPrice() + " :-");
+                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + (int) item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + price + " :-");
                 }
                 cartMenuButton.getItems().add(i, temp);
             }
