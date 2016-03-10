@@ -70,13 +70,13 @@ public class SearchViewController extends ProductView implements Initializable {
                 ImageView img = new ImageView(new Image(url));
                 img.setEffect(new DropShadow(8, Color.BEIGE));
                 Button newButton = new Button(price, img);
-                newButton.setPrefWidth(250);
-                newButton.setPrefHeight(250);
+                newButton.setPrefWidth(200);
+                newButton.setPrefHeight(230);
                 newButton.setPickOnBounds(false);
                 newButton.setFocusTraversable(false);
 
                 img.setFitWidth(newButton.getPrefWidth());
-                img.setFitHeight(newButton.getPrefHeight() * 0.6);
+                img.setFitHeight(newButton.getPrefHeight() * 0.51);
                 newButton.getStyleClass().add("productButton");
                 img.getStyleClass().add("productImage");
                 newButton.setContentDisplay(ContentDisplay.TOP);
@@ -84,7 +84,7 @@ public class SearchViewController extends ProductView implements Initializable {
 
                 BuyButton newBottomButton = new BuyButton("Köp", products.get(adrianplz).getProductId());
                 newBottomButton.setPrefWidth(75);
-                newBottomButton.setPrefHeight(30);
+                newBottomButton.setPrefHeight(25);
                 newBottomButton.toFront();
                 newBottomButton.setAlignment(Pos.CENTER);
                 newBottomButton.setPickOnBounds(false);
