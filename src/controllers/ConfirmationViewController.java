@@ -80,15 +80,26 @@ public class ConfirmationViewController implements Initializable {
         for (Iterator<ShoppingItem> ite = cartItems.iterator(); ite.hasNext(); ) {
 
             ShoppingItem thisItem = ite.next();
-            double totalItemCost = thisItem.getAmount() * thisItem.getProduct().getPrice();
+            String totalItemCost;
+            if(thisItem.getAmount() * thisItem.getProduct().getPrice() == Math.floor(thisItem.getAmount() * thisItem.getProduct().getPrice())){
+                totalItemCost = (int)(thisItem.getAmount() * thisItem.getProduct().getPrice())+"";
+            }else{
+                totalItemCost = String.format("%.2f", thisItem.getAmount() * thisItem.getProduct().getPrice());
+            }
+            //double totalItemCost = thisItem.getAmount() * thisItem.getProduct().getPrice();
 
+            String pricePerUnit;
+            if(thisItem.getProduct().getPrice() == Math.floor(thisItem.getProduct().getPrice())){
+                pricePerUnit = (int)thisItem.getProduct().getPrice()+"";
+            }else{
+                pricePerUnit = String.format("%.2f", thisItem.getProduct().getPrice());
+            }
             listProductNames.add(thisItem.getProduct().getName());
             listProductQuantity.add(String.valueOf(thisItem.getAmount()));
-            listProductPricePerUnit.add(String.valueOf(thisItem.getProduct().getPrice()));
-            listProductPrice.add(String.valueOf(totalItemCost));
-
+            listProductPricePerUnit.add(pricePerUnit);
+            listProductPrice.add(totalItemCost);
             listViewList.add(getStringSpacing(thisItem.getProduct().getName() + ", " +
-                    thisItem.getAmount() + " x " + thisItem.getProduct().getPrice() +
+                    thisItem.getAmount() + " x " + pricePerUnit +
                     " " + thisItem.getProduct().getUnit()) + totalItemCost + ":-");
 
         }
