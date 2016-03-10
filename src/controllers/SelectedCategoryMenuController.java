@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -17,11 +19,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import properties.BuyButton;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -63,9 +67,11 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
             }
             int rowNrAgain = 0;
             double magicalHeight = 0.0;
-            int adrianplz = 0;
+            int adrianplz = 1;
             for (int i = 0; i < productListSize - 1; i += 4) {
                 for (int j = 0; j < 4; j++) {
+                    List<Product> favorites = handler.favorites();
+                    Product p = handler.getProduct(adrianplz);
                     String url = "/products/images/" + productList.get(adrianplz).getImageName();
                     String price = super.getPriceText(productList.get(adrianplz));
                     ImageView img = new ImageView(new Image(url));
@@ -94,14 +100,48 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                     newBottomButton.getStyleClass().add("buyButton");
                     newBottomButton.setCursor(Cursor.HAND);
 
+                    Image image = new Image("products/unselectedFavorite.png");
+                    Image selImage = new Image("products/selectedFavorite.png");
+                    ImageView im = new ImageView(image);
+                    im.setFitHeight(25);
+                    im.setFitWidth(25);
+                    ImageView selIm = new ImageView(selImage);
+                    selIm.setFitHeight(25);
+                    selIm.setFitWidth(25);
+
+                    Button favoriteB = new Button();
+                    favoriteB.setStyle("-fx-background-color:Transparent;");
+                    favoriteB.setCursor(Cursor.HAND);
+                    favoriteB.setPadding(new Insets(10, 0, 0, 20));
+                    favoriteB.setMaxWidth(im.getFitWidth());
+                    favoriteB.setMaxHeight(im.getFitHeight());
+
+                    if (!(p == null)) {
+                        if (favorites.contains(p)) favoriteB.setGraphic(selIm);
+                        else favoriteB.setGraphic(im);
+                    }
+                    favoriteB.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (handler.isFavorite(p)) {
+                                favoriteB.setGraphic(im);
+                                if (!(p == null)) handler.favorites().remove(p);
+                            }
+                            else {
+                                if (!(p == null)) handler.favorites().add(p);
+                                favoriteB.setGraphic(selIm);
+                            }
+                        }
+                    });
+
                     Label txt = new Label(productList.get(adrianplz).getName());
                     txt.setTextFill(exampleText.getTextFill());
                     txt.setFont(exampleText.getFont());
 
-
-                    StackPane panelLayout = new StackPane(newButton, newBottomButton, txt);
+                    StackPane panelLayout = new StackPane(newButton, newBottomButton, txt, favoriteB);
                     panelLayout.setAlignment(newBottomButton, Pos.BOTTOM_CENTER);
                     panelLayout.setAlignment(txt, Pos.TOP_CENTER);
+                    panelLayout.setAlignment(favoriteB, Pos.TOP_LEFT);
                     panelLayout.setMargin(newBottomButton, new Insets(0, 0, 5, 0));
                     gridPane123.add(panelLayout, j, rowNrAgain);
                     if (getProductInCart(productList.get(adrianplz)) != null) {
