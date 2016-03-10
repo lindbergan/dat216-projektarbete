@@ -73,7 +73,7 @@
                                         </Label>
                                         <Label font="$x1" layoutX="1013.0" layoutY="43.0" text="Leveranstid:" />
                                         <Label layoutX="915.0" layoutY="127.0" text="Datum" />
-                                        <Label layoutX="873.0" layoutY="197.0" text="Mellan klockan" />
+                                        <Label layoutX="854.0" layoutY="199.0" text="Mellan klockan" />
                                         <ChoiceBox fx:id="timeIntervallChoicebox" layoutX="970.0" layoutY="194.0" prefHeight="27.0" prefWidth="127.0">
                                             <items>
                                                 <FXCollections fx:factory="observableArrayList">
@@ -86,7 +86,7 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </ChoiceBox>
-                                        <Label fx:id="infoLabel" layoutX="796.0" layoutY="475.0" prefWidth="411.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" />
+                                        <Label fx:id="infoLabel" layoutX="701.0" layoutY="475.0" prefHeight="21.0" prefWidth="506.0" text="Alla obligatoriska fält (*) och leveranstid måste fyllas i för att kunna fortsätta" textFill="RED" />
                                         <DatePicker fx:id="calendar" layoutX="970.0" layoutY="123.0" onAction="#listenToDatePicker">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />

@@ -22,6 +22,7 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 //OBS: Detta är main-controllern OCH controllern för DeliveryView:n. Inte optimalt att ha dem sammanslagna, men lyckades inte ta mig runt detta.
@@ -167,6 +168,7 @@ public class DeliveryViewController implements Initializable {
 
     public void initDatePicker() {
         calendar.setValue(userSpecifiedDate);
+        calendar.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
     }
 
     //ChangeListener for the textfields:

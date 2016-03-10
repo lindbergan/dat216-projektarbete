@@ -395,7 +395,7 @@ public class IMatController implements Initializable {
             shoppingCartItem.getStyleClass().add("shoppingCartItem");
         }
 
-        totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
+        totalMenu.setText("Totalt:" + "  " + String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
     }
 
     public boolean cantBuyHalf(int i) {
