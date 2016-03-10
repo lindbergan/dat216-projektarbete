@@ -63,7 +63,7 @@ public class SearchViewController extends ProductView implements Initializable {
         int rowNrAgain = 0;
         double magicalHeight = 0.0;
 
-        for (int i = 0; i < products.size() - 1; i += 4) {
+        for (int i = 0; i < products.size(); i += 4) {
             for (int j = 0; j < 4; j++) {
                 String url = "/products/images/" + products.get(adrianplz).getImageName();
                 String price = super.getPriceText(products.get(adrianplz));
