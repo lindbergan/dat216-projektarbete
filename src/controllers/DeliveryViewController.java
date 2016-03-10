@@ -34,7 +34,7 @@ public class DeliveryViewController implements Initializable {
     private static Image confirmImage = new Image("/images/IMat-progess-bekräfta.png");
     private static Image payImage = new Image("/images/IMat-progess-betalning.png");
     private static Image deliveryImage = new Image("/images/IMat-progess-leverans.png");
-    private static int nummer = 1;
+    private static boolean firstTime = true;
     private static ImageView progressImageViewProperty;
     private static boolean allFieldsFilled = false;
     private static ViewSingelton currentView = ViewSingelton.getInstance();
@@ -100,10 +100,10 @@ public class DeliveryViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if (nummer == 1) {
+        if (firstTime) {
             DataHolder.deliveryViewController = this;
             progressImageViewProperty = progressImageView;
-            nummer++;
+            firstTime = false;
         }
 
         //initialize the fields
@@ -303,6 +303,7 @@ public class DeliveryViewController implements Initializable {
 
     //back to IMat store when user clicked "back to store" <--
     public void backtoStoreClicked(ActionEvent event) throws IOException {
+        firstTime = true;
         viewChanger.changeStageOverride(event, "/fxml/IMat.fxml");
     }
 
