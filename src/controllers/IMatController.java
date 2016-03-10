@@ -86,9 +86,7 @@ public class IMatController implements Initializable {
         cart.addShoppingCartListener(new ShoppingCartListener() {
             @Override
             public void shoppingCartChanged() {
-                cartMenuButton.setVisible(false);
-                ohKnapp.setVisible(true);
-                ohKnapp.setDefaultButton(true);
+                cartMenuButton.setStyle("-fx-background-color:#C8DAE5");
                 timer.start();
 
 
@@ -445,8 +443,7 @@ public class IMatController implements Initializable {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
-            cartMenuButton.setVisible(true);
-            ohKnapp.setVisible(false);
+            cartMenuButton.setStyle("-fx-background-color");
             timer.stop();
         }
     }
