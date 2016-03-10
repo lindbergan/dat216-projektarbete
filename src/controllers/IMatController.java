@@ -28,6 +28,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
+import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -375,11 +376,17 @@ public class IMatController implements Initializable {
         if (handler.getShoppingCart().getItems().size() != 0) {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
+                String price;
+                if(item.getProduct().getPrice() == Math.floor(item.getProduct().getPrice())){
+                    price = (int)item.getProduct().getPrice()+"";
+                }else{
+                    price = String.format("%.2f", item.getProduct().getPrice());
+                }
                 if (!cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + item.getProduct().getPrice() + " :-");
+                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + price + " :-");
                 }
                 if (cantBuyHalf(item.getProduct().getProductId())) {
-                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + (int) item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + item.getProduct().getPrice() + " :-");
+                    temp = new MenuItem(item.getProduct().getName() + calculateSpaces(item.getProduct().getName()) + (int) item.getAmount() + calculateSpacesForInt(String.valueOf(item.getAmount())) + item.getProduct().getUnitSuffix() + calculateSpacesForInt(item.getProduct().getUnitSuffix()) + price + " :-");
                 }
                 cartMenuButton.getItems().add(i, temp);
             }
@@ -394,7 +401,7 @@ public class IMatController implements Initializable {
             shoppingCartItem.getStyleClass().add("shoppingCartItem");
         }
 
-        totalMenu.setText("Totalt:" + "  " + handler.getShoppingCart().getTotal() + " :-");
+        totalMenu.setText("Totalt:" + "  " + String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
     }
 
     public boolean cantBuyHalf(int i) {
@@ -446,5 +453,14 @@ public class IMatController implements Initializable {
             cartMenuButton.setStyle("-fx-background-color");
             timer.stop();
         }
+    }
+
+    public void escapeHatchAction(ActionEvent e){
+        if(toggle1.isSelected()){
+            start();
+        }else{
+            goToCategoryMenu();
+        }
+        deselectCategory();
     }
 }
