@@ -15,20 +15,16 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import properties.CategoryListCell;
-import properties.ShoppingCartMenuItem;
 import properties.ViewChanger;
 import se.chalmers.ait.dat215.project.*;
 
-import javax.management.StringValueExp;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
-import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -36,7 +32,8 @@ public class IMatController implements Initializable {
 
     @FXML
     private AnchorPane content;
-    @FXML private MenuItem shoppingCartItem;
+    @FXML
+    private MenuItem shoppingCartItem;
     @FXML
     public ImageView imageView1;
     @FXML
@@ -63,15 +60,17 @@ public class IMatController implements Initializable {
     private MenuItem totalMenu;
     @FXML
     private ListView<String> listView;
-    @FXML Button ohKnapp;
+    @FXML
+    Button ohKnapp;
 
-    @FXML ImageView heartImage;
+    @FXML
+    ImageView heartImage;
 
     private Properties prop = new Properties();
 
     private boolean isShopView;
     private MenuItem temp;
-    Timer timer = new Timer(1500,new TimerListener());
+    Timer timer = new Timer(1500, new TimerListener());
     IMatDataHandler handler = IMatDataHandler.getInstance();
     CategoryMenuController categoryHandler = new CategoryMenuController();
 
@@ -212,8 +211,7 @@ public class IMatController implements Initializable {
             MenuItem newMenuItem = new MenuItem("Inga favoriter.");
             newMenuItem.setDisable(true);
             favoritesMenu.getItems().add(newMenuItem);
-        }
-        else {
+        } else {
             ObservableList<Product> favorites = FXCollections.observableArrayList(handler.favorites());
             favoritesMenu.getItems().clear();
             for (Product p : favorites) {
@@ -383,9 +381,9 @@ public class IMatController implements Initializable {
             for (int i = 0; i < limit; i++) {
                 ShoppingItem item = handler.getShoppingCart().getItems().get(i);
                 String price;
-                if(item.getProduct().getPrice() == Math.floor(item.getProduct().getPrice())){
-                    price = (int)item.getProduct().getPrice()+"";
-                }else{
+                if (item.getProduct().getPrice() == Math.floor(item.getProduct().getPrice())) {
+                    price = (int) item.getProduct().getPrice() + "";
+                } else {
                     price = String.format("%.2f", item.getProduct().getPrice());
                 }
                 if (!cantBuyHalf(item.getProduct().getProductId())) {
@@ -407,7 +405,7 @@ public class IMatController implements Initializable {
             shoppingCartItem.getStyleClass().add("shoppingCartItem");
         }
 
-        totalMenu.setText("Totalt:" + "  " + String.format("%.2f",handler.getShoppingCart().getTotal()) + " :-");
+        totalMenu.setText("Totalt:" + "  " + String.format("%.2f", handler.getShoppingCart().getTotal()) + " :-");
     }
 
     public boolean cantBuyHalf(int i) {
@@ -452,7 +450,8 @@ public class IMatController implements Initializable {
     public void deselectCategory() {
         listView.getSelectionModel().clearSelection();
     }
-    class TimerListener implements ActionListener{
+
+    class TimerListener implements ActionListener {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -461,15 +460,16 @@ public class IMatController implements Initializable {
         }
     }
 
-    public void escapeHatchAction(ActionEvent e){
-        if(toggle1.isSelected()){
+    public void escapeHatchAction(ActionEvent e) {
+        if (toggle1.isSelected()) {
             start();
-        }else{
+        } else {
             goToCategoryMenu();
         }
         deselectCategory();
     }
-    public void initHeartImage(){
+
+    public void initHeartImage() {
         Image i = new Image("/products/selectedFavorite.png");
         heartImage.setImage(i);
         heartImage.setFitWidth(19);

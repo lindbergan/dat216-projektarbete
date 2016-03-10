@@ -1,7 +1,5 @@
 package controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -27,7 +25,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class SearchViewController extends ProductView implements Initializable {
     IMatDataHandler handler = IMatDataHandler.getInstance();
@@ -119,6 +116,6 @@ public class SearchViewController extends ProductView implements Initializable {
             gridRazz.setVgap(10);
         }
 
-        }
     }
+}
 

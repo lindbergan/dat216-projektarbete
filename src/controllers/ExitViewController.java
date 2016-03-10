@@ -31,7 +31,8 @@ public class ExitViewController implements Initializable {
     private Label customerDate;
     @FXML
     private Button receipts;
-    @FXML private Button continueButton;
+    @FXML
+    private Button continueButton;
 
 
     @Override

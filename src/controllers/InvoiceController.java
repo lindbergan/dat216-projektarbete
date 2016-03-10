@@ -60,12 +60,18 @@ public class InvoiceController implements Initializable {
     private Label infoLabel;
     @FXML
     private Button continueButton;
-    @FXML private Label firstNameLabel;
-    @FXML private Label lastNameLabel;
-    @FXML private Label adressLabel;
-    @FXML private Label postCodeLabel;
-    @FXML private Label emailLabel;
-    @FXML private Label phoneNumberLabel;
+    @FXML
+    private Label firstNameLabel;
+    @FXML
+    private Label lastNameLabel;
+    @FXML
+    private Label adressLabel;
+    @FXML
+    private Label postCodeLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label phoneNumberLabel;
 
     public static boolean AllFieldsFilled() {
         return allFieldsFilled;
@@ -290,11 +296,11 @@ public class InvoiceController implements Initializable {
             infoLabel.setVisible(true);
         }
     }
+
     public void setCorrectlabelColor(String str, Label l) {
         if (str.length() == 0) {
             l.setTextFill(Color.RED);
-        }
-        else{
+        } else {
             l.setTextFill(Color.BLACK);
         }
     }

@@ -82,12 +82,18 @@ public class DeliveryViewController implements Initializable {
     private Button paymentButton;
     @FXML
     private Button confirmationButton;
-    @FXML private Label firstNameLabel;
-    @FXML private Label lastNameLabel;
-    @FXML private Label adressLabel;
-    @FXML private Label postCodeLabel;
-    @FXML private Label emailLabel;
-    @FXML private Label phoneNumberLabel;
+    @FXML
+    private Label firstNameLabel;
+    @FXML
+    private Label lastNameLabel;
+    @FXML
+    private Label adressLabel;
+    @FXML
+    private Label postCodeLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label phoneNumberLabel;
 
 
     //the observable lists for the Choiceboxes
@@ -213,7 +219,7 @@ public class DeliveryViewController implements Initializable {
 
                 if (StringComparer.onlyContainsLetter(newValue)) {
                     customer.setFirstName(newValue);
-                    setCorrectlabelColor(newValue,firstNameLabel);
+                    setCorrectlabelColor(newValue, firstNameLabel);
                 } else {
                     customerFirstName.setText(oldValue);
                 }
@@ -228,7 +234,7 @@ public class DeliveryViewController implements Initializable {
 
                 if (StringComparer.onlyContainsLetter(newValue)) {
                     customer.setLastName(newValue);
-                    setCorrectlabelColor(newValue,lastNameLabel);
+                    setCorrectlabelColor(newValue, lastNameLabel);
                 } else {
                     customerLastName.setText(oldValue);
                 }
@@ -241,7 +247,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setAddress(newValue);
-                setCorrectlabelColor(newValue,adressLabel);
+                setCorrectlabelColor(newValue, adressLabel);
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -253,7 +259,7 @@ public class DeliveryViewController implements Initializable {
 
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 6) {
                     customer.setPostCode(newValue);
-                    setCorrectlabelColor(newValue,postCodeLabel);
+                    setCorrectlabelColor(newValue, postCodeLabel);
                 } else {
                     customerPostCode.setText(oldValue);
                 }
@@ -280,7 +286,7 @@ public class DeliveryViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 customer.setEmail(newValue);
-                setCorrectlabelColor(newValue,emailLabel);
+                setCorrectlabelColor(newValue, emailLabel);
                 checkIfAllFieldsFilledIn();
             }
         });
@@ -292,7 +298,7 @@ public class DeliveryViewController implements Initializable {
 
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 11) {
                     customer.setPhoneNumber(newValue);
-                    setCorrectlabelColor(newValue,phoneNumberLabel);
+                    setCorrectlabelColor(newValue, phoneNumberLabel);
                 } else {
                     customerPhone.setText(oldValue);
                 }
@@ -351,7 +357,7 @@ public class DeliveryViewController implements Initializable {
 
     //gives us the right PaymentView depending on what radiobutton is selected
     public void continueClicked() throws IOException {
-        DataHolder.deliveryViewController.setPaymentProgImage();
+        setPaymentProgImage();
         currentView.setCurrentViewName("paymentView");
 
         if (paymentChoice == "Kortbetalning") {
@@ -388,22 +394,22 @@ public class DeliveryViewController implements Initializable {
     }
 
     public void paymentButtonClicked() throws IOException {
-        setPaymentProgImage();
         if (allFieldsFilled) {
             continueClicked();
         }
     }
 
     public void confirmationButtonClicked() throws IOException {
-        setConfirmationProgImage();
         if (paymentChoice.equals("Kortbetalning")) {
 
             if (allFieldsFilled && CreditCardController.AllFieldsFilled()) {
                 viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
+                setConfirmationProgImage();
             }
         } else {
             if (allFieldsFilled && InvoiceController.AllFieldsFilled()) {
                 viewChanger.changeScene(deliveryView, "/fxml/ConfirmationView.fxml");
+                setConfirmationProgImage();
             }
         }
     }
@@ -449,8 +455,7 @@ public class DeliveryViewController implements Initializable {
     public void setCorrectlabelColor(String str, Label l) {
         if (str.length() == 0) {
             l.setTextFill(Color.RED);
-        }
-        else{
+        } else {
             l.setTextFill(Color.BLACK);
         }
     }

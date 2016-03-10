@@ -20,12 +20,8 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingCart;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
@@ -64,7 +60,8 @@ public class ConfirmationViewController implements Initializable {
     @FXML
     private Label price;
 
-    @FXML private Button confirmationButton;
+    @FXML
+    private Button confirmationButton;
     private ObservableList<String> listViewList = FXCollections.observableArrayList();
 
     @Override
@@ -81,17 +78,16 @@ public class ConfirmationViewController implements Initializable {
 
             ShoppingItem thisItem = ite.next();
             String totalItemCost;
-            if(thisItem.getAmount() * thisItem.getProduct().getPrice() == Math.floor(thisItem.getAmount() * thisItem.getProduct().getPrice())){
-                totalItemCost = (int)(thisItem.getAmount() * thisItem.getProduct().getPrice())+"";
-            }else{
+            if (thisItem.getAmount() * thisItem.getProduct().getPrice() == Math.floor(thisItem.getAmount() * thisItem.getProduct().getPrice())) {
+                totalItemCost = (int) (thisItem.getAmount() * thisItem.getProduct().getPrice()) + "";
+            } else {
                 totalItemCost = String.format("%.2f", thisItem.getAmount() * thisItem.getProduct().getPrice());
             }
-            //double totalItemCost = thisItem.getAmount() * thisItem.getProduct().getPrice();
 
             String pricePerUnit;
-            if(thisItem.getProduct().getPrice() == Math.floor(thisItem.getProduct().getPrice())){
-                pricePerUnit = (int)thisItem.getProduct().getPrice()+"";
-            }else{
+            if (thisItem.getProduct().getPrice() == Math.floor(thisItem.getProduct().getPrice())) {
+                pricePerUnit = (int) thisItem.getProduct().getPrice() + "";
+            } else {
                 pricePerUnit = String.format("%.2f", thisItem.getProduct().getPrice());
             }
             listProductNames.add(thisItem.getProduct().getName());

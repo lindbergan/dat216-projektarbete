@@ -49,7 +49,8 @@ public class ShoppingCartController implements Initializable {
     @FXML
     private DelButton delButton;
 
-    @FXML private Button forwardButton;
+    @FXML
+    private Button forwardButton;
     private ViewChanger viewChanger = new ViewChanger();
 
 

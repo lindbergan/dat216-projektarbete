@@ -129,8 +129,7 @@ public class SelectedCategoryMenuController extends ProductView implements Initi
                                     handler.favorites().remove(p);
                                     DataHolder.iMat.updateFavorites();
                                 }
-                            }
-                            else {
+                            } else {
                                 if (!(p == null)) handler.favorites().add(p);
                                 favoriteB.setGraphic(selIm);
                                 DataHolder.iMat.updateFavorites();

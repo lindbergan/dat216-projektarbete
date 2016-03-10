@@ -59,9 +59,12 @@ public class CreditCardController implements Initializable {
     private Button helpButton;
     @FXML
     private Label cvvInfoLabel;
-    @FXML private Label cardHolderLabel;
-    @FXML private Label cardNumberLabel;
-    @FXML private Label cvvLabel;
+    @FXML
+    private Label cardHolderLabel;
+    @FXML
+    private Label cardNumberLabel;
+    @FXML
+    private Label cvvLabel;
     private ObservableList<String> cardYear = FXCollections.observableArrayList("16", "17", "18", "19", "20", "21", "22");
     private ObservableList<String> cardMonth = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
     private boolean wasClickedBefore = false;
@@ -132,7 +135,7 @@ public class CreditCardController implements Initializable {
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 17) {
                     creditCard.setCardNumber(newValue);
                     creditCardNumbr.setText(newValue);
-                    setCorrectlabelColor(newValue,cardNumberLabel);
+                    setCorrectlabelColor(newValue, cardNumberLabel);
                 } else {
                     creditCardNumbr.setText(oldValue);
                 }
@@ -148,7 +151,7 @@ public class CreditCardController implements Initializable {
 
                 if (StringComparer.onlyContainsLetter(newValue)) {
                     creditCard.setHoldersName(newValue);
-                    setCorrectlabelColor(newValue,cardHolderLabel);
+                    setCorrectlabelColor(newValue, cardHolderLabel);
                 } else {
                     cardHolderName.setText(oldValue);
                 }
@@ -261,11 +264,11 @@ public class CreditCardController implements Initializable {
     public void setCorrectlabelColor(String str, Label l) {
         if (str.length() == 0) {
             l.setTextFill(Color.RED);
-        }
-        else{
+        } else {
             l.setTextFill(Color.BLACK);
         }
     }
+
     public boolean isInt(String s) {
 
         try {
