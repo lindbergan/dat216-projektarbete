@@ -137,14 +137,14 @@
     <left>
         <AnchorPane prefHeight="285.0" prefWidth="20.0" BorderPane.alignment="CENTER">
             <children>
-                <Button alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="20.0" layoutY="63.0" mnemonicParsing="false" onAction="#backClicked" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <Button alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="20.0" layoutY="63.0" mnemonicParsing="false" onAction="#backClicked" pickOnBounds="false" prefHeight="479.0" prefWidth="52.0" scaleShape="false" text="&lt;--" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-29.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>
     </left>
     <right>
         <AnchorPane prefHeight="285.0" prefWidth="28.0" BorderPane.alignment="CENTER">
             <children>
-                <Button cacheShape="false" centerShape="false" focusTraversable="false" mnemonicParsing="false" onAction="#forwardClicked" pickOnBounds="false" prefHeight="285.0" prefWidth="36.0" scaleShape="false" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <Button cacheShape="false" centerShape="false" focusTraversable="false" layoutX="-24.0" mnemonicParsing="false" onAction="#forwardClicked" pickOnBounds="false" prefHeight="479.0" prefWidth="52.0" scaleShape="false" text="--&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-24.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>
     </right>
