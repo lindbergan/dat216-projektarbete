@@ -162,9 +162,12 @@ public class CreditCardController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
                 if (StringComparer.onlyContainsNumbers(newValue) && newValue.length() < 4) {
-                    creditCard.setVerificationCode(Integer.parseInt(newValue));
-                    setCorrectlabelColor(newValue,cvvLabel);
-                    cvv.setText(newValue);
+
+                    if (isInt(newValue)) {
+                        creditCard.setVerificationCode(Integer.parseInt(newValue));
+                        setCorrectlabelColor(newValue, cvvLabel);
+                        cvv.setText(newValue);
+                    }
                 } else {
                     cvv.setText(oldValue);
                 }
@@ -261,6 +264,15 @@ public class CreditCardController implements Initializable {
         }
         else{
             l.setTextFill(Color.BLACK);
+        }
+    }
+    public boolean isInt(String s) {
+
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }
