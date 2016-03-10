@@ -51,7 +51,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button focusTraversable="false" layoutX="812.0" layoutY="547.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToCheckout" prefHeight="31.0" prefWidth="175.0" text="Till kassan">
+                <Button fx:id="forwardButton" focusTraversable="false" layoutX="812.0" layoutY="547.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToCheckout" prefHeight="31.0" prefWidth="175.0" text="Till kassan">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>

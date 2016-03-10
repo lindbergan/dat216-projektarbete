@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -47,6 +48,8 @@ public class ShoppingCartController implements Initializable {
     private Label totalPrice;
     @FXML
     private DelButton delButton;
+
+    @FXML private Button forwardButton;
     private ViewChanger viewChanger = new ViewChanger();
 
 
@@ -155,6 +158,8 @@ public class ShoppingCartController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        forwardButton.setStyle("-fx-background-color:#A9D990");
 
         double magicHeight = 0;
 

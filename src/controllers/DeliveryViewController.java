@@ -106,6 +106,8 @@ public class DeliveryViewController implements Initializable {
             firstTime = false;
         }
 
+        continueButton.setStyle("-fx-background-color:#A9D990");
+
         //initialize the fields
         initTextFields();
         initChoiceBoxes();

@@ -66,7 +66,7 @@ public class InvoiceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        continueButton.setStyle("-fx-background-color:#A9D990;");
         initRadioButtons();
         listenToRadioButtons();
         initTextFields();

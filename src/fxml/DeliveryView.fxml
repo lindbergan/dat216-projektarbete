@@ -60,7 +60,7 @@
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button fx:id="continueButton" defaultButton="true" layoutX="1082.0" layoutY="508.0"
+                <Button fx:id="continueButton" layoutX="1082.0" layoutY="508.0"
                         mnemonicParsing="false" onAction="#continueClicked" prefHeight="35.0" prefWidth="130.0"
                         text="Fortsätt">
                     <tooltip>
