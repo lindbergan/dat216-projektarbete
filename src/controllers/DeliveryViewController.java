@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import properties.StringComparer;
 import properties.ViewChanger;
 import properties.ViewSingelton;
@@ -23,6 +24,7 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 //OBS: Detta är main-controllern OCH controllern för DeliveryView:n. Inte optimalt att ha dem sammanslagna, men lyckades inte ta mig runt detta.
@@ -115,6 +117,7 @@ public class DeliveryViewController implements Initializable {
             firstTime = false;
         }
 
+
         continueButton.setStyle("-fx-background-color:#A9D990");
 
         //initialize the fields
@@ -176,6 +179,28 @@ public class DeliveryViewController implements Initializable {
 
     public void initDatePicker() {
         calendar.setValue(userSpecifiedDate);
+        calendar.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
+        final Callback<DatePicker, DateCell> dayCellFactory =
+                new Callback<DatePicker, DateCell>() {
+                    @Override
+                    public DateCell call(final DatePicker datePicker) {
+                        return new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (item.isBefore(
+                                        LocalDate.now().plus(1, ChronoUnit.DAYS))
+                                        ) {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+                        };
+                    }
+                };
+        calendar.setDayCellFactory(dayCellFactory);
+        userSpecifiedDate = calendar.getValue();
     }
 
     //ChangeListener for the textfields:
