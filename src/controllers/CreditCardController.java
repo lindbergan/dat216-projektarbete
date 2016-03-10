@@ -69,7 +69,7 @@ public class CreditCardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        continueButton.setStyle("-fx-background-color:#A9D990");
         //initialize the fields
         initTextFields();
         initiChoiceBoxes();
