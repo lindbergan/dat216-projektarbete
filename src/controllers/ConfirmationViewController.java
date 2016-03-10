@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -62,11 +63,13 @@ public class ConfirmationViewController implements Initializable {
     private Label customerPaymentChoice;
     @FXML
     private Label price;
+
+    @FXML private Button confirmationButton;
     private ObservableList<String> listViewList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        confirmationButton.setStyle("-fx-background-color:#A9D990");
         initTextFields();
         initShoppingCartSummary();
         setTotalPrice();

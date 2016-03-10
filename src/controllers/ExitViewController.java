@@ -31,12 +31,14 @@ public class ExitViewController implements Initializable {
     private Label customerDate;
     @FXML
     private Button receipts;
+    @FXML private Button continueButton;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initTextFields();
         initButtons();
+        continueButton.setStyle("-fx-background-color:#A9D990");
     }
 
     public void initTextFields() {
