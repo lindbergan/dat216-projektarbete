@@ -39,7 +39,7 @@ public class SelectedReceiptController implements Initializable {
         ViewChanger vc = new ViewChanger();
         backButton.setOnAction(e -> {
             try {
-                vc.changeScene(IMatController.contentProperty, "/fxml/Receipts.fxml");
+                vc.changeScene(DataHolder.iMat.getContent(), "/fxml/Receipts.fxml");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

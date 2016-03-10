@@ -1,6 +1,6 @@
 package properties;
 
-import controllers.IMatController;
+import controllers.DataHolder;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -11,7 +11,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 
 public class CategoryListCell extends ListCell<String> {
-    IMatController handler = new IMatController();
 
     @Override
     public void updateItem(String item, boolean empty) {
@@ -28,8 +27,8 @@ public class CategoryListCell extends ListCell<String> {
             l.setFont(Font.font("Verdana", 15));
 
             StackPane sp = new StackPane(l, l2);
-            sp.setPrefWidth(handler.getListProperty().getWidth() * 0.75);
-            sp.setPrefHeight(handler.getListProperty().getHeight() * 0.075);
+            sp.setPrefWidth(DataHolder.iMat.getListView().getWidth() * 0.75);
+            sp.setPrefHeight(DataHolder.iMat.getListView().getHeight() * 0.075);
 
             GridPane gp = new GridPane();
             gp.add(l2, 0, 0, 1, 1);
